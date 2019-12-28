@@ -4,7 +4,7 @@
     src: url('../fonts/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
     url('../fonts/Gilroy-Regular.woff') format('woff'),
     url('../fonts/Gilroy-Regular.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 300;
     font-style: normal;
 }
 
@@ -14,7 +14,7 @@
     src: url('../fonts/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
     url('../fonts/Gilroy-Bold.woff') format('woff'),
     url('../fonts/Gilroy-Bold.ttf') format('truetype');
-    font-weight: bold;
+    font-weight: 800;
     font-style: normal;
 }
 
@@ -32,9 +32,156 @@ body {
     letter-spacing: 0.1em;
 }
 
+.wrapper {
+    width: 1440px;
+    margin: 0 auto;
+}
+
 header {
-    position: fixed;
+    background: #000;
     width: 100%;
     height: 94px;
+}
+
+.header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 35px;
+    width: 1440px;
+    box-sizing: border-box;
+    height: 94px;
     background: #000;
+    .header_logo {
+
+        .header_logo__link {}
+        .header_logo__image {
+            width: 114px;
+            height: 27px;
+        }
+    }
+    .header_nav {
+        .header_nav--list {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+        }
+        .header_nav--item {
+            position: relative;
+            margin: 0 20px;
+        }
+        .header_nav--link {
+            display: inline-block;
+            line-height: 22px;
+            height: 22px;
+            color: #EDEDED;
+            text-transform: uppercase;
+            text-decoration: none;
+            outline: none;
+            //transition: all .15s ease-in;
+            &:focus {
+                color: #EA3535;
+            }
+            &:hover {
+                color: #CEA776;
+            }
+        }
+        .header_nav--basket {
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+        .header_nav--language {
+            position: relative;
+            color: #CEA776;
+            &:after {
+                content: "";
+                width: 11px;
+                height: 8px;
+                position: absolute;
+                left: 50%;
+                margin-left: -1px;
+                transform: translateX(-50%) translateY(250%);
+                background: url(../images/arrow-down.svg) bottom center no-repeat;
+            }
+        }
+        .header_nav--active {
+            display: inline-block;
+            line-height: 22px;
+            height: 22px;
+            color: #CEA776;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-bottom: 1px solid #CEA776;
+            cursor: default;
+        }
+    }
+    .basket {
+        opacity: 0;
+        z-index: -1;
+        position: absolute;
+        top: -12px;
+        right: -14px;
+        background: #000;
+        border: 1px solid #CEA776;
+        //transition: opacity .15s ease-in;
+        .basket_empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 410px;
+            height: 135px;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: #CEA776;
+        }
+        .basket_close--button {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 16px;
+            height: 16px;
+            border: none;
+            background: url(../images/basket_close--button.svg) no-repeat;
+            cursor: pointer;
+            //transition: all .15s ease-in;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+    .language_list {
+        opacity: 0;
+        position: absolute;
+        padding: 5px 5px 5px 6px;
+        top: -15px;
+        left: -6px;
+        box-sizing: border-box;
+        background: #000;
+        list-style-type: none;
+        z-index: -1;
+        //transition: all .15s ease-in;
+        //border: 1px solid #CEA776;
+        .language_item {}
+        .language_link {
+            display: block;
+            line-height: 22px;
+            height: 22px;
+            color: #EDEDED;
+            text-transform: uppercase;
+            text-decoration: none;
+            outline: none;
+            &:hover {
+                font-weight: 800;
+            }
+        }
+        .language_link--active {
+            color: #CEA776;
+            cursor: default;
+            &:hover {
+                font-weight: 300;
+            }
+        }
+    }
 }

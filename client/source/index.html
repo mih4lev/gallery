@@ -9,6 +9,58 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
+
+<header>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header_logo">
+                <a href="/" class="header_logo--link">
+                    <img class="header_logo--image" src="images/header-logo.svg" width="114" height="27" alt="Logo ARTE">
+                </a>
+            </div>
+            <nav class="header_nav">
+                <ul class="header_nav--list">
+                    <li class="header_nav--item">
+                        <span class="header_nav--active">Коллекции</span>
+                    </li>
+                    <li class="header_nav--item">
+                        <a class="header_nav--link" href="/authors">Авторы</a>
+                    </li>
+                    <li class="header_nav--item">
+                        <a class="header_nav--link" href="/art-placement">Арт-пространство</a>
+                    </li>
+                    <li class="header_nav--item">
+                        <a class="header_nav--link" href="/delivery">Доставка</a>
+                    </li>
+                    <li class="header_nav--item">
+                        <a class="header_nav--link header_nav--basket" href="#">
+                            <img src="images/basket-icon.svg" width="18" height="19" alt="Basket">
+                        </a>
+                        <div class="basket">
+                            <!-- Корзина с картинами -->
+                            <div class="basket_empty">Ваша корзина пуста</div>
+                            <button class="basket_close--button" disabled></button>
+                        </div>
+                    </li>
+                    <li class="header_nav--item header_language--block">
+                        <span class="header_nav--link header_nav--language">RU</span>
+                        <ul class="language_list">
+                            <li class="language_item">
+                                <a class="language_link language_link--active" data-language="ru-RU" href="#">RU</a>
+                            </li>
+                            <li class="language_item">
+                                <a class="language_link" data-language="en-EN" href="#">EN</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+</header>
+
+
+
 <script src="./scripts/bundle.min.js"></script>
 </body>
 </html>
