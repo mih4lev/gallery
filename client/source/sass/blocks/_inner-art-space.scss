@@ -1,0 +1,132 @@
+.innerPage {
+    .artSpace {
+        width: 100%;
+        border-bottom: 1px solid $secondaryColor;
+        background-color: #000;
+        background-image: url(../images/art-space--background.png);
+        background-position: top center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        z-index: 1;
+        .artSpaceHeader {
+            margin-top: 80px;
+            margin-bottom: 0;
+            text-align: center; 
+            @extend %largePrimaryText;
+        }
+        .artSpaceDescription {
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+        .artSpaceList {
+            margin-top: 40px;
+            margin-bottom: -40px;
+            padding-left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            list-style-type: none;
+            .artSpaceItem {
+                display: flex;
+                flex-direction: column;
+                width: 347px;
+                background-color: #000;
+                border: 1px solid $secondaryColor;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 20px;
+                box-sizing: border-box;
+                .artSpaceImage {
+                    margin-left: -21px;
+                    margin-right: -1px;
+                    margin-top: -1px;
+                    width: 347px;
+                    height: 347px;
+                }
+                .artSpaceName {
+                    margin-top: 40px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    @extend %middleSecondaryText;
+                }
+            }
+        }
+    }
+    .events {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        z-index: 0;
+        width: 100%;
+        background-color: #1E1B1E;
+        .eventsHeader {
+            margin-top: 40px;
+            margin-bottom: 0;
+            text-align: center; 
+            @extend %largeSecondaryText;
+        }
+        .eventsList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
+            margin-top: 40px;
+            margin-left: -20px;
+            margin-right: -21px;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style-type: none;
+            .event {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                margin-left: 20px;
+                margin-right: 20px;
+                margin-bottom: 40px;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 40px;
+                box-sizing: border-box;
+                width: 347px;
+                background: #000;
+                .eventPhoto {
+                    margin-left: -20px;
+                    width: 347px;
+                    height: 201px;
+                }
+                .eventLink {
+                    margin-top: 20px;
+                    @extend %middleSecondaryText;
+                    transition: all .25s ease-in;
+                    &:hover {
+                        color: $primaryColor;
+                    }
+                }
+                .eventTheme {
+                    position: absolute;
+                    bottom: 20px;
+                    left: 20px;
+                }
+            }
+        }
+        .eventsButton {
+            position: relative;
+            @extend %middleSecondaryText;
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: 4px;
+                left: -20px;
+                width: 8px;
+                height: 136px;
+                background: url(../images/arrow_top.svg) no-repeat;
+                transition: all .15s ease-in;
+            }
+            &:hover {
+                color: $primaryColor;
+                &:before {
+                    bottom: -24px;
+                }
+            }
+        }
+    }
+}

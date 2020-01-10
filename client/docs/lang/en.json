@@ -1,5 +1,5 @@
 {
-    "headerNav--collections": "Collections",
+    "headerNav--collections": "Collection",
     "headerNav--authors": "Authors",
     "headerNav--artPlacement": "Art space",
     "headerNav--delivery": "Delivery",
@@ -25,6 +25,7 @@
     "interestTheme--news": "News",
     "interestTheme--poster": "Poster",
     "interestButton": "Show more",
+    "eventsHeader": "Interesting",
     "deliveryHeader": "Delicate delivery",
     "deliveryAdditional": "Across Russia and around the world",
     "deliveryLink": "Details",

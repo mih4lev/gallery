@@ -37,4 +37,28 @@
     background-repeat: no-repeat;
  }
 
-
+.innerPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 94px;
+    border-top: 1px solid $secondaryColor;
+    .wrapper {
+        @include respond(desktop) {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+        @include respond(tablet) {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+        @include respond(tabletMini) {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+        @include respond(mobile) {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    }
+}

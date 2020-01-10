@@ -4,6 +4,8 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const csso = require('gulp-csso');
+const posthtml = require('gulp-posthtml');
+const include = require('posthtml-include');
 const htmlmin = require('gulp-htmlmin');
 const tinypng = require('gulp-tinypng-compress');
 const browserSync = require('browser-sync').create();
@@ -22,6 +24,9 @@ gulp.task('browser-sync', function() {
     gulp.watch("./source/sass/*.scss", gulp.series('sass'));
     gulp.watch("./source/sass/blocks/*.scss", gulp.series('sass'));
     gulp.watch("./source/*.html", gulp.series('html'));
+    gulp.watch("./source/components/*.html", gulp.series('html'));
+    gulp.watch("./source/components/blocks/main/*.html", gulp.series('html'));
+    gulp.watch("./source/components/blocks/inner/*.html", gulp.series('html'));
     gulp.watch("./docs/scripts/*.js", gulp.series("scripts"));
     gulp.watch("./docs/scripts/blocks/*.js", gulp.series("scripts"));
     gulp.watch('./source/fonts/*.{woff, woff2, ttf}', gulp.series('fonts'));
@@ -53,6 +58,9 @@ gulp.task('scripts', function() {
 // HTML
 gulp.task('html', function() {
     return gulp.src("./source/*.html")
+        .pipe(posthtml([
+            include()
+        ]))
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest("./docs"))
         .pipe(browserSync.stream());

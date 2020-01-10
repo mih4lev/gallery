@@ -3,6 +3,8 @@ export const respondInterestBlock = () => {
     const interestBlocks = [...document.querySelectorAll(`.interestItem`)];
     const parentBlock = document.querySelector(`.interestList`);
 
+    if (!interestBlocks.length || !parentBlock) return false;
+
     interestBlocks.forEach((block, index) => {
         block.classList.add(`interestItem--${index + 1}`);
         block.addEventListener(`click`, (event) => {
@@ -28,7 +30,7 @@ export const respondInterestBlock = () => {
         event.stopPropagation();
         touchStartX = event.changedTouches[0].clientX;
     }, false);
-    
+
     parentBlock.addEventListener(`touchend`, (event) => {
         event.stopPropagation();
         const windowSize = window.innerWidth;

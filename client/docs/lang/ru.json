@@ -1,5 +1,5 @@
 {
-    "headerNav--collections": "Коллекции",
+    "headerNav--collections": "Коллекция",
     "headerNav--authors": "Авторы",
     "headerNav--artPlacement": "Арт-пространство",
     "headerNav--delivery": "Доставка",
@@ -25,6 +25,7 @@
     "interestTheme--news": "Новости",
     "interestTheme--poster": "Афиша",
     "interestButton": "Показать больше",
+    "eventsHeader": "Интересное",
     "deliveryHeader": "Бережная доставка",
     "deliveryAdditional": "По России и всему миру",
     "deliveryLink": "Подробнее",
