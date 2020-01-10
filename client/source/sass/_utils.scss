@@ -47,18 +47,22 @@
         @include respond(desktop) {
             margin-left: 35px;
             margin-right: 35px;
+            width: 930px;
         }
         @include respond(tablet) {
             margin-left: 35px;
             margin-right: 35px;
+            width: 698px;
         }
         @include respond(tabletMini) {
             margin-left: 35px;
             margin-right: 35px;
+            width: 350px;
         }
         @include respond(mobile) {
             margin-left: 15px;
             margin-right: 15px;
+            width: 290px;
         }
     }
 }
