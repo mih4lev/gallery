@@ -11,6 +11,9 @@
         @include respond(desktop) {
             background-size: 180%;
         }
+        @include respond(tablet) {
+            background-size: 160%;
+        }
         .artSpaceHeader {
             margin-top: 80px;
             margin-bottom: 0;
@@ -45,6 +48,9 @@
                 @include respond(desktop) {
                     width: 290px;       
                 }
+                @include respond(tablet) {
+                    width: 220px;       
+                }
                 .artSpaceImage {
                     margin-left: -21px;
                     margin-right: -1px;
@@ -55,12 +61,28 @@
                         width: 290px;
                         height: 290px;
                     }
+                    @include respond(tablet) {
+                        width: 220px;
+                        height: 220px;
+                    }
                 }
                 .artSpaceName {
                     margin-top: 40px;
                     margin-bottom: 20px;
                     text-align: center;
                     @extend %middleSecondaryText;
+                    @include respond(tablet) {
+                        margin-top: 30px;
+                        margin-bottom: 10px;
+                        font-size: 15px;
+                        line-height: 20px;
+                    }
+                }
+                .artSpaceAdditional {
+                    @include respond(tablet) {
+                        font-size: 10px;
+                        line-height: 12px;
+                    }
                 }
             }
         }
@@ -91,12 +113,16 @@
             margin-bottom: 0;
             padding-left: 0;
             list-style-type: none;
+            @include respond(tablet) {
+                margin-left: -10px;
+                margin-right: -10px;
+            }
             .event {
                 display: flex;
                 flex-direction: column;
                 position: relative;
-                margin-left: 16px;
-                margin-right: 16px;
+                margin-left: 20px;
+                margin-right: 20px;
                 margin-bottom: 40px;
                 padding-left: 20px;
                 padding-right: 20px;
@@ -105,7 +131,14 @@
                 width: 347px;
                 background: #000;
                 @include respond(desktop) {
+                    margin-left: 16px;
+                    margin-right: 16px;
                     width: 290px;
+                }
+                @include respond(tablet) {
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    width: 219px;
                 }
                 .eventPhoto {
                     margin-left: -20px;
@@ -115,19 +148,37 @@
                         width: 290px;
                         height: 168px;
                     }
+                    @include respond(tablet) {
+                        width: 219px;
+                        height: 123px;
+                    }
                 }
                 .eventLink {
                     margin-top: 20px;
                     @extend %middleSecondaryText;
                     transition: all .25s ease-in;
+                    @include respond(tablet) {
+                        font-size: 12px;
+                        line-height: 14px;
+                    }
                     &:hover {
                         color: $primaryColor;
+                    }
+                }
+                .eventDescription {
+                    @include respond(tablet) {
+                        font-size: 10px;
+                        line-height: 12px;
                     }
                 }
                 .eventTheme {
                     position: absolute;
                     bottom: 20px;
                     left: 20px;
+                    @include respond(tablet) {
+                        font-size: 10px;
+                        line-height: 12px;
+                    }
                 }
             }
         }
