@@ -1,6 +1,6 @@
 module.exports = {
     watch: true,
-    entry: './scripts/index.js',
+    entry: './source/scripts/index.js',
     output: {
         filename: 'bundle.min.js',
         path: __dirname + '/docs/scripts'

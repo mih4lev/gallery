@@ -20,11 +20,14 @@ gulp.task('browser-sync', function() {
         cors: true
     });
     gulp.watch("./source/sass/*.scss", gulp.series('sass'));
+    gulp.watch("./source/sass/blocks/*.scss", gulp.series('sass'));
     gulp.watch("./source/*.html", gulp.series('html'));
     gulp.watch("./docs/scripts/*.js", gulp.series("scripts"));
+    gulp.watch("./docs/scripts/blocks/*.js", gulp.series("scripts"));
     gulp.watch('./source/fonts/*.{woff, woff2, ttf}', gulp.series('fonts'));
     gulp.watch('./source/images/*.{png,jpg,jpeg}', gulp.series('tinypng'));
     gulp.watch('./source/images/*.svg', gulp.series('svg'));
+    gulp.watch('./source/lang/*.json', gulp.series('lang'));
 });
 
 // SASS -> CSS
@@ -69,6 +72,13 @@ gulp.task('svg', function() {
         .pipe(gulp.dest("./docs/images"));
 });
 
+// LANG
+gulp.task('lang', function() {
+    del.sync("./docs/lang/*.json");
+    return gulp.src("./source/lang/*.json")
+        .pipe(gulp.dest("./docs/lang"));
+});
+
 // TINYPNG
 gulp.task('tinypng', function () {
     del.sync('./docs/images/*.{png,jpg,jpeg}');
@@ -81,4 +91,4 @@ gulp.task('tinypng', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('default', gulp.parallel('sass', 'html', 'fonts', 'scripts', 'svg', 'tinypng', 'browser-sync'));
+gulp.task('default', gulp.parallel('sass', 'html', 'fonts', 'scripts', 'svg', 'lang', 'tinypng', 'browser-sync'));

@@ -1,0 +1,205 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 35px;
+    padding-right: 35px;
+    box-sizing: border-box;
+    height: 94px;
+    background: #000;
+    @include respond(mobile) {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .header_logo {
+        margin-right: 35px;
+        .header_logo__image {
+            width: 114px;
+            height: 27px;
+        }
+    }
+    .headerNav {
+        .headerNav--list {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+        }
+        .headerNav--item {
+            position: relative;
+            margin: 0 20px;
+            @include respond(mobile) {
+                margin: 0 10px;
+            }
+        }
+        .headerNav--basket {
+            margin-top: 2px;
+        }
+        .headerNav--language {
+            margin-right: 0;
+        }
+        .mainNav {
+            order: -1;
+            margin-left: 0;
+            margin-right: 0;
+            .mainNavList {
+                display: flex;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-left: 0;
+                list-style-type: none;
+            }
+            @include respond(tablet) {
+                order: 2;
+                align-self: center;
+                margin-left: 40px;
+                width: 16px;
+                height: 15px;
+                background-image: url(../images/sandwitch-icon.svg);
+                background-repeat: no-repeat;
+                .mainNavList {
+                    display: none;
+                }
+            }
+            @include respond(tabletMini) {
+                order: 2;
+                align-self: center;
+                margin-left: 40px;
+                width: 16px;
+                height: 15px;
+                background-image: url(../images/sandwitch-icon.svg);
+                background-repeat: no-repeat;
+                .mainNavList {
+                    display: none;
+                }
+            }
+            @include respond(mobile) {
+                order: 2;
+                align-self: center;
+                margin-left: 20px;
+                width: 16px;
+                height: 15px;
+                background-image: url(../images/sandwitch-icon.svg);
+                background-repeat: no-repeat;
+                .mainNavList {
+                    display: none;
+                }
+            }
+        }
+        .headerNav--link {
+            display: inline-block;
+            line-height: 22px;
+            height: 22px;
+            color: $primaryColor;
+            text-transform: uppercase;
+            text-decoration: none;
+            outline: none;
+            transition: all .15s ease-in;
+            &:focus {
+                color: $focusColor;
+            }
+            &:hover {
+                color: $secondaryColor;
+            }
+        }
+        .headerNav--basket {
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+        .headerNav--language {
+            position: relative;
+            color: $secondaryColor;
+            &:after {
+                content: "";
+                width: 11px;
+                height: 8px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%) translateY(250%);
+                background: url(../images/arrow_down--icon.svg) bottom center no-repeat;
+            }
+        }
+        .headerNav--active {
+            display: inline-block;
+            line-height: 22px;
+            height: 22px;
+            color: $secondaryColor;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-bottom: 1px solid $secondaryColor;
+            cursor: default;
+        }
+    }
+    .headerBasket {
+        opacity: 0;
+        z-index: -1;
+        position: absolute;
+        top: -12px;
+        right: -14px;
+        background: #000;
+        border: 1px solid $secondaryColor;
+        transition: opacity .15s ease-in;
+        @include respond(mobile) {
+            top: -10px;
+            right: -85px;
+        }
+        .headerBasket--empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 410px;
+            height: 135px;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: $secondaryColor;
+            @include respond(mobile) {
+                width: 310px;
+            }
+        }
+        .headerBasket--closeButton {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 16px;
+            height: 16px;
+            border: none;
+            background: url(../images/basket_close--icon.svg) no-repeat;
+            cursor: pointer;
+            transition: all .15s ease-in;
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+    .headerLanguage--list {
+        opacity: 0;
+        position: absolute;
+        padding: 5px 5px 5px 6px;
+        top: -15px;
+        left: -6px;
+        box-sizing: border-box;
+        background: #000;
+        list-style-type: none;
+        z-index: -1;
+        transition: all .15s ease-in;
+        .headerLanguage--link {
+            display: block;
+            line-height: 22px;
+            height: 22px;
+            color: $primaryColor;
+            text-transform: uppercase;
+            text-decoration: none;
+            outline: none;
+            &:hover {
+                font-weight: 800;
+            }
+        }
+        .headerLanguage--active {
+            color: $secondaryColor;
+            cursor: default;
+            &:hover {
+                font-weight: 300;
+            }
+        }
+    }
+}

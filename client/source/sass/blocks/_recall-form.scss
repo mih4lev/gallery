@@ -1,0 +1,152 @@
+.recallForm {
+    min-height: 420px;
+    border-top: 1px solid $secondaryColor;
+    background-color: #000;
+    background-image: url(../images/recall_form--background.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    @include respond(tabletMini) {
+        min-height: 447px;
+    }
+    @include respond(mobile) {
+        min-height: 447px;
+    }
+    .recallWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        min-height: inherit;
+        .recallForm--header,
+        .recallForm--sendedHeader {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            @extend %middleSecondaryText;
+            @include respond(tabletMini) {
+                margin-left: 35px;
+                margin-right: 35px;
+            }
+            @include respond(mobile) {
+                margin-left: 20px;
+                margin-right: 20px;
+                font-size: 15px;
+                line-height: 19px;
+            }
+        }
+        .sended--show {
+            display: none;
+        }
+        .recallForm--description {
+            margin-top: 0;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-align: center;
+            @include respond(tabletMini) {
+                margin-left: 35px;
+                margin-right: 35px;
+            }
+            @include respond(mobile) {
+                margin-left: 20px;
+                margin-right: 20px;
+                font-size: 10px;
+                line-height: 14px;
+            }
+        }
+        .recallForm--item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .recallForm--label {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 40px;
+            line-height: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: opacity 0.2s ease-in;
+            cursor: text;
+            .recallForm--require {
+                color: $errorColor;
+            }
+        }
+        .errorBlock--field {
+            opacity: 0;
+            position: absolute;
+            top: -15px;
+            right: 0;
+            color: $errorColor;
+            letter-spacing: 0.1em;
+            transition: all 0.2s ease-in;
+        }
+        .recallForm--field {
+            border: 1px solid $primaryColor;
+            box-sizing: border-box;
+            width: 537px;
+            height: 40px;
+            padding: 0 30px;
+            line-height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+            color: $primaryColor;
+            letter-spacing: 0.2em;
+            outline: none;
+            transition: all 0.2s ease-in;
+            @include respond(tabletMini) {
+                width: 410px;
+            }
+            @include respond(mobile) {
+                width: 290px;
+            }
+            &:focus {
+                border-color: $secondaryColor;  
+            }
+        }
+        .field--error {
+            border-color: $errorColor;
+        }
+        .recallForm--button {
+            margin-top: 20px;
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            width: 537px;
+            height: 40px;
+            box-sizing: border-box;
+            border: 1px solid $secondaryColor;
+            background: #000;
+            color: $secondaryColor;
+            line-height: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            outline: none;
+            transition: all 0.2s ease-in;
+            cursor: pointer;
+            @include respond(tabletMini) {
+                width: 410px;
+            }
+            @include respond(mobile) {
+                width: 290px;
+            }
+            &:hover {
+                background: $secondaryColor;
+                color: #000;
+            }
+        }
+        .errorBlock--form {
+            position: absolute;
+            bottom: 20px;
+            opacity: 0;
+            color: $errorColor;
+            letter-spacing: 0.1em;
+            @include respond(mobile) {
+                font-size: 10px;
+                line-height: 14px;
+            }
+        }
+    }
+}

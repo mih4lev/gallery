@@ -4,22 +4,22 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build prod": "webpack --mode=production",
-        "build dev": "webpack --mode=development",
-        "run gulp": "gulp"
+        "prod": "webpack --mode=production",
+        "dev": "webpack --mode=development",
+        "gulp": "gulp",
+        "build": "concurrently \"npm run dev\" \"npm run gulp\""
     },
-    "author": "",
+    "author": "Andrei Mikhalev",
     "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.7.4",
         "@babel/plugin-transform-runtime": "^7.7.4",
         "@babel/preset-env": "^7.7.4",
         "@babel/runtime": "^7.7.4",
-        "babel-loader": "^8.0.6",
-        "webpack": "^4.41.2",
-        "webpack-cli": "^3.3.10",
         "autoprefixer": "^9.4.7",
+        "babel-loader": "^8.0.6",
         "browser-sync": "^2.26.3",
+        "concurrently": "^5.0.2",
         "del": "^3.0.0",
         "gulp": "^4.0.0",
         "gulp-csso": "^3.0.1",
@@ -29,9 +29,9 @@
         "gulp-postcss": "^8.0.0",
         "gulp-rename": "^1.4.0",
         "gulp-sass": "^4.0.1",
-        "gulp-tinypng-compress": "^1.2.1"
+        "gulp-tinypng-compress": "^1.2.1",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
     },
-    "dependencies": {
-        "concurrently": "^5.0.2"
-    }
+    "dependencies": {}
 }

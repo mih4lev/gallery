@@ -1,0 +1,1045 @@
+.splitBlocks--main {
+    margin-top: 94px;
+    background-color: #000;
+    background-image: url(../images/main-header--background.png);
+    @include respond(desktop) {
+        background-size: 120%;
+        background-position: top center;
+    }
+    @include respond(tablet) {
+        background-size: 140%;
+        background-position: top center;
+    }
+    @include respond(tabletMini) {
+        background-size: 200%;
+        background-position: top center;
+    }
+    @include respond(mobile) {
+        background-size: 250%;
+        background-position: top center;
+    }
+    .mainBlock {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .mainLogo {
+            margin-top: 160px;
+            width: 525px;
+            height: 120px;
+            @include respond(tablet) {
+                margin-top: 100px;
+            }
+            @include respond(tabletMini) {
+                margin-top: 50px;
+                width: 275px;
+                height: 65px;
+            }
+            @include respond(mobile) {
+                margin-top: 50px;
+                width: 275px;
+                height: 65px;
+            }
+        }
+        .mainDescription {
+            margin-top: 68px;
+            margin-bottom: 0;
+            max-width: 656px;
+            text-align: center;
+            @include respond(tabletMini) {
+                margin-top: 40px;
+                max-width: 410px;
+            }
+            @include respond(mobile) {
+                margin-top: 40px;
+                max-width: 290px;
+            }
+        }
+        .mainHeader {
+            margin-top: 90px;
+            margin-bottom: 0;
+            @extend %middleSecondaryText;
+            @include respond(tabletMini) {
+                margin-top: 60px;
+            }
+            @include respond(mobile) {
+                margin-top: 60px;
+            }
+        }
+        .mainCollection {
+            position: relative;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            width: 1140px;
+            height: 1390px;
+            box-sizing: border-box;
+            @include respond(desktop) {
+                width: 960px;
+                height: 1170px;
+            }
+            @include respond(tablet) {
+                width: 728px;
+                height: 894px;
+                margin-bottom: 95px;
+            }
+            @include respond(tabletMini) {
+                width: 450px;
+                height: 1187px;
+                margin-bottom: 95px;
+            }
+            @include respond(mobile) {
+                width: 305px;
+                height: 807px;
+                margin-bottom: 95px;
+            }
+            .collectionPhoto {
+                position: absolute;
+                &:nth-of-type(1) {
+                    top: 0;
+                    left: 33px;
+                    width: 319px;
+                    height: 515px;
+                    @include respond(desktop) {
+                        top: 0;
+                        left: 34px;
+                        width: 274px;
+                        height: 442px;
+                    }
+                    @include respond(tablet) {
+                        top: 0;
+                        left: 25px;
+                        width: 208px;
+                        height: 335px;
+                    }
+                    @include respond(tabletMini) {
+                        top: 0;
+                        left: 0;
+                        width: 173px;
+                        height: 278px;
+                    }
+                    @include respond(mobile) {
+                        top: 0;
+                        left: 0;
+                        width: 118px;
+                        height: 190px;
+                    }
+                }
+                &:nth-of-type(2) {
+                    top: 40px;
+                    left: 388px;
+                    width: 358px;
+                    height: 327px;
+                    @include respond(desktop) {
+                        top: 30px;
+                        left: 325px;
+                        width: 307px;
+                        height: 281px;
+                    }
+                    @include respond(tablet) {
+                        top: 30px;
+                        left: 245px;
+                        width: 233px;
+                        height: 213px;
+                    }
+                    @include respond(tabletMini) {
+                        top: 35px;
+                        left: 185px;
+                        width: 265px;
+                        height: 243px;
+                    }
+                    @include respond(mobile) {
+                        top: 27px;
+                        left: 127px;
+                        width: 178px;
+                        height: 163px;
+                    }
+                }
+                &:nth-of-type(3) {
+                    top: 93px;
+                    right: 0;
+                    width: 365px;
+                    height: 274px;
+                    @include respond(desktop) {
+                        top: 76px;
+                        right: 0;
+                        width: 313px;
+                        height: 235px;
+                    }
+                    @include respond(tablet) {
+                        top: 65px;
+                        right: 0;
+                        width: 238px;
+                        height: 178px;
+                    }
+                    @include respond(tabletMini) {
+                        top: 975px;
+                        right: 234px;
+                        width: 216px;
+                        height: 161px;
+                    }
+                    @include respond(mobile) {
+                        top: 661px;
+                        right: 160px;
+                        width: 145px;
+                        height: 109px;
+                    }
+                }
+                &:nth-of-type(4) {
+                    top: 397px;
+                    right: 66px;
+                    width: 687px;
+                    height: 515px;
+                    @include respond(desktop) {
+                        top: 327px;
+                        right: 46px;
+                        width: 589px;
+                        height: 442px;
+                    }
+                    @include respond(tablet) {
+                        top: 256px;
+                        right: 36px;
+                        width: 447px;
+                        height: 335px;
+                    }
+                    @include respond(tabletMini) {
+                        top: 290px;
+                        right: 0;
+                        width: 450px;
+                        height: 339px;
+                    }
+                    @include respond(mobile) {
+                        top: 199px;
+                        right: 0;
+                        width: 305px;
+                        height: 228px;
+                    }
+                }
+                &:nth-of-type(5) {
+                    top: 545px;
+                    left: 0;
+                    width: 357px;
+                    height: 535px;
+                    @include respond(desktop) {
+                        top: 460px;
+                        left: 0;
+                        width: 307px;
+                        height: 459px;
+                    }
+                    @include respond(tablet) {
+                        top: 348px;
+                        left: 0;
+                        width: 233px;
+                        height: 348px;
+                    }
+                    @include respond(tabletMini) {
+                        top: 641px;
+                        left: 0;
+                        width: 216px;
+                        height: 323px;
+                    }
+                    @include respond(mobile) {
+                        top: 435px;
+                        left: 0;
+                        width: 145px;
+                        height: 217px;
+                    }
+                }
+                &:nth-of-type(6) {
+                    left: 387px;
+                    bottom: 0;
+                    width: 358px;
+                    height: 447px;
+                    @include respond(desktop) {
+                        left: 325px;
+                        bottom: 0;
+                        width: 307px;
+                        height: 384px;
+                    }
+                    @include respond(tablet) {
+                        left: 245px;
+                        bottom: 0;
+                        width: 233px;
+                        height: 291px;
+                    }
+                    @include respond(tabletMini) {
+                        left: 227px;
+                        bottom: 268px;
+                        width: 223px;
+                        height: 278px;
+                    }
+                    @include respond(mobile) {
+                        left: 154px;
+                        bottom: 184px;
+                        width: 151px;
+                        height: 188px;
+                    }
+                }
+                &:nth-of-type(7) {
+                    right: 25px;
+                    bottom: 56px;
+                    width: 338px;
+                    height: 391px;
+                    @include respond(desktop) {
+                        right: 21px;
+                        bottom: 48px;
+                        width: 290px;
+                        height: 336px;
+                    }
+                    @include respond(tablet) {
+                        right: 17px;
+                        bottom: 36px;
+                        width: 220px;
+                        height: 255px;
+                    }
+                    @include respond(tabletMini) {
+                        right: 0;
+                        bottom: 0;
+                        width: 223px;
+                        height: 256px;
+                    }
+                    @include respond(mobile) {
+                        right: 0;
+                        bottom: 0;
+                        width: 151px;
+                        height: 175px;
+                    }
+                }
+            }
+            .collectionLink {
+                position: absolute;
+                left: -28px;
+                bottom: 135px;
+                @extend %arrowSecondaryButton;
+                @include respond(desktop) {
+                    bottom: 110px;
+                }
+                @include respond(tablet) {
+                    position: absolute;
+                    left: 50%;
+                    bottom: 0;
+                    margin-left: -16px;
+                    margin-bottom: -60px;
+                    transform: translateX(-50%);
+                    white-space: nowrap;
+                }
+                @include respond(tabletMini) {
+                    position: absolute;
+                    left: 50%;
+                    bottom: 0;
+                    margin-left: -16px;
+                    margin-bottom: -60px;
+                    transform: translateX(-50%);
+                    white-space: nowrap;
+                }
+                @include respond(mobile) {
+                    position: absolute;
+                    left: 50%;
+                    bottom: 0;
+                    margin-left: -10px;
+                    margin-bottom: -60px;
+                    transform: translateX(-50%);
+                    font-size: 16px;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+    .authorsWrapper {
+        .authorsHeader {
+            margin-top: 0;
+            margin-bottom: 40px;
+            @extend %lineHeader;
+        }
+        .authorBlock {
+            display: flex;
+            flex-direction: column;
+            @include respond(desktop) {
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            @include respond(tablet) {
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            @include respond(tabletMini) {
+                margin-left: 35px;
+                margin-right: 35px;
+            }
+            @include respond(mobile) {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            .authorWrapper {
+                display: flex;
+                align-items: center;
+                @include respond(tabletMini) {
+                    flex-direction: column;
+                }
+                @include respond(mobile) {
+                    flex-direction: column;
+                }
+                .authorInfoWrapper {
+                    display: flex;
+                    align-items: center;
+                    flex-grow: 1;
+                    .authorPhoto {
+                        width: 216px;
+                        height: 216px;
+                        @include respond(desktop) {
+                            width: 170px;
+                            height: 170px;
+                        }
+                        @include respond(tablet) {
+                            width: 100px;
+                            height: 100px;
+                        }
+                        @include respond(tabletMini) {
+                            width: 100px;
+                            height: 100px;
+                        }
+                        @include respond(mobile) {
+                            width: 100px;
+                            height: 100px;
+                        }
+                    }
+                    .authorInfo {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        margin-left: 40px;
+                        margin-right: 40px;
+                        @include respond(tabletMini) {
+                            margin-left: 35px;
+                            margin-right: 0px;
+                        }
+                        @include respond(mobile) {
+                            margin-left: 20px;
+                            margin-right: 0px;
+                        }
+                        .authorNameWrapper {
+                            margin-bottom: 24px;
+                            @include respond(tablet) {
+                                margin-bottom: 10px;
+                            }
+                            @include respond(mobile) {
+                                margin-bottom: 10px;
+                            }
+                            .authorName {
+                                @extend %middleSecondaryText;
+                                transition: all .25s ease-in;
+                                @include respond(tablet) {
+                                    font-size: 18px;
+                                }
+                                &:hover {
+                                    color: $primaryColor;
+                                }
+                            }
+                        }
+                        .authorDescription {
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            @include respond(tablet) {
+                                font-size: 10px;
+                                line-height: 12px;
+                            }
+                            @include respond(mobile) {
+                                font-size: 10px;
+                                line-height: 12px;
+                            }
+                        }
+                    }
+                }
+                .authorPictures--list {
+                    display: flex;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    padding-left: 0;
+                    list-style-type: none;
+                    @include respond(tabletMini) {
+                        margin-top: 35px;
+                        margin-bottom: 35px;
+                    }
+                    @include respond(mobile) {
+                        margin-top: 35px;
+                        margin-bottom: 35px;
+                    }
+                    .authorPictures--item {
+                        margin-left: 3px;
+                        margin-right: 3px;
+                        .authorPictures-link {
+                            .authorPictures--photo {
+                                width: 194px;
+                                height: 194px;
+                                transition: all .25s ease-in;
+                                @include respond(desktop) {
+                                    width: 154px;
+                                    height: 154px;
+                                }
+                                @include respond(tablet) {
+                                    width: 100px;
+                                    height: 100px;
+                                }
+                                @include respond(tabletMini) {
+                                    width: 100px;
+                                    height: 100px;
+                                }
+                                @include respond(mobile) {
+                                    width: 90px;
+                                    height: 90px;
+                                }
+                            }
+                            &:hover {
+                                .authorPictures--photo {
+                                    opacity: 0.5;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .authorButton {
+                align-self: flex-end;
+                margin: 40px 28px 35px;
+                @extend %arrowSecondaryButton;
+                @include respond(tabletMini) {
+                    align-self: center;
+                    margin-top: 0;
+                }
+                @include respond(mobile) {
+                    align-self: center;
+                    margin-top: 0;
+                    margin-left: 0;
+                }
+            }
+        }
+        .authorsBlock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @include respond(tablet) {
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            @include respond(tabletMini) {
+                margin-left: 35px;
+                margin-right: 35px;
+            }
+            @include respond(mobile) {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            .authorsList {
+                display: flex;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-left: 0;
+                list-style-type: none;
+                .authorsItem {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 58px;
+                    margin-right: 58px;
+                    width: 216px;
+                    align-items: center;
+                    @include respond(tablet) {
+                        width: 190px;
+                        margin-left: 30px;
+                        margin-right: 30px;
+                    }
+                    @include respond(tabletMini) {
+                        width: 120px;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                    @include respond(mobile) {
+                        width: 120px;
+                        margin-left: 15px;
+                        margin-right: 15px;
+                        &:nth-of-type(3) {
+                            display: none;
+                        }
+                    }
+                    .authorsImage {
+                        width: 216px;
+                        height: 216px;
+                        @include respond(tablet) {
+                            width: 190px;
+                            height: 190px;
+                        }
+                        @include respond(tabletMini) {
+                            width: 120px;
+                            height: 120px;
+                        }
+                        @include respond(mobile) {
+                            width: 120px;
+                            height: 120px;
+                        }
+                    }
+                    .authorsLinkWrapper {
+                        margin-top: 36px;
+                        text-align: center;
+                        @include respond(tabletMini) {
+                            margin-top: 20px;
+                        }
+                        @include respond(mobile) {
+                            margin-top: 20px;
+                        }
+                        .authorsLink {
+                            @extend %middleSecondaryText;
+                            transition: all .2s ease-in;
+                            &:hover {
+                                color: $primaryColor;
+                            }
+                            @include respond(tabletMini) {
+                                font-size: 12px;
+                                line-height: 14px;
+                            }
+                            @include respond(mobile) {
+                                font-size: 12px;
+                                line-height: 14px;
+                            }
+                        }
+                    }
+                    .authorsPlace {
+                        margin-top: 21px;
+                        text-align: center;
+                        @include respond(tabletMini) {
+                            margin-top: 10px;
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+                        @include respond(mobile) {
+                            margin-top: 10px;
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+                    }
+                }
+            }
+            .authorsButton {
+                align-self: center;
+                margin-top: 40px;
+                margin-bottom: 40px;
+                @extend %arrowSecondaryButton;
+                @include respond(desktop) {
+                    margin-left: 0;
+                }
+                @include respond(tablet) {
+                    margin-left: 0;
+                }
+                @include respond(tabletMini) {
+                    margin-left: 0;
+                }
+                @include respond(mobile) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+    .orderWrapper {
+        .orderHeader {
+            margin-top: 0;
+            margin-bottom: 40px;
+            @extend %lineHeader;
+            @include respond(mobile) {
+                font-size: 21px;
+                line-height: 27px;
+                &:before, &:after {
+                    transform: translateY(-7px);
+                }
+                &:before {
+                    left: -15px;
+                }
+                &:after {
+                    right: -15px;
+                }
+            }
+        }
+        .orderBlock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 1120px;
+            @include respond(desktop) {
+                margin-left: 30px;
+                margin-right: 30px;
+                width: 940px;
+            }
+            @include respond(tablet) {
+                margin-left: 30px;
+                margin-right: 30px;
+                width: 710px;
+            }
+            @include respond(tabletMini) {
+                margin-left: auto;
+                margin-right: auto;
+                width: 452px;
+            }
+            @include respond(mobile) {
+                margin-left: 10px;
+                margin-right: 10px;
+                width: 300px;
+            }
+            .orderDescription {
+                margin-top: 0;
+                margin-bottom: 40px;
+                text-align: center;
+                @include respond(desktop) {
+                    margin-left: 150px;
+                    margin-right: 150px;
+                }
+                @include respond(tablet) {
+                    margin-left: 35px;
+                    margin-right: 35px;
+                }
+            }
+            .orderExamples {
+                display: flex;
+                justify-content: space-between;
+                width: inherit;
+                height: 592px;
+                @include respond(desktop) {
+                    height: 505px;
+                }
+                @include respond(tablet) {
+                    height: 376px;
+                    margin-bottom: 30px;
+                }
+                @include respond(tabletMini) {
+                    flex-direction: column;
+                    height: 950px;
+                    margin-bottom: 70px;
+                }
+                @include respond(mobile) {
+                    flex-direction: column;
+                    height: 720px;      
+                }
+                .picturesWrapper {
+                    position: relative;
+                    width: 473px;
+                    height: inherit;
+                    @include respond(desktop) {
+                        width: 400px;
+                    }
+                    @include respond(tablet) {
+                        width: 300px;
+                    }
+                    @include respond(tabletMini) {
+                        width: 452px;
+                        height: 570px;
+                    }
+                    @include respond(mobile) {
+                        width: 300px;
+                        height: 386px;
+                    }
+                    .picturesHeader {
+                        position: absolute;
+                        top: 428px;
+                        left: 0;
+                        width: 240px;
+                        text-align: right;
+                        @extend %bigPrimaryText;
+                        @include respond(desktop) {
+                            top: 360px;
+                            width: 207px;
+                            font-size: 24px;
+                        }
+                        @include respond(tablet) {
+                            top: 260px;
+                            width: 155px;
+                            font-size: 18px;
+                            line-height: 25px;
+                        }
+                        @include respond(tabletMini) {
+                            top: 415px;
+                            width: 224px;
+                            text-align: left;
+                            font-size: 20px;
+                            line-height: 25px;
+                        }
+                        @include respond(mobile) {
+                            top: 275px;
+                            width: 145px;
+                            text-align: left;
+                            font-size: 13px;
+                            line-height: 18px;
+                        }
+                    }
+                    .picturesDescription {
+                        position: absolute;
+                        top: 493px;
+                        left: 0;
+                        width: 233px;
+                        text-align: right;
+                        color: $primaryColor;
+                        @include respond(desktop) {
+                            top: 408px;
+                            width: 200px;
+                        }
+                        @include respond(tablet) {
+                            top: 298px;
+                            width: 151px;
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+                        @include respond(tabletMini) {
+                            top: 458px;
+                            width: 214px;
+                            text-align: left;
+                        }
+                        @include respond(mobile) {
+                            top: 305px;
+                            width: 145px;
+                            font-size: 10px;
+                            line-height: 12px;
+                            text-align: left;
+                        }
+                    }
+                    .picturesExample {
+                        position: absolute;
+                        &:nth-of-type(1) {
+                            top: 125px;
+                            left: 0;
+                            width: 233px;
+                            height: 271px;
+                            @include respond(desktop) {
+                                top: 100px;
+                                left: 0;
+                                width: 200px;
+                                height: 233px;
+                            }
+                            @include respond(tablet) {
+                                top: 72px;
+                                left: 0;
+                                width: 151px;
+                                height: 176px;
+                            }
+                            @include respond(tabletMini) {
+                                top: 115px;
+                                left: 0;
+                                width: 224px;
+                                height: 261px;
+                            }
+                            @include respond(mobile) {
+                                top: 80px;
+                                left: 0;
+                                width: 145px;
+                                height: 173px;
+                            }
+                        }
+                        &:nth-of-type(2) {
+                            top: 0;
+                            right: 0;
+                            width: 223px;
+                            height: 302px;
+                            @include respond(desktop) {
+                                width: 192px;
+                                height: 260px;
+                            }
+                            @include respond(tablet) {
+                                width: 142px;
+                                height: 192px;
+                            }
+                            @include respond(tabletMini) {
+                                width: 214px;
+                                height: 290px;
+                            }
+                            @include respond(mobile) {
+                                width: 145px;
+                                height: 196px;
+                            }
+                        }
+                        &:nth-of-type(3) {
+                            bottom: 0;
+                            right: 0;
+                            width: 220px;
+                            height: 273px;
+                            @include respond(desktop) {
+                                width: 189px;
+                                height: 235px;
+                            }
+                            @include respond(tablet) {
+                                width: 142px;
+                                height: 177px;
+                            }
+                            @include respond(tabletMini) {
+                                width: 214px;
+                                height: 266px;
+                            }
+                            @include respond(mobile) {
+                                width: 145px;
+                                height: 180px;
+                            }
+                        }
+                    }
+                }
+                .reproductionsWrapper {
+                    position: relative;
+                    width: 624px;
+                    height: inherit;
+                    @include respond(desktop) {
+                        width: 530px;
+                    }
+                    @include respond(tablet) {
+                        width: 400px;
+                    }
+                    @include respond(tabletMini) {
+                        width: 452px;
+                        height: 367px;
+                    }
+                    @include respond(mobile) {
+                        width: 300px;
+                        height: 323px;
+                    }
+                    .reproductionsHeader {
+                        position: absolute;
+                        top: 474px;
+                        left: 0;
+                        width: 322px;
+                        text-align: left;
+                        @extend %bigPrimaryText;
+                        @include respond(desktop) {
+                            top: 402px;
+                            width: 276px;
+                            font-size: 24px;
+                        }
+                        @include respond(tablet) {
+                            top: 303px;
+                            width: 276px;
+                            font-size: 18px;
+                            line-height: 25px;
+                        }
+                        @include respond(tabletMini) {
+                            top: 330px;
+                            width: 276px;
+                            font-size: 20px;
+                            line-height: 25px;
+                        }
+                        @include respond(mobile) {
+                            top: 222px;
+                            width: 145px;
+                            text-align: left;
+                            font-size: 13px;
+                            line-height: 18px;
+                        }
+                    }
+                    .reproductionsDescription {
+                        position: absolute;
+                        bottom: 0;
+                        margin-top: 0;
+                        margin-bottom: 0;
+                        width: inherit;
+                        text-align: left;
+                        color: $primaryColor;
+                        @include respond(tablet) {
+                            margin-bottom: -30px;
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+                        @include respond(tabletMini) {
+                            margin-bottom: -75px; 
+                        }
+                        @include respond(mobile) {
+                            font-size: 10px;
+                            line-height: 12px;
+                        }
+                    }
+                    .reproductionsExample {
+                        position: absolute;
+                        &:nth-of-type(1) {
+                            top: 40px;
+                            left: 0;
+                            width: 322px;
+                            height: 402px;
+                            @include respond(desktop) {
+                                top: 30px;
+                                width: 276px;
+                                height: 346px;
+                            }
+                            @include respond(tablet) {
+                                top: 22px;
+                                width: 209px;
+                                height: 262px;
+                            }
+                            @include respond(tabletMini) {
+                                top: 0;
+                                width: 224px;
+                                height: 280px;
+                            }
+                            @include respond(mobile) {
+                                top: 0;
+                                width: 145px;
+                                height: 184px;
+                            }
+                        }
+                        &:nth-of-type(2) {
+                            top: 60px;
+                            right: 0;
+                            width: 285px;
+                            height: 275px;
+                            @include respond(desktop) {
+                                top: 48px;
+                                width: 245px;
+                                height: 237px;
+                            }
+                            @include respond(tablet) {
+                                top: 37px;
+                                width: 184px;
+                                height: 178px;
+                            }
+                            @include respond(tabletMini) {
+                                top: 0;
+                                width: 214px;
+                                height: 207px;
+                            }
+                            @include respond(mobile) {
+                                top: 0;
+                                width: 145px;
+                                height: 140px;
+                            }
+                        }
+                        &:nth-of-type(3) {
+                            top: 352px;
+                            right: 20px;
+                            width: 265px;
+                            height: 180px;
+                            @include respond(desktop) {
+                                top: 294px;
+                                right: 20px;
+                                width: 225px;
+                                height: 155px;
+                            }
+                            @include respond(tablet) {
+                                top: 222px;
+                                right: 14px;
+                                width: 170px;
+                                height: 116px;
+                            }
+                            @include respond(tabletMini) {
+                                top: 220px;
+                                right: 0;
+                                width: 214px;
+                                height: 146px;
+                            }
+                            @include respond(mobile) {
+                                top: 150px;
+                                right: 0;
+                                width: 145px;
+                                height: 98px;
+                            }
+                        }
+                    }
+                }
+            }
+            .orderButton {
+                align-self: flex-end;
+                margin-top: 40px;
+                margin-bottom: 40px;
+                @extend %arrowSecondaryButton;
+                @include respond(mobile) {
+                    align-self: center;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}

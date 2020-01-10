@@ -1,34 +1,40 @@
-(function(){
-    const wrapper = document.querySelector(`.basket`);
-    const link = document.querySelector(`.header_nav--basket`);
-    const closeButton = document.querySelector(`.basket_close--button`);
-    const showBasket = (zIndex, opacity, isDisabled) => {
-        return (event) => {
-            event.preventDefault();
-            wrapper.style.zIndex = zIndex;
-            wrapper.style.opacity = opacity;
-            if (!isDisabled) return closeButton.removeAttribute(`disabled`);
-            closeButton.setAttribute(`disabled`, `disabled`);
-        };
-    };
-    link.addEventListener(`click`, showBasket(`100`, `1`, false));
-    closeButton.addEventListener(`click`, showBasket(`-1`, `0`, true));
-})();
+export const headerLanguage = () => {
 
-(function(){
+    // default language is ru-RU (delete)
+    localStorage.setItem(`options`, JSON.stringify({ language: `ru-RU` }));
+    const downloadLocalization = async (lang) => {
+        if (!lang) return false;
+        const receive = await fetch(`/lang/${lang}.json`);
+        const data = await receive.json();
+        for (const phrase in data) {
+            console.log(phrase);
+            const phraseNode = [...document.querySelectorAll(`.${phrase}`)];
+            if (phraseNode.length) {
+                phraseNode.forEach((node) => {
+                    node.innerText = data[phrase];
+                })
+            }
+        }
+    };
+    const createCustomEvent = (lang) => {
+        const eventOptions = { detail: { lang }};
+        const customEvent = new CustomEvent("languageChange", eventOptions);
+        document.dispatchEvent(customEvent);
+    };
+    // boolean varible
     let isAlreadySelected = false;
-    const block = document.querySelector(`.language_list`);
-    const link = document.querySelector(`.header_language--block`);
-    const links = document.querySelectorAll(`.language_link`);
+    const block = document.querySelector(`.headerLanguage--list`);
+    const link = document.querySelector(`.headerNav--language`);
+    const links = document.querySelectorAll(`.headerLanguage--link`);
     const showList = (opacity, zIndex) => {
         return () => {
             if (isAlreadySelected) return false;
             block.style.opacity = opacity;
             block.style.zIndex = zIndex;
         };
-    };
+    }; 
     const setHeaderLink = (value) => {
-        const headerLink = document.querySelector(`.header_nav--language`);
+        const headerLink = document.querySelector(`.headerLanguage`);
         headerLink.innerText = value;
     };
     const setStorage = (value) => {
@@ -40,14 +46,14 @@
         link.innerText = label;
     };
     const setLinks = (language) => {
-        const links = document.querySelectorAll(`.language_link`);
+        const links = document.querySelectorAll(`.headerLanguage--link`);
         setLinkData(links[0], language);
         setLinkData(links[1], (language === `ru-RU`) ? `en-EN` : `ru-RU`);
     };
     const changeLanguage = (link) => {
-        return (event = { preventDefault: () => {}}) => {
+        return async (event = { preventDefault: () => {}}) => {
             event.preventDefault();
-            if (link.classList && link.classList.contains(`language_link--active`)) return false;
+            if (link.classList && link.classList.contains(`headerLanguage--active`)) return false;
             const { dataset: { language }} = link;
             const { 0: lang, 1: label } = language.split(`-`);
             setHeaderLink(label);
@@ -57,6 +63,8 @@
             htmlNode.setAttribute(`lang`, lang);
             showList(`0`, `-1`)();
             isAlreadySelected = true;
+            await downloadLocalization(lang);
+            createCustomEvent(lang);
             setTimeout(() => {
                 isAlreadySelected = false;
             }, 1000);
@@ -70,6 +78,10 @@
     // check localStorage for actual language version
     if (localStorage.getItem(`options`)) {
         const { language } = JSON.parse(localStorage.getItem(`options`));
+        const { 0: lang } = language.split(`-`);
+        const htmlNode = document.querySelector(`html`);
+        if (htmlNode.lang === lang) return false;
         changeLanguage({ dataset: { language }})();
     }
-})();
+
+};

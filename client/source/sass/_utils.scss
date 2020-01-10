@@ -1,0 +1,40 @@
+// wrappers
+.wrapperFull {
+    width: 1440px;
+}
+.wrapper {
+    width: 1120px;
+}
+.wrapper, .wrapperFull {
+    height: inherit;
+    min-height: inherit;
+    margin: 0 auto;
+    @include respond(desktop) {
+        width: $desktopWidth;
+    }
+    @include respond(tablet) {
+        width: $tabletWidth;
+    }
+    @include respond(tabletMini) {
+        width: $tabletMiniWidth;
+    }
+    @include respond(mobile) {
+        width: $mobileWidth;
+    }
+}
+
+// similarPhoto effect
+.similarPhoto {
+    transition: all .25s ease-in;
+}
+.similarPhoto--active {
+    filter: grayscale(100%);
+}
+
+// splibBlocks
+.splitBlocks {
+    background-size: 100%;
+    background-repeat: no-repeat;
+ }
+
+
