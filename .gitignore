@@ -4,3 +4,10 @@
 # ignore WebStorm settings
 /.idea/
 /client/.idea/
+# ignore DS files
+/.DS_Store
+/client/.DS_Store
+/client/source/.DS_Store
+/client/source/images/.DS_Store
+/client/docs/.DS_Store
+/client/docs/images/.DS_Store
