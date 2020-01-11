@@ -69,27 +69,27 @@
             position: relative;
             margin-top: 40px;
             margin-bottom: 60px;
+            box-sizing: border-box;
             width: 1140px;
             height: 1390px;
-            box-sizing: border-box;
             @include respond(desktop) {
                 width: 960px;
                 height: 1170px;
             }
             @include respond(tablet) {
+                margin-bottom: 95px;
                 width: 728px;
                 height: 894px;
-                margin-bottom: 95px;
             }
             @include respond(tabletMini) {
+                margin-bottom: 95px;
                 width: 450px;
                 height: 1187px;
-                margin-bottom: 95px;
             }
             @include respond(mobile) {
+                margin-bottom: 95px;
                 width: 305px;
                 height: 807px;
-                margin-bottom: 95px;
             }
             .collectionPhoto {
                 position: absolute;
@@ -337,7 +337,9 @@
                     margin-left: -10px;
                     margin-bottom: -60px;
                     transform: translateX(-50%);
-                    font-size: 16px;
+                    font-size: 15px;
+                    line-height: 18px;
+                    letter-spacing: 0.125em;
                     white-space: nowrap;
                 }
             }
@@ -382,7 +384,9 @@
                     align-items: center;
                     flex-grow: 1;
                     .authorPhoto {
-                        flex: 0 0 auto;
+                        flex-grow: 0;
+                        flex-shrink: 0;
+                        flex-basis: auto;
                         width: 216px;
                         height: 216px;
                         @include respond(desktop) {
@@ -405,8 +409,10 @@
                     .authorInfo {
                         display: flex;
                         flex-direction: column;
+                        flex-grow: 0;
+                        flex-shrink: 1;
+                        flex-basis: auto;
                         justify-content: center;
-                        flex: 0 1 auto;
                         margin-left: 40px;
                         margin-right: 40px;
                         @include respond(tabletMini) {
@@ -429,7 +435,14 @@
                                 @extend %middleSecondaryText;
                                 transition: all .25s ease-in;
                                 @include respond(tablet) {
-                                    font-size: 18px;
+                                    font-size: 20px;
+                                    line-height: 24px;
+                                    letter-spacing: 0.1375em;
+                                }
+                                @include respond(mobile) {
+                                    font-size: 15px;
+                                    line-height: 18px;
+                                    letter-spacing: 0.125em;
                                 }
                                 &:hover {
                                     color: $primaryColor;
@@ -440,12 +453,9 @@
                             margin-top: 0;
                             margin-bottom: 0;
                             @include respond(tablet) {
-                                font-size: 10px;
-                                line-height: 12px;
-                            }
-                            @include respond(mobile) {
-                                font-size: 10px;
-                                line-height: 12px;
+                                font-size: 12px;
+                                line-height: 14px;
+                                letter-spacing: 0.1em;
                             }
                         }
                     }
@@ -500,7 +510,10 @@
             }
             .authorButton {
                 align-self: flex-end;
-                margin: 40px 28px 35px;
+                margin-top: 40px;
+                margin-left: 28px;
+                margin-right: 28px;
+                margin-bottom: 35px;
                 @extend %arrowSecondaryButton;
                 @include respond(tabletMini) {
                     align-self: center;
@@ -538,24 +551,24 @@
                 .authorsItem {
                     display: flex;
                     flex-direction: column;
+                    align-items: center;
                     margin-left: 58px;
                     margin-right: 58px;
                     width: 216px;
-                    align-items: center;
                     @include respond(tablet) {
-                        width: 190px;
                         margin-left: 30px;
                         margin-right: 30px;
+                        width: 190px;
                     }
                     @include respond(tabletMini) {
-                        width: 120px;
                         margin-left: 10px;
                         margin-right: 10px;
+                        width: 120px;
                     }
                     @include respond(mobile) {
-                        width: 120px;
                         margin-left: 15px;
                         margin-right: 15px;
+                        width: 120px;
                         &:nth-of-type(3) {
                             display: none;
                         }
@@ -591,14 +604,6 @@
                             &:hover {
                                 color: $primaryColor;
                             }
-                            @include respond(tabletMini) {
-                                font-size: 12px;
-                                line-height: 14px;
-                            }
-                            @include respond(mobile) {
-                                font-size: 12px;
-                                line-height: 14px;
-                            }
                         }
                     }
                     .authorsPlace {
@@ -606,13 +611,9 @@
                         text-align: center;
                         @include respond(tabletMini) {
                             margin-top: 10px;
-                            font-size: 10px;
-                            line-height: 12px;
                         }
                         @include respond(mobile) {
                             margin-top: 10px;
-                            font-size: 10px;
-                            line-height: 12px;
                         }
                     }
                 }
@@ -643,8 +644,9 @@
             margin-bottom: 40px;
             @extend %lineHeader;
             @include respond(mobile) {
-                font-size: 21px;
-                line-height: 27px;
+                font-size: 25px;
+                line-height: 30px;
+                letter-spacing: 0.15em;
                 &:before, &:after {
                     transform: translateY(-7px);
                 }
@@ -660,26 +662,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 1120px;
+            width: $wrapperWidth;
             @include respond(desktop) {
                 margin-left: 30px;
                 margin-right: 30px;
-                width: 940px;
+                width: $desktopContentWidth + 10;
             }
             @include respond(tablet) {
                 margin-left: 30px;
                 margin-right: 30px;
-                width: 710px;
+                width: $tabletContentWidth + 12;
             }
             @include respond(tabletMini) {
                 margin-left: auto;
                 margin-right: auto;
-                width: 452px;
+                width: $tabletMiniContentWidth + 42;
             }
             @include respond(mobile) {
                 margin-left: 10px;
                 margin-right: 10px;
-                width: 300px;
+                width: $mobileContentWidth + 10;
             }
             .orderDescription {
                 margin-top: 0;
@@ -703,13 +705,13 @@
                     height: 505px;
                 }
                 @include respond(tablet) {
-                    height: 376px;
                     margin-bottom: 30px;
+                    height: 376px;
                 }
                 @include respond(tabletMini) {
                     flex-direction: column;
-                    height: 950px;
                     margin-bottom: 70px;
+                    height: 950px;
                 }
                 @include respond(mobile) {
                     flex-direction: column;
@@ -742,28 +744,33 @@
                         @extend %bigPrimaryText;
                         @include respond(desktop) {
                             top: 360px;
-                            width: 207px;
-                            font-size: 24px;
+                            width: 205px;
+                            font-size: 25px;
+                            line-height: 30px;
+                            letter-spacing: 0.15em;
                         }
                         @include respond(tablet) {
                             top: 260px;
-                            width: 155px;
-                            font-size: 18px;
-                            line-height: 25px;
+                            width: 154px;
+                            font-size: 20px;
+                            line-height: 24px;
+                            letter-spacing: 0.1375em;
                         }
                         @include respond(tabletMini) {
                             top: 415px;
                             width: 224px;
                             text-align: left;
                             font-size: 20px;
-                            line-height: 25px;
+                            line-height: 24px;
+                            letter-spacing: 0.1375em;
                         }
                         @include respond(mobile) {
                             top: 275px;
                             width: 145px;
                             text-align: left;
-                            font-size: 13px;
+                            font-size: 15px;
                             line-height: 18px;
+                            letter-spacing: 0.125em;
                         }
                     }
                     .picturesDescription {
@@ -780,8 +787,6 @@
                         @include respond(tablet) {
                             top: 298px;
                             width: 151px;
-                            font-size: 10px;
-                            line-height: 12px;
                         }
                         @include respond(tabletMini) {
                             top: 458px;
@@ -791,8 +796,6 @@
                         @include respond(mobile) {
                             top: 305px;
                             width: 145px;
-                            font-size: 10px;
-                            line-height: 12px;
                             text-align: left;
                         }
                     }
@@ -902,26 +905,31 @@
                         @include respond(desktop) {
                             top: 402px;
                             width: 276px;
-                            font-size: 24px;
+                            font-size: 25px;
+                            line-height: 30px;
+                            letter-spacing: 0.15em;
                         }
                         @include respond(tablet) {
                             top: 303px;
                             width: 276px;
-                            font-size: 18px;
-                            line-height: 25px;
+                            font-size: 20px;
+                            line-height: 24px;
+                            letter-spacing: 0.1375em;
                         }
                         @include respond(tabletMini) {
                             top: 330px;
                             width: 276px;
                             font-size: 20px;
-                            line-height: 25px;
+                            line-height: 24px;
+                            letter-spacing: 0.1375em;
                         }
                         @include respond(mobile) {
                             top: 222px;
                             width: 145px;
                             text-align: left;
-                            font-size: 13px;
+                            font-size: 15px;
                             line-height: 18px;
+                            letter-spacing: 0.125em;
                         }
                     }
                     .reproductionsDescription {
@@ -933,16 +941,15 @@
                         text-align: left;
                         color: $primaryColor;
                         @include respond(tablet) {
-                            margin-bottom: -30px;
-                            font-size: 10px;
-                            line-height: 12px;
+                            margin-bottom: -35px;
                         }
                         @include respond(tabletMini) {
-                            margin-bottom: -75px; 
+                            margin-bottom: -55px; 
                         }
                         @include respond(mobile) {
                             font-size: 10px;
                             line-height: 12px;
+                            letter-spacing: 0.075em;
                         }
                     }
                     .reproductionsExample {
@@ -1037,6 +1044,9 @@
                 margin-top: 40px;
                 margin-bottom: 40px;
                 @extend %arrowSecondaryButton;
+                @include respond(tabletMini) {
+                    margin-top: 20px;
+                }
                 @include respond(mobile) {
                     align-self: center;
                     margin-left: 0;

@@ -21,23 +21,33 @@
     .headerNav {
         .headerNav--list {
             display: flex;
+            padding-left: 0;
             list-style-type: none;
-            padding: 0;
         }
         .headerNav--item {
             position: relative;
-            margin: 0 20px;
+            margin-top: 0;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 0;
             @include respond(tablet) {
                 text-align: right;
             }
             @include respond(tabletMini) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
                 text-align: right;
             }
             @include respond(mobile) {
+                margin-top: 0;
+                margin-bottom: 0;
+                margin-left: 10px;
+                margin-right: 10px;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
                 text-align: right;
-            }
-            @include respond(mobile) {
-                margin: 0 10px;
             }
         }
         .headerNav--basket {
@@ -58,39 +68,39 @@
                 list-style-type: none;
                 @include respond(tablet) {
                     position: absolute;
-                    width: 190px;
-                    box-sizing: border-box;
-                    background: #000;
                     top: -20px;
                     right: -5px;
                     padding-top: 15px;
-                    padding-bottom: 15px;
                     padding-left: 5px;
                     padding-right: 5px;
+                    padding-bottom: 15px;
+                    box-sizing: border-box;
+                    width: 190px;
+                    background: #000;
                 }
                 @include respond(tabletMini) {
                     position: absolute;
-                    width: 190px;
-                    box-sizing: border-box;
-                    background: #000;
                     top: -20px;
                     right: -5px;
                     padding-top: 15px;
                     padding-bottom: 15px;
                     padding-left: 5px;
                     padding-right: 5px;
+                    box-sizing: border-box;
+                    width: 190px;
+                    background: #000;
                 }
                 @include respond(mobile) {
                     position: absolute;
-                    width: 170px;
-                    box-sizing: border-box;
-                    background: #000;
                     top: -10px;
                     right: -5px;
                     padding-top: 5px;
                     padding-bottom: 5px;
                     padding-left: 5px;
                     padding-right: 5px;
+                    box-sizing: border-box;
+                    width: 170px;
+                    background: #000;
                 }
             }
             @include respond(tablet) {
@@ -100,6 +110,7 @@
                 width: 16px;
                 height: 15px;
                 background-image: url(../images/sandwitch-icon.svg);
+                background-color: transparent;
                 background-repeat: no-repeat;
                 .mainNavList {
                     display: none;
@@ -112,6 +123,7 @@
                 width: 16px;
                 height: 15px;
                 background-image: url(../images/sandwitch-icon.svg);
+                background-color: transparent;
                 background-repeat: no-repeat;
                 .mainNavList {
                     display: none;
@@ -124,6 +136,7 @@
                 width: 16px;
                 height: 15px;
                 background-image: url(../images/sandwitch-icon.svg);
+                background-color: transparent;
                 background-repeat: no-repeat;
                 .mainNavList {
                     display: none;
@@ -132,8 +145,8 @@
         }
         .headerNav--link {
             display: inline-block;
-            line-height: 22px;
             height: 22px;
+            line-height: 22px;
             color: $primaryColor;
             text-transform: uppercase;
             text-decoration: none;
@@ -156,18 +169,21 @@
             color: $secondaryColor;
             &:after {
                 content: "";
-                width: 11px;
-                height: 8px;
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%) translateY(250%);
-                background: url(../images/arrow_down--icon.svg) bottom center no-repeat;
+                width: 11px;
+                height: 8px;
+                background-image: url(../images/arrow_down--icon.svg);
+                background-color: transparent;
+                background-position: bottom center;
+                background-repeat: no-repeat;
             }
         }
         .headerNav--active {
             display: inline-block;
-            line-height: 22px;
             height: 22px;
+            line-height: 22px;
             color: $secondaryColor;
             text-transform: uppercase;
             text-decoration: none;
@@ -181,7 +197,7 @@
         position: absolute;
         top: -12px;
         right: -14px;
-        background: #000;
+        background-color: #000;
         border: 1px solid $secondaryColor;
         transition: opacity .15s ease-in;
         @include respond(mobile) {
@@ -195,6 +211,8 @@
             width: 410px;
             height: 135px;
             font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1375em;
             text-transform: uppercase;
             color: $secondaryColor;
             @include respond(mobile) {
@@ -208,7 +226,9 @@
             width: 16px;
             height: 16px;
             border: none;
-            background: url(../images/basket_close--icon.svg) no-repeat;
+            background-image: url(../images/basket_close--icon.svg);
+            background-color: transparent;
+            background-repeat: no-repeat;
             cursor: pointer;
             transition: all .15s ease-in;
             &:hover {
@@ -218,19 +238,22 @@
     }
     .headerLanguage--list {
         opacity: 0;
+        z-index: -1;
         position: absolute;
-        padding: 5px 5px 5px 6px;
         top: -15px;
         left: -6px;
+        padding-top: 5px;
+        padding-left: 6px;
+        padding-right: 5px;
+        padding-bottom: 5px;
         box-sizing: border-box;
-        background: #000;
         list-style-type: none;
-        z-index: -1;
+        background-color: #000;
         transition: all .15s ease-in;
         .headerLanguage--link {
             display: block;
-            line-height: 22px;
             height: 22px;
+            line-height: 22px;
             color: $primaryColor;
             text-transform: uppercase;
             text-decoration: none;

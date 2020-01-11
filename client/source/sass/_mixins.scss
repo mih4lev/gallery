@@ -14,12 +14,51 @@
     }
 }
 
+/*
+
+    10PX
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.075em;
+
+    12PX
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.1em;
+
+    15PX
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.125em;
+
+    20PX
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.1375em;
+
+    25PX
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 0.15em;
+
+    30PX
+    font-size: 30px
+    line-height: 36px;
+    letter-spacing: 0.1675em;
+
+    50PX
+    font-size: 50px;
+    line-height: 57px;
+    letter-spacing: 0.2152em;
+
+*/
+
 // large 50/57 text Headers
 %largeText {
     font-size: 50px;
     line-height: 57px;
-    font-weight: 100;
     letter-spacing: 0.2152em;
+    font-weight: 100;
     text-transform: uppercase;
 }
 %largePrimaryText {
@@ -34,9 +73,9 @@
 // big 30/37 text Headers
 %bigText {
     font-size: 30px;
-    line-height: 37px;
+    line-height: 36px;
+    letter-spacing: 0.1675em;
     font-weight: 300;
-    letter-spacing: 0.2152em;
     text-transform: uppercase;
 }
 %bigPrimaryText {
@@ -51,9 +90,9 @@
 // middle text Headers / Links
 %middleText {
     font-size: 20px;
-    line-height: 25px;
+    line-height: 24px;
+    letter-spacing: 0.1375em;
     font-weight: 300;
-    letter-spacing: 0.2152em;
     text-transform: uppercase;
 }
 %middlePrimaryText {
@@ -107,11 +146,13 @@
     }
     @include respond(tabletMini) {
         font-size: 30px;
-        line-height: 37px;
+        line-height: 36px;
+        letter-spacing: 0.1675em;
     }
     @include respond(mobile) {
         font-size: 30px;
-        line-height: 37px;
+        line-height: 36px;
+        letter-spacing: 0.1675em;
     }
 }
 
@@ -122,7 +163,9 @@
     margin-right: 28px;
     @extend %middleText;
     @include respond(mobile) {
-        font-size: 16px;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.125em;
         white-space: nowrap;
     }
     &:after {
@@ -133,6 +176,9 @@
         width: 20px;
         height: 8px;
         transition: all .2s ease-in;
+        @include respond(mobile) {
+            top: 5px;
+        }
     }
     &:hover {
         &:after {

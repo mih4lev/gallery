@@ -1,14 +1,16 @@
 // wrappers
 .wrapperFull {
-    width: 1440px;
+    width: $wrapperFullWidth;
 }
 .wrapper {
-    width: 1120px;
+    width: $wrapperWidth;
 }
 .wrapper, .wrapperFull {
+    position: relative;
     height: inherit;
     min-height: inherit;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     @include respond(desktop) {
         width: $desktopWidth;
     }
@@ -38,31 +40,28 @@
  }
 
 .innerPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-top: 94px;
     border-top: 1px solid $secondaryColor;
     .wrapper {
         @include respond(desktop) {
             margin-left: 35px;
             margin-right: 35px;
-            width: 930px;
+            width: $desktopContentWidth;
         }
         @include respond(tablet) {
             margin-left: 35px;
             margin-right: 35px;
-            width: 698px;
+            width: $tabletContentWidth;
         }
         @include respond(tabletMini) {
             margin-left: 35px;
             margin-right: 35px;
-            width: 350px;
+            width: $tabletMiniContentWidth;
         }
         @include respond(mobile) {
             margin-left: 15px;
             margin-right: 15px;
-            width: 290px;
+            width: $mobileContentWidth;
         }
     }
 }
