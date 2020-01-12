@@ -8,8 +8,8 @@
     .deliveryWrapper {
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
         @include respond(desktop) {
@@ -30,21 +30,24 @@
         }
         .deliveryHeader {
             margin-top: 0;
-            margin-bottom: 32px;
+            margin-bottom: 20px;
             text-align: center;
             @extend %largeSecondaryText;
             @include respond(tablet) {
-                font-size: 44px;
-                line-height: 51px;
+                font-size: 40px;
+                line-height: 48px;
+                letter-spacing: 0.1975em;
             }
             @include respond(tabletMini) {
                 font-size: 30px;
-                line-height: 34px;
+                line-height: 36px;
+                letter-spacing: 0.1675em;
             }
             @include respond(mobile) {
                 margin-top: 10px;
-                font-size: 27px;
-                line-height: 31px;
+                font-size: 30px;
+                line-height: 36px;
+                letter-spacing: 0.1675em;
             }
         }
         .deliveryAdditional {
@@ -54,15 +57,16 @@
             @extend %middlePrimaryText;
             @include respond(mobile) {
                 font-size: 15px;
-                line-height: 19px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
             }
         }
         .deliveryIcon {
-            margin-bottom: 58px;
+            margin-bottom: 40px;
         }
         .deliveryLink {
-            @extend %arrowSecondaryButton;
             margin-left: 0;
+            @extend %arrowSecondaryButton;
         }
     }
 }

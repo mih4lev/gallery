@@ -98,16 +98,18 @@
                 .artSpaceLink {
                     margin-top: 40px;
                     margin-bottom: 40px;
-                    @extend %middleSecondaryText;
                     transition: all .25s ease-in;
+                    @extend %middleSecondaryText;
                     @include respond(tablet) {
-                        font-size: 18px;
+                        font-size: 20px;
                         line-height: 24px;
+                        letter-spacing: 0.1375em;
                     }
                     @include respond(tabletMini) {
                         margin-top: 20px;
                         font-size: 10px;
                         line-height: 12px;
+                        letter-spacing: 0.075em;
                     }
                     @include respond(mobile) {
                         margin-top: 20px;
@@ -165,11 +167,11 @@
                     padding-bottom: 65px;
                     padding-left: 25px;
                     padding-right: 25px;
+                    box-sizing: border-box;
                     width: 370px;
                     min-height: 370px;
-                    box-sizing: border-box;
-                    background: #000;
-                    // transition: all .25s ease-in;
+                    background-color: #000;
+                    transition: all .25s ease-in;
                     @include respond(desktop) {
                         width: 280px;
                     }
@@ -179,17 +181,19 @@
                         width: 220px;
                     }
                     @include respond(tabletMini) {
+                        opacity: 0.4;
                         margin-left: 5px;
                         margin-right: 5px;
-                        width: 230px;
-                        opacity: 0.4;
+                        width: 280px;
+                        min-height: 330px;
                         cursor: pointer;
                     }
                     @include respond(mobile) {
+                        opacity: 0.4;
                         margin-left: 5px;
                         margin-right: 5px;
                         width: 220px;
-                        opacity: 0.4;
+                        min-height: 300px;
                         cursor: pointer;
                     }
                     .interestPhoto {
@@ -206,7 +210,7 @@
                             height: 125px;
                         }
                         @include respond(tabletMini) {
-                            width: 230px;
+                            width: 280px;
                             height: 135px;
                         }
                         @include respond(mobile) {
@@ -215,19 +219,22 @@
                         }
                     }
                     .interestLink {
-                        @extend %middleSecondaryText;
                         transition: all .2s ease-in; 
+                        @extend %middleSecondaryText;
                         @include respond(tablet) {
-                            font-size: 14px;
-                            line-height: 17px;
+                            font-size: 15px;
+                            line-height: 18px;
+                            letter-spacing: 0.125em;
                         }
                         @include respond(tabletMini) {
-                            font-size: 14px;
-                            line-height: 17px;
+                            font-size: 15px;
+                            line-height: 18px;
+                            letter-spacing: 0.125em;
                         }
                         @include respond(mobile) {
                             font-size: 10px;
                             line-height: 12px;
+                            letter-spacing: 0.075em;
                         }
                         &:hover {
                             color: $primaryColor;
@@ -262,13 +269,15 @@
                         width: 240px;
                     }
                     @include respond(tabletMini) {
-                        width: 280px;
                         opacity: 1;
+                        width: 280px;
+                        min-height: 350px;
                         cursor: default;
                     }
                     @include respond(mobile) {
-                        width: 220px;
                         opacity: 1;
+                        width: 220px;
+                        min-height: 350px;
                         cursor: default;
                     }
                     .interestPhoto {

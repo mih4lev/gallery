@@ -74,8 +74,8 @@
                                 margin-bottom: 10px;
                             }
                             .authorName {
-                                @extend %middleSecondaryText;
                                 transition: all .25s ease-in;
+                                @extend %middleSecondaryText;
                                 @include respond(tablet) {
                                     font-size: 15px;
                                     line-height: 18px;
