@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>Gallery - Delivery</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+<include src="source/components/header.html"></include>
+
+<main>
+    <div class="innerPage">
+        <h1 class="deliveryInnerHeader">Доставка</h1>
+        <div class="deliveryContent">
+            <div class="wrapper">
+                <p class="deliveryHeader deliveryHeader--types">Вы можете выбрать один из следующих видов доставки:</p>
+                <ul class="deliveryList">
+                    <li class="delivery">
+                        <div class="deliveryIconWrapper">
+                            <img class="deliveryIcon" src="images/delivery_icon--box.svg" alt="delivery box icon">
+                        </div>
+                        <h2 class="deliveryType deliveryType--box">Самовывоз (Москва)</h2>
+                        <p class="deliveryDescription deliveryDescription--box">Вы можете забрать свой заказ в здании ARTÉ по адресу: г. Москва, В.О. 29-я линия, д 2, касса №1 на ресепшене: ежедневно с 10:00 до 20:30.</p>
+                    </li>
+                    <li class="delivery">
+                        <div class="deliveryIconWrapper">
+                            <img class="deliveryIcon" src="images/delivery_icon--truck.svg" alt="delivery truck icon">
+                        </div>
+                        <h2 class="deliveryType deliveryType--truck">Доставка товара курьером (по Москве)</h2>
+                        <p class="deliveryDescription deliveryDescription--truck">Курьерская доставка по Москве в пределах МКАД осуществляется, как правило, на следующий рабочий день после передачи заказа курьеру. Стоимость доставки вы увидите, когда заказ будет сформирован. Оплатить доставку вы сможете вместе с заказом.</p>
+                    </li>
+                    <li class="delivery">
+                        <div class="deliveryIconWrapper">
+                            <img class="deliveryIcon" src="images/delivery_icon--airbus.svg" alt="delivery airbus icon">
+                        </div>
+                        <h2 class="deliveryType deliveryType--airbus">Доставка товара курьерской службой (доставка по России и за границу)</h2>
+                        <p class="deliveryDescription deliveryDescription--airbus">Мы работаем с транспортными компаниями EMS и TNT. Транспортные компании доставляют заказ до двери. Перед доставкой они свяжутся с вами для уточнения времени доставки.</p>
+                    </li>
+                </ul>
+                <p class="deliveryHeader deliveryHeader--payment">Оплата:</p>
+                <p class="deliveryText deliveryText--payment">ARTÉ работает по 100% предоплате заказа. Срок отгрузки готовых изделий 1 рабочий день. Мы доставляем товар в любую точку земного шара.</p>
+                <ul class="paymentList">
+                    <li class="payment">
+                        <h3 class="paymentHeader paymentHeader--cash">Наличными или банковской картой в магазине (Москва)</h3>
+                        <p class="paymentText paymentText--cash">Оплата производится по адресу: г. Москва, В.О., 29-я линия, д. 2, 1ый этаж; ежедневно с 10:00 до 20:30.</p>
+                    </li>
+                    <li class="payment">
+                        <h3 class="paymentHeader paymentHeader--card">Банковской картой online</h3>
+                        <p class="paymentText paymentText--card">При оплате заказа банковской картой ввод реквизитов карты происходит в системе электронных платежей ПАО АКБ «Авангард», который прошел сертификацию в платежных системах Visa и MasterCard. Представленные Вами данные полностью защищены и никто, включая наш интернет-магазин, не может их получить.</p>
+                        <ul class="cardsList">
+                            <li class="card">
+                                <img src="images/card_icon--visa.png" alt="Visa card icon">
+                            </li>
+                            <li class="card">
+                                <img src="images/card_icon--mastercard.png" alt="Mastercard card icon">
+                            </li>
+                            <li class="card">
+                                <img src="images/card_icon--maestro.png" alt="Maestro card icon">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="deliveryMap">
+            <img class="mapLogo" src="images/logo.svg" alt="arTE logo">
+            <img class="mapPin" src="images/map_pin.png" alt="map pin icon">
+            <div class="mapContacts">
+                <span class="contactsLogo">ARTÉ</span>
+                <address class="contactsAddress footerAddress">ул. Рождественская д.5</address>
+                <span class="contactsTimeline footerTimeline">Ежедневно с 11.00 - 22.00</span>
+                <span class="contactsEmail">arTE@gmail.com</span>
+                <span class="contactsPhone">+7 920 535 55 55</span>
+                <ul class="socialList">
+                    <li class="social">
+                        <a class="socialLink socialLink--facebook" href="#">Facebook</a>
+                    </li>
+                    <li class="social">
+                        <a class="socialLink socialLink--instagram" href="#">Instagram</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <include src="source/components/blocks/main/recall-form.html"></include>
+    </div>
+</main>
+
+<include src="source/components/footer.html"></include>
+
+<script src="./scripts/bundle.min.js"></script>
+</body>
+</html>
