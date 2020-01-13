@@ -55,6 +55,9 @@
     "errorBlock--email": "Invalid e-mail",
     "errorBlock--form": "Please fill out all the required fields",
     "recallForm--sendedHeader": "We will contact you shortly.",
+    "filtersHeader": "Filters",
+    "sizeLabel": "Size",
+    "cartButton": "Add to cart",
     "footerAddress": "Address: Rozhdestvenskaya St. 5",
     "footerTimeline": "Daily from 11:00 - 22:00"
 }

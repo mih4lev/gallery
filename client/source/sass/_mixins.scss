@@ -114,6 +114,23 @@
     @extend %middlePrimaryText;
 }
 
+// small text Headers / Links
+%smallText {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+%smallPrimaryText {
+    @extend %smallText;
+    color: $primaryColor;
+}
+%smallSecondaryText {
+    @extend %smallText;
+    color: $secondaryColor;
+}
+
 // line Header LARGE
 %lineHeader {
     overflow: hidden;

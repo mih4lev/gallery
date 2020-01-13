@@ -1,13 +1,12 @@
 export const headerLanguage = () => {
 
     // default language is ru-RU (delete)
-    localStorage.setItem(`options`, JSON.stringify({ language: `ru-RU` }));
+    // localStorage.setItem(`options`, JSON.stringify({ language: `ru-RU` }));
     const downloadLocalization = async (lang) => {
         if (!lang) return false;
         const receive = await fetch(`/lang/${lang}.json`);
         const data = await receive.json();
         for (const phrase in data) {
-            console.log(phrase);
             const phraseNode = [...document.querySelectorAll(`.${phrase}`)];
             if (phraseNode.length) {
                 phraseNode.forEach((node) => {
@@ -50,6 +49,16 @@ export const headerLanguage = () => {
         setLinkData(links[0], language);
         setLinkData(links[1], (language === `ru-RU`) ? `en-EN` : `ru-RU`);
     };
+    const changeCurrency = (lang) => {
+        const priceElements = [...document.querySelectorAll(`.picturePrice`)];
+        if (!priceElements.length) return false;
+        priceElements.forEach((price) => {
+            const { dataset: { priceRub, priceEuro }} = price;
+            price.innerText = (lang === `ru`) ? priceRub : priceEuro;
+            const method = (lang === `ru`) ? `remove` : `add`;
+            price.classList[method](`picturePrice--euro`);
+        });
+    };
     const changeLanguage = (link) => {
         return async (event = { preventDefault: () => {}}) => {
             event.preventDefault();
@@ -59,6 +68,7 @@ export const headerLanguage = () => {
             setHeaderLink(label);
             setStorage(language);
             setLinks(language);
+            changeCurrency(lang);
             const htmlNode = document.querySelector(`html`);
             htmlNode.setAttribute(`lang`, lang);
             showList(`0`, `-1`)();

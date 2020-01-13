@@ -8,6 +8,9 @@
         margin-right: 35px;
         .filters {
             width: 210px;
+            .filtersHeader {
+                @extend %middleSecondaryText;
+            }
         }
         .pictureList {
             display: flex;
@@ -30,15 +33,24 @@
                 .picturePhotoWrapper {
                     position: relative;
                     width: 346px;
+                    overflow: hidden;
+                    &:hover {
+                        .picturePhoto {
+                            transform: scale(1.1);
+                        }
+                    }
                     .picturePhoto {
+                        display: block;
                         width: inherit;
+                        border: none;
+                        transition: all .25s ease-in;
                     }
                 }
                 .photoLabel {
                     &:after {
                         position: absolute;
                         right: 0;
-                        bottom: 3px;
+                        bottom: 0;
                         padding-top: 10px;
                         padding-bottom: 10px;
                         padding-left: 14px;
@@ -47,6 +59,7 @@
                         line-height: 20px;
                         font-weight: 700;
                         text-transform: uppercase;
+                        transition: all .25s ease-in;
                     }
                 }
                 .photoLabel--new {
@@ -63,9 +76,136 @@
                         background-color: #EA3535;
                     }
                 }
-                .pictureHeader {
+                .pictureHeaderWrapper {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    .pictureHeader {
+                        letter-spacing: 0.1em;
+                        transition: all .25s ease-in;
+                        @extend %middlePrimaryLowercaseText;
+                        &:hover {
+                            color: $secondaryColor;
+                        }
+                    }
+                }
+                .pictureData {
+                    display: flex;
+                    justify-content: space-between;
+                    .pictureInfoWrapper {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        .pictureAuthorWrapper {
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            .pictureAuthor {
+                                transition: all .25s ease-in;
+                                @extend %smallSecondaryText;
+                                &:hover {
+                                    color: $primaryColor;
+                                }
+                            }
+                        }
+                        .pictureSize {
+                            margin-top: 10px;
+                            margin-bottom: 0;
+                        }
+                    }
+                    .picturePriceWrapper {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                        position: relative;
+                        .picturePrice {
+                            padding-right: 25px;
+                            white-space: nowrap;
+                            &:after {
+                                content: "₽";
+                                position: absolute;
+                                margin-left: 6px;
+                            }
+                        }
+                        .picturePrice--main {
+                            margin-bottom: -5px;
+                            font-size: 25px;
+                            line-height: 30px;
+                            letter-spacing: 0.15em;
+                        }
+                        .picturePrice--old {
+                            opacity: 0.5;
+                            margin-top: 5px;
+                            padding-right: 0;
+                            font-size: 15px;
+                            line-height: 18px;
+                            letter-spacing: 0.125em;
+                            text-decoration-line: line-through;
+                            &:after {
+                                display: none;
+                            }
+                        }
+                        .picturePrice.picturePrice--euro {
+                            padding-right: 0;
+                            &:before {
+                                content: "€";
+                                position: absolute;
+                                margin-left: -25px;
+                            }
+                            &:after {
+                                display: none;
+                            }
+                        }
+                        .picturePrice--old.picturePrice--euro {
+                            &:before {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .cartButton {
+                    position: relative;
+                    margin-top: 20px;
+                    width: inherit;
+                    height: 40px;
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 14px;
                     letter-spacing: 0.1em;
-                    @extend %middlePrimaryLowercaseText;
+                    text-transform: uppercase;
+                    color: $secondaryColor;
+                    border: 1px solid $secondaryColor;
+                    background: #000;
+                    cursor: pointer;
+                    transition: all .25s ease-in;
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        transform: translate(-28px, -4px) scale(0.7);
+                        width: 18px;
+                        height: 19px;
+                        background-image: url(../images/basket--icon.svg);
+                        transition: all .25s ease-in;
+                    }
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        transform: translate(10px, 3px);
+                        width: 20px;
+                        height: 8px;
+                        background-image: url(../images/arrow_right--icon.svg);
+                        transition: all .25s ease-in;
+                    }
+                    &:hover {
+                        color: $primaryColor;
+                        border: 1px solid $primaryColor;
+                        &:before {
+                            background-image: url(../images/basket_white--icon.svg);
+                        }
+                        &:after {
+                            transform: translate(20px, 3px);
+                            background-image: url(../images/arrow_right_white--icon.svg);
+                        }
+                    }
                 }
             }
         }
