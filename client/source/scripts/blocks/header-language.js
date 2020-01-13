@@ -49,13 +49,18 @@ export const headerLanguage = () => {
         setLinkData(links[0], language);
         setLinkData(links[1], (language === `ru-RU`) ? `en-EN` : `ru-RU`);
     };
-    const changeCurrency = (lang) => {
+    const changeCurrency = async (lang) => {
         const priceElements = [...document.querySelectorAll(`.picturePrice`)];
         if (!priceElements.length) return false;
+        // euro currency API
+        const API = `https://www.cbr-xml-daily.ru/daily_json.js`;
+        const response = await fetch(API);
+        const { Valute: { EUR: { Value: currency }}} = await response.json();
+        // currency
         priceElements.forEach((price) => {
             const { dataset: { priceRub, priceEuro }} = price;
-            price.innerText = (lang === `ru`) ? priceRub : priceEuro;
             const method = (lang === `ru`) ? `remove` : `add`;
+            price.innerText = (lang === `ru`) ? priceRub : priceEuro;
             price.classList[method](`picturePrice--euro`);
         });
     };
