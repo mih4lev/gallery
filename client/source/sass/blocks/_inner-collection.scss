@@ -1,0 +1,73 @@
+.innerPage {
+    .collection {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 60px;
+        margin-left: 35px;
+        margin-right: 35px;
+        .filters {
+            width: 210px;
+        }
+        .pictureList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 0;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 0;
+            width: 1160px;
+            list-style-type: none;
+            .picture {
+                display: flex;
+                flex-direction: column;
+                margin-left: 20px;
+                margin-right: 20px;
+                margin-bottom: 60px;
+                width: 346px;
+                .picturePhotoWrapper {
+                    position: relative;
+                    width: 346px;
+                    .picturePhoto {
+                        width: inherit;
+                    }
+                }
+                .photoLabel {
+                    &:after {
+                        position: absolute;
+                        right: 0;
+                        bottom: 3px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        padding-left: 14px;
+                        padding-right: 14px;
+                        font-size: 20px;
+                        line-height: 20px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+                }
+                .photoLabel--new {
+                    &:after {
+                        content: "NEW";
+                        color: #000;
+                        background-color: #FFC700;
+                    }
+                }
+                .photoLabel--sale {
+                    &:after {
+                        content: "SALE";
+                        color: #000;
+                        background-color: #EA3535;
+                    }
+                }
+                .pictureHeader {
+                    letter-spacing: 0.1em;
+                    @extend %middlePrimaryLowercaseText;
+                }
+            }
+        }
+    }
+}

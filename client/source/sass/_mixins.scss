@@ -108,6 +108,11 @@
     @extend %middleText;
     color: $secondaryColor;
 }
+%middlePrimaryLowercaseText {
+    text-transform: unset;
+    letter-spacing: 0.1em;
+    @extend %middlePrimaryText;
+}
 
 // line Header LARGE
 %lineHeader {
