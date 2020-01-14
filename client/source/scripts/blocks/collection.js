@@ -4,6 +4,7 @@ export const setPicturesLayout = () => {
     // set pictures layout
     setTimeout(() => {
         const pictureList = document.querySelector(`.pictureList`);
+        if (!pictureList) return false;
         new Masonry( pictureList, {
             itemSelector: `.picture`
         });
@@ -132,6 +133,7 @@ export const setPicturesLayout = () => {
         const { left: maxButtonOffset } = coors(rangeMaxButton);
         let buttonFinishCoors = 0;
         const leftMoveHandler = (event) => {
+            event.preventDefault();
             buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = buttonFinishCoors - minButtonOffset;
             const isMinimal = (buttonFinishCoors - minButtonOffset < 0);
@@ -162,6 +164,7 @@ export const setPicturesLayout = () => {
             });
         });
         const rightMoveHandler = (event) => {
+            event.preventDefault();
             buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = maxButtonOffset - buttonFinishCoors;
             const isMinimal = (buttonFinishCoors - maxButtonOffset > 0);
@@ -177,11 +180,22 @@ export const setPicturesLayout = () => {
             rangeMaxButton.style[`right`] = `${rangeSize}px`;
             rangeLine.style[`right`] = `${rangeSize}px`;
         };
-        rangeMaxButton.addEventListener(`mousedown`, () => {
+        rangeMaxButton.addEventListener(`mousedown`, (event) => {
+            event.preventDefault();
             document.addEventListener(`mousemove`, rightMoveHandler);
-            document.addEventListener(`mouseup`, ({ pageX }) => {
-                buttonFinishCoors = pageX;
+            document.addEventListener(`mouseup`, (event) => {
+                event.preventDefault();
+                buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
                 document.removeEventListener(`mousemove`, rightMoveHandler);
+            });
+        });
+        rangeMaxButton.addEventListener(`touchstart`, (event) => {
+            event.preventDefault();
+            document.addEventListener(`touchmove`, rightMoveHandler);
+            document.addEventListener(`touchend`, (event) => {
+                event.preventDefault();
+                buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
+                document.removeEventListener(`touchmove`, rightMoveHandler);
             });
         });
     });
