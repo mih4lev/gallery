@@ -9,20 +9,19 @@
         .filtersWrapper {
             width: 210px;
             .filtersHeader {
-                opacity: 0.05; // delete
                 @extend %middleSecondaryText;
             }
             .filters {
                 display: flex;
                 flex-direction: column;
-                margin-top: 0;
+                margin-top: 40px;
                 margin-bottom: 0;
                 padding-left: 0;
                 width: inherit;
                 list-style-type: none;
                 .filter {
                     position: relative;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
                     width: inherit;
                     .filterLabel {
                         position: relative;
@@ -31,7 +30,6 @@
                         text-transform: uppercase;
                     }
                     .rangeWrapper {
-                        margin-bottom: 10px;
                         .rangeHeader {
                             margin-top: 10px;
                             margin-bottom: 0;
@@ -50,8 +48,11 @@
                             margin-right: 3px;
                             .rangeMin,
                             .rangeMax {
-                                padding-left: 0;
-                                padding-right: 0;
+                                z-index: 10;
+                                padding-top: 9px;
+                                padding-left: 2px;
+                                padding-right: 2px;
+                                padding-bottom: 9px;
                                 position: absolute;
                                 top: -2px;
                                 width: 6px;
@@ -62,6 +63,10 @@
                                 background-color: transparent;
                                 background-repeat: no-repeat;
                                 cursor: pointer;
+                                outline: none;
+                                &:focus {
+                                    background-image: url(../images/circle_white--icon.svg);
+                                }
                             }
                             .rangeMin {
                                 left: 0;
@@ -91,6 +96,122 @@
                                 letter-spacing: 0.075em;
                                 color: $primaryColor;
                             }
+                        }
+                    }
+                    .orientationWrapper {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        padding-top: 10px;
+                        .orientation {
+                            margin-right: 10px;
+                            padding-left: 0;
+                            padding-right: 0;
+                            width: 20px;
+                            height: 20px;
+                            font-size: 0;
+                            border: 1px solid $secondaryColor;
+                            background-color: transparent;
+                            background-image: url(../images/chosen--icon.svg);
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            cursor: pointer;
+                            outline: none;
+                            transition: all .15s ease-in;
+                            &:hover {
+                                transform: scale(1.2);
+                                background-image: url(../images/chosen_white--icon.svg);
+                            }
+                            &:last-of-type {
+                                margin-right: 0;
+                            }
+                        }
+                        .orientation--active {
+                            border: 1px solid $primaryColor;
+                            background-image: none;
+                            &:hover {
+                                border: 1px solid $primaryColor;
+                                background-image: url(../images/chosen--icon.svg);
+                            }
+                        }
+                        .orientation--width {
+                            width: 30px;
+                        }
+                        .orientation--height {
+                            height: 30px;
+                        }
+                    }
+                    .colorsWrapper {
+                        display: flex;
+                        justify-content: flex-start;
+                        flex-wrap: wrap;
+                        margin-left: -7px;
+                        margin-right: -7px;
+                        padding-top: 10px;
+                        .color {
+                            margin-left: 6px;
+                            margin-right: 6px;
+                            margin-bottom: 10px;
+                            width: 20px;
+                            height: 20px;
+                            font-size: 0;
+                            border: none;
+                            background-color: transparent;
+                            background-image: url(../images/chosen--icon.svg);
+                            background-repeat: no-repeat;
+                            background-position: center center;
+                            outline: none;
+                            cursor: pointer;
+                            transition: all .15s ease-in;
+                            &:hover {
+                                transform: scale(1.2);
+                            }
+                            &:nth-of-type(1) {
+                                background-color: #4E0AA5;
+                            }
+                            &:nth-of-type(2) {
+                                background-color: #DB71C4;
+                            }
+                            &:nth-of-type(3) {
+                                background-color: #A5856E;
+                            }
+                            &:nth-of-type(4) {
+                                background-color: #3B6505;
+                            }
+                            &:nth-of-type(5) {
+                                background-color: #0D747A;
+                            }
+                            &:nth-of-type(6) {
+                                background-color: #8CC9EB;
+                            }
+                            &:nth-of-type(7) {
+                                background-color: #0C318B;
+                            }
+                            &:nth-of-type(8) {
+                                background-color: #4B042F;
+                            }
+                            &:nth-of-type(9) {
+                                background-color: #A72121;
+                            }
+                            &:nth-of-type(10) {
+                                background-color: #E9750F;
+                            }
+                            &:nth-of-type(11) {
+                                background-color: #FDDC2E;
+                            }
+                            &:nth-of-type(12) {
+                                background-color: #868594;
+                            }
+                            &:nth-of-type(13) {
+                                background-color: #EDEDED;
+                            }
+                            &:nth-of-type(14) {
+                                background-color: #121213;
+                            }
+                        }
+                        .color--active {
+                            transform: scale(1.2);
+                            background-image: none;
                         }
                     }
                     .filterLabel--dropdown {
@@ -270,7 +391,6 @@
             }
         }
         .pictureList {
-            opacity: 0.025; // delete
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -434,6 +554,7 @@
                     border: 1px solid $secondaryColor;
                     background: #000;
                     cursor: pointer;
+                    outline: none;
                     transition: all .25s ease-in;
                     &:before {
                         content: "";
@@ -468,16 +589,4 @@
             }
         }
     }
-}
-
-header {
-    opacity: 0.05; // delete
-}
-
-footer {
-    opacity: 0.05; // delete
-}
-
-.innerPage {
-    border-top: none;
 }

@@ -111,31 +111,96 @@ export const setPicturesLayout = () => {
         }
         return { top: Math.round(top), left: Math.round(left) };
     }
-    //
+    // range blocks
     const rangeWrappers = [...document.querySelectorAll(`.rangeWrapper`)];
     rangeWrappers.forEach((rangeWrapper) => {
+        const minValueNode = rangeWrapper.querySelector(`.labelMin`);
+        const minValue = Number(minValueNode.innerText);
+        const maxValueNode = rangeWrapper.querySelector(`.labelMax`);
+        const maxValue = Number(maxValueNode.innerText);
+        const valueRange = maxValue - minValue;
+        const step =
+            (valueRange / 1000 > 100) ? 1000 :
+                (valueRange / 500 > 100) ? 500 :
+                    (valueRange / 100 > 100) ? 100 :
+                        (valueRange / 50 > 500) ? 50 : 10;
         const rangeLine = rangeWrapper.querySelector(`.range`);
         const maxRange = rangeLine.offsetWidth;
         const rangeMinButton = rangeWrapper.querySelector(`.rangeMin`);
         const { left: minButtonOffset } = coors(rangeMinButton);
-        // const rangeMaxButton = rangeWrapper.querySelector(`.rangeMax`);
-        // const { left: maxButtonOffset } = coors(rangeMaxButton);
+        const rangeMaxButton = rangeWrapper.querySelector(`.rangeMax`);
+        const { left: maxButtonOffset } = coors(rangeMaxButton);
         let buttonFinishCoors = 0;
-        const moveHandler = (event) => {
-            buttonFinishCoors = event.pageX;
+        const leftMoveHandler = (event) => {
+            buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = buttonFinishCoors - minButtonOffset;
             const isMinimal = (buttonFinishCoors - minButtonOffset < 0);
             const isMaximum = (maxRange < range);
-            const rangeSize = (isMinimal) ? 0 : (isMaximum) ? maxRange : range;
-            rangeMinButton.style.left = `${rangeSize}px`;
-            rangeLine.style.left = `${rangeSize}px`;
+            const { left: maxButtonOffset } = coors(rangeMaxButton);
+            const isInvalidOffset = (buttonFinishCoors - maxButtonOffset > 0);
+            const rangeSize =
+                (isInvalidOffset) ? (maxButtonOffset - minButtonOffset) :
+                    (isMaximum) ? maxRange :
+                        (isMinimal) ? 0 : range;
+            const value = (rangeSize / maxRange) * valueRange;
+            minValueNode.innerText = (Math.round(Math.round(value) / step) * step) + minValue;
+            rangeMinButton.style[`left`] = `${rangeSize}px`;
+            rangeLine.style[`left`] = `${rangeSize}px`;
         };
-        rangeMinButton.addEventListener(`mousedown`, (event) => {
-            document.addEventListener(`mousemove`, moveHandler);
+        rangeMinButton.addEventListener(`mousedown`, () => {
+            document.addEventListener(`mousemove`, leftMoveHandler);
             document.addEventListener(`mouseup`, (event) => {
-                buttonFinishCoors = event.pageX;
-                document.removeEventListener(`mousemove`, moveHandler);
+                buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
+                document.removeEventListener(`mousemove`, leftMoveHandler);
             });
+        });
+        rangeMinButton.addEventListener(`touchstart`, () => {
+            document.addEventListener(`touchmove`, leftMoveHandler);
+            document.addEventListener(`touchend`, (event) => {
+                buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
+                document.removeEventListener(`touchmove`, leftMoveHandler);
+            });
+        });
+        const rightMoveHandler = (event) => {
+            buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
+            const range = maxButtonOffset - buttonFinishCoors;
+            const isMinimal = (buttonFinishCoors - maxButtonOffset > 0);
+            const isMaximum = (maxRange < range);
+            const { left: minButtonOffset } = coors(rangeMinButton);
+            const isInvalidOffset = (buttonFinishCoors - minButtonOffset < 0);
+            const rangeSize =
+                (isInvalidOffset) ? (maxButtonOffset - minButtonOffset) :
+                    (isMaximum) ? maxRange :
+                        (isMinimal) ? 0 : range;
+            const value = (rangeSize / maxRange) * valueRange;
+            maxValueNode.innerText = maxValue - (Math.round(Math.round(value) / step) * step);
+            rangeMaxButton.style[`right`] = `${rangeSize}px`;
+            rangeLine.style[`right`] = `${rangeSize}px`;
+        };
+        rangeMaxButton.addEventListener(`mousedown`, () => {
+            document.addEventListener(`mousemove`, rightMoveHandler);
+            document.addEventListener(`mouseup`, ({ pageX }) => {
+                buttonFinishCoors = pageX;
+                document.removeEventListener(`mousemove`, rightMoveHandler);
+            });
+        });
+    });
+    // orientation choose
+    const orientationIcons = [...document.querySelectorAll(`.orientation`)];
+    orientationIcons.forEach((icon) => {
+        icon.addEventListener(`click`, () => {
+            const isChosen = icon.classList.contains(`orientation--active`);
+            const method = (isChosen) ? `remove` : `add`;
+            icon.classList[method](`orientation--active`);
+        });
+    });
+    // color choose
+    const colorIcons = [...document.querySelectorAll(`.color`)];
+    colorIcons.forEach((icon) => {
+        icon.addEventListener(`click`, () => {
+            const isChosen = icon.classList.contains(`color--active`);
+            const method = (isChosen) ? `remove` : `add`;
+            icon.classList[method](`color--active`);
         });
     });
 };
