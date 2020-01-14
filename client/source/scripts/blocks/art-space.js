@@ -28,11 +28,13 @@ export const respondInterestBlock = () => {
     let touchEndX = 0;
 
     parentBlock.addEventListener(`touchstart`, (event) => {
+        event.preventDefault();
         event.stopPropagation();
         touchStartX = event.changedTouches[0].clientX;
     }, false);
 
     parentBlock.addEventListener(`touchend`, (event) => {
+        event.preventDefault();
         event.stopPropagation();
         const windowSize = window.innerWidth;
         if (windowSize > 768) return false;
