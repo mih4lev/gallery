@@ -17,8 +17,177 @@
     <div class="innerPage">
         <div class="wrapperFull">
             <div class="collection">
-                <div class="filters">
+                <div class="filtersWrapper">
                     <div class="filtersHeader">Фильтры</div>
+                    <ul class="filters">
+                        <li class="filter">
+                            <p class="filterLabel">Цена</p>
+                            <div class="rangeWrapper">
+                                <div class="rangeLine">
+                                    <button class="rangeMin">min</button>
+                                    <button class="rangeMax">max</button>
+                                    <span class="range"></span>
+                                </div>
+                                <div class="rangeLabels labelCurrency">
+                                    <span class="labelMin">6000</span>
+                                    <span class="labelMax">280000</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="filter">
+                            <p class="filterLabel">Ориентация</p>
+                        </li>
+                        <li class="filter">
+                            <p class="filterLabel">Размер</p>
+                            <div class="rangeWrapper">
+                                <p class="rangeHeader">Ширина</p>
+                                <div class="rangeLine">
+                                    <button class="rangeMin">min</button>
+                                    <button class="rangeMax">max</button>
+                                    <span class="range"></span>
+                                </div>
+                                <div class="rangeLabels labelCurrency">
+                                    <span class="labelMin">20</span>
+                                    <span class="labelMax">250</span>
+                                </div>
+                            </div>
+                            <div class="rangeWrapper">
+                                <p class="rangeHeader">Высота</p>
+                                <div class="rangeLine">
+                                    <button class="rangeMin">min</button>
+                                    <button class="rangeMax">max</button>
+                                    <span class="range"></span>
+                                </div>
+                                <div class="rangeLabels labelCurrency">
+                                    <span class="labelMin">20</span>
+                                    <span class="labelMax">250</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="filter">
+                            <p class="filterLabel">Цвет</p>
+                        </li>
+                        <li class="filter">
+                            <p class="filterLabel filterLabel--dropdown">Жанр</p>
+                            <div class="dropdown">
+                                <div class="dropdownWrapper">
+                                    <ul class="dropdownList">
+                                        <li class="dropdownItem" data-select="1">
+                                            <span class="dropdownLink">Портрет</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="2">
+                                            <span class="dropdownLink">Пейзаж</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="3">
+                                            <span class="dropdownLink">Абстракция</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdownScroll"></div>
+                            </div>
+                            <ul class="chosenList"></ul>
+                        </li>
+                        <li class="filter">
+                            <p class="filterLabel filterLabel--dropdown">Техника</p>
+                            <div class="dropdown">
+                                <div class="dropdownWrapper">
+                                    <ul class="dropdownList">
+                                        <li class="dropdownItem" data-select="1">
+                                            <span class="dropdownLink">Масла</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="2">
+                                            <span class="dropdownLink">Коллаж</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="3">
+                                            <span class="dropdownLink">Акрил</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="4">
+                                            <span class="dropdownLink">Пастель</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="5">
+                                            <span class="dropdownLink">Маркер</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="6">
+                                            <span class="dropdownLink">Акварель</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdownScroll"></div>
+                            </div>
+                            <ul class="chosenList"></ul>
+                        </li>
+                        <li class="filter">
+                            <p class="filterLabel filterLabel--dropdown">Автор</p>
+                            <div class="dropdown">
+                                <div class="dropdownWrapper">
+                                    <ul class="dropdownList">
+                                        <li class="dropdownItem" data-select="1">
+                                            <img class="authorPhoto" src="images/author1_photo.png" alt="author 1 photo">
+                                            <span class="dropdownLink">Катерина Жуковская</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="2">
+                                            <img class="authorPhoto" src="images/author2_photo.png" alt="author 2 photo">
+                                            <span class="dropdownLink">Марина Лебедева</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="3">
+                                            <img class="authorPhoto" src="images/author3_photo.png" alt="author 3 photo">
+                                            <span class="dropdownLink">Sasha Ignatiadou</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="4">
+                                            <img class="authorPhoto" src="images/author1_photo.png" alt="author 1 photo">
+                                            <span class="dropdownLink">Валентина Нарыжная</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="5">
+                                            <img class="authorPhoto" src="images/author2_photo.png" alt="author 2 photo">
+                                            <span class="dropdownLink">Оля Пахомова</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="6">
+                                            <img class="authorPhoto" src="images/author3_photo.png" alt="author 3 photo">
+                                            <span class="dropdownLink">Дмитрий Маликов</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="7">
+                                            <img class="authorPhoto" src="images/author1_photo.png" alt="author 1 photo">
+                                            <span class="dropdownLink">Анастасия Иванова</span>
+                                        </li>
+                                        <li class="dropdownItem" data-author="8">
+                                            <img class="authorPhoto" src="images/author2_photo.png" alt="author 2 photo">
+                                            <span class="dropdownLink">Оля Кулевина</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="9">
+                                            <img class="authorPhoto" src="images/author3_photo.png" alt="author 3 photo">
+                                            <span class="dropdownLink">Антон Антонов</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="10">
+                                            <img class="authorPhoto" src="images/author1_photo.png" alt="author 1 photo">
+                                            <span class="dropdownLink">Светлана Светлакова</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="11">
+                                            <img class="authorPhoto" src="images/author2_photo.png" alt="author 2 photo">
+                                            <span class="dropdownLink">Марина Левобережная</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="12">
+                                            <img class="authorPhoto" src="images/author3_photo.png" alt="author 3 photo">
+                                            <span class="dropdownLink">Аркадий Новиков</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="13">
+                                            <img class="authorPhoto" src="images/author1_photo.png" alt="author 1 photo">
+                                            <span class="dropdownLink">Артем Безволосый</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="14">
+                                            <img class="authorPhoto" src="images/author2_photo.png" alt="author 2 photo">
+                                            <span class="dropdownLink">Екатерина Смирнова</span>
+                                        </li>
+                                        <li class="dropdownItem" data-select="15">
+                                            <img class="authorPhoto" src="images/author3_photo.png" alt="author 3 photo">
+                                            <span class="dropdownLink">Вика Красильникова</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdownScroll"></div>
+                            </div>
+                            <ul class="chosenList"></ul>
+                        </li>
+                    </ul>
                 </div>
                 <ul class="pictureList">
                     <li class="picture similarParent">

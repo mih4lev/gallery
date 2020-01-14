@@ -6,13 +6,271 @@
         margin-top: 60px;
         margin-left: 35px;
         margin-right: 35px;
-        .filters {
+        .filtersWrapper {
             width: 210px;
             .filtersHeader {
+                opacity: 0.05; // delete
                 @extend %middleSecondaryText;
+            }
+            .filters {
+                display: flex;
+                flex-direction: column;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding-left: 0;
+                width: inherit;
+                list-style-type: none;
+                .filter {
+                    position: relative;
+                    margin-bottom: 10px;
+                    width: inherit;
+                    .filterLabel {
+                        position: relative;
+                        margin-top: 0;
+                        margin-bottom: 0;
+                        text-transform: uppercase;
+                    }
+                    .rangeWrapper {
+                        margin-bottom: 10px;
+                        .rangeHeader {
+                            margin-top: 10px;
+                            margin-bottom: 0;
+                            padding-left: 0;
+                            font-size: 10px;
+                            line-height: 12px;
+                            letter-spacing: 0.075em;
+                            color: $secondaryColor;
+                        }
+                        .rangeLine {
+                            margin-top: 10px;
+                            position: relative;
+                            height: 2px;
+                            background-color: #1E1B1E;
+                            margin-left: 3px;
+                            margin-right: 3px;
+                            .rangeMin,
+                            .rangeMax {
+                                padding-left: 0;
+                                padding-right: 0;
+                                position: absolute;
+                                top: -2px;
+                                width: 6px;
+                                height: 6px;
+                                font-size: 0;
+                                border: none;
+                                background-image: url(../images/circle--icon.svg);
+                                background-color: transparent;
+                                background-repeat: no-repeat;
+                                cursor: pointer;
+                            }
+                            .rangeMin {
+                                left: 0;
+                                transform: translateX(-3px);
+                            }
+                            .rangeMax {
+                                right: 0;
+                                transform: translateX(3px);
+                            }
+                            .range {
+                                position: absolute;
+                                left: 0;
+                                right: 0;
+                                display: block;
+                                height: 2px;
+                                background-color: $secondaryColor;
+                            }
+                        }
+                        .rangeLabels {
+                            margin-top: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            .labelMin,
+                            .labelMax {
+                                font-size: 10px;
+                                line-height: 12px;
+                                letter-spacing: 0.075em;
+                                color: $primaryColor;
+                            }
+                        }
+                    }
+                    .filterLabel--dropdown {
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            right: 0;
+                            transform: translateY(-50%);
+                            width: 11px;
+                            height: 7px;
+                            background-image: url(../images/arrow_down_white--icon.svg);
+                            cursor: pointer;
+                            transition: all .15s ease-in;
+                        }
+                    }
+                    .filterLabel.filterLabel--dropdown {
+                        cursor: pointer;
+                    }
+                    .filterLabel--dropdown.filterLabel--active {
+                        &:after {
+                            transform: translateY(-3px) rotate(180deg);
+                            background-image: url(../images/arrow_down--icon.svg);
+                        }
+                    }
+                    .dropdown {
+                        opacity: 0;
+                        z-index: -1;
+                        position: absolute;
+                        margin-top: 10px;
+                        width: inherit;
+                        max-height: 188px;
+                        border: 1px solid $secondaryColor;
+                        transition: all .25s ease-in;
+                        background-color: #000;
+                        .dropdownWrapper {
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            max-height: 168px;
+                            overflow: hidden;
+                            .dropdownList {
+                                margin-top: 0;
+                                margin-bottom: 0;
+                                padding-left: 45px;
+                                box-sizing: border-box;
+                                width: inherit;
+                                list-style-type: none;
+                                transition: all .25s ease-in;
+                                .dropdownItem {
+                                    position: relative;
+                                    padding-top: 7px;
+                                    padding-bottom: 7px;
+                                    .authorPhoto {
+                                        width: 20px;
+                                        height: 20px;
+                                        position: absolute;
+                                        top: 50%;
+                                        transform: translate(-30px, -50%);
+                                    }
+                                    .dropdownLink {
+                                        font-size: 10px;
+                                        line-height: 12px;
+                                        letter-spacing: 0.075em;
+                                        cursor: pointer;
+                                        &:hover {
+                                            color: $secondaryColor;
+                                        }
+                                    }
+                                    .dropdownLink--active {
+                                        color: $secondaryColor;
+                                        &:before {
+                                            content: "";
+                                            position: absolute;
+                                            left: -25px;
+                                            top: 50%;
+                                            width: 14px;
+                                            height: 11px;
+                                            background-image: url(../images/chosen--icon.svg);
+                                            transform: translateY(-50%);
+                                        }
+                                    }
+                                    .authorPhoto + .dropdownLink.dropdownLink--active {
+                                        &:before {
+                                            display: none;
+                                        }
+                                        &:after {
+                                            content: "";
+                                            position: absolute;
+                                            top: 50%;
+                                            right: 15px;
+                                            width: 14px;
+                                            height: 11px;
+                                            background-image: url(../images/chosen--icon.svg);
+                                            transform: translateY(-50%);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .dropdownScroll {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            width: 1px;
+                            height: 80px;
+                            transform: translate(5px, -1px);
+                            background-color: $secondaryColor;
+                            transition: all .25s ease-in;
+                        }
+                    }
+                    .chosenList {
+                        margin-top: 0;
+                        margin-bottom: 0;
+                        padding-left: 30px;
+                        box-sizing: border-box;
+                        list-style-type: none;
+                        .chosenItem {
+                            position: relative;
+                            padding-top: 7px;
+                            padding-bottom: 7px;
+                            &:nth-of-type(1) {
+                                margin-top: 8px;
+                            }
+                            .authorPhoto {
+                                width: 20px;
+                                height: 20px;
+                                position: absolute;
+                                top: 50%;
+                                transform: translate(-30px, -50%);
+                            }
+                            .chosenLink {
+                                font-size: 10px;
+                                line-height: 12px;
+                                letter-spacing: 0.075em;
+                                cursor: pointer;
+                                color: $secondaryColor;
+                                transition: all .15s ease-in;
+                                &:before {
+                                    content: "";
+                                    position: absolute;
+                                    left: -25px;
+                                    top: 50%;
+                                    width: 14px;
+                                    height: 11px;
+                                    transform: translateY(-50%);
+                                    background-image: url(../images/chosen--icon.svg);
+                                    transition: all .15s ease-in;
+                                }
+                                &:after {
+                                    opacity: 0;
+                                    content: "";
+                                    position: absolute;
+                                    width: 16px;
+                                    height: 16px;
+                                    transform: translate(5px) scale(0.6);
+                                    background-image: url(../images/basket_close_white--icon.svg);
+                                    transition: all .15s ease-in;
+                                }
+                                &:hover {
+                                    color: $primaryColor;
+                                    &:before {
+                                        opacity: 0;
+                                    }
+                                    &:after {
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                            .authorPhoto + .chosenLink {
+                                &:before {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         .pictureList {
+            opacity: 0.025; // delete
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -210,4 +468,16 @@
             }
         }
     }
+}
+
+header {
+    opacity: 0.05; // delete
+}
+
+footer {
+    opacity: 0.05; // delete
+}
+
+.innerPage {
+    border-top: none;
 }
