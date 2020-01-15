@@ -527,6 +527,12 @@
                                     transform: translate(5px) scale(0.6);
                                     background-image: url(../images/basket_close_white--icon.svg);
                                     transition: all .15s ease-in;
+                                    @include respond(tabletMini) {
+                                        margin-top: -2px;
+                                    }
+                                    @include respond(mobile) {
+                                        margin-top: -2px;
+                                    }
                                 }
                                 &:hover {
                                     color: $primaryColor;
