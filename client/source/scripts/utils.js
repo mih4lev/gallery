@@ -31,7 +31,7 @@ export const changeCurrency = async (lang) => {
     currencyNodes.forEach((node) => {
         const { dataset: { rub: valueRub }} = node;
         const valueEuro = Math.round((valueRub / rate) * 100) / 100;
-        const value = (isDefault) ? format(valueRub) : valueEuro;
+        const value = (isDefault) ? format(valueRub) : valueEuro.toFixed(2);
         const selector = (isDefault) ? [ `euro`, `rub` ] : [ `rub`, `euro` ];
         node.classList.replace(`price--${selector[0]}`, `price--${selector[1]}`);
         node.innerText = value;
