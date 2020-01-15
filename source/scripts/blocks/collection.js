@@ -42,8 +42,8 @@ export const setPicturesLayout = () => {
     const dropdownElements = [...document.querySelectorAll(`.filterLabel--dropdown`)];
     dropdownElements.forEach((element) => {
         element.addEventListener(`click`, () => {
-            const dropdownMenu = element.nextSibling;
-            const isActive = (dropdownMenu.style.opacity === `1`);
+            const dropdownMenu = element.closest(`.filter`).querySelector(`.dropdown`);
+            const isActive = (dropdownMenu.style.opacity && dropdownMenu.style.opacity === `1`);
             const method = (isActive) ? `remove` : `add`;
             if (!isActive) hideAllDropdownMenu();
             element.classList[method](`filterLabel--active`);

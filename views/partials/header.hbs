@@ -1,0 +1,68 @@
+<header>
+    <div class="wrapperFull">
+        <div class="header">
+            <div class="headerLogo">
+                <a href="/" class="headerLogo--link">
+                    <img class="headerLogo--image" src="images/logo.svg" width="114" height="27" alt="Logo arTE">
+                </a>
+            </div>
+            <nav class="headerNav">
+                <ul class="headerNav--list">
+                    <li class="headerNav--item">
+                        <a class="headerNav--link headerNav--basket" href="#">
+                            <img src="images/basket--icon.svg" width="18" height="19" alt="Basket">
+                        </a>
+                        <div class="headerBasket">
+                            <!-- basket -->
+                            <div class="headerBasket--empty">Ваша корзина пуста</div>
+                            <button class="headerBasket--closeButton" disabled></button>
+                        </div>
+                    </li>
+                    <li class="headerNav--item headerNav--language">
+                        <span class="headerNav--link headerLanguage">RU</span>
+                        <ul class="headerLanguage--list">
+                            <li class="headerLanguage--item">
+                                <a class="headerLanguage--link headerLanguage--active" data-language="ru-RU" href="#">RU</a>
+                            </li>
+                            <li class="headerLanguage--item">
+                                <a class="headerLanguage--link" data-language="en-EN" href="#">EN</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="headerNav--item mainNav">
+                        <ul class="mainNavList">
+                            <li class="headerNav--item">
+                                {{#if isCollectionActive}}
+                                    <span class="headerNav--active headerNav--collections">Коллекция</span>
+                                {{else}}
+                                    <a class="headerNav--link headerNav--collections" href="/collection">Коллекция</a>
+                                {{/if}}
+                            </li>
+                            <li class="headerNav--item">
+                                {{#if isAuthorsActive}}
+                                    <span class="headerNav--active headerNav--authors">Авторы</span>
+                                {{else}}
+                                    <a class="headerNav--link headerNav--authors" href="/authors">Авторы</a>
+                                {{/if}}
+                            </li>
+                            <li class="headerNav--item">
+                                {{#if isArtSpaceActive}}
+                                    <span class="headerNav--active headerNav--artPlacement">Арт-пространство</span>
+                                {{else}}
+                                    <a class="headerNav--link headerNav--artPlacement" href="/art-space">Арт-пространство</a>
+                                {{/if}}
+                            </li>
+                            <li class="headerNav--item">
+                                {{#if isDeliveryActive}}
+                                    <span class="headerNav--active headerNav--delivery">Доставка</span>
+                                {{else}}
+                                    <a class="headerNav--link headerNav--delivery" href="/delivery">Доставка</a>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

@@ -3,7 +3,7 @@ module.exports = {
     entry: './source/scripts/index.js',
     output: {
         filename: 'bundle.min.js',
-        path: __dirname + '/docs/scripts'
+        path: __dirname + '/public/scripts'
     },
     optimization: {
         minimize: true

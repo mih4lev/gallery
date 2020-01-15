@@ -2,7 +2,10 @@ const { Router } = require(`express`);
 const router = new Router();
 
 router.get(`/delivery`, (request, response) => {
-    response.send(`delivery page`);
+    const data = {
+        isDeliveryActive: true
+    };
+    response.render('delivery', data);
 });
 
 module.exports = router;

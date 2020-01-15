@@ -2,7 +2,10 @@ const { Router } = require(`express`);
 const router = new Router();
 
 router.get(`/authors`, (request, response) => {
-    response.send(`authors page`);
+    const data = {
+        isAuthorsActive: true
+    };
+    response.render('authors', data);
 });
 
 router.get(`/authors/:name`, (request, response) => {
