@@ -28,25 +28,108 @@
                 width: $mobileContentWidth;
             }
             .filtersHeader {
+                margin-bottom: 40px;
                 @extend %middleSecondaryText;
+                @include respond(tabletMini) {
+                    position: fixed;
+                    z-index: 201;
+                    left: 50%;
+                    top: 78px;
+                    margin-left: 161px;
+                    padding-top: 10px;
+                    padding-left: 15px;
+                    padding-right: 25px;
+                    padding-bottom: 10px;
+                    transform: translateX(-50%);
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                    background: #000000;
+                    &:after {
+                        position: absolute;
+                        content: "";
+                        width: 11px;
+                        height: 7px;
+                        top: 50%;
+                        transform: translate(5px, -50%);
+                        background-image: url(../images/arrow_down--icon.svg);
+                        transition: all .3s ease-in;
+                    }
+                }
+                @include respond(mobile) {
+                    position: fixed;
+                    z-index: 201;
+                    left: 50%;
+                    top: 78px;
+                    margin-left: 101px;
+                    padding-top: 10px;
+                    padding-left: 15px;
+                    padding-right: 25px;
+                    padding-bottom: 10px;
+                    transform: translateX(-50%);
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                    background: #000000;
+                    &:after {
+                        position: absolute;
+                        content: "";
+                        width: 11px;
+                        height: 7px;
+                        top: 50%;
+                        transform: translate(5px, -50%);
+                        background-image: url(../images/arrow_down--icon.svg);
+                        transition: all .3s ease-in;
+                    }
+                }
+            }
+            .filtersHeader--active {
+                @include respond(tabletMini) {
+                    &:after {
+                        transform: translate(5px, -50%) rotate(180deg);
+                    }
+                }
+                @include respond(mobile) {
+                    &:after {
+                        transform: translate(5px, -50%) rotate(180deg);
+                    }
+                }
             }
             .filters {
                 display: flex;
                 flex-direction: column;
-                margin-top: 40px;
+                margin-top: 0;
                 margin-bottom: 0;
                 padding-left: 0;
                 width: inherit;
                 list-style-type: none;
                 @include respond(tabletMini) {
+                    opacity: 0;
+                    z-index: -200;
+                    align-content: flex-start;
+                    padding-top: 50px;
+                    top: 94px;
+                    height: 100%;
+                    position: fixed;
                     flex-direction: row;
                     flex-wrap: wrap;
                     justify-content: space-between;
+                    background: rgba(0,0,0,0.93);
+                    transition: all .3s ease-in;
                 }
                 @include respond(mobile) {
+                    opacity: 0;
+                    z-index: -200;
+                    align-content: flex-start;
+                    padding-top: 50px;
+                    top: 94px;
+                    height: 100%;
+                    position: fixed;
                     flex-direction: row;
                     flex-wrap: wrap;
                     justify-content: space-between;
+                    background: rgba(0,0,0,0.93);
+                    transition: all .3s ease-in;
                 }
                 .filter {
                     position: relative;
@@ -57,6 +140,9 @@
                     }
                     @include respond(mobile) {
                         width: 135px;
+                        &:last-of-type {
+                            flex-grow: 1;
+                        }
                     }
                     .filterLabel {
                         position: relative;
@@ -306,11 +392,15 @@
                         z-index: -1;
                         position: absolute;
                         margin-top: 10px;
-                        width: inherit;
+                        width: 100%;
                         max-height: 188px;
                         border: 1px solid $secondaryColor;
                         transition: all .25s ease-in;
                         background-color: #000;
+                        @include respond(tablet) {
+                            margin-left: -20px;
+                            width: 210px;
+                        }
                         .dropdownWrapper {
                             margin-top: 10px;
                             margin-bottom: 10px;
@@ -720,6 +810,9 @@
                                 font-size: 12px;
                                 line-height: 14px;
                                 letter-spacing: 0.1em;
+                            }
+                            &:before {
+                                display: none;
                             }
                             &:after {
                                 display: none;

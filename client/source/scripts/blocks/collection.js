@@ -2,6 +2,19 @@ import Masonry from "masonry-layout";
 import {changeCurrency, currency} from "../utils";
 
 export const setPicturesLayout = () => {
+    // filters hide on mobile && tabletMini
+    const filtersHeader = document.querySelector(`.filtersHeader`);
+    if (!filtersHeader) return false;
+    filtersHeader.addEventListener(`click`, () => {
+        const windowSize = window.innerWidth;
+        if (windowSize > 768) return false;
+        const filters = document.querySelector(`.filters`);
+        const isVisible = (filters.style.opacity === `1`);
+        filters.style.zIndex = (isVisible) ? `-200` : `200`;
+        filters.style.opacity = (isVisible) ? `0` : `1`;
+        const method = (isVisible) ? `remove` : `add`;
+        filtersHeader.classList[method](`filtersHeader--active`);
+    });
     // format rub function
     const format = (value) => {
         return String(value).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
@@ -91,6 +104,9 @@ export const setPicturesLayout = () => {
             event.preventDefault();
             event.stopPropagation();
             touchEndY = event.changedTouches[0].clientY;
+            if (touchEndY - touchStartY < 10 && touchEndY - touchStartY > -10) {
+                return event.target.click();
+            }
             const direction = (touchEndY - touchStartY < 0);
             slide(direction);
         }, false);
@@ -171,7 +187,6 @@ export const setPicturesLayout = () => {
         const { left: maxButtonOffset } = coors(rangeMaxButton);
         let buttonFinishCoors = 0;
         const leftMoveHandler = (event) => {
-            event.preventDefault();
             const { minValueNode, minValue, valueRange, step } = requestRange();
             buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = buttonFinishCoors - minButtonOffset;
@@ -187,7 +202,9 @@ export const setPicturesLayout = () => {
             const roundValue = Math.round(Math.round(value) / step) * step;
             const isDefault = (minValueNode.classList.contains(`price--rub`));
             const textValue = roundValue + minValue;
-            minValueNode.dataset.current = String(textValue);
+            if (minValueNode.dataset.rub) {
+                minValueNode.dataset.current = String(textValue);
+            }
             minValueNode.innerText = (isDefault) ? format(textValue) : textValue;
             rangeMinButton.style[`left`] = `${rangeSize}px`;
             rangeLine.style[`left`] = `${rangeSize}px`;
@@ -199,15 +216,17 @@ export const setPicturesLayout = () => {
                 document.removeEventListener(`mousemove`, leftMoveHandler);
             });
         });
-        rangeMinButton.addEventListener(`touchstart`, () => {
+        rangeMinButton.addEventListener(`touchstart`, (event) => {
+            // event.preventDefault();
             document.addEventListener(`touchmove`, leftMoveHandler);
             document.addEventListener(`touchend`, (event) => {
+                // event.preventDefault();
                 buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
                 document.removeEventListener(`touchmove`, leftMoveHandler);
             });
         });
         const rightMoveHandler = (event) => {
-            event.preventDefault();
+            // event.preventDefault();
             const { maxValueNode, maxValue, valueRange, step } = requestRange();
             buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = maxButtonOffset - buttonFinishCoors;
@@ -223,7 +242,9 @@ export const setPicturesLayout = () => {
             const roundValue = Math.round(Math.round(value) / step) * step;
             const isDefault = (maxValueNode.classList.contains(`price--rub`));
             const textValue = maxValue - roundValue;
-            maxValueNode.dataset.current = String(textValue);
+            if (maxValueNode.dataset.rub) {
+                maxValueNode.dataset.current = String(textValue);
+            }
             maxValueNode.innerText = (isDefault) ? format(textValue) : textValue;
             rangeMaxButton.style[`right`] = `${rangeSize}px`;
             rangeLine.style[`right`] = `${rangeSize}px`;
@@ -238,10 +259,10 @@ export const setPicturesLayout = () => {
             });
         });
         rangeMaxButton.addEventListener(`touchstart`, (event) => {
-            event.preventDefault();
+            // event.preventDefault();
             document.addEventListener(`touchmove`, rightMoveHandler);
             document.addEventListener(`touchend`, (event) => {
-                event.preventDefault();
+                // event.preventDefault();
                 buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
                 document.removeEventListener(`touchmove`, rightMoveHandler);
             });

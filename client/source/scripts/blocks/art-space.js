@@ -19,8 +19,8 @@ export const respondInterestBlock = () => {
             interestBlocks.forEach((block) => block.classList.remove(`interestItem--active`));
             clickedBlock.classList.add(`interestItem--active`);
             const offset = (windowSize >= 480) ? 580 : 460;
-            parentBlock.style.marginLeft = (index == 0 || index == 1) ? `0` : `-${offset}px`;
-            parentBlock.style.marginRight = (index == 1 || index == 2) ? `0` : `-${offset}px`;
+            parentBlock.style.marginLeft = (index === 0 || index === 1) ? `0` : `-${offset}px`;
+            parentBlock.style.marginRight = (index === 1 || index === 2) ? `0` : `-${offset}px`;
         }, true);
     });
 
