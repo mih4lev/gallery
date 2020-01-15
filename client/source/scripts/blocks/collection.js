@@ -56,11 +56,10 @@ export const setPicturesLayout = () => {
         if (listElements <= maxElements) {
             scrollNode.style.display = `none`;
         }
-        // add wheel listener at list
-        list.addEventListener(`wheel`, (event) => {
-            event.preventDefault();
+        // scroll slide function
+        const slide = (direction) => {
             const scrolled = Number(list.dataset.scroll) || 0;
-            const newScroll = ((event.deltaY) > 0) ? scrolled - step : scrolled + step;
+            const newScroll = (direction) ? scrolled - step : scrolled + step;
             const isMinimum = (newScroll >= 0);
             const isMaximum = (list.dataset.scroll) ?
                 (maxListHeight + (list.dataset.scroll * -1) === listHeight) :
@@ -73,7 +72,28 @@ export const setPicturesLayout = () => {
             const scrollOffset = String(scrollStep);
             const scrolledNodes = (scroll * -1) / step;
             scrollNode.style.top = (isMinimum) ? `0` : `${scrollOffset * scrolledNodes}px`;
+        };
+        // add wheel listener at list
+        list.addEventListener(`wheel`, (event) => {
+            event.preventDefault();
+            const direction = (event.deltaY > 0);
+            slide(direction);
         });
+        // add touch listener at list
+        let touchStartY = 0;
+        let touchEndY = 0;
+        list.addEventListener(`touchstart`, (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            touchStartY = event.changedTouches[0].clientY;
+        }, false);
+        list.addEventListener(`touchend`, (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            touchEndY = event.changedTouches[0].clientY;
+            const direction = (touchEndY - touchStartY < 0);
+            slide(direction);
+        }, false);
     });
     // add dropdown items to chosen list
     const dropdownLinks = [...document.querySelectorAll(`.dropdownItem`)];
@@ -254,8 +274,9 @@ export const setPicturesLayout = () => {
         currentValueNodes.forEach((node) => {
             const { dataset: { current: currentValue }} = node;
             const preValue = (isDefault) ? currentValue * rate : currentValue / rate;
-            const exchangeValue = Math.round((preValue) * 100) / 100;
-            const roundValue = Math.round(exchangeValue / 100) * 100;
+            const step = (isDefault) ? 100 : 10;
+            const exchangeValue = Math.round((preValue) * step) / step;
+            const roundValue = Math.round(exchangeValue / step) * step;
             node.dataset.current = String(roundValue);
             node.innerText = (isDefault) ? format(roundValue) : roundValue;
         });
