@@ -1,6 +1,8 @@
 import Masonry from "masonry-layout";
 import {changeCurrency, currency} from "../utils";
 
+const imagesLoaded = require('imagesloaded');
+
 export const setPicturesLayout = () => {
     // filters hide on mobile && tabletMini
     const filtersHeader = document.querySelector(`.filtersHeader`);
@@ -20,13 +22,14 @@ export const setPicturesLayout = () => {
         return String(value).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     };
     // set pictures layout
-    setTimeout(() => {
-        const pictureList = document.querySelector(`.pictureList`);
-        if (!pictureList) return false;
+    const pictureList = document.querySelector(`.pictureList`);
+    if (!pictureList) return false;
+    imagesLoaded( pictureList, function() {
+        console.log(`imagesLoaded`);
         new Masonry( pictureList, {
             itemSelector: `.picture`
         });
-    }, 200);
+    });
     // hide all dropdown menus
     const dropdownWrappers = [...document.querySelectorAll(`.dropdown`)];
     const hideAllDropdownMenu = () => {
