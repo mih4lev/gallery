@@ -25,7 +25,6 @@ export const setPicturesLayout = () => {
     const pictureList = document.querySelector(`.pictureList`);
     if (!pictureList) return false;
     imagesLoaded( pictureList, function() {
-        console.log(`imagesLoaded`);
         new Masonry( pictureList, {
             itemSelector: `.picture`
         });

@@ -200,6 +200,10 @@
         background-color: #000;
         border: 1px solid $secondaryColor;
         transition: opacity .15s ease-in;
+        @include respond(tabletMini) {
+            top: -10px;
+            right: -114px;
+        }
         @include respond(mobile) {
             top: -10px;
             right: -85px;
