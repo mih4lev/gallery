@@ -99,9 +99,6 @@
                                 background-repeat: no-repeat;
                                 cursor: pointer;
                                 outline: none;
-                                &:focus {
-                                    background-image: url(../images/circle_white--icon.svg);
-                                }
                             }
                             .rangeMin {
                                 left: 0;
@@ -130,6 +127,26 @@
                                 line-height: 12px;
                                 letter-spacing: 0.075em;
                                 color: $primaryColor;
+                            }
+                            .labelMin.metric--ru,
+                            .labelMax.metric--ru,
+                            .labelMin.metric--en,
+                            .labelMax.metric--en {
+                                &:after {
+                                    margin-left: 5px;
+                                }
+                            }
+                            .labelMin.metric--ru,
+                            .labelMax.metric--ru {
+                                &:after {
+                                    content: "см";
+                                }
+                            }
+                            .labelMin.metric--en,
+                            .labelMax.metric--en {
+                                &:after {
+                                    content: "cm";
+                                }
                             }
                         }
                     }
@@ -660,24 +677,6 @@
                             margin-top: 10px;
                             align-items: flex-start;
                         }
-                        .picturePrice {
-                            padding-right: 25px;
-                            white-space: nowrap;
-                            @include respond(tablet) {
-                                padding-right: 18px;
-                            }
-                            @include respond(tabletMini) {
-                                padding-right: 18px;
-                            }
-                            @include respond(mobile) {
-                                padding-right: 18px;
-                            }
-                            &:after {
-                                content: "₽";
-                                position: absolute;
-                                margin-left: 6px;
-                            }
-                        }
                         .picturePrice--main {
                             margin-bottom: -5px;
                             font-size: 25px;
@@ -721,25 +720,6 @@
                                 letter-spacing: 0.1em;
                             }
                             &:after {
-                                display: none;
-                            }
-                        }
-                        .picturePrice.picturePrice--euro {
-                            padding-right: 0;
-                            &:before {
-                                content: "€";
-                                position: absolute;
-                                margin-left: -25px;
-                                @include respond(tablet) {
-                                    margin-left: -18px;
-                                }
-                            }
-                            &:after {
-                                display: none;
-                            }
-                        }
-                        .picturePrice--old.picturePrice--euro {
-                            &:before {
                                 display: none;
                             }
                         }

@@ -65,3 +65,24 @@
         }
     }
 }
+
+.price--rub {
+    white-space: nowrap;
+    &:before {
+        display: none;
+    }
+    &:after {
+        content: "₽";
+        margin-left: 5px;
+    }
+}
+.price--euro {
+    white-space: nowrap;
+    &:before {
+        content: "€";
+        margin-right: 5px;
+    }
+    &:after {
+        display: none;
+    }
+}

@@ -1,6 +1,11 @@
 import Masonry from "masonry-layout";
+import {changeCurrency, currency} from "../utils";
 
 export const setPicturesLayout = () => {
+    // format rub function
+    const format = (value) => {
+        return String(value).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    };
     // set pictures layout
     setTimeout(() => {
         const pictureList = document.querySelector(`.pictureList`);
@@ -115,16 +120,29 @@ export const setPicturesLayout = () => {
     // range blocks
     const rangeWrappers = [...document.querySelectorAll(`.rangeWrapper`)];
     rangeWrappers.forEach((rangeWrapper) => {
-        const minValueNode = rangeWrapper.querySelector(`.labelMin`);
-        const minValue = Number(minValueNode.innerText);
-        const maxValueNode = rangeWrapper.querySelector(`.labelMax`);
-        const maxValue = Number(maxValueNode.innerText);
-        const valueRange = maxValue - minValue;
-        const step =
-            (valueRange / 1000 > 100) ? 1000 :
-                (valueRange / 500 > 100) ? 500 :
-                    (valueRange / 100 > 100) ? 100 :
-                        (valueRange / 50 > 500) ? 50 : 10;
+        const requestRange = () => {
+            const minValueNode = rangeWrapper.querySelector(`.labelMin`);
+            const maxValueNode = rangeWrapper.querySelector(`.labelMax`);
+            if (!minValueNode.dataset.value) {
+                minValueNode.dataset.value = minValueNode.dataset.rub || minValueNode.dataset.default;
+            }
+            if (!maxValueNode.dataset.value) {
+                maxValueNode.dataset.value = maxValueNode.dataset.rub || maxValueNode.dataset.default;
+            }
+            const minValue = Number(minValueNode.dataset.value);
+            const maxValue = Number(maxValueNode.dataset.value);
+            const valueRange = maxValue - minValue;
+            const step =
+                (valueRange / 1000 > 100) ? 1000 :
+                    (valueRange / 500 > 100) ? 500 :
+                        (valueRange / 100 > 100) ? 100 :
+                            (valueRange / 50 > 500) ? 50 : 10;
+            return {
+                minValueNode, minValue,
+                maxValueNode, maxValue,
+                valueRange, step
+            }
+        };
         const rangeLine = rangeWrapper.querySelector(`.range`);
         const maxRange = rangeLine.offsetWidth;
         const rangeMinButton = rangeWrapper.querySelector(`.rangeMin`);
@@ -134,6 +152,7 @@ export const setPicturesLayout = () => {
         let buttonFinishCoors = 0;
         const leftMoveHandler = (event) => {
             event.preventDefault();
+            const { minValueNode, minValue, valueRange, step } = requestRange();
             buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = buttonFinishCoors - minButtonOffset;
             const isMinimal = (buttonFinishCoors - minButtonOffset < 0);
@@ -145,7 +164,11 @@ export const setPicturesLayout = () => {
                     (isMaximum) ? maxRange :
                         (isMinimal) ? 0 : range;
             const value = (rangeSize / maxRange) * valueRange;
-            minValueNode.innerText = (Math.round(Math.round(value) / step) * step) + minValue;
+            const roundValue = Math.round(Math.round(value) / step) * step;
+            const isDefault = (minValueNode.classList.contains(`price--rub`));
+            const textValue = roundValue + minValue;
+            minValueNode.dataset.current = String(textValue);
+            minValueNode.innerText = (isDefault) ? format(textValue) : textValue;
             rangeMinButton.style[`left`] = `${rangeSize}px`;
             rangeLine.style[`left`] = `${rangeSize}px`;
         };
@@ -165,6 +188,7 @@ export const setPicturesLayout = () => {
         });
         const rightMoveHandler = (event) => {
             event.preventDefault();
+            const { maxValueNode, maxValue, valueRange, step } = requestRange();
             buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
             const range = maxButtonOffset - buttonFinishCoors;
             const isMinimal = (buttonFinishCoors - maxButtonOffset > 0);
@@ -176,7 +200,11 @@ export const setPicturesLayout = () => {
                     (isMaximum) ? maxRange :
                         (isMinimal) ? 0 : range;
             const value = (rangeSize / maxRange) * valueRange;
-            maxValueNode.innerText = maxValue - (Math.round(Math.round(value) / step) * step);
+            const roundValue = Math.round(Math.round(value) / step) * step;
+            const isDefault = (maxValueNode.classList.contains(`price--rub`));
+            const textValue = maxValue - roundValue;
+            maxValueNode.dataset.current = String(textValue);
+            maxValueNode.innerText = (isDefault) ? format(textValue) : textValue;
             rangeMaxButton.style[`right`] = `${rangeSize}px`;
             rangeLine.style[`right`] = `${rangeSize}px`;
         };
@@ -197,6 +225,46 @@ export const setPicturesLayout = () => {
                 buttonFinishCoors = event.pageX || event.changedTouches[0].pageX;
                 document.removeEventListener(`touchmove`, rightMoveHandler);
             });
+        });
+    });
+    // trigger to custom event 'languageChange'
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        // change currency of picture list
+        await changeCurrency(lang);
+        // change filters currency
+        const minNode = document.querySelector(`.labelMin[data-rub]`);
+        const maxNode = document.querySelector(`.labelMax[data-rub]`);
+        if (!minNode || !maxNode) return false;
+        const rate = await currency();
+        const isDefault = (lang === `ru`);
+        const { dataset: { rub: minDefaultRub }} = minNode;
+        const { dataset: { rub: maxDefaultRub }} = maxNode;
+        const minDefaultValueEuro = Math.round((minDefaultRub / rate) * 100) / 100;
+        const maxDefaultValueEuro = Math.round((maxDefaultRub / rate) * 100) / 100;
+        const minRoundValueEuro = Math.floor(minDefaultValueEuro / 100) * 100;
+        const maxRoundValueEuro = Math.ceil(maxDefaultValueEuro / 100) * 100;
+        const minValue = (isDefault) ? minDefaultRub : minRoundValueEuro;
+        const maxValue = (isDefault) ? maxDefaultRub : maxRoundValueEuro;
+        minNode.dataset.value = minValue;
+        maxNode.dataset.value = maxValue;
+        minNode.innerText = (isDefault) ? format(minValue) : minValue;
+        maxNode.innerText = (isDefault) ? format(maxValue) : maxValue;
+        // change current values
+        const currentValueNodes = [...document.querySelectorAll(`[data-current]`)];
+        currentValueNodes.forEach((node) => {
+            const { dataset: { current: currentValue }} = node;
+            const preValue = (isDefault) ? currentValue * rate : currentValue / rate;
+            const exchangeValue = Math.round((preValue) * 100) / 100;
+            const roundValue = Math.round(exchangeValue / 100) * 100;
+            node.dataset.current = String(roundValue);
+            node.innerText = (isDefault) ? format(roundValue) : roundValue;
+        });
+        // change metric
+        const metricSelector = `.rangeLabels>[data-default]`;
+        const metricLabels = [...document.querySelectorAll(metricSelector)];
+        metricLabels.forEach((label) => {
+            const SL = (isDefault) ? [ `en`, `ru` ] : [ `ru`, `en` ];
+            label.classList.replace(`metric--${SL[0]}`, `metric--${SL[1]}`);
         });
     });
     // orientation choose
