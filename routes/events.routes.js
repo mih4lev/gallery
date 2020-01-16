@@ -3,24 +3,24 @@ const router = new Router();
 
 router.get(`/`, (request, response) => {
     const data = {
-        isCollectionActive: true,
-        pageTitle: `arTE Gallery | collection`,
+        isEventsActive: true,
+        pageTitle: `arTE Gallery | events`,
         metaDescription: ``,
         metaKeywords: ``
     };
-    response.render('collection', data);
+    response.render('events', data);
 });
 
 router.get(`/:id`, (request, response) => {
-    const { params: { id: pictureID }} = request;
+    const { params: { id: eventID }} = request;
     const data = {
-        isCollectionActive: true,
-        pageTitle: `arTE Gallery | picture`,
+        isEventsActive: true,
+        pageTitle: `arTE Gallery | article`,
         metaDescription: ``,
         metaKeywords: ``,
-        pictureID
+        eventID
     };
-    response.render('picture', data);
+    response.render('article', data);
 });
 
 module.exports = router;

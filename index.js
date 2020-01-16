@@ -23,12 +23,13 @@ app.use(express.json({ extended: true }));
 // index && all functional pages
 app.use('/', require('./routes/main.routes'));
 app.use('/api', require('./routes/api.routes'));
-app.use('/', require('./routes/collection.routes'));
-app.use('/', require('./routes/authors.routes'));
-app.use('/', require('./routes/art-space.routes'));
-app.use('/', require('./routes/delivery.routes'));
+app.use('/collection', require('./routes/collection.routes'));
+app.use('/authors', require('./routes/authors.routes'));
+app.use('/events', require('./routes/events.routes'));
+app.use('/delivery', require('./routes/delivery.routes'));
+app.use('/basket', require('./routes/basket.routes'));
 // if needed page don't exist
-app.use(function(request, response, next) {
+app.use((request, response, next) => {
     response.status(404).redirect(`/404`);
     next();
 });

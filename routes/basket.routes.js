@@ -3,12 +3,11 @@ const router = new Router();
 
 router.get(`/`, (request, response) => {
     const data = {
-        isDeliveryActive: true,
-        pageTitle: `arTE Gallery | delivery`,
+        pageTitle: `arTE Gallery | basket`,
         metaDescription: ``,
-        metaKeywords: ``
+        metaKeywords: ``,
     };
-    response.render('delivery', data);
+    response.render('basket', data);
 });
 
 module.exports = router;
