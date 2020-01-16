@@ -4,6 +4,14 @@ import {changeCurrency, currency} from "../utils";
 const imagesLoaded = require('imagesloaded');
 
 export const setPicturesLayout = () => {
+    // set pictures layout
+    const pictureList = document.querySelector(`.pictureList`);
+    if (!pictureList) return false;
+    imagesLoaded( pictureList, function() {
+        new Masonry( pictureList, {
+            itemSelector: `.picture`
+        });
+    });
     // filters hide on mobile && tabletMini
     const filtersHeader = document.querySelector(`.filtersHeader`);
     if (!filtersHeader) return false;
@@ -21,14 +29,6 @@ export const setPicturesLayout = () => {
     const format = (value) => {
         return String(value).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     };
-    // set pictures layout
-    const pictureList = document.querySelector(`.pictureList`);
-    if (!pictureList) return false;
-    imagesLoaded( pictureList, function() {
-        new Masonry( pictureList, {
-            itemSelector: `.picture`
-        });
-    });
     // hide all dropdown menus
     const dropdownWrappers = [...document.querySelectorAll(`.dropdown`)];
     const hideAllDropdownMenu = () => {

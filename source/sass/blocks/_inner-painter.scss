@@ -1,0 +1,324 @@
+.painterHeader {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 170px;
+    background-image: url(/images/painter--background.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    border-bottom: 1px solid $secondaryColor;
+    @include respond(desktop) {
+        height: 120px;
+    }
+    @include respond(tablet) {
+        height: 120px;
+        background-size: cover;
+    }
+    @include respond(tabletMini) {
+        height: 80px;
+        background-size: cover;
+    }
+    @include respond(mobile) {
+        height: 80px;
+        background-size: cover;
+    }
+    .painterHeaderWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: inherit;
+        .painterName {
+            margin-top: 0;
+            margin-bottom: 0;
+            @extend %bigSecondaryText;
+            @include respond(tabletMini) {
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+            }
+            @include respond(mobile) {
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+            }
+        }
+        .painterCity {
+            margin-top: 20px;
+            padding-left: 20px;
+            @extend %middlePrimaryText;
+            @include respond(desktop) {
+                margin-top: 10px;
+            }
+            @include respond(tablet) {
+                margin-top: 10px;
+            }
+            @include respond(tabletMini) {
+                margin-top: 10px;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+            }
+            @include respond(mobile) {
+                margin-top: 10px;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+            }
+            &:before {
+                content: "";
+                position: absolute;
+                margin-top: 2px;
+                margin-left: -20px;
+                width: 11px;
+                height: 16px;
+                background-image: url(/images/map_pin.png);
+                background-size: 11px 16px;
+                background-repeat: no-repeat;
+                @include respond(tabletMini) {
+                    margin-top: -2px;
+                }
+                @include respond(mobile) {
+                    margin-top: -2px;
+                }
+            }
+        }
+        .painterPhoto {
+            right: 0;
+            bottom: 0;
+            transform: translateY(50%);
+            position: absolute;
+            z-index: 1;
+            width: 216px;
+            height: 216px;
+            border: 1px solid $secondaryColor;
+            border-radius: 50%;
+            @include respond(tabletMini) {
+                width: 130px;
+                height: 130px;
+            }
+            @include respond(mobile) {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    }
+}
+.painterData {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: linear-gradient(91.1deg, #000000 24.57%, #1E1B1E 82.74%);
+    .breadcrumbs {
+        display: flex;
+        margin-top: 0;
+        margin-bottom: 40px;
+        padding-left: 0;
+        list-style-type: none;
+        @include respond(tabletMini) {
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+        @include respond(mobile) {
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+        .breadcrumb {
+            position: relative;
+            margin-right: 20px;
+            color: $secondaryColor;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.075em;
+            text-transform: uppercase;
+            &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 6px;
+                height: 9px;
+                transform: translate(6px, -50%);
+                background-image: url(/images/arrow_right_breadcrumbs--icon.svg);
+                background-repeat: no-repeat;
+            }
+            &:last-of-type {
+                &:after {
+                    display: none;
+                }
+            }
+            .breadcrumbLink {
+                color: $secondaryColor;
+                transition: all .25s ease-in;
+                &:hover {
+                    color: $primaryColor;
+                }
+            }
+            .breadcrumbLink--active {
+                color: $primaryColor;
+            }
+        }
+    }
+    .painterDataArticle {
+        .painterDataHeader {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1375em;
+            @extend %middleSecondaryLowercaseText;
+            @include respond(tabletMini) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+            @include respond(mobile) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+        }
+        .painterDataList {
+            margin-top: 0;
+            margin-right: 240px;
+            margin-bottom: 20px;
+            padding-left: 0;
+            @include respond(tablet) {
+                margin-right: 100px;
+            }
+            @include respond(tabletMini) {
+                margin-right: 0;
+            }
+            @include respond(mobile) {
+                margin-right: 0;
+            }
+            .painterEvent {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 10px;
+                @include respond(mobile) {
+                    flex-direction: column;
+                }
+                @include respond(tabletMini) {
+                    flex-direction: column;
+                }
+                .painterTimeline {
+                    align-self: center;
+                    flex-shrink: 0;
+                    width: 80px;
+                    margin-right: 20px;
+                    text-align: right;
+                    font-size: 10px;
+                    line-height: 12px;
+                    letter-spacing: 0.075em;
+                    font-style: normal;
+                    color: $secondaryColor;
+                    white-space: nowrap;
+                    @include respond(tabletMini) {
+                        text-align: left;
+                        align-self: flex-start;
+                    }
+                    @include respond(mobile) {
+                        text-align: left;
+                        align-self: flex-start;
+                    }
+                }
+                .painterText {
+                    flex-shrink: 1;
+                    @include respond(tabletMini) {
+                        margin-top: 2px;
+                        flex-shrink: 0;
+                    }
+                    @include respond(mobile) {
+                        margin-top: 2px;
+                        flex-shrink: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.painterPicturesHeader {
+    margin-top: -10px;
+    margin-left: -1030px;
+    margin-bottom: 40px;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.1375em;
+    font-weight: 300;
+    color: $secondaryColor;
+    @extend %lineHeader;
+    &:before, &:after {
+        transform: translateY(-7px);
+    }
+    @include respond(desktop) {
+        margin-left: -835px;
+    }
+    @include respond(tabletMini) {
+        margin-left: -360px;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.1em;
+        &:before, &:after {
+            transform: translateY(-4px);
+        }
+    }
+    @include respond(mobile) {
+        margin-left: -240px;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.1em;
+        &:before, &:after {
+            transform: translateY(-4px);
+        }
+    }
+}
+.picturesWrapper {
+    display: flex;
+    justify-content: center;
+}
+.painterPictures {
+    @include respond(desktop) {
+        .pictureList {
+            width: $desktopContentWidth + 40;
+            .picture {
+                width: 283px;
+                .picturePrice.picturePrice--main {
+                    font-size: 20px;
+                    line-height: 24px;
+                    letter-spacing: 0.1375em;
+                }
+            }
+        }
+    }
+    @include respond(tablet) {
+        .pictureList {
+            margin-left: -20px;
+            margin-right: -20px;
+            width: $tabletContentWidth + 40;
+            .picture {
+                margin-left: 20px;
+                margin-right: 20px;
+                width: 329px;
+                .pictureHeader {
+                    font-size: 20px;
+                    line-height: 24px;
+                    letter-spacing: 0.1375em;
+                }
+                .picturePrice.picturePrice--main {
+                    font-size: 25px;
+                    line-height: 30px;
+                    letter-spacing: 0.15em;
+                }
+                .picturePrice.picturePrice--old {
+                    font-size: 15px;
+                    line-height: 18px;
+                    letter-spacing: 0.125em;
+                }
+            }
+        }
+    }
+}

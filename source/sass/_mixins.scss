@@ -113,6 +113,11 @@
     letter-spacing: 0.1em;
     @extend %middlePrimaryText;
 }
+%middleSecondaryLowercaseText {
+    text-transform: unset;
+    letter-spacing: 0.1em;
+    @extend %middleSecondaryText;
+}
 
 // small text Headers / Links
 %smallText {
