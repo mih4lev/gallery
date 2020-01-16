@@ -37,6 +37,9 @@ export const headerLanguage = () => {
         headerLink.innerText = value;
     };
     const setStorage = (value) => {
+        const lang = value.substr(0, 2);
+        const maxAge = 3600 * 24 * 30;
+        document.cookie = `language=${lang}; max-age=${maxAge}`;
         localStorage.setItem(`options`, JSON.stringify({ language: value }));
     };
     const setLinkData = (link, language) => {
@@ -79,7 +82,8 @@ export const headerLanguage = () => {
         const { language } = JSON.parse(localStorage.getItem(`options`));
         const { 0: lang } = language.split(`-`);
         const htmlNode = document.querySelector(`html`);
-        if (htmlNode.lang === lang) return false;
+        // RETURN
+        // if (htmlNode.lang === lang) return false;
         changeLanguage({ dataset: { language }})();
     }
 

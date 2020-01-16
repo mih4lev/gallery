@@ -68,6 +68,11 @@
     "sizeLabel": "Размер",
     "sizeMetric": "см",
     "cartButton": "Добавить в корзину",
+    "authorsBreadcrumbLink": "Авторы",
+    "headerEducation": "Образование",
+    "headerAwards": "Награды",
+    "exhibitionHeader": "Выставки",
+    "worksHeader": "Работы",
     "footerAddress": "Адрес: ул. Рождественская д.5",
     "footerTimeline": "Ежедневно с 11.00 - 22.00"
 }

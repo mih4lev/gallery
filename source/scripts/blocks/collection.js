@@ -4,6 +4,11 @@ import {changeCurrency, currency} from "../utils";
 const imagesLoaded = require('imagesloaded');
 
 export const setPicturesLayout = () => {
+    // changeCurrency of all site
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        // change currency of picture list
+        await changeCurrency(lang);
+    });
     // set pictures layout
     const pictureList = document.querySelector(`.pictureList`);
     if (!pictureList) return false;
@@ -272,8 +277,6 @@ export const setPicturesLayout = () => {
     });
     // trigger to custom event 'languageChange'
     document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
-        // change currency of picture list
-        await changeCurrency(lang);
         // change filters currency
         const minNode = document.querySelector(`.labelMin[data-rub]`);
         const maxNode = document.querySelector(`.labelMax[data-rub]`);

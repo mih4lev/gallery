@@ -1,8 +1,11 @@
 const { Router } = require(`express`);
+const { requestLanguage } = require("../models/utils.model");
+
 const router = new Router();
 
-router.get([`/`], async (request, response) => {
+router.get(`/`, async (request, response) => {
     const data = {
+        language: requestLanguage(request),
         pageTitle: `arTE Gallery | home`,
         metaDescription: ``,
         metaKeywords: ``
@@ -13,6 +16,7 @@ router.get([`/`], async (request, response) => {
 
 router.get(`/404`, (request, response) => {
     const data = {
+        language: requestLanguage(request),
         pageTitle: `arTE Gallery | 404`,
         metaDescription: ``,
         metaKeywords: ``

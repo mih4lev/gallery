@@ -1,6 +1,7 @@
 const express = require(`express`);
 const expressHbs = require(`express-handlebars`);
 const hbs = require(`hbs`);
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(`/lang`, express.static(__dirname + `/public/lang`));
 
 const PORT = process.env.PORT || 5000;
 app.use(express.json({ extended: true }));
+app.use(cookieParser());
 // index && all functional pages
 app.use('/', require('./routes/main.routes'));
 app.use('/api', require('./routes/api.routes'));

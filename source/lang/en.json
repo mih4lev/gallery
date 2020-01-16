@@ -68,6 +68,11 @@
     "sizeLabel": "Size",
     "sizeMetric": "cm",
     "cartButton": "Add to cart",
+    "authorsBreadcrumbLink": "Authors",
+    "headerEducation": "Education",
+    "headerAwards": "Rewards",
+    "exhibitionHeader": "Exhibitions",
+    "worksHeader": "Works",
     "footerAddress": "Address: Rozhdestvenskaya St. 5",
     "footerTimeline": "Daily from 11:00 - 22:00"
 }
