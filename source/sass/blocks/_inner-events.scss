@@ -393,6 +393,12 @@
         }
         .eventsButton {
             position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            cursor: pointer;
             @extend %middleSecondaryText;
             @include respond(tabletMini) {
                 font-size: 15px;

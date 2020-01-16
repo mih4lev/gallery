@@ -9,7 +9,6 @@ export const respondInterestBlock = () => {
     interestBlocks.forEach((block, index) => {
         block.classList.add(`interestItem--${index + 1}`);
         block.addEventListener(`click`, (event) => {
-            event.preventDefault();
             const windowSize = window.innerWidth;
             if (windowSize > 768) return false;
             const { target } = event;
@@ -28,14 +27,10 @@ export const respondInterestBlock = () => {
     let touchEndX = 0;
 
     parentBlock.addEventListener(`touchstart`, (event) => {
-        event.preventDefault();
-        event.stopPropagation();
         touchStartX = event.changedTouches[0].clientX;
     }, false);
 
     parentBlock.addEventListener(`touchend`, (event) => {
-        event.preventDefault();
-        event.stopPropagation();
         const windowSize = window.innerWidth;
         if (windowSize > 768) return false;
         touchEndX = event.changedTouches[0].clientX;
