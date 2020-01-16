@@ -10,7 +10,10 @@ router.get(`/collection`, (request, response) => {
 
 router.get(`/collection/:id`, (request, response) => {
     const pictureID = request.params.id;
-    response.send(`picture ${pictureID} page`);
+    const data = {
+        pictureID
+    };
+    response.render('picture', data);
 });
 
 module.exports = router;

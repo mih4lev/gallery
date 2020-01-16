@@ -1,6 +1,5 @@
 const express = require(`express`);
 const expressHbs = require(`express-handlebars`);
-const bodyParser = require(`body-parser`);
 const hbs = require(`hbs`);
 
 const app = express();
@@ -13,7 +12,6 @@ app.engine(`hbs`, expressHbs({
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(`/css`, express.static(__dirname + `/public/css`));
 app.use(`/images`, express.static(__dirname + `/public/images`));
 app.use(`/scripts`, express.static(__dirname + `/public/scripts`));

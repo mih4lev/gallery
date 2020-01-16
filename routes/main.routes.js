@@ -7,7 +7,8 @@ router.get([`/`, `/index`], (request, response) => {
 });
 
 router.get(`/404`, (request, response) => {
-    response.send(`404 page`);
+    const data = {};
+    response.render('404', data);
 });
 
 module.exports = router;

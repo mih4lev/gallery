@@ -217,13 +217,13 @@
     @extend %arrowButton;
     color: $primaryColor;
     &:after {
-        background: url(../images/arrow_right_white--icon.svg) no-repeat;
+        background: url(/images/arrow_right_white--icon.svg) no-repeat;
     }
 }
 %arrowSecondaryButton {
     @extend %arrowButton;
     color: $secondaryColor;
     &:after {
-        background: url(../images/arrow_right--icon.svg) no-repeat;
+        background: url(/images/arrow_right--icon.svg) no-repeat;
     }
 }

@@ -53,7 +53,7 @@
                         height: 7px;
                         top: 50%;
                         transform: translate(5px, -50%);
-                        background-image: url(../images/arrow_down--icon.svg);
+                        background-image: url(/images/arrow_down--icon.svg);
                         transition: all .3s ease-in;
                     }
                 }
@@ -80,7 +80,7 @@
                         height: 7px;
                         top: 50%;
                         transform: translate(5px, -50%);
-                        background-image: url(../images/arrow_down--icon.svg);
+                        background-image: url(/images/arrow_down--icon.svg);
                         transition: all .3s ease-in;
                     }
                 }
@@ -182,7 +182,7 @@
                                 height: 6px;
                                 font-size: 0;
                                 border: none;
-                                background-image: url(../images/circle--icon.svg);
+                                background-image: url(/images/circle--icon.svg);
                                 background-color: transparent;
                                 background-repeat: no-repeat;
                                 cursor: pointer;
@@ -252,7 +252,7 @@
                             font-size: 0;
                             border: 1px solid $secondaryColor;
                             background-color: transparent;
-                            background-image: url(../images/chosen--icon.svg);
+                            background-image: url(/images/chosen--icon.svg);
                             background-position: center center;
                             background-repeat: no-repeat;
                             cursor: pointer;
@@ -260,7 +260,7 @@
                             transition: all .15s ease-in;
                             &:hover {
                                 transform: scale(1.2);
-                                background-image: url(../images/chosen_white--icon.svg);
+                                background-image: url(/images/chosen_white--icon.svg);
                             }
                             &:last-of-type {
                                 margin-right: 0;
@@ -271,7 +271,7 @@
                             background-image: none;
                             &:hover {
                                 border: 1px solid $primaryColor;
-                                background-image: url(../images/chosen--icon.svg);
+                                background-image: url(/images/chosen--icon.svg);
                             }
                         }
                         .orientation--width {
@@ -309,7 +309,7 @@
                             font-size: 0;
                             border: none;
                             background-color: transparent;
-                            background-image: url(../images/chosen--icon.svg);
+                            background-image: url(/images/chosen--icon.svg);
                             background-repeat: no-repeat;
                             background-position: center center;
                             outline: none;
@@ -375,7 +375,7 @@
                             transform: translateY(-50%);
                             width: 11px;
                             height: 7px;
-                            background-image: url(../images/arrow_down_white--icon.svg);
+                            background-image: url(/images/arrow_down_white--icon.svg);
                             cursor: pointer;
                             transition: all .15s ease-in;
                         }
@@ -386,7 +386,7 @@
                     .filterLabel--dropdown.filterLabel--active {
                         &:after {
                             transform: translateY(-3px) rotate(180deg);
-                            background-image: url(../images/arrow_down--icon.svg);
+                            background-image: url(/images/arrow_down--icon.svg);
                         }
                     }
                     .dropdown {
@@ -447,7 +447,7 @@
                                             top: 50%;
                                             width: 14px;
                                             height: 11px;
-                                            background-image: url(../images/chosen--icon.svg);
+                                            background-image: url(/images/chosen--icon.svg);
                                             transform: translateY(-50%);
                                         }
                                     }
@@ -462,7 +462,7 @@
                                             right: 15px;
                                             width: 14px;
                                             height: 11px;
-                                            background-image: url(../images/chosen--icon.svg);
+                                            background-image: url(/images/chosen--icon.svg);
                                             transform: translateY(-50%);
                                         }
                                     }
@@ -515,7 +515,7 @@
                                     width: 14px;
                                     height: 11px;
                                     transform: translateY(-50%);
-                                    background-image: url(../images/chosen--icon.svg);
+                                    background-image: url(/images/chosen--icon.svg);
                                     transition: all .15s ease-in;
                                 }
                                 &:after {
@@ -525,7 +525,7 @@
                                     width: 16px;
                                     height: 16px;
                                     transform: translate(5px) scale(0.6);
-                                    background-image: url(../images/basket_close_white--icon.svg);
+                                    background-image: url(/images/basket_close_white--icon.svg);
                                     transition: all .15s ease-in;
                                     @include respond(tabletMini) {
                                         margin-top: -2px;
@@ -864,7 +864,7 @@
                         transform: translate(-28px, -4px) scale(0.7);
                         width: 18px;
                         height: 19px;
-                        background-image: url(../images/basket--icon.svg);
+                        background-image: url(/images/basket--icon.svg);
                         transition: all .25s ease-in;
                         @include respond(tablet) {
                             transform: translate(-28px, -5px) scale(0.7);
@@ -879,7 +879,7 @@
                         transform: translate(10px, 3px);
                         width: 20px;
                         height: 8px;
-                        background-image: url(../images/arrow_right--icon.svg);
+                        background-image: url(/images/arrow_right--icon.svg);
                         transition: all .25s ease-in;
                         @include respond(tablet) {
                             transform: translate(7px, 2px) scale(0.8);
@@ -892,11 +892,11 @@
                         color: $primaryColor;
                         border: 1px solid $primaryColor;
                         &:before {
-                            background-image: url(../images/basket_white--icon.svg);
+                            background-image: url(/images/basket_white--icon.svg);
                         }
                         &:after {
                             transform: translate(20px, 3px);
-                            background-image: url(../images/arrow_right_white--icon.svg);
+                            background-image: url(/images/arrow_right_white--icon.svg);
                             @include respond(tablet) {
                                 transform: translate(17px, 2px) scale(0.8);
                             }

@@ -6,7 +6,7 @@
         width: 100%;
         border-bottom: 1px solid $secondaryColor;
         background-color: #000;
-        background-image: url(../images/art-space--background.png);
+        background-image: url(/images/art-space--background.png);
         background-position: top center;
         background-size: 100%;
         background-repeat: no-repeat;
@@ -416,7 +416,7 @@
                 bottom: 4px;
                 width: 8px;
                 height: 136px;
-                background: url(../images/arrow_top.svg) no-repeat;
+                background: url(/images/arrow_top.svg) no-repeat;
                 transition: all .15s ease-in;
                 @include respond(mobile) {
                     display: none;
@@ -435,7 +435,7 @@
                     width: 20px;
                     height: 8px;
                     transform: rotate(90deg);
-                    background: url(../images/arrow_right--icon.svg) no-repeat;
+                    background: url(/images/arrow_right--icon.svg) no-repeat;
                     transition: all .2s ease-in;
                 }
                 &:hover {

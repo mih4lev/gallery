@@ -6,7 +6,7 @@
         margin-top: 0;
         margin-bottom: 0;
         height: 295px;
-        background-image: url(../images/delivery--background.png);
+        background-image: url(/images/delivery--background.png);
         background-position: center bottom;
         background-repeat: no-repeat;
         background-size: cover;
@@ -175,7 +175,7 @@
         position: relative;
         height: 315px;
         border-top: 1px solid $secondaryColor;
-        background-image: url(../images/delivery_map--background.png);
+        background-image: url(/images/delivery_map--background.png);
         background-position: center center;
         background-size: cover;
         .mapLogo {
@@ -272,17 +272,17 @@
                     .socialLink--facebook {
                         width: 14px;
                         height: 27px;
-                        background-image: url(../images/facebook--icon_gold.svg);
+                        background-image: url(/images/facebook--icon_gold.svg);
                         &:hover {
-                            background-image: url(../images/facebook--icon.svg);
+                            background-image: url(/images/facebook--icon.svg);
                         }
                     } 
                     .socialLink--instagram {
                         width: 29px;
                         height: 28px;
-                        background-image: url(../images/instagram--icon_gold.svg);
+                        background-image: url(/images/instagram--icon_gold.svg);
                         &:hover {
-                            background-image: url(../images/instagram--icon.svg);
+                            background-image: url(/images/instagram--icon.svg);
                         }
                     } 
                 }

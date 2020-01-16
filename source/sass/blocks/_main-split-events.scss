@@ -1,7 +1,7 @@
 .splitBlocks--events {
     border-top: 1px solid $secondaryColor;
     background-color: #1E1B1E;
-    background-image: url(../images/art-space--background.png);
+    background-image: url(/images/art-space--background.png);
     background-position: top center;
     @include respond(desktop) {
         background-size: 120%;

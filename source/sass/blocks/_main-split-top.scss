@@ -1,7 +1,7 @@
 .splitBlocks--main {
     margin-top: 94px;
     background-color: #000;
-    background-image: url(../images/main-header--background.png);
+    background-image: url(/images/main-header--background.png);
     @include respond(desktop) {
         background-size: 120%;
         background-position: top center;
