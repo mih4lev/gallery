@@ -208,6 +208,182 @@
             top: -10px;
             right: -85px;
         }
+        .addedPictures {
+            width: 640px;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.5);
+            @include respond(tablet) {
+                width: 450px;
+            }
+            @include respond(tabletMini) {
+                width: $tabletMiniContentWidth;
+            }
+            @include respond(mobile) {
+                width: $mobileContentWidth + 20;
+            }
+            .basketHeader {
+                margin-top: 0;
+                margin-bottom: 20px;
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+                color: $secondaryColor;
+                text-transform: uppercase;
+                @include respond(mobile) {
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                }
+            }
+            .basketPicture {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: stretch;
+                margin-bottom: 20px;
+                width: 100%;
+                &:last-of-type {
+                    margin-bottom: 0px;
+                }
+                .basketPhoto {
+                    width: 200px;
+                    height: 100%;
+                    @include respond(tablet) {
+                        width: 160px;
+                    }
+                    @include respond(tabletMini) {
+                        width: 140px;
+                    }
+                    @include respond(mobile) {
+                        width: 100px;
+                    }
+                }
+                .basketData {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    position: relative;
+                    margin-left: 20px;
+                    padding-bottom: 40px;
+                    box-sizing: border-box;
+                    .pictureHeaderWrapper {
+                        margin-bottom: 10px;
+                        .pictureHeader {
+                            font-size: 15px;
+                            line-height: 18px;
+                            letter-spacing: 0.125em;
+                            color: $primaryColor;
+                            text-transform: uppercase;
+                            @include respond(mobile) {
+                                font-size: 12px;
+                                line-height: 14px;
+                                letter-spacing: 0.1em;
+                            }
+                        }
+                    }
+                    .pictureSize {
+                        display: inline-block;
+                        margin-top: 0;
+                        margin-bottom: 10px;
+                        @include respond(mobile) {
+                            font-size: 10px;
+                            line-height: 12px;
+                            letter-spacing: 0.075em;
+                        }
+                        .pictureWidth {
+                            &:after {
+                                content: "x";
+                                padding-left: 5px;
+                                padding-right: 5px;
+                            }
+                        }
+                    }
+                    .pictureAuthor {
+                        text-transform: uppercase;
+                        color: $secondaryColor;
+                        @include respond(mobile) {
+                            font-size: 10px;
+                            line-height: 12px;
+                            letter-spacing: 0.075em;
+                        }
+                        &:hover {
+                            color: $primaryColor;
+                        }
+                    }
+                    .picturePrice {
+                        position: absolute;
+                        bottom: 0;
+                        font-weight: 300;
+                        font-style: normal;
+                        font-size: 20px;
+                        line-height: 24px;
+                        letter-spacing: 0.1375em;
+                        @include respond(mobile) {
+                            font-size: 15px;
+                            line-height: 18px;
+                            letter-spacing: 0.125em;
+                        }
+                    }
+                }
+            }
+            .basketButton {
+                position: absolute;
+                right: 20px;
+                bottom: 20px;
+                padding-right: 30px;
+                box-sizing: border-box;
+                width: 200px;
+                height: 40px;
+                text-transform: uppercase;
+                color: $secondaryColor;
+                border: 1px solid $secondaryColor;
+                background-color: transparent;
+                transition: opacity .25s ease-in;
+                cursor: pointer;
+                @include respond(tablet) {
+                    position: relative;
+                    right: 0;
+                    bottom: 0;
+                    margin-top: 20px;
+                    width: 100%;
+                }
+                @include respond(tabletMini) {
+                    position: relative;
+                    right: 0;
+                    bottom: 0;
+                    margin-top: 20px;
+                    width: 100%;
+                }
+                @include respond(mobile) {
+                    position: relative;
+                    right: 0;
+                    bottom: 0;
+                    margin-top: 20px;
+                    width: 100%;
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(8px, -50%);
+                    background-image: url(/images/arrow_right--icon.svg);
+                    width: 20px;
+                    height: 8px;
+                }
+                &:hover {
+                    color: $primaryColor;
+                    border-color: $primaryColor;
+                    &:after {
+                        background-image: url(/images/arrow_right_white--icon.svg);
+                    }
+                }
+            }
+        }
         .headerBasket--empty {
             display: flex;
             align-items: center;

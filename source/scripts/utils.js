@@ -37,3 +37,13 @@ export const changeCurrency = async (lang) => {
         node.innerText = value;
     });
 };
+
+export const changeMetric = (lang) => {
+    const metricLabels = [...document.querySelectorAll(`[data-metric]`)];
+    console.log(metricLabels);
+    const isDefault = (lang === `ru`);
+    metricLabels.forEach((label) => {
+        const SL = (isDefault) ? [ `en`, `ru` ] : [ `ru`, `en` ];
+        label.classList.replace(`metric--${SL[0]}`, `metric--${SL[1]}`);
+    });
+};

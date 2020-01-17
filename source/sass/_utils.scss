@@ -86,3 +86,24 @@
         display: none;
     }
 }
+
+.metric--ru,
+.metric--ru,
+.metric--en,
+.metric--en {
+    &:after {
+        margin-left: 5px;
+    }
+}
+.metric--ru,
+.metric--ru {
+    &:after {
+        content: "см";
+    }
+}
+.metric--en,
+.metric--en {
+    &:after {
+        content: "cm";
+    }
+}

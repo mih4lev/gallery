@@ -216,26 +216,6 @@
                                 letter-spacing: 0.075em;
                                 color: $primaryColor;
                             }
-                            .labelMin.metric--ru,
-                            .labelMax.metric--ru,
-                            .labelMin.metric--en,
-                            .labelMax.metric--en {
-                                &:after {
-                                    margin-left: 5px;
-                                }
-                            }
-                            .labelMin.metric--ru,
-                            .labelMax.metric--ru {
-                                &:after {
-                                    content: "см";
-                                }
-                            }
-                            .labelMin.metric--en,
-                            .labelMax.metric--en {
-                                &:after {
-                                    content: "cm";
-                                }
-                            }
                         }
                     }
                     .orientationWrapper {

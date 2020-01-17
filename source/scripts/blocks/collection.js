@@ -1,5 +1,5 @@
 import Masonry from "masonry-layout";
-import {changeCurrency, currency} from "../utils";
+import {changeCurrency, changeMetric, currency} from "../utils";
 
 const imagesLoaded = require('imagesloaded');
 
@@ -8,6 +8,7 @@ export const setPicturesLayout = () => {
     document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
         // change currency of picture list
         await changeCurrency(lang);
+        changeMetric(lang);
     });
     // set pictures layout
     const pictureList = document.querySelector(`.pictureList`);
@@ -305,13 +306,6 @@ export const setPicturesLayout = () => {
             const roundValue = Math.round(exchangeValue / step) * step;
             node.dataset.current = String(roundValue);
             node.innerText = (isDefault) ? format(roundValue) : roundValue;
-        });
-        // change metric
-        const metricSelector = `.rangeLabels>[data-default]`;
-        const metricLabels = [...document.querySelectorAll(metricSelector)];
-        metricLabels.forEach((label) => {
-            const SL = (isDefault) ? [ `en`, `ru` ] : [ `ru`, `en` ];
-            label.classList.replace(`metric--${SL[0]}`, `metric--${SL[1]}`);
         });
     });
     // orientation choose
