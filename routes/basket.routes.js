@@ -1,11 +1,11 @@
 const { Router } = require(`express`);
-const { requestLanguage } = require("../models/utils.model");
 
 const router = new Router();
 
 router.get(`/`, (request, response) => {
+    const { language } = request;
     const data = {
-        language: requestLanguage(request),
+        language,
         pageTitle: `arTE Gallery | basket`,
         metaDescription: ``,
         metaKeywords: ``,

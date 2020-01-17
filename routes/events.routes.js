@@ -1,11 +1,11 @@
 const { Router } = require(`express`);
-const { requestLanguage } = require("../models/utils.model");
 
 const router = new Router();
 
 router.get(`/`, (request, response) => {
+    const { language } = request;
     const data = {
-        language: requestLanguage(request),
+        language,
         isEventsActive: true,
         pageTitle: `arTE Gallery | events`,
         metaDescription: ``,
@@ -15,9 +15,9 @@ router.get(`/`, (request, response) => {
 });
 
 router.get(`/:id`, (request, response) => {
-    const { params: { id: eventID }} = request;
+    const { language, params: { id: eventID }} = request;
     const data = {
-        language: requestLanguage(request),
+        language,
         isEventsActive: true,
         pageTitle: `arTE Gallery | article`,
         metaDescription: ``,

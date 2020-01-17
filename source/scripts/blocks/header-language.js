@@ -39,7 +39,7 @@ export const headerLanguage = () => {
     const setStorage = (value) => {
         const lang = value.substr(0, 2);
         const maxAge = 3600 * 24 * 30;
-        document.cookie = `language=${lang}; max-age=${maxAge}`;
+        document.cookie = `language=${lang}; path=/; max-age=${maxAge}`;
         localStorage.setItem(`options`, JSON.stringify({ language: value }));
     };
     const setLinkData = (link, language) => {

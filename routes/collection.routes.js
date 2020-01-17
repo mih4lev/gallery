@@ -1,11 +1,11 @@
 const { Router } = require(`express`);
-const { requestLanguage } = require("../models/utils.model");
 
 const router = new Router();
 
 router.get(`/`, (request, response) => {
+    const { language } = request;
     const data = {
-        language: requestLanguage(request),
+        language,
         isCollectionActive: true,
         pageTitle: `arTE Gallery | collection`,
         metaDescription: ``,
@@ -15,9 +15,9 @@ router.get(`/`, (request, response) => {
 });
 
 router.get(`/:id`, (request, response) => {
-    const { params: { id: pictureID }} = request;
+    const { language, params: { id: pictureID }} = request;
     const data = {
-        language: requestLanguage(request),
+        language,
         isCollectionActive: true,
         pageTitle: `arTE Gallery | picture`,
         metaDescription: ``,
