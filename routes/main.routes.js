@@ -1,14 +1,19 @@
 const { Router } = require(`express`);
+const { requestDB } = require(`../models/db.model`);
 
 const router = new Router();
 
 router.get(`/`, async (request, response) => {
     const { language } = request;
+    const query = `SELECT * FROM pages_ru WHERE name = 'index'`;
+    const {
+        0: { title, description, keywords }
+    } = await requestDB(query);
     const data = {
         language,
-        pageTitle: `arTE Gallery | home`,
-        metaDescription: ``,
-        metaKeywords: ``
+        pageTitle: title,
+        metaDescription: description,
+        metaKeywords: keywords
     };
     response.render(`home`, data);
 });
