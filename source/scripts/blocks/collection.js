@@ -1,15 +1,9 @@
 import Masonry from "masonry-layout";
-import {changeCurrency, changeMetric, currency} from "../utils";
+import { currency } from "../utils";
 
 const imagesLoaded = require('imagesloaded');
 
 export const setPicturesLayout = () => {
-    // changeCurrency of all site
-    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
-        // change currency of picture list
-        await changeCurrency(lang);
-        changeMetric(lang);
-    });
     // set pictures layout
     const pictureList = document.querySelector(`.pictureList`);
     if (!pictureList) return false;
@@ -23,7 +17,7 @@ export const setPicturesLayout = () => {
     if (!filtersHeader) return false;
     filtersHeader.addEventListener(`click`, () => {
         const windowSize = window.innerWidth;
-        if (windowSize > 768) return false;
+        if (windowSize >= 768) return false;
         const filters = document.querySelector(`.filters`);
         const isVisible = (filters.style.opacity === `1`);
         filters.style.zIndex = (isVisible) ? `-200` : `200`;

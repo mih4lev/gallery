@@ -1,3 +1,5 @@
+import { changeCurrency, changeMetric } from "../utils";
+
 export const headerLanguage = () => {
 
     // default language is ru-RU (delete)
@@ -66,6 +68,8 @@ export const headerLanguage = () => {
             showList(`0`, `-1`)();
             isAlreadySelected = true;
             await downloadLocalization(lang);
+            await changeCurrency(lang);
+            changeMetric(lang);
             createCustomEvent(lang);
             setTimeout(() => {
                 isAlreadySelected = false;

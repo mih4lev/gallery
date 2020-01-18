@@ -1,5 +1,4 @@
 export const similarPhoto = () => {
-
     const links = document.querySelectorAll(`.similarLink`);
     const targetPhoto = (isLinkHovered) => {
         return ({ target: link }) => {
@@ -13,7 +12,6 @@ export const similarPhoto = () => {
         link.addEventListener(`mouseout`, targetPhoto(false));
     };
     [...links].forEach(addListeners);
-
 };
 
 export const currency = async () => {
@@ -27,23 +25,24 @@ export const changeCurrency = async (lang) => {
     const format = (value) => value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     const isDefault = (lang === `ru`);
     const rate = await currency();
-    const currencyNodes = [...document.querySelectorAll(`[data-rub]`)];
+    const currencyNodes = [...document.querySelectorAll(`.price`)];
     currencyNodes.forEach((node) => {
         const { dataset: { rub: valueRub }} = node;
         const valueEuro = Math.round((valueRub / rate) * 100) / 100;
         const value = (isDefault) ? format(valueRub) : valueEuro.toFixed(2);
-        const selector = (isDefault) ? [ `euro`, `rub` ] : [ `rub`, `euro` ];
-        node.classList.replace(`price--${selector[0]}`, `price--${selector[1]}`);
+        const SL = (isDefault) ? [ `euro`, `rub` ] : [ `rub`, `euro` ];
+        node.classList.remove(`price--${SL[0]}`);
+        node.classList.add(`price--${SL[1]}`);
         node.innerText = value;
     });
 };
 
 export const changeMetric = (lang) => {
-    const metricLabels = [...document.querySelectorAll(`[data-metric]`)];
-    console.log(metricLabels);
+    const metricLabels = [...document.querySelectorAll(`.metric`)];
     const isDefault = (lang === `ru`);
     metricLabels.forEach((label) => {
         const SL = (isDefault) ? [ `en`, `ru` ] : [ `ru`, `en` ];
-        label.classList.replace(`metric--${SL[0]}`, `metric--${SL[1]}`);
+        label.classList.remove(`metric--${SL[0]}`);
+        label.classList.add(`metric--${SL[1]}`);
     });
 };

@@ -10,8 +10,7 @@ const htmlmin = require(`gulp-htmlmin`);
 const browserSync = require(`browser-sync`).create();
 const del = require(`del`);
 const rename = require(`gulp-rename`);
-const imagemin = require(`gulp-imagemin`);
-// const tinypng = require(`gulp-tinypng-compress`);
+const tinypng = require(`gulp-tinypng-compress`);
 
 // live server (browser-reload)
 gulp.task(`browser-sync`, function() {
@@ -33,8 +32,7 @@ gulp.task(`browser-sync`, function() {
     gulp.watch(`./source/fonts/*.{woff, woff2, ttf}`, gulp.series(`fonts`));
     gulp.watch(`./source/lang/*.json`, gulp.series(`lang`));
     gulp.watch(`./source/images/*.svg`, gulp.series(`svg`));
-    gulp.watch(`./source/images/*.{png,jpg,jpeg}`, gulp.series(`images`));
-    // gulp.watch(`./source/images/*.{png,jpg,jpeg}`, gulp.series(`tinypng`));
+    gulp.watch(`./source/images/*.{png,jpg,jpeg}`, gulp.series(`tinypng`));
 });
 
 // SASS -> CSS
@@ -89,26 +87,19 @@ gulp.task(`lang`, function() {
         .pipe(gulp.dest(`./public/lang`));
 });
 
-// Images
-gulp.task(`images`, function () {
-    del.sync(`./public/images/*.{png,jpg,jpeg}`);
+// TINYPNG
+gulp.task(`tinypng`, function () {
     return gulp.src(`./source/images/*.{png,jpg,jpeg}`)
-        .pipe(imagemin())
+        .pipe(tinypng({
+            key: `TQsc1zc45QNBZBD6CC3JrhMTX8hWWW88`,
+            sigFile: `./source/images/.tinypng-sigs`,
+            summarize: true,
+            parallel: true,
+            log: true
+        }))
         .pipe(gulp.dest(`./public/images`))
         .pipe(browserSync.stream());
 });
 
-// TINYPNG
-// gulp.task(`tinypng`, function () {
-//     del.sync(`./public/images/*.{png,jpg,jpeg}`);
-//     return gulp.src(`./source/images/*.{png,jpg,jpeg}`)
-//         .pipe(tinypng({
-//             key: `wNS29BVwd8BM7rkKHQxBKtnLgZHxbM81`,
-//             log: false
-//         }))
-//         .pipe(gulp.dest(`./public/images`))
-//         .pipe(browserSync.stream());
-// });
-
-const tasks = [`sass`, `html`, `fonts`, `scripts`, `svg`, `lang`, `images`, `browser-sync`];
+const tasks = [`sass`, `html`, `fonts`, `scripts`, `svg`, `lang`, `tinypng`, `browser-sync`];
 gulp.task(`default`, gulp.parallel(...tasks));

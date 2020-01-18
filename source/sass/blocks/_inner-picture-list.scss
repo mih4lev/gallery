@@ -205,10 +205,22 @@
                 .pictureSize {
                     margin-top: 10px;
                     margin-bottom: 0;
+                    white-space: nowrap;
                     @include respond(tablet) {
                         font-size: 10px;
                         line-height: 12px;
                         letter-spacing: 0.075em;
+                    }
+                    .sizeLabel {
+                        &:after {
+                            content: ":";
+                        }
+                    }
+                    .pictureHeight {
+                        &:before {
+                            content: "x";
+                            margin-right: 5px;
+                        }
                     }
                 }
             }
