@@ -111,14 +111,14 @@
                 .instagramLink {
                     &:hover {
                         .instagramPhoto {
-                            opacity: 0.5;
+                            @extend %photoFilter;
                         }
                     }
                 }
                 .instagramPhoto {
                     width: 175px;
                     height: 175px;
-                    transition: all 0.3s ease-in;
+                    transition: all 0.25s ease-in;
                     @include respond(tabletMini) {
                         width: 134px;
                         height: 134px;

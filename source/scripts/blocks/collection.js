@@ -3,6 +3,15 @@ import { currency } from "../utils";
 
 const imagesLoaded = require('imagesloaded');
 
+export const setDesktopLinks = () => {
+    const desktopLinks = document.querySelectorAll(`.collectionPhoto`);
+    desktopLinks.forEach((link) => {
+        link.addEventListener(`click`, () => {
+            document.location.href = "/collection";
+        });
+    });
+};
+
 export const setPicturesLayout = () => {
     // set pictures layout
     const pictureList = document.querySelector(`.pictureList`);

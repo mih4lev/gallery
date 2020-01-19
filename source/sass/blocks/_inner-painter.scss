@@ -257,6 +257,9 @@
     @include respond(desktop) {
         margin-left: -835px;
     }
+    @include respond(tablet) {
+        margin-left: -605px;
+    }
     @include respond(tabletMini) {
         margin-left: -360px;
         font-size: 12px;
@@ -279,10 +282,19 @@
 .picturesWrapper {
     display: flex;
     justify-content: center;
+    .arrowDownButton {
+        left: 20px;
+        @include respond(tabletMini) {
+            left: 10px;
+        }
+        @include respond(mobile) {
+            left: 50%;
+        }
+    }
 }
 .painterPictures {
     @include respond(desktop) {
-        .pictureList {
+        .pictureListWrapper {
             width: $desktopContentWidth + 40;
             .picture {
                 width: 283px;
@@ -295,10 +307,13 @@
         }
     }
     @include respond(tablet) {
-        .pictureList {
+        .pictureListWrapper {
             margin-left: -20px;
             margin-right: -20px;
             width: $tabletContentWidth + 40;
+            .pictureList {
+                width: $tabletContentWidth + 40;
+            }
             .picture {
                 margin-left: 20px;
                 margin-right: 20px;

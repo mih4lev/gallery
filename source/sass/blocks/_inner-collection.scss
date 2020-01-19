@@ -534,5 +534,17 @@
                 }
             }
         }
+        .arrowDownButton {
+            left: 20px;
+            @include respond(tablet) {
+                left: 10px;
+            }
+            @include respond(tabletMini) {
+                left: 10px;
+            }
+            @include respond(mobile) {
+                left: 50%;
+            }
+        }
     }
 }

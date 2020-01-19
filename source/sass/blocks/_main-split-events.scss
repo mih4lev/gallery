@@ -78,6 +78,7 @@
                 .artSpacePhoto {
                     width: 347px;
                     height: 347px;
+                    transition: all .3s ease-in;
                     @include respond(desktop) {
                         width: 270px;
                         height: 270px;
@@ -93,6 +94,11 @@
                     @include respond(mobile) {
                         width: 240px;
                         height: 240px;
+                    }
+                }
+                &:hover {
+                    .artSpacePhoto {
+                        @extend %photoFilter;
                     }
                 }
                 .artSpaceLink {
@@ -196,11 +202,19 @@
                         min-height: 300px;
                         cursor: pointer;
                     }
+                    .interestPhotoLink {
+                        &:hover {
+                            .interestPhoto {
+                                @extend %photoFilter;
+                            }
+                        }
+                    }
                     .interestPhoto {
                         width: 370px;
                         height: 215px;
                         margin-left: -25px;
                         margin-bottom: 25px;
+                        transition: all 0.25s ease-in;
                         @include respond(desktop) {
                             width: 280px;
                             height: 165px;

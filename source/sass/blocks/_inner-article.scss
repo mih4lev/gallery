@@ -1,0 +1,342 @@
+.articleWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    // padding-bottom: 40px;
+    background-image: linear-gradient(260.17deg, #000000 24.57%, #1E1B1E 82.74%);
+}
+
+.articleWrapper {
+    .breadcrumbs {
+        display: flex;
+        margin-top: 0;
+        margin-bottom: 40px;
+        padding-left: 0;
+        list-style-type: none;
+        @include respond(tabletMini) {
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+        @include respond(mobile) {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
+        .breadcrumb {
+            position: relative;
+            margin-right: 20px;
+            color: $secondaryColor;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.075em;
+            text-transform: uppercase;
+            @include respond(tabletMini) {
+                font-size: 8px;
+                line-height: 10px;
+                letter-spacing: 0.05em;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 6px;
+                height: 9px;
+                transform: translate(6px, -50%);
+                background-image: url(/images/arrow_right_breadcrumbs--icon.svg);
+                background-repeat: no-repeat;
+                @include respond(mobile) {
+                    top: 0;
+                    left: 50%;
+                    margin-top: 22px;
+                    transform: translate(0, -50%) rotate(90deg);
+                }
+            }
+            &:last-of-type {
+                @include respond(mobile) {
+                    display: none;
+                }
+                &:after {
+                    display: none;
+                }
+            }
+            .breadcrumbLink {
+                color: $secondaryColor;
+                transition: all .25s ease-in;
+                &:hover {
+                    color: $primaryColor;
+                }
+            }
+            .breadcrumbLink--active {
+                color: $primaryColor;
+            }
+        }
+    }
+}
+
+.article {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    @include respond(tabletMini) {
+        width: $tabletMiniContentWidth;
+        flex-direction: column;
+    }
+    @include respond(mobile) {
+        width: $mobileContentWidth;
+        flex-direction: column;
+    }
+    .articleAdditional {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 470px;
+        @include respond(tablet) {
+            width: 340px; 
+        }
+        @include respond(tabletMini) {
+            width: $tabletMiniContentWidth;
+        }
+        @include respond(mobile) {
+            width: $mobileContentWidth;
+        }
+        .articleHeader {
+            margin-top: 0;
+            margin-bottom: 20px;
+            margin-left: -5px;
+            margin-right: -5px;
+            letter-spacing: 0;
+            @extend %largeSecondaryText;
+            @include respond(tablet) {
+                font-size: 25px;
+                line-height: 30px;
+                letter-spacing: 0.15em;
+            }
+            @include respond(tabletMini) {
+                margin-left: 0;
+                margin-right: 0;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: 0.1375em;
+            }
+            @include respond(mobile) {
+                margin-left: 0;
+                margin-right: 0;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: 0.1375em;
+            }
+        }
+        .articlePicture {
+            width: 470px;
+            @include respond(tablet) {
+                width: 340px;
+            }
+            @include respond(tabletMini) {
+                width: $tabletMiniContentWidth;
+            }
+            @include respond(mobile) {
+                width: $mobileContentWidth;
+            }
+        }
+    }
+    .articleTextWrapper {
+        margin-left: 40px;
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+        border: 1px solid $secondaryColor;
+        box-sizing: border-box;
+        @include respond(tablet) {
+            margin-left: 20px;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+        }
+        @include respond(tabletMini) {
+            margin-top: 20px;
+            margin-left: 0;
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+            border: none;
+        }
+        @include respond(mobile) {
+            margin-top: 20px;
+            margin-left: 0;
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+            border: none;
+        }
+        .articleText {
+            height: 532px;
+            overflow: hidden;
+            @include respond(tablet) {
+                height: 364px;
+            }
+            @include respond(mobile) {
+                height: 100%;
+            }
+            p {
+                margin-top: 0;
+                margin-bottom: 14px;
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    .articleLable {
+        position: absolute;
+        top: -20px;
+        right: 0;
+        text-transform: uppercase;
+        color: $secondaryColor;
+        @include respond(tabletMini) {
+            display: none;
+        }
+        @include respond(mobile) {
+            display: none;
+        }
+    }
+}
+
+.articleLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.1375em;
+    text-transform: uppercase;
+    @include respond(tablet) {
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: 0.125em;    
+    }
+    @include respond(tabletMini) {
+        margin-top: 0;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.075em;
+    }
+    @include respond(mobile) {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.075em;
+    }
+    .articleBack {
+        padding-left: 30px;
+        color: $primaryColor;
+        background-image: url(/images/arrow_left_white--icon.svg);
+        background-position: left center;
+        background-repeat: no-repeat;
+        transition: all .25s ease-in;
+        &:hover {
+            color: $secondaryColor;
+            background-image: url(/images/arrow_left--icon.svg);
+        }
+    }
+    .articleSocialLinks {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: $secondaryColor;
+        @include respond(mobile) {
+            order: -1;
+            margin-bottom: 20px;
+        }
+        .shareTitle {
+            &:after {
+                content: ":"
+            }
+        }
+        .socialList {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 0;
+            margin-left: 14px;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style-type: none;
+            .social {
+                margin-left: 7px;
+                margin-right: 7px;
+                @include respond(tablet) {
+                    margin-left: 4px;
+                    margin-right: 4px;
+                }
+                @include respond(tabletMini) {
+                    margin-left: 4px;
+                    margin-right: 4px;
+                }
+                @include respond(mobile) {
+                    margin-left: 4px;
+                    margin-right: 4px;
+                }
+                &:first-of-type {
+                    margin-left: 0;
+                }
+                &:last-of-type {
+                    margin-right: 0;
+                }
+                .socialLink {
+                    display: block;
+                    font-size: 0;
+                    transition: all .25s ease-in;
+                    @include respond(tablet) {
+                        transform: scale(0.8);
+                    }
+                    @include respond(tabletMini) {
+                        transform: scale(0.7);
+                    }
+                    @include respond(mobile) {
+                        transform: scale(0.7);
+                    }
+                }
+                .socialLink--facebook {
+                    width: 11px;
+                    height: 22px;
+                    background-image: url(/images/facebook--icon_gold.svg);
+                    &:hover {
+                        background-image: url(/images/facebook--icon.svg);
+                    }
+                }
+                .socialLink--instagram {
+                    width: 23px;
+                    height: 24px;
+                    background-image: url(/images/instagram--icon_gold.svg);
+                    &:hover {
+                        background-image: url(/images/instagram--icon.svg);
+                    }
+                }
+                .socialLink--whatsapp {
+                    width: 19px;
+                    height: 18px;
+                    background-image: url(/images/whatsapp--icon_gold.svg);
+                    &:hover {
+                        background-image: url(/images/whatsapp--icon.svg);
+                    }
+                }
+                .socialLink--telegram {
+                    width: 18px;
+                    height: 16px;
+                    background-image: url(/images/telegram--icon_gold.svg);
+                    &:hover {
+                        background-image: url(/images/telegram--icon.svg);
+                    }
+                }
+            }
+        }
+    }
+}

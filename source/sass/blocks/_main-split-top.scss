@@ -57,7 +57,11 @@
         .mainHeader {
             margin-top: 90px;
             margin-bottom: 0;
+            cursor: pointer;
             @extend %middleSecondaryText;
+            &:hover {
+                color: $primaryColor;
+            }
             @include respond(tabletMini) {
                 margin-top: 60px;
             }
@@ -93,6 +97,11 @@
             }
             .collectionPhoto {
                 position: absolute;
+                cursor: pointer;
+                transition: all .25s ease-in;
+                &:hover {
+                    @extend %photoFilter;
+                }
                 &:nth-of-type(1) {
                     top: 0;
                     left: 33px;
@@ -406,6 +415,11 @@
                             height: 100px;
                         }
                     }
+                    &:hover {
+                        .authorPhoto {
+                            @extend %photoFilter;
+                        }
+                    }
                     .authorInfo {
                         display: flex;
                         flex-direction: column;
@@ -501,7 +515,7 @@
                             }
                             &:hover {
                                 .authorPictures--photo {
-                                    opacity: 0.5;
+                                    @extend %photoFilter;
                                 }
                             }
                         }

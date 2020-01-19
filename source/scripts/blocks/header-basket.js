@@ -6,7 +6,7 @@ export const headerBasket = () => {
     const filtersBlock = document.querySelector(`.filters`);
     const showBasket = (zIndex, opacity, visible, isDisabled) => {
         return (event) => {
-            if (filtersBlock.style.zIndex === `200`) return false;
+            if (filtersBlock && filtersBlock.style.zIndex === `200`) return false;
             event.preventDefault();
             wrapper.style.zIndex = zIndex;
             wrapper.style.opacity = opacity;

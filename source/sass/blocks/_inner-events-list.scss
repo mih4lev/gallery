@@ -1,0 +1,167 @@
+.eventsList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: 40px;
+    margin-left: -20px;
+    margin-right: -21px;
+    margin-bottom: 30px;
+    padding-left: 0;
+    list-style-type: none;
+    @include respond(tablet) {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    @include respond(tabletMini) {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    @include respond(mobile) {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .event {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 40px;
+        box-sizing: border-box;
+        width: 347px;
+        background: #000;
+        @include respond(desktop) {
+            margin-left: 16px;
+            margin-right: 16px;
+            width: 290px;
+        }
+        @include respond(tablet) {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 219px;
+        }
+        @include respond(tabletMini) {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+            width: 410px;
+        }
+        @include respond(mobile) {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+            width: 290px;
+        }
+        .eventPhotoLink {
+            &:hover {
+                .eventPhoto {
+                    @extend %photoFilter;
+                }
+            }
+        }
+        .eventPhoto {
+            margin-left: -20px;
+            width: 347px;
+            height: 201px;
+            transition: all 0.25s ease-in;
+            @include respond(desktop) {
+                width: 290px;
+                height: 168px;
+            }
+            @include respond(tablet) {
+                width: 219px;
+                height: 123px;
+            }
+            @include respond(tabletMini) {
+                width: 410px;
+                height: 237px;
+            }
+            @include respond(mobile) {
+                width: 290px;
+                height: 167px;
+            }
+        }
+        .eventLink {
+            margin-top: 20px;
+            transition: all .25s ease-in;
+            @extend %middleSecondaryText;
+            @include respond(tablet) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+            }
+            @include respond(tabletMini) {
+                position: absolute;
+                bottom: 0;
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-top: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 20px;
+                box-sizing: border-box;
+                width: 410px;
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+            @include respond(mobile) {
+                position: absolute;
+                bottom: 0;
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-top: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 20px;
+                box-sizing: border-box;
+                width: 290px;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+        .eventDescription {
+            @include respond(tablet) {
+                font-size: 10px;
+                line-height: 12px;
+                letter-spacing: 0.075em;
+            }
+            @include respond(tabletMini) {
+                display: none;
+            }
+            @include respond(mobile) {
+                display: none;
+            }
+        }
+        .eventTheme {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            @include respond(tablet) {
+                font-size: 10px;
+                line-height: 12px;
+                letter-spacing: 0.075em;
+            }
+            @include respond(tabletMini) {
+                display: none;
+            }
+            @include respond(mobile) {
+                display: none;
+            }
+        }
+    }
+}
