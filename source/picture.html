@@ -1,9 +1,25 @@
-<div class="innerPage">
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>Gallery - Picture</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<include src="source/components/header.html"></include>
+
+<main>
+    <div class="innerPage">
         <div class="pictureWrapper">
             <div class="wrapper">
                 <ul class="breadcrumbs">
                     <li class="breadcrumb">
-                        <a class="breadcrumbLink headerNav--collections" href="/collection">Коллекция</a>
+                        <a class="breadcrumbLink headerNav--collections" href="/collection.html">Коллекция</a>
                     </li>
                     <li class="breadcrumb">
                         <span class="breadcrumbLink--active">Женщина на желтом фоне</span>
@@ -15,7 +31,7 @@
                         <img class="picturePhoto" src="/images/picture_photo1_big.png" alt="picture 1 photo">
                     </div>
                     <div class="pictureAuthorWrapper">
-                        <a class="pictureAuthor" href="/authors/1">Екатерина Жуковская</a>
+                        <a class="pictureAuthor" href="/painter.html">Екатерина Жуковская</a>
                     </div>
                     <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
                     <p class="pictureSize">
@@ -57,35 +73,42 @@
                     </div>
                     <ul class="authorList">
                         <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/1">
+                            <a class="authorPictureLink" href="/picture.html">
                                 <img class="authorPicturePhoto" src="/images/author_pictures_1.png" alt="author picture 1"> 
                             </a>
                         </li>
                         <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/2">
+                            <a class="authorPictureLink" href="/picture.html">
                                 <img class="authorPicturePhoto" src="/images/author_pictures_2.png" alt="author picture 2"> 
                             </a>
                         </li>
                         <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/3">
+                            <a class="authorPictureLink" href="/picture.html">
                                 <img class="authorPicturePhoto" src="/images/author_pictures_3.png" alt="author picture 3"> 
                             </a>
                         </li>
                         <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/4">
+                            <a class="authorPictureLink" href="/picture.html">
                                 <img class="authorPicturePhoto" src="/images/author_pictures_4.png" alt="author picture 4"> 
                             </a>
                         </li>
                         <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/5">
+                            <a class="authorPictureLink" href="/picture.html">
                                 <img class="authorPicturePhoto" src="/images/author_pictures_5.png" alt="author picture 5"> 
                             </a>
                         </li>
                     </ul>
                     <div class="buttonWrapper">
-                        <a class="picturesButton" href="/authors/1">Показать больше</a>
+                        <a class="picturesButton" href="/painter.html">Показать больше</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</main>
+
+<include src="source/components/footer.html"></include>
+
+<script src="/scripts/bundle.min.js"></script>
+</body>
+</html>

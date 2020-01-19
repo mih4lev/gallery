@@ -1,0 +1,526 @@
+.pictureWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #000;
+}
+
+.pictureWrapper  .breadcrumbs {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 40px;
+    padding-left: 0;
+    list-style-type: none;
+    @include respond(tabletMini) {
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
+    @include respond(mobile) {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
+    .breadcrumb {
+        position: relative;
+        margin-right: 20px;
+        color: $secondaryColor;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.075em;
+        text-transform: uppercase;
+        @include respond(tabletMini) {
+            font-size: 8px;
+            line-height: 10px;
+            letter-spacing: 0.05em;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 6px;
+            height: 9px;
+            transform: translate(6px, -50%);
+            background-image: url(/images/arrow_right_breadcrumbs--icon.svg);
+            background-repeat: no-repeat;
+            @include respond(mobile) {
+                top: 0;
+                left: 50%;
+                margin-top: 22px;
+                transform: translate(0, -50%) rotate(90deg);
+            }
+        }
+        &:last-of-type {
+            @include respond(mobile) {
+                display: none;
+            }
+            &:after {
+                display: none;
+            }
+        }
+        .breadcrumbLink {
+            color: $secondaryColor;
+            transition: all .25s ease-in;
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+        .breadcrumbLink--active {
+            color: $primaryColor;
+        }
+    }
+}
+
+.pictureWrapper .picture {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 773px;
+    box-sizing: border-box;
+    min-height: 445px;
+    @include respond(desktop) {
+        min-height: 345px;
+        padding-left: 600px;
+    }
+    @include respond(tablet) {
+        padding-left: 0;
+    }
+    @include respond(tabletMini) {
+        padding-left: 0;
+    }
+    @include respond(mobile) {
+        padding-left: 0;
+    }
+    .picturePhotoWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 773px;
+        height: 100%;
+        @include respond(desktop) {
+            width: 600px;
+        }
+        @include respond(tablet) {
+            order: 2;
+            position: unset;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        @include respond(tabletMini) {
+            order: 2;
+            position: unset;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        @include respond(mobile) {
+            order: 2;
+            position: unset;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .picturePhoto {
+            max-width: 753px;
+            cursor: pointer;
+            @include respond(desktop) {
+                max-width: 530px;
+            }
+            @include respond(tablet) {
+                width: 100%;
+            }
+            @include respond(tabletMini) {
+                width: 100%;
+            }
+            @include respond(mobile) {
+                width: 100%;
+            }
+        }
+    }
+    .pictureHeader {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        @include respond(desktop) {
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1375em;
+        }
+        @include respond(tablet) {
+            order: 1;
+            margin-bottom: 20px;
+        }
+        @include respond(tabletMini) {
+            order: 1;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1375em;
+        }
+        @include respond(mobile) {
+            order: 1;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+    }
+    .pictureAuthorWrapper {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        @include respond(tablet) {
+            order: 4;
+            margin-top: 0;
+        }
+        @include respond(tabletMini) {
+            order: 4;
+            margin-top: 0;
+        }
+        @include respond(mobile) {
+            order: 4;
+            margin-top: 0;
+        }
+        .pictureAuthor {
+            transition: all .25s ease-in;
+            @extend %middleSecondaryText;
+            @include respond(desktop) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+            }
+            @include respond(tabletMini) {
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+            }
+            @include respond(mobile) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+            }
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+    }
+    .picturePrice {
+        margin-top: auto;
+        margin-bottom: auto;
+        font-weight: 700;
+        font-style: normal;
+        letter-spacing: 0.1em;
+        @extend %largePrimaryText;
+        @include respond(desktop) {
+            font-size: 30px;
+            line-height: 36px;
+            letter-spacing: 0.1675em;
+        }
+        @include respond(tablet) {
+            order: 5;
+            font-size: 25px;
+            line-height: 30px;
+            letter-spacing: 0.15em;
+        }
+        @include respond(tabletMini) {
+            order: 5;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1375em;
+        }
+        @include respond(mobile) {
+            order: 5;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+    }
+    .pictureSize{
+        margin-top: 20px;
+        margin-bottom: 10px;
+        @include respond(tablet) {
+            order: 6;
+        }
+        @include respond(tabletMini) {
+            order: 6;
+        }
+        @include respond(mobile) {
+            order: 6;
+        }
+        .sizeLabel {
+            &:after {
+                content: ":"
+            }
+        }
+        .pictureHeight {
+            &:before {
+                padding-right: 5px;
+                content: "x";
+            }
+        }
+    }
+    .pictureGenre {
+        margin-top: 0;
+        margin-bottom: 10px;
+        @include respond(tablet) {
+            order: 7;
+        }
+        @include respond(tabletMini) {
+            order: 7;
+        }
+        @include respond(mobile) {
+            order: 7;
+        }
+        .genreLabel {
+            &:after {
+                content: ":"
+            }
+        }
+    }
+    .pictureTechnique {
+        margin-top: 0;
+        margin-bottom: 20px;
+        @include respond(tablet) {
+            order: 8;
+        }
+        @include respond(tabletMini) {
+            order: 8;
+        }
+        @include respond(mobile) {
+            order: 8;
+        }
+        .techniqueLabel {
+            &:after {
+                content: ":"
+            }
+        }
+    }
+    .pictureSimilarList {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        margin-bottom: 20px;
+        padding-left: 0;
+        list-style-type: none;
+        @include respond(tablet) {
+            order: 3;
+        }
+        @include respond(tabletMini) {
+            order: 3;
+        }
+        @include respond(mobile) {
+            order: 3;
+        }
+        .pictureSimilar {
+            margin-right: 10px;
+            cursor: pointer;
+            &:hover {
+                @extend %photoFilter;
+            }
+        }
+    }
+    .pictureDeliveryText {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.075em;
+        @include respond(tablet) {
+            order: 9;
+            width: 370px;
+        }
+        @include respond(tabletMini) {
+            order: 9;
+        }
+        @include respond(mobile) {
+            order: 9;
+        }
+    }
+    .cartButton {
+        position: relative;
+        margin-top: 20px;
+        width: inherit;
+        height: 40px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $secondaryColor;
+        border: 1px solid $secondaryColor;
+        background: #000;
+        cursor: pointer;
+        outline: none;
+        transition: all .25s ease-in;
+        @include respond(tablet) {
+            order: 10;
+            margin-top: -38px;
+            margin-left: 397px;
+            width: 300px;
+        }
+        @include respond(tabletMini) {
+            order: 10;
+        }
+        @include respond(mobile) {
+            order: 10;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            transform: translate(-28px, -4px) scale(0.7);
+            width: 18px;
+            height: 19px;
+            background-image: url(/images/basket--icon.svg);
+            transition: all .25s ease-in;
+            @include respond(tablet) {
+                transform: translate(-28px, -4px) scale(0.7);
+            }
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            transform: translate(10px, 3px);
+            width: 20px;
+            height: 8px;
+            background-image: url(/images/arrow_right--icon.svg);
+            transition: all .25s ease-in;
+            @include respond(tablet) {
+                transform: translate(7px, 2px) scale(0.8);
+            }
+        }
+        &:hover {
+            color: $primaryColor;
+            border: 1px solid $primaryColor;
+            &:before {
+                background-image: url(/images/basket_white--icon.svg);
+            }
+            &:after {
+                transform: translate(20px, 3px);
+                background-image: url(/images/arrow_right_white--icon.svg);
+                @include respond(tablet) {
+                    transform: translate(17px, 3px) scale(0.8);
+                }
+            }
+        }
+    }
+}
+
+.pictureWrapper .pictureText {
+    margin-bottom: 40px;
+}
+
+.pictureWrapper .authorWrapper {
+    .authorHeaderWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .authorPhoto {
+            margin-right: 20px;
+            width: 55px;
+            height: 55px;
+        }
+        .authorHeaderAnother {
+            flex-grow: 1;
+            @extend %lineHeader;
+            @extend %middleSecondaryText;
+            text-align: left;
+            @include respond(tabletMini) {
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+            }
+            @include respond(mobile) {
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+            }
+            &:before {
+                display: none;
+            }
+            &:after {
+                transform: translateY(-7px);
+                @include respond(tabletMini) {
+                    transform: translateY(-5px);
+                }
+                @include respond(mobile) {
+                    transform: translateY(-4px);
+                }
+            }
+        }
+    }
+    .authorList {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style-type: none;
+        @include respond(tabletMini) {
+            flex-wrap: wrap;
+        }
+        @include respond(mobile) {
+            flex-wrap: wrap;
+        }
+        .authorPicture {
+            @include respond(tabletMini) {
+                margin-bottom: 20px;
+            }
+            @include respond(mobile) {
+                margin-bottom: 10px;
+            }
+            .authorPicturePhoto {
+                width: 208px;
+                height: 208px;
+                @include respond(desktop) {
+                    width: 170px;
+                    height: 170px;
+                }
+                @include respond(tablet) {
+                    width: 130px;
+                    height: 130px;
+                }
+                @include respond(tabletMini) {
+                    width: 195px;
+                    height: 195px;
+                }
+                @include respond(mobile) {
+                    width: 138px;
+                    height: 138px;
+                }
+                &:hover {
+                    @extend %photoFilter;
+                }
+            }
+        }
+    }
+    .buttonWrapper {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        @include respond(tabletMini) {
+            margin-top: 20px;
+            justify-content: center;
+        }
+        @include respond(mobile) {
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .picturesButton {
+            @include respond(tabletMini) {
+                margin-left: 0;
+            }
+            @include respond(mobile) {
+                margin-left: 0;
+            }
+            @extend %arrowSecondaryButton;
+        }
+    }
+}

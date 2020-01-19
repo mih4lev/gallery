@@ -77,6 +77,11 @@
     "worksHeader": "Works",
     "articleBack": "Go back",
     "shareTitle": "Share",
+    "genreLabel": "Genre",
+    "techniqueLabel": "Technique",
+"pictureDeliveryText": "You can already order this picture today without leaving your home. Add it to the basket and follow the instructions. For answers to questions, refer to the tab: DELIVERY",
+    "authorHeaderAnother": "Other works by the author",
+    "picturesButton": "Show more",
     "footerAddress": "Address: Rozhdestvenskaya St. 5",
     "footerTimeline": "Daily from 11:00 - 22:00"
 }
