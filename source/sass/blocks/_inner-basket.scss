@@ -1,0 +1,103 @@
+.basketWrapper {
+    background-image: linear-gradient(264.54deg, #000000 24.57%, #1E1B1E 82.74%);
+}
+
+.basketTitle {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    @extend %middlePrimaryText;
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 18px;
+        height: 19px;
+        background-image: url(/images/basket_white--icon.svg);
+        background-repeat: no-repeat;
+    }
+}
+
+.basketTable {
+    margin-top: 0;
+    margin-bottom: 0;
+    .basketTableHeader {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid $secondaryColor;
+        padding-bottom: 20px;
+        .basketHeaderTitle {
+            text-transform: uppercase;
+            color: $secondaryColor;
+        }
+        .basketTitleName {
+            margin-left: 240px;
+        }
+        .basketTitlePrice {
+            margin-left: auto;
+            width: 260px;
+        }
+    }
+    .basketTableBody {
+        padding-top: 20px;
+        .basketItem {
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 20px;
+            .basketPhoto {
+                width: 200px;
+            }
+            .basketItemData {
+                margin-left: 40px;
+                .basketItemLink {
+                    @extend %middlePrimaryText;
+                }
+                .pictureSize {
+                    margin-top: 10px;
+                    .sizeLabel {
+                        &:after {
+                            content: ":";
+                        }
+                    }
+                }
+                .pictureAuthor {
+                    margin-top: 10px;
+                    .pictureAuthorLink {
+                        text-transform: uppercase;
+                        color: $secondaryColor;
+                        transition: opacity .25s ease-in;
+                        &:hover {
+                            color: $primaryColor;
+                        }
+                    }
+                }
+
+            }
+            .picturePrice {
+                margin-left: auto;
+                width: 260px;
+                font-style: normal;
+                @extend %middlePrimaryText;
+            }
+        }
+    }
+    .basketTableFooter {
+        display: flex;
+        justify-content: flex-end;
+        border-top: 1px solid $secondaryColor;
+        padding-top: 20px;
+        font-size: 25px;
+        line-height: 30px;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+        .basketSummaryTitle {
+            margin-right: 20px;
+            &:after {
+                content: ":";
+            }
+        }
+    }
+}

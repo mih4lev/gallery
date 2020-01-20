@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>Gallery - Basket</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<include src="source/components/header.html"></include>
+
+<main>
+    <div class="innerPage">
+        <div class="basketWrapper">
+            <div class="wrapper">
+                <h1 class="basketTitle">Корзина</h1>
+                <div class="basketTable">
+                    <div class="basketTableHeader">
+                        <span class="basketHeaderTitle basketTitleName">Название</span>
+                        <span class="basketHeaderTitle basketTitlePrice">Цена</span>
+                    </div>
+                    <div class="basketTableBody">
+                        <div class="basketItem">
+                            <img class="basketPhoto" src="/images/basket_item1_photo.png" alt="basket item 1 photo">
+                            <div class="basketItemData">
+                                <div class="basketItemHeader">
+                                    <a class="basketItemLink" href="picture.html">Неширокая но длинная синяя картина</a>
+                                </div>
+                                <div class="pictureSize">
+                                    <span class="sizeLabel">Размер</span>
+                                    <span class="pictureWidth metric metric--ru">100</span>
+                                    <span class="pictureHeight metric metric--ru">180</span>
+                                </div>
+                                <div class="pictureAuthor">
+                                    <a class="pictureAuthorLink" href="/author.html">Екатерина Жуковская</a>
+                                </div>
+                            </div>
+                            <em class="picturePrice price price--rub" data-rub="325000">325 000</em>
+                        </div>
+                        <div class="basketItem">
+                            <img class="basketPhoto" src="/images/basket_item2_photo.png" alt="basket item 2 photo">
+                            <div class="basketItemData">
+                                <div class="basketItemHeader">
+                                    <a class="basketItemLink" href="picture.html">Широкая желтая картина</a>
+                                </div>
+                                <div class="pictureSize">
+                                    <span class="sizeLabel">Размер</span>
+                                    <span class="pictureWidth metric metric--ru">200</span>
+                                    <span class="pictureHeight metric metric--ru">120</span>
+                                </div>
+                                <div class="pictureAuthor">
+                                    <a class="pictureAuthorLink" href="/author.html">Екатерина Жуковская</a>
+                                </div>
+                            </div>
+                            <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
+                        </div>
+                    </div>
+                    <div class="basketTableFooter">
+                        <span class="basketSummaryTitle">Итого</span>
+                        <span class="basketSummaryValue price price--rub" data-rub="350000">350 000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<include src="source/components/footer.html"></include>
+
+<script src="/scripts/bundle.min.js"></script>
+</body>
+</html>

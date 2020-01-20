@@ -164,6 +164,24 @@
                 opacity: 0.5;
             }
         }
+        .basketCount {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            background: #EA3535;
+            border-radius: 50%;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.075em;
+        }
+        .basketCount--active {
+            display: flex;
+        }
         .headerNav--language {
             position: relative;
             color: $secondaryColor;
