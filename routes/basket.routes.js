@@ -9,6 +9,7 @@ router.get(`/`, (request, response) => {
         pageTitle: `arTE Gallery | basket`,
         metaDescription: ``,
         metaKeywords: ``,
+        isBasketActive: true
     };
     response.render('basket', data);
 });

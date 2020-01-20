@@ -177,7 +177,8 @@
             border-radius: 50%;
             font-size: 10px;
             line-height: 12px;
-            letter-spacing: 0.075em;
+            letter-spacing: 0;
+            font-weight: 700;
         }
         .basketCount--active {
             display: flex;

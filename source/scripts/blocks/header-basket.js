@@ -20,6 +20,13 @@ export const headerBasket = () => {
             closeButton.setAttribute(`disabled`, `disabled`);
         };
     };
+    if (!link) return false;
     link.addEventListener(`click`, showBasket(`100`, `1`, `block`, false));
     closeButton.addEventListener(`click`, showBasket(`-1`, `0`, `none`, true));
+    const basketButton = document.querySelector(`.basketButton`);
+    if (!basketButton) return false;
+    basketButton.addEventListener(`click`, () => {
+        if (document.location.href.indexOf(`basket`) !== -1) return false;
+        document.location.href = `/basket`;
+    });
 };

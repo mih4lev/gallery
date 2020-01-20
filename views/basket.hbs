@@ -1,0 +1,164 @@
+<div class="innerPage">
+    <div class="basketWrapper">
+        <div class="wrapper">
+            <h1 class="pageTitle basketTitle">Корзина</h1>
+            <div class="basketTable">
+                <div class="basketTableHeader">
+                    <span class="basketHeaderTitle basketTitleName">Название</span>
+                    <span class="basketHeaderTitle basketTitlePrice">Цена</span>
+                </div>
+                <div class="basketTableBody">
+                    <div class="basketItem">
+                        <img class="basketPhoto" src="/images/basket_item1_photo.png" alt="basket item 1 photo">
+                        <div class="basketItemData">
+                            <div class="basketItemHeader">
+                                <a class="basketItemLink" href="/collection/1">Неширокая но длинная синяя картина</a>
+                            </div>
+                            <div class="pictureSize">
+                                <span class="sizeLabel">Размер</span>
+                                <span class="pictureWidth metric metric--ru">100</span>
+                                <span class="pictureHeight metric metric--ru">180</span>
+                            </div>
+                            <div class="pictureAuthor">
+                                <a class="pictureAuthorLink" href="/authors/1">Екатерина Жуковская</a>
+                            </div>
+                        </div>
+                        <em class="picturePrice price price--rub" data-rub="325000">325 000</em>
+                        <button class="removeButton">Удалить</button>
+                    </div>
+                    <div class="basketItem">
+                        <img class="basketPhoto" src="/images/basket_item2_photo.png" alt="basket item 2 photo">
+                        <div class="basketItemData">
+                            <div class="basketItemHeader">
+                                <a class="basketItemLink" href="/collection/2">Широкая желтая картина</a>
+                            </div>
+                            <div class="pictureSize">
+                                <span class="sizeLabel">Размер</span>
+                                <span class="pictureWidth metric metric--ru">200</span>
+                                <span class="pictureHeight metric metric--ru">120</span>
+                            </div>
+                            <div class="pictureAuthor">
+                                <a class="pictureAuthorLink" href="/authors/1">Екатерина Жуковская</a>
+                            </div>
+                        </div>
+                        <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
+                        <button class="removeButton">Удалить</button>
+                    </div>
+                </div>
+                <div class="basketTableFooter">
+                    <span class="basketSummaryTitle">Итого</span>
+                    <span class="basketSummaryValue price price--rub" data-rub="350000">350 000</span>
+                </div>
+            </div>
+            <div class="pageTitle deliveryTitle">Вид доставки</div>
+            <ul class="checkedForm deliveryForm">
+                <li class="checkedItem">
+                    <span class="checkedElement checkedElement--active"></span>
+                    <span class="checkedLabel">Самовывоз</span>
+                    <span class="checkedAdditional">г. Москва ул. Рождественская д.5. Ежедневно с 11-00 до 22-00</span>
+                </li>
+                <li class="checkedItem">
+                    <span class="checkedElement"></span>
+                    <span class="checkedLabel">Доставка курьером</span>
+                    <span class="checkedAdditional">в пределах МКАД</span>
+                </li>
+                <li class="checkedItem">
+                    <span class="checkedElement"></span>
+                    <span class="checkedLabel">Доставка транспортной компанией</span>
+                    <span class="checkedAdditional">доставка по России и за границу</span>
+                </li>
+            </ul>
+            <div class="pageTitle paymentTitle">Способ оплаты</div>
+            <ul class="checkedForm paymentForm">
+                <li class="checkedItem">
+                    <span class="checkedElement checkedElement--active"></span>
+                    <span class="checkedLabel">Оплата наличными</span>
+                </li>
+                <li class="checkedItem">
+                    <span class="checkedElement"></span>
+                    <span class="checkedLabel">Оплата онлайн</span>
+                    <ul class="paymentList">
+                        <li class="payment">
+                            <img class="paymentIcon" src="/images/card_icon--visa.png" alt="Visa payment system">
+                        </li>
+                        <li class="payment">
+                            <img class="paymentIcon" src="/images/card_icon--mastercard.png" alt="Mastercard payment system">
+                        </li>
+                        <li class="payment">
+                            <img class="paymentIcon" src="/images/card_icon--maestro.png" alt="Maestro payment system">
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clientFormWrapper">
+                <form class="clientForm">
+                    <div class="clientFields">
+                        <div class="pageTitle clientTitle">Данные получателя</div>
+                        <div class="clientForm--item sended--hide">
+                            <label class="clientForm--label" for="clientName">
+                                <span class="clientForm--require">*</span>
+                                <span class="clientForm--title clientForm--name">Ваше имя</span>
+                            </label>
+                            <div class="errorBlock--field errorBlock--name">Укажите Ваше имя</div>
+                            <input class="clientForm--field" type="text" id="clientName" name="clientName" data-type="name">
+                        </div>
+                        <div class="clientForm--item sended--hide">
+                            <label class="clientForm--label" for="clientPhone">
+                                <span class="clientForm--require">*</span>
+                                <span class="clientForm--title clientForm--phone">Телефон</span>
+                            </label>
+                            <div class="errorBlock--field errorBlock--phone">Некорректный номер</div>
+                            <input class="clientForm--field" type="text" id="clientPhone" name="clientPhone" data-type="phone">
+                        </div>
+                        <div class="clientForm--item sended--hide">
+                            <label class="clientForm--label" for="clientEmail">
+                                <span class="clientForm--require">*</span>
+                                <span class="clientForm--title clientForm--email">E-mail</span>
+                            </label>
+                            <div class="errorBlock--field errorBlock--email">Некорректный e-mail</div>
+                            <input class="clientForm--field" type="text" id="clientEmail" name="clientEmail" data-type="email">
+                        </div>
+                        <div class="clientForm--item sended--hide">
+                            <label class="clientForm--label" for="clientComment">
+                                <span class="clientForm--title clientForm--comment">Комментарий к заказу</span>
+                            </label>
+                            <textarea class="clientForm--textarea" id="clientComment" name="clientComment" data-type="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="clientAdditional">
+                        <div class="galleryMap">
+                            <img class="mapPin" src="/images/map_pin.png" alt="map pin">
+                            <img class="logo" src="/images/logo.svg" alt="arTE logo">
+                            <address class="galleryAddress">ул. Рождественская д.5</address>
+                            <span class="galleryTimeline">Ежедневно с 11.00 - 22.00</span>
+                        </div>
+                        <div class="deliveryData deliveryData--active">
+                            <div class="pageTitle dataTitle">Адрес доставки</div>
+                            <div class="clientForm--item sended--hide">
+                                <label class="clientForm--label" for="clientCity">
+                                    <span class="clientForm--require">*</span>
+                                    <span class="clientForm--title clientForm--city">Город</span>
+                                </label>
+                                <div class="errorBlock--field errorBlock--name">Укажите город доставки</div>
+                                <input class="clientForm--field" type="text" id="clientCity" name="clientCity" data-type="city">
+                            </div>
+                            <div class="clientForm--item sended--hide">
+                                <label class="clientForm--label" for="clientAddress">
+                                    <span class="clientForm--require">*</span>
+                                    <span class="clientForm--title clientForm--address">Адрес</span>
+                                </label>
+                                <div class="errorBlock--field errorBlock--phone">Укажите адрес доставки</div>
+                                <input class="clientForm--field" type="text" id="clientAddress" name="clientAddress" data-type="address">
+                            </div>
+                            <div class="rulesFieldWrapper">
+                                <span class="rulesField rulesField--active"></span>
+                                <span class="rulesLabel">Согласен с <a href="#" class="rulesLink">условиями оплаты и доставки</a></span>
+                            </div>
+                        </div>
+                        <button class="clientForm--button sended--hide" type="submit" disabled="disabled">Оформить заказ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
