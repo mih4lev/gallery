@@ -10,7 +10,8 @@ CREATE TABLE pictures (
   picture_price_sale int NULL,
   picture_about_ru text,
   picture_about_en text,
-  picture_position int
+  picture_position int,
+  picture_photo varchar(255) NOT NULL
 );
 
 CREATE TABLE genre_list (
@@ -51,7 +52,8 @@ INSERT INTO pictures (
     picture_price_sale, 
     picture_about_ru, 
     picture_about_en,
-    picture_position
+    picture_position,
+    picture_photo
 ) VALUES (
     1,
     'Женщина на желтом фоне',
@@ -63,7 +65,8 @@ INSERT INTO pictures (
     0,
     'Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор.',
     'Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat. Description picture of a yellow man strokes a hat.',
-    1
+    1,
+    'collection_photo4.png'
 );
 
 INSERT INTO genre_list ( picture_id, genre_id ) VALUES ( 1, 1 );
