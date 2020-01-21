@@ -43,8 +43,8 @@ export const basketDelivery = () => {
 
 export const basketForm = () => {
     const formNode = document.querySelector(`.clientForm`);
+    if (!formNode) return false;
     const formFields = [...formNode.querySelectorAll(`.formField`)];
-    if (!formNode || !formFields) return false;
     formFields.forEach((field) => {
         const fieldLabel = field.parentNode.querySelector(`.clientForm--label`);
         const showLabel = (isFocused) => {
