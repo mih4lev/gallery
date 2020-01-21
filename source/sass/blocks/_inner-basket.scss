@@ -1,4 +1,6 @@
 .basketWrapper {
+    display: flex;
+    justify-content: center;
     background-image: linear-gradient(264.54deg, #000000 24.57%, #1E1B1E 82.74%);
     padding-bottom: 40px;
 }
@@ -10,6 +12,14 @@
     padding-top: 40px;
     padding-bottom: 40px;
     @extend %middlePrimaryText;
+    @include respond(tabletMini) {
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+    @include respond(mobile) {
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
     &:after {
         content: ":";
     }
@@ -39,33 +49,100 @@
         flex-direction: row;
         border-bottom: 1px solid $secondaryColor;
         padding-bottom: 20px;
+        @include respond(mobile) {
+            display: none;
+        }
         .basketHeaderTitle {
             text-transform: uppercase;
             color: $secondaryColor;
         }
         .basketTitleName {
             margin-left: 240px;
+            @include respond(tablet) {
+                margin-left: 220px;
+            }
+            @include respond(tabletMini) {
+                margin-left: 120px;
+            }
+            @include respond(mobile) {
+                margin-left: 120px;
+            }
         }
         .basketTitlePrice {
             margin-left: auto;
             width: 260px;
+            @include respond(tablet) {
+                width: 200px;
+            }
+            @include respond(tabletMini) {
+                width: 120px;
+            }
+            @include respond(mobile) {
+                width: 120px;
+            }
         }
     }
     .basketTableBody {
         padding-top: 20px;
+        @include respond(mobile) {
+            padding-top: 0;
+        }
         .basketItem {
             display: flex;
             flex-direction: row;
             position: relative;
             padding-bottom: 20px;
+            @include respond(mobile) {
+                padding-left: 60px;
+                box-sizing: border-box;
+                flex-direction: column;
+            }
             .basketPhoto {
                 width: 200px;
+                @include respond(tablet) {
+                    width: 180px;
+                    height: 100%;
+                }
+                @include respond(tabletMini) {
+                    width: 100px;
+                    height: 100%;
+                }
+                @include respond(mobile) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 60px;
+                }
             }
             .basketItemData {
                 margin-left: 40px;
+                margin-right: 40px;
+                @include respond(tabletMini) {
+                    margin-left: 20px;
+                    margin-right: 20px;
+                }
+                @include respond(mobile) {
+                    margin-left: 20px;
+                    margin-right: 40px;
+                }
                 .basketItemLink {
                     @extend %middlePrimaryText;
                     transition: all .25s ease-in;
+                    @include respond(tablet) {
+                        font-size: 15px;
+                        line-height: 18px;
+                        letter-spacing: 0.125em;
+                    }
+                    @include respond(tabletMini) {
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.1em;
+                    }
+                    @include respond(mobile) {
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.1em;
+                    }
                     &:hover {
                         color: $secondaryColor;
                     }
@@ -98,10 +175,31 @@
 
             }
             .picturePrice {
+                flex-shrink: 0;
                 margin-left: auto;
                 width: 260px;
                 font-style: normal;
                 @extend %middlePrimaryText;
+                @include respond(tablet) {
+                    width: 200px;
+                    font-size: 15px;
+                    line-height: 18px;
+                    letter-spacing: 0.125em;
+                }
+                @include respond(tabletMini) {
+                    width: 120px;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                }
+                @include respond(mobile) {
+                    margin-top: 10px;
+                    margin-left: 20px;
+                    width: 80px;
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                }
             }
             .removeButton {
                 position: absolute;
@@ -115,6 +213,18 @@
                 font-size: 0;
                 cursor: pointer;
                 transition: all .25s ease-in;
+                @include respond(tablet) {
+                    width: 30px;
+                    height: 30px;
+                }
+                @include respond(tabletMini) {
+                    width: 20px;
+                    height: 20px;
+                }
+                @include respond(mobile) {
+                    width: 20px;
+                    height: 20px;
+                }
                 &:before {
                     content: "";
                     position: absolute;
@@ -145,6 +255,21 @@
         line-height: 30px;
         letter-spacing: 0.15em;
         font-weight: 700;
+        @include respond(tablet) {
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1375em;
+        }
+        @include respond(tabletMini) {
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        @include respond(mobile) {
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
         .basketSummaryTitle {
             margin-right: 20px;
             &:after {
@@ -164,6 +289,7 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+        position: relative;
         margin-bottom: 20px;
         &:last-of-type {
             margin-bottom: 0;
@@ -173,24 +299,16 @@
             margin-right: 20px;
             width: 16px;
             height: 16px;
-            border: 1px solid $primaryColor;
+            border: 1px solid $secondaryColor;
             box-sizing: border-box;
             cursor: pointer;
-        }
-        .checkedElement--active {
-            &:after {
-                margin-top: 2px;
-                margin-left: 2px;
-                content: "";
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                background-color: $secondaryColor;
-            }
         }
         .checkedLabel {
             margin-right: 20px;
             text-transform: uppercase;
+            cursor: pointer;
+        }
+        .checkedAdditional {
             cursor: pointer;
         }
         .paymentList {
@@ -210,6 +328,75 @@
             }
         }
     }
+    .checkedItem--active {
+        .checkedElement {
+            &:after {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 14px;
+                height: 11px;
+                background-image: url(/images/chosen_white--icon.svg);
+                transform: scale(1.7) translate(3px, -2px);
+            }
+        }
+    }
+    .checkedItem--disable {
+        opacity: 0.3;
+        .checkedElement {
+            cursor: default;
+        }
+        .checkedLabel {
+            cursor: default;
+        }
+        .checkedAdditional {
+            cursor: default;
+        }
+    }
+}
+
+.basketWrapper {
+    .deliveryForm .checkedItem {
+        @include respond(tabletMini) {
+            margin-bottom: 25px;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+        @include respond(mobile) {
+            margin-bottom: 25px;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+        &:first-of-type {
+            @include respond(mobile) {
+                margin-bottom: 35px;
+            }
+        }
+    }
+    .deliveryForm .checkedLabel {
+        @include respond(tabletMini) {
+            margin-top: -10px;
+        }
+        @include respond(mobile) {
+            margin-top: -10px;
+        }
+    }
+    .deliveryForm .checkedAdditional {
+        @include respond(tabletMini) {
+            position: absolute;
+            top: 10px;
+            left: 36px;
+            opacity: 0.6;
+        }
+        @include respond(mobile) {
+            position: absolute;
+            top: 10px;
+            left: 36px;
+            opacity: 0.6;
+        }
+    }
 }
 
 .clientForm {
@@ -217,13 +404,43 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    @include respond(tabletMini) {
+        flex-direction: column;
+    }
+    @include respond(mobile) {
+        flex-direction: column;
+    }
     .clientFields {
         width: 537px;
+        @include respond(desktop) {
+            width: 440px;
+        }
+        @include respond(tablet) {
+            width: 335px;
+        }
+        @include respond(tabletMini) {
+            width: 410px;
+        }
+        @include respond(mobile) {
+            width: 290px;
+        }
     }
     .clientAdditional {
         display: flex;
         flex-direction: column;
         width: 537px;
+        @include respond(desktop) {
+            width: 440px;
+        }
+        @include respond(tablet) {
+            width: 335px;
+        }
+        @include respond(tabletMini) {
+            width: 410px;
+        }
+        @include respond(mobile) {
+            width: 290px;
+        }
         .deliveryData {
             display: none;
             .rulesFieldWrapper {
@@ -255,6 +472,11 @@
                     margin-left: 20px;
                     text-transform: uppercase;
                     cursor: pointer;
+                    @include respond(tablet) {
+                        font-size: 10px;
+                        line-height: 12px;
+                        letter-spacing: 0.075em;
+                    }
                     .rulesLink {
                         color: $primaryColor;
                         text-decoration: underline;
@@ -265,7 +487,7 @@
                 }
             }
         }
-        .deliveryData--active {
+        .deliveryData.formAdditional--active {
             display: block;
         }
         .galleryMap {
@@ -278,8 +500,42 @@
             width: 537px;
             height: 291px;
             background-image: url(/images/client_form_map.png);
+            @include respond(desktop) {
+                width: 440px;
+                height: 238px;
+            }
+            @include respond(tablet) {
+                width: 335px;
+                height: 181px;
+            }
+            @include respond(tabletMini) {
+                position: relative;
+                bottom: -40px;
+                width: 410px;
+                height: 222px;
+            }
+            @include respond(mobile) {
+                position: relative;
+                bottom: -40px;
+                width: 290px;
+                height: 157px;
+            }
+            .mapPin {
+                @include respond(mobile) {
+                    margin-top: -10px;
+                    margin-bottom: -10px;
+                    transform: scale(0.6);
+                }
+            }
+            .logo {
+                @include respond(mobile) {
+                    margin-top: -10px;
+                    margin-bottom: -10px;
+                    transform: scale(0.7);
+                }
+            }
         }
-        .galleryMap--active {
+        .galleryMap.formAdditional--active {
             display: flex;
         }
         .galleryAddress {
@@ -338,6 +594,12 @@
         background-color: rgba(0, 0, 0, 0.4);
         outline: none;
         transition: all 0.2s ease-in;
+        @include respond(desktop) {
+            width: 440px;
+        }
+        @include respond(tablet) {
+            width: 335px;
+        }
         @include respond(tabletMini) {
             width: 410px;
         }
@@ -366,6 +628,12 @@
         background-color: rgba(0, 0, 0, 0.4);
         outline: none;
         transition: all 0.2s ease-in;
+        @include respond(desktop) {
+            width: 440px;
+        }
+        @include respond(tablet) {
+            width: 335px;
+        }
         @include respond(tabletMini) {
             width: 410px;
         }
@@ -399,9 +667,11 @@
         transition: all 0.2s ease-in;
         cursor: pointer;
         @include respond(tabletMini) {
+            margin-top: 60px;
             width: 410px;
         }
         @include respond(mobile) {
+            margin-top: 60px;
             width: 290px;
         }
         &:hover {

@@ -14,7 +14,7 @@ export const recallForm = () => {
         fieldError.style.opacity = (field.isValid || field.isEmpty) ? `0` : `1`;
         const method = (!field.isValid || field.isEmpty) ? `add` : `remove`;
         field.classList[method](`field--error`);
-    }
+    };
     const setFieldValue = (field) => {
         const { value, dataset: { type }} = field;
         field.isEmpty = !value.length;

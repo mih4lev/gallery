@@ -5,6 +5,7 @@ import { headerLanguage } from "./blocks/header-language";
 import { headerNav } from "./blocks/header-nav";
 import { respondInterestBlock } from "./blocks/events";
 import { setDesktopLinks, setPicturesLayout } from "./blocks/collection";
+import { basketDelivery, basketForm } from "./blocks/basket";
 
 similarPhoto();
 recallForm();
@@ -14,3 +15,5 @@ headerNav();
 respondInterestBlock();
 setDesktopLinks();
 setPicturesLayout();
+basketDelivery();
+basketForm();
