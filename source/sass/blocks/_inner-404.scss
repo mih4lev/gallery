@@ -1,0 +1,136 @@
+.specialWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    height: 100%;
+    background-image: linear-gradient(257.66deg, #000000 24.57%, #1E1B1E 82.74%);
+    @include respond(tabletMini) {
+        padding-top: 60px;
+    }
+    @include respond(mobile) {
+        padding-top: 40px;
+    }
+    .special {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .specialTitle {
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: center;
+        @include respond(tabletMini) {
+            font-size: 34px;
+            line-height: 41px;
+            letter-spacing: 0.1675em;
+        }
+        @include respond(mobile) {
+            font-size: 34px;
+            line-height: 41px;
+            letter-spacing: 0.1675em;
+        }
+        @extend %largePrimaryText;
+    }
+    .specialErrorText {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-size: 25px;
+        line-height: 30px;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .specialDescription {
+        margin-bottom: 0;
+        text-align: center;
+        max-width: 547px;
+    }
+    .specialRecommendation {
+        margin-top: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        max-width: 547px;
+    }
+    .returnButton {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        padding-left: 30px;
+        position: relative;
+        transition: all .25s ease-in;
+        @extend %middleSecondaryText;
+        @include respond(tabletMini) {
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        @include respond(mobile) {
+            align-self: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 8px;
+            background-image: url(/images/arrow_left--icon.svg);
+            transition: all .25s ease-in;
+        }
+        &:hover {
+            color: $primaryColor;
+            &:before {
+                left: -10px;
+                background-image: url(/images/arrow_left_white--icon.svg);
+            }
+        }
+    }
+    .eventsButton {
+        align-self: flex-start;
+        margin-top: -40px;
+        margin-bottom: 40px;
+        padding-left: 30px;
+        position: relative;
+        transition: all .25s ease-in;
+        @extend %middlePrimaryText;
+        @include respond(tabletMini) {
+            align-self: center;
+            margin-top: 0;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        @include respond(mobile) {
+            align-self: center;
+            margin-top: 0;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 8px;
+            background-image: url(/images/arrow_left_white--icon.svg);
+            transition: all .25s ease-in;
+        }
+        &:hover {
+            color: $secondaryColor;
+            &:before {
+                left: -10px;
+                background-image: url(/images/arrow_left--icon.svg);
+            }
+        }
+    }
+}

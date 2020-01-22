@@ -1,5 +1,6 @@
 const { Router } = require(`express`);
 const cors = require('cors');
+const { saveOrder } = require("../models/orders.model");
 const router = new Router();
 
 const allowedOrigins = [
@@ -47,13 +48,9 @@ router.get(`/orders`, cors(corsOptions), (request, response) => {
     response.send(`GET options API`);
 });
 
-router.post(`/orders`, cors(corsOptions), (request, response) => {
-    console.log(request.body);
-    // new Date(timestamp).toISOString() - time of order
-    const sendResponse = {
-        code: 200
-    };
-    response.json(sendResponse);
+router.post(`/orders`, cors(corsOptions), async (request, response) => {
+    const sendResponse = await saveOrder(request.body);
+    await response.json(sendResponse);
 });
 
 module.exports = router;

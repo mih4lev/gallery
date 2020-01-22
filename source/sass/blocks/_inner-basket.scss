@@ -633,7 +633,7 @@
         line-height: 14px;
         letter-spacing: 0.1em;
         font-family: "Gilroy", Arial, sans-serif;
-        text-transform: uppercase;
+        text-transform: unset;
         color: $primaryColor;
         border: 1px solid $primaryColor;
         background-color: rgba(0, 0, 0, 0.4);
@@ -696,6 +696,139 @@
         &:hover {
             background-color: #000;
             color: $secondaryColor;
+        }
+    }
+}
+
+.orderWrapper {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(257.66deg, #000000 24.57%, #1E1B1E 82.74%);
+    padding-top: 80px;
+    height: 100%;
+    @include respond(tabletMini) {
+        padding-top: 60px;
+    }
+    @include respond(mobile) {
+        padding-top: 40px;
+    }
+    .order {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .orderTitle {
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: center;
+        @include respond(mobile) {
+            font-size: 40px;
+            line-height: 48px;
+            letter-spacing: 0.1975em;
+        }
+        @extend %largePrimaryText;
+    }
+    .orderNumberWrapper {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-size: 25px;
+        line-height: 30px;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+        text-transform: uppercase;
+        .orderNumberTitle {
+            &:after {
+                content: ":";
+            }
+        }
+    }
+    .orderConfirm {
+        text-align: center;
+        max-width: 547px;
+    }
+    .followWrapper {
+        margin-top: 40px;
+    }
+    .followLabel {
+        @extend %middleSecondaryText;
+    }
+    .followList {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 0;
+        list-style-type: none;
+        .followItem {
+            margin-left: 10px;
+            margin-right: 10px;
+            .followLink {
+                display: block;
+                font-size: 0;
+            }
+            .followLink--facebook {
+                width: 18px;
+                height: 34px;
+                background-image: url(/images/facebook--icon_gold.svg);
+                background-size: 18px 34px;
+                transition: all .25s ease-in;
+                &:hover {
+                    background-image: url(/images/facebook--icon.svg);
+                }
+            }
+            .followLink--instagram {
+                width: 37px;
+                height: 36px;
+                background-image: url(/images/instagram--icon_gold.svg);
+                background-size: 37px 36px;
+                transition: all .25s ease-in;
+                &:hover {
+                    background-image: url(/images/instagram--icon.svg);
+                }
+            }
+        }
+    }
+    .eventsButton {
+        align-self: flex-start;
+        margin-top: -40px;
+        margin-bottom: 40px;
+        padding-left: 30px;
+        position: relative;
+        transition: all .25s ease-in;
+        @extend %middlePrimaryText;
+        @include respond(tabletMini) {
+            align-self: center;
+            margin-top: 0;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        @include respond(mobile) {
+            align-self: center;
+            margin-top: 0;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 8px;
+            background-image: url(/images/arrow_left_white--icon.svg);
+            transition: all .25s ease-in;
+        }
+        &:hover {
+            color: $secondaryColor;
+            &:before {
+                left: -10px;
+                background-image: url(/images/arrow_left--icon.svg);
+            }
         }
     }
 }

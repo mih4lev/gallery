@@ -60,7 +60,7 @@
             padding-bottom: 0;
             width: 290px;
         }
-        .eventPhotoLink {
+        .eventPhotoWrapper {
             &:hover {
                 .eventPhoto {
                     @extend %photoFilter;

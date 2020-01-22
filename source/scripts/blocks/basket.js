@@ -1,3 +1,6 @@
+const basketWrapper = document.querySelector(`.basketWrapper`);
+const orderWrapper = document.querySelector(`.orderWrapper`);
+
 export const basketDelivery = () => {
     const formAdditionalWrappers = [...document.querySelectorAll(`.clientAdditional .formAdditional`)];
     const pickupMap = document.querySelector(`.galleryMap`);
@@ -42,7 +45,6 @@ export const basketDelivery = () => {
 };
 
 export const basketForm = () => {
-    const basketWrapper = document.querySelector(`.basketWrapper`);
     const formNode = document.querySelector(`.clientForm`);
     if (!basketWrapper || !formNode) return false;
     // fields && button
@@ -105,13 +107,17 @@ export const basketForm = () => {
     };
     // send data function
     const sendOrder = async () => {
+        const delivery = document.querySelector(`.deliveryForm .checkedItem--active`);
+        const payment = document.querySelector(`.paymentForm .checkedItem--active`);
         const orderBody = {
-            client_name: document.querySelector(`#clientName`).value,
-            client_phone: document.querySelector(`#clientPhone`).value,
-            client_email: document.querySelector(`#clientEmail`).value,
-            client_comment: document.querySelector(`#clientComment`).value,
-            client_city: document.querySelector(`#clientCity`).value,
-            client_address: document.querySelector(`#clientAddress`).value
+            delivery: delivery.dataset.delivery,
+            payment: payment.dataset.payment,
+            clientName: document.querySelector(`#clientName`).value,
+            clientPhone: document.querySelector(`#clientPhone`).value,
+            clientEmail: document.querySelector(`#clientEmail`).value,
+            clientComment: document.querySelector(`#clientComment`).value,
+            clientCity: document.querySelector(`#clientCity`).value,
+            clientAddress: document.querySelector(`#clientAddress`).value
         };
         const orderOptions = {
             method: `POST`,
@@ -121,9 +127,13 @@ export const basketForm = () => {
             body: JSON.stringify(orderBody)
         };
         const response = await fetch(`/api/orders`, orderOptions);
-        const { code } = await response.json();
-        const action = (code === 200) ? `order saved` : `order save error`;
-        console.log(action);
+        const { code, orderNumber } = await response.json();
+        if (code !== 200) return false;
+        basketWrapper.style.display = `none`;
+        orderWrapper.style.display = `flex`;
+        const orderNumberNode = document.querySelector(`.orderNumber`);
+        orderNumberNode.innerText = orderNumber;
+        window.scrollTo(0,0);
     };
     // form button listeners
     const isRequiredField = (field) => {

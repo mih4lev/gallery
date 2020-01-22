@@ -115,6 +115,16 @@
     "clientError--address": "Specify the delivery address",
     "rulesLabel": "I agree to the terms of payment and delivery",
     "clientForm--button": "Place an order",
+    "orderTitle": "Thank you for the order",
+    "orderNumberTitle": "Order №",
+    "orderConfirm": "Your order has been accepted. We will contact you when the order is ready for shipment. An order confirmation message has been sent to the e-mail you left.",
+    "followLabel": "Follow us",
+    "eventsButton": "Check out our blog",
+    "specialTitle": "Page not found",
+    "specialErrorText": "Error 404",
+    "specialDescription": "Sorry, the page was not found.",
+    "specialRecommendation": "Return to the main page and try again.",
+    "returnButton": "Return to Home",
     "footerAddress": "Address: Rozhdestvenskaya St. 5",
     "footerTimeline": "Daily from 11:00 - 22:00"
 }
