@@ -486,6 +486,14 @@
                     }
                 }
             }
+            .rulesFieldWrapper--error {
+                .rulesField {
+                    border-color: $errorColor;
+                }
+                .rulesLabel {
+                    color: $errorColor;
+                }
+            }
         }
         .deliveryData.formAdditional--active {
             display: block;
@@ -575,6 +583,9 @@
         right: 0;
         color: $errorColor;
         transition: all 0.2s ease-in;
+    }
+    .field--error {
+        opacity: 1;
     }
     .clientForm--field {
         padding-top: 0;

@@ -105,6 +105,7 @@
     "clientForm--email": "E-mail",
     "clientError--email": "Некорректный e-mail",
     "clientForm--comment": "Комментарий к заказу",
+    "clientError--comment": "Некорректный комментарий",
     "galleryAddress": "ул. Рождественская д.5",
     "galleryTimeline": "Ежедневно с 11.00 - 22.00",
     "dataTitle--address": "Адрес доставки",

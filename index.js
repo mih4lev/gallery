@@ -1,8 +1,11 @@
 const express = require(`express`);
+const compression = require('compression');
 const expressHbs = require(`express-handlebars`);
 const hbs = require(`hbs`);
 const cookieParser = require(`cookie-parser`);
 const app = express();
+// compress response
+app.use(compression());
 // handlebars options
 app.engine(`hbs`, expressHbs({
     layoutsDir: `views/layouts`,

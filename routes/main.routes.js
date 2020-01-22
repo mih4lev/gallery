@@ -5,13 +5,17 @@ const router = new Router();
 
 router.get(`/`, async (request, response) => {
     const { language } = request;
-    // const query = `SELECT * FROM pages_ru WHERE name = 'index'`;
-    // const {
-    //     0: { title, description, keywords }
-    // } = await requestDB(query);
-    const title = `arTE Gallery | home`;
-    const description = `...`;
-    const keywords = `...`;
+    const RU = (language === `ru`);
+    const query = `SELECT * FROM pages WHERE page_link = 'home'`;
+    const {
+        0: {
+            title_ru, meta_description_ru, meta_keywords_ru,
+            title_en, meta_description_en, meta_keywords_en,
+        }
+    } = await requestDB(query);
+    const title = (RU) ? title_ru : title_en;
+    const description = (RU) ? meta_description_ru : meta_description_en;
+    const keywords = (RU) ? meta_keywords_ru : meta_keywords_en;
     const data = {
         language,
         pageTitle: title,

@@ -42,9 +42,36 @@ export const basketDelivery = () => {
 };
 
 export const basketForm = () => {
+    const basketWrapper = document.querySelector(`.basketWrapper`);
     const formNode = document.querySelector(`.clientForm`);
-    if (!formNode) return false;
+    if (!basketWrapper || !formNode) return false;
+    // fields && button
     const formFields = [...formNode.querySelectorAll(`.formField`)];
+    const formButton = document.querySelector(`.clientForm--button`);
+    // delivery && payments check
+    const checkedItems = [...document.querySelectorAll(`.checkedItem`)];
+    const isDeliveryChecked = () => {
+        const elements = [
+            document.querySelectorAll(`.deliveryForm .checkedItem--active`),
+            document.querySelectorAll(`.paymentForm .checkedItem--active`)
+        ];
+        return !!elements[0].length && !!elements[1].length;
+    };
+    // checkedItems mutation observer (delivery && payment)
+    const formCallback = (mutationsList, observer) => {
+        mutationsList.forEach((mutation) => {
+            const { target } = mutation;
+            if (!target.classList.contains(`checkedItem`)) return false;
+            if (isDeliveryChecked()) {
+                return formButton.removeAttribute(`disabled`);
+            }
+            formButton.setAttribute(`disabled`, `disabled`);
+        });
+    };
+    const formObserver = new MutationObserver(formCallback);
+    const formOptions = { attributes: true, childList: true, subtree: true };
+    formObserver.observe(basketWrapper, formOptions);
+    // form fields labels show/hide
     formFields.forEach((field) => {
         const fieldLabel = field.parentNode.querySelector(`.clientForm--label`);
         const showLabel = (isFocused) => {
@@ -63,6 +90,70 @@ export const basketForm = () => {
     const rulesCheckbox = document.querySelector(`.rulesField`);
     rulesWrapper.addEventListener(`click`, () => {
         const method = (rulesCheckbox.classList.contains(`rulesField--active`)) ? `remove` : `add`;
+        const unmethod = (rulesCheckbox.classList.contains(`rulesField--active`)) ? `add` : `remove`;
         rulesCheckbox.classList[method](`rulesField--active`);
+        rulesWrapper.classList[unmethod](`rulesFieldWrapper--error`);
+    });
+    // fields patterns
+    const patterns = {
+        name: /^[a-zA-Zа-яА-Я-\s]+$/,
+        phone: /^[\s()+-]*([0-9][\s()+-]*){10,11}$/,
+        email: /\S+@\S+\.\S+/,
+        comment: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=\(\)\/\#\@]{0,200}$/,
+        city: /^[а-яА-Яa-zA-Z]+(?:[\s-][а-яА-Яa-zA-Z]+)*$/,
+        address: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=]{10,200}$/
+    };
+    // send data function
+    const sendOrder = async () => {
+        const orderBody = {
+            client_name: document.querySelector(`#clientName`).value,
+            client_phone: document.querySelector(`#clientPhone`).value,
+            client_email: document.querySelector(`#clientEmail`).value,
+            client_comment: document.querySelector(`#clientComment`).value,
+            client_city: document.querySelector(`#clientCity`).value,
+            client_address: document.querySelector(`#clientAddress`).value
+        };
+        const orderOptions = {
+            method: `POST`,
+            headers: {
+                'Content-Type': `application/json;charset=utf-8`
+            },
+            body: JSON.stringify(orderBody)
+        };
+        const response = await fetch(`/api/orders`, orderOptions);
+        const { code } = await response.json();
+        const action = (code === 200) ? `order saved` : `order save error`;
+        console.log(action);
+    };
+    // form button listeners
+    const isRequiredField = (field) => {
+        const parent = field.closest(`.formAdditional`);
+        return (parent && !parent.classList.contains(`formAdditional--active`));
+    };
+    const isRulesChecked = () => {
+        if (isRequiredField(rulesCheckbox)) return true;
+        return rulesCheckbox.classList.contains(`rulesField--active`);
+    };
+    const isFormValid = () => {
+        const filter = (field) => {
+            if (isRequiredField(field)) return false;
+            const { dataset: { type }, value } = field;
+            return !patterns[type].test(value);
+        };
+        return !formFields.filter(filter).length;
+    };
+    formButton.addEventListener(`click`, (event) => {
+        event.preventDefault();
+        formFields.forEach((field) => {
+            if (isRequiredField(field)) return false;
+            const { dataset: { type }, value } = field;
+            const isValid = (patterns[type].test(value));
+            const errorField = field.parentNode.querySelector(`.errorBlock--field`);
+            const method = (isValid) ? `remove` : `add`;
+            errorField.classList[method](`field--error`);
+        });
+        if (!isFormValid()) return false;
+        if (!isRulesChecked()) return rulesWrapper.classList.add(`rulesFieldWrapper--error`);
+        sendOrder().catch((error) => console.log(error));
     });
 };
