@@ -1,23 +1,23 @@
 CREATE TABLE techniques (
-  technique_id serial,
-  technique_ru varchar(64) UNIQUE NOT NULL,
-  technique_en varchar(64) UNIQUE NOT NULL
+  techniqueID serial,
+  techniqueRU varchar(64) UNIQUE NOT NULL,
+  techniqueEN varchar(64) UNIQUE NOT NULL
 );
 
-INSERT INTO techniques ( technique_ru, technique_en ) 
+INSERT INTO techniques ( techniqueRU, techniqueEN )
 VALUES ( 'Масла', 'Oils' );
 
-INSERT INTO techniques ( technique_ru, technique_en ) 
+INSERT INTO techniques ( techniqueRU, techniqueEN )
 VALUES ( 'Коллаж', 'Collage' );
 
-INSERT INTO techniques ( technique_ru, technique_en ) 
+INSERT INTO techniques ( techniqueRU, techniqueEN )
 VALUES ( 'Акрил', 'Acrylic' );
 
-INSERT INTO techniques ( technique_ru, technique_en ) 
+INSERT INTO techniques ( techniqueRU, techniqueEN )
 VALUES ( 'Пастель', 'Pastel' );
 
-INSERT INTO techniques ( technique_ru, technique_en ) 
+INSERT INTO techniques ( techniqueRU, techniqueEN )
 VALUES ( 'Маркер', 'Marker' );
 
-INSERT INTO techniques ( technique_ru, technique_en ) 
+INSERT INTO techniques ( techniqueRU, techniqueEN )
 VALUES ( 'Акварель', 'Watercolor' );

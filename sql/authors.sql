@@ -1,47 +1,47 @@
 CREATE TABLE authors (
-  author_id serial,
-  author_ru varchar(255) UNIQUE NOT NULL,
-  author_en varchar(255) UNIQUE NOT NULL,
-  author_photo varchar(255) UNIQUE NOT NULL,
-  author_about_ru text,
-  author_about_en text,
-  author_city_ru varchar(255),
-  author_city_en varchar(255)
+  authorID serial,
+  authorRU varchar(255) UNIQUE NOT NULL,
+  authorEN varchar(255) UNIQUE NOT NULL,
+  authorPhoto varchar(255) UNIQUE NOT NULL,
+  authorAboutRU text NULL,
+  authorAboutEN text NULL,
+  authorCityRU varchar(255) NULL,
+  authorCityEN varchar(255) NULL
 );
 
 CREATE TABLE educations (
-  education_id serial,
-  author_id int NOT NULL,
-  education_year_ru varchar(64) NOT NULL,
-  education_year_en varchar(64) NOT NULL,
-  education_ru varchar(255) NOT NULL,
-  education_en varchar(255) NOT NULL
+  educationID serial,
+  authorID int NOT NULL,
+  educationYearRU varchar(64) NOT NULL,
+  educationYearEN varchar(64) NOT NULL,
+  educationRU varchar(255) NOT NULL,
+  educationEN varchar(255) NOT NULL
 );
 
 CREATE TABLE rewards (
-  reward_id serial,
-  author_id int NOT NULL,
-  reward_year_ru varchar(64) NOT NULL,
-  reward_year_en varchar(64) NOT NULL,
-  reward_ru varchar(255) NOT NULL,
-  reward_en varchar(255) NOT NULL
+  rewardID serial,
+  authorID int NOT NULL,
+  rewardYearRU varchar(64) NOT NULL,
+  rewardYearEN varchar(64) NOT NULL,
+  rewardRU varchar(255) NOT NULL,
+  rewardEN varchar(255) NOT NULL
 );
 
 CREATE TABLE exhibitions (
-  exhibition_id serial,
-  author_id int NOT NULL,
-  exhibition_year_ru varchar(64) NOT NULL,
-  exhibition_year_en varchar(64) NOT NULL,
-  exhibition_ru varchar(255) NOT NULL,
-  exhibition_en varchar(255) NOT NULL
+  exhibitionID serial,
+  authorID int NOT NULL,
+  exhibitionYearRU varchar(64) NOT NULL,
+  exhibitionYearEN varchar(64) NOT NULL,
+  exhibitionRU varchar(255) NOT NULL,
+  exhibitionEN varchar(255) NOT NULL
 );
 
 
-INSERT INTO authors ( author_ru, author_en, author_photo, author_about_ru, author_about_en, author_city_ru, author_city_en )
+INSERT INTO authors ( authorRU, authorEN, authorPhoto, authorAboutRU, authorAboutEN, authorCityRU, authorCityEN )
 VALUES ( 'Екатерина Жуковская', 'Ekaterina Zhukovskaya', 'author1_photo.png', '', '', 'Москва', 'Moscow' );
 
 
-INSERT INTO educations ( author_id, education_year_ru, education_year_en, education_ru, education_en )
+INSERT INTO educations ( authorID, educationYearRU, educationYearEN, educationRU, educationEN )
 VALUES ( 
     '1', 
     '2002-2009', 
@@ -50,7 +50,7 @@ VALUES (
     'Moscow Academic Art Lyceum at the Russian Academy of Arts.'
 );
 
-INSERT INTO educations ( author_id, education_year_ru, education_year_en, education_ru, education_en )
+INSERT INTO educations ( authorID, educationYearRU, educationYearEN, educationRU, educationEN )
 VALUES ( 
     '1', 
     '2009-2015', 
@@ -59,7 +59,7 @@ VALUES (
     'Moscow Academic Art Institute named after Surikov, faculty of painting, workshop of modern art under the guidance of academician Salakhova A.T. and Ossovsky S.P.'
 );
 
-INSERT INTO educations ( author_id, education_year_ru, education_year_en, education_ru, education_en )
+INSERT INTO educations ( authorID, educationYearRU, educationYearEN, educationRU, educationEN )
 VALUES ( 
     '1', 
     '2014-2015', 
@@ -69,7 +69,7 @@ VALUES (
 );
 
 
-INSERT INTO rewards ( author_id, reward_year_ru, reward_year_en, reward_ru, reward_en )
+INSERT INTO rewards ( authorID, rewardYearRU, rewardYearEN, rewardRU, rewardEN )
 VALUES ( 
     '1', 
     '2007', 
@@ -78,7 +78,7 @@ VALUES (
     'She was awarded the gold medal of the Russian Academy of Arts.'
 );
 
-INSERT INTO rewards ( author_id, reward_year_ru, reward_year_en, reward_ru, reward_en )
+INSERT INTO rewards ( authorID, rewardYearRU, rewardYearEN, rewardRU, rewardEN )
 VALUES ( 
     '1', 
     '2015', 
@@ -87,7 +87,7 @@ VALUES (
     'She was awarded the gold medal of the Russian Academy of Arts.'
 );
 
-INSERT INTO rewards ( author_id, reward_year_ru, reward_year_en, reward_ru, reward_en )
+INSERT INTO rewards ( authorID, rewardYearRU, rewardYearEN, rewardRU, rewardEN )
 VALUES ( 
     '1', 
     'с 2015', 
@@ -97,7 +97,7 @@ VALUES (
 );
 
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2010', 
@@ -106,7 +106,7 @@ VALUES (
     'Participation in the exhibition of the Moscow Union of Artists of Russia “Youth XXX”, participation in the exhibition “Young Artists of Russia”, Central House of Artists.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2013-2015', 
@@ -115,7 +115,7 @@ VALUES (
     'She worked on her projects and exhibited in an open studio (AidanStudio, Center for Contemporary Art Winzavod).'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2015', 
@@ -124,7 +124,7 @@ VALUES (
     'Participation in the exhibition "Artist`s Book" with the assistance of MOMMA and the Prospect Library.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2015', 
@@ -133,7 +133,7 @@ VALUES (
     'Participation in the exhibition "ONLINE / OFFLINE", AIC Winery AidanStudio.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2015', 
@@ -142,7 +142,7 @@ VALUES (
     'Participation in the exhibition "SUB OBSERVATIONEM", Moscow Museum of Modern Art.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2015', 
@@ -151,7 +151,7 @@ VALUES (
     'Participation in the exhibition "EGOCENTRIYA", CSI Winery, Red Shop.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2015', 
@@ -160,7 +160,7 @@ VALUES (
     'Participation in the exhibition "This is my place", TotalArtClub.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2016', 
@@ -169,7 +169,7 @@ VALUES (
     'Participation in the exhibition "I want", AidanStudio Center for Contemporary Art Winery'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2016', 
@@ -178,7 +178,7 @@ VALUES (
     'Participation in the V Moscow International Biennale of Young Art, FineArt Gallery.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2017', 
@@ -187,7 +187,7 @@ VALUES (
     'Participation in the exhibition “June 22. On the human side”, the gallery is HERE on Taganka.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2017', 
@@ -196,7 +196,7 @@ VALUES (
     'Participation in the exhibition "Guilty", Moscow Museum of Modern Art.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2017', 
@@ -205,7 +205,7 @@ VALUES (
     'Participation in the exhibition "Where Nobody Dreams: From Sacred Geography to No-Place", Moscow Museum of Modern Art.'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2018', 
@@ -214,7 +214,7 @@ VALUES (
     'Participation in the “Picnic” Picnic festival, installation “Sexy Selfie”'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2018', 
@@ -223,7 +223,7 @@ VALUES (
     'Participation in the exhibition "5 Life-Crafts for Dummies", Omelchenko Gallery, parallel program of the 6th Moscow International Biennale for Young Art'
 );
 
-INSERT INTO exhibitions ( author_id, exhibition_year_ru, exhibition_year_en, exhibition_ru, exhibition_en )
+INSERT INTO exhibitions ( authorID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN )
 VALUES ( 
     '1', 
     '2019', 

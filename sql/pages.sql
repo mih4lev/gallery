@@ -1,40 +1,40 @@
 CREATE TABLE pages (
-  page_id serial,
-  page_link varchar(64) UNIQUE NOT NULL,
-  title_ru varchar(255) NOT NULL,
-  title_en varchar(255) NOT NULL,
-  meta_description_ru text,
-  meta_description_en text,
-  meta_keywords_ru text,
-  meta_keywords_en text
+  pageID serial,
+  pageLink varchar(64) UNIQUE NOT NULL,
+  titleRU varchar(255) NOT NULL,
+  titleEN varchar(255) NOT NULL,
+  metaDescriptionRU text NULL,
+  metaDescriptionEN text NULL,
+  metaKeywordsRU text NULL,
+  metaKeywordsEN text NULL
 );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'home', 'arTE', 'arTE | home', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'collection', 'arTE | Коллекция', 'arTE | collection', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'picture', 'arTE | Картина', 'arTE | picture', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'authors', 'arTE | Авторы', 'arTE | authors', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'painter', 'arTE | Автор', 'arTE | painter', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'events', 'arTE | Арт-пространство', 'arTE | art space', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'article', 'arTE | Афиша', 'arTE | article', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'delivery', 'arTE | Доставка', 'arTE | delivery', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( 'basket', 'arTE | Корзина', 'arTE | basket', '', '', '', '' );
 
-INSERT INTO pages ( page_link, title_ru, title_en, meta_description_ru, meta_description_en, meta_keywords_ru, meta_keywords_en )
+INSERT INTO pages ( pageLink, titleRU, titleEN, metaDescriptionRU, metaDescriptionEN, metaKeywordsRU, metaKeywordsEN )
 VALUES ( '404', 'arTE | 404', 'arTE | 404', '', '', '', '' );

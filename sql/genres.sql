@@ -1,14 +1,14 @@
 CREATE TABLE genres (
-  genre_id serial,
-  genre_ru varchar(64) UNIQUE NOT NULL,
-  genre_en varchar(64) UNIQUE NOT NULL
+  genreID serial,
+  genreRU varchar(64) UNIQUE NOT NULL,
+  genreEN varchar(64) UNIQUE NOT NULL
 );
 
-INSERT INTO genres ( genre_ru, genre_en ) 
+INSERT INTO genres ( genreRU, genreEN )
 VALUES ( 'Портрет', 'Portrait' );
 
-INSERT INTO genres ( genre_ru, genre_en ) 
+INSERT INTO genres ( genreRU, genreEN )
 VALUES ( 'Пейзаж', 'Landscape' );
 
-INSERT INTO genres ( genre_ru, genre_en ) 
+INSERT INTO genres ( genreRU, genreEN )
 VALUES ( 'Абстракция', 'Abstraction' );

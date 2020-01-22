@@ -9,8 +9,8 @@ const saveOrder = async (typedData) => {
         clientEmail, clientComment, clientCity, clientAddress
     } = typedData;
     const query = `INSERT INTO orders (
-        order_number, delivery, payment, client_name, client_phone, 
-        client_email, client_comment, client_city, client_address
+        orderNumber, delivery, payment, clientName, clientPhone, 
+        clientEmail, clientComment, clientCity, clientAddress
     ) VALUES (
         '${orderNumber}', '${delivery}', '${payment}', '${clientName}', '${clientPhone}',
         '${clientEmail}', '${clientComment}', '${clientCity}', '${clientAddress}' 

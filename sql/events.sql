@@ -1,14 +1,14 @@
 CREATE TABLE categories (
-    category_id serial,
-    category_title_ru varchar(64) UNIQUE NOT NULL,
-    category_title_en varchar(64) UNIQUE NOT NULL,
-    category_link varchar(64) UNIQUE NOT NULL
+    categoryID serial,
+    categoryTitleRU varchar(64) UNIQUE NOT NULL,
+    categoryTitleEN varchar(64) UNIQUE NOT NULL,
+    categoryLink varchar(64) UNIQUE NOT NULL
 );
 
 INSERT INTO categories (
-    category_title_ru, 
-    category_title_en, 
-    category_link
+    categoryTitleRU,
+    categoryTitleEN,
+    categoryLink
 ) VALUES (
     'Новости',
     'News',
@@ -16,9 +16,9 @@ INSERT INTO categories (
 );
 
 INSERT INTO categories (
-    category_title_ru, 
-    category_title_en, 
-    category_link
+    categoryTitleRU,
+    categoryTitleEN,
+    categoryLink
 ) VALUES (
     'Афиша',
     'poster',
@@ -26,24 +26,24 @@ INSERT INTO categories (
 );
 
 CREATE TABLE events (
-  event_id serial,
-  category_id int,
-  event_title_ru text UNIQUE NOT NULL,
-  event_title_en text UNIQUE NOT NULL,
-  event_annotaion_ru text NOT NULL,
-  event_annotaion_en text NOT NULL,
-  event_text_ru text NOT NULL,
-  event_text_en text NOT NULL
+  eventID serial,
+  categoryID int,
+  eventTitleRU text UNIQUE NOT NULL,
+  eventTitleEN text UNIQUE NOT NULL,
+  eventAnnotationRU text NOT NULL,
+  eventAnnotationEN text NOT NULL,
+  eventTextRU text NOT NULL,
+  eventTextEN text NOT NULL
 );
 
 INSERT INTO events (
-    category_id,
-    event_title_ru,
-    event_title_en,
-    event_annotaion_ru,
-    event_annotaion_en,
-    event_text_ru,
-    event_text_en
+    categoryID,
+    eventTitleRU,
+    eventTitleEN,
+    eventAnnotationRU,
+    eventAnnotationEN,
+    eventTextRU,
+    eventTextEN
 ) VALUES (
     2,
     'Instagram-интенсив «Теперь так»',
@@ -55,13 +55,13 @@ INSERT INTO events (
 );
 
 INSERT INTO events (
-    category_id,
-    event_title_ru,
-    event_title_en,
-    event_annotaion_ru,
-    event_annotaion_en,
-    event_text_ru,
-    event_text_en
+    categoryID,
+    eventTitleRU,
+    eventTitleEN,
+    eventAnnotationRU,
+    eventAnnotationEN,
+    eventTextRU,
+    eventTextEN
 ) VALUES (
     1,
     'Инсталляции группы Numen/For Use «Оклеим Москву»',
@@ -73,13 +73,13 @@ INSERT INTO events (
 );
 
 INSERT INTO events (
-    category_id,
-    event_title_ru,
-    event_title_en,
-    event_annotaion_ru,
-    event_annotaion_en,
-    event_text_ru,
-    event_text_en
+    categoryID,
+    eventTitleRU,
+    eventTitleEN,
+    eventAnnotationRU,
+    eventAnnotationEN,
+    eventTextRU,
+    eventTextEN
 ) VALUES (
     1,
     'День открытых дверей в ARTE',
