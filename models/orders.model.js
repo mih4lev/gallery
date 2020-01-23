@@ -7,7 +7,8 @@ const requestOrderList = async () => {
 
 const requestOrder = async (orderID) => {
     const query = `SELECT * FROM orders WHERE orderID = ${orderID}`;
-    return await requestDB(query);
+    const response = await requestDB(query);
+    return response[0];
 };
 
 const saveOrder = async (typedData) => {

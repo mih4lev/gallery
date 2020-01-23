@@ -1,6 +1,9 @@
 const { Router } = require(`express`);
 const cors = require(`cors`);
-const { saveAuthor } = require("../models/authors.model");
+const {
+    requestAuthor, requestAuthorList,
+    saveAuthor, updateAuthor, deleteAuthor
+} = require("../models/authors.model");
 const {
     saveOrder, requestOrderList, requestOrder, deleteOrder
 } = require("../models/orders.model");
@@ -36,14 +39,32 @@ router.get(`/collection`, cors(corsOptions), (request, response) => {
     response.send(`collection API`);
 });
 
-router.get(`/authors`, cors(corsOptions), (request, response) => {
-    response.send(`authors API`);
+router.get(`/authors`, cors(corsOptions), async (request, response) => {
+    const data = await requestAuthorList();
+    response.send(data);
+});
+
+router.get(`/authors/:authorID`, cors(corsOptions), async (request, response) => {
+    const { params: { authorID }} = request;
+    const data = await requestAuthor(authorID);
+    response.send(data);
 });
 
 router.post(`/authors`, cors(corsOptions), async (request, response) => {
-    console.log(request.body);
     const data = await saveAuthor(request.body);
-    response.json(data);
+    await response.json(data);
+});
+
+router.put(`/authors/:authorID`, cors(corsOptions), async (request, response) => {
+    const { params: { authorID }} = request;
+    const data = await updateAuthor(authorID, request.body);
+    await response.json(data);
+});
+
+router.delete(`/authors/:authorID`, cors(corsOptions), async (request, response) => {
+    const { params: { authorID }} = request;
+    const data = await deleteAuthor(authorID);
+    response.send(data);
 });
 
 router.get(`/art-space`, cors(corsOptions), (request, response) => {

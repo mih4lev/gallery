@@ -15,14 +15,14 @@ router.get(`/`, (request, response) => {
 });
 
 router.get(`/:painter`, (request, response) => {
-    const { language, params: { painter: painterName }} = request;
+    const { language, params: { painter: painterLink }} = request;
     const data = {
         language,
         isAuthorsActive: true,
         pageTitle: `arTE Gallery | painter`,
         metaDescription: ``,
         metaKeywords: ``,
-        painterName
+        painterLink
     };
     response.render('painter', data);
 });
