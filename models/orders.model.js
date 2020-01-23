@@ -1,5 +1,15 @@
 const { requestDB } = require(`../models/db.model`);
 
+const requestOrderList = async () => {
+    const query = `SELECT * FROM orders`;
+    return await requestDB(query);
+};
+
+const requestOrder = async (orderID) => {
+    const query = `SELECT * FROM orders WHERE orderID = ${orderID}`;
+    return await requestDB(query);
+};
+
 const saveOrder = async (typedData) => {
     const lastOrderQuery = `SELECT COUNT(*) AS ordersCount FROM orders`;
     const { 0: { ordersCount }} = await requestDB(lastOrderQuery);
@@ -19,4 +29,17 @@ const saveOrder = async (typedData) => {
     return { code: (result.insertId) ? 200 : 0, orderNumber };
 };
 
-module.exports = { saveOrder };
+const deleteOrder = async (orderID) => {
+    const query = `DELETE FROM orders WHERE orderID = ${orderID}`;
+    try {
+        const { affectedRows } = await requestDB(query);
+        return {
+            code: (affectedRows) ? 200 : 404,
+            result: (affectedRows) ? `order deleted` : `order not found`
+        };
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+
+module.exports = { saveOrder, requestOrderList, requestOrder, deleteOrder };

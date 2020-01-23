@@ -70,8 +70,8 @@ export const articleScroll = () => {
 };
 
 export const shareList = () => {
-    const socialLinks = document.querySelectorAll(`.socialLink`);
-    if (!socialLinks) return false;
+    const socialLinks = [...document.querySelectorAll(`.socialLink`)];
+    if (!socialLinks.length) return false;
     const url = location.href;
     const imageSource = document.querySelector(`.articlePicture`).src;
     const image = `${imageSource}`;
@@ -105,7 +105,7 @@ export const shareList = () => {
             `&st.description=${encodeURIComponent(description)}`
         ]
     };
-    [...socialLinks].forEach((link) => {
+    socialLinks.forEach((link) => {
         link.addEventListener(`click`, (event) => {
             event.preventDefault();
             const { dataset: { social }} = link;

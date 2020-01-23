@@ -7,6 +7,8 @@ import { respondInterestBlock } from "./blocks/events";
 import { setDesktopLinks, setPicturesLayout } from "./blocks/collection";
 import { basketDelivery, basketForm } from "./blocks/basket";
 import { articleScroll, shareList } from "./blocks/article";
+import { changePhotos } from "./blocks/picture";
+import { instagramPosts } from "./blocks/home";
 
 similarPhoto();
 recallForm();
@@ -20,3 +22,5 @@ basketDelivery();
 basketForm();
 articleScroll();
 shareList();
+changePhotos();
+instagramPosts().catch((error) => console.log(error));

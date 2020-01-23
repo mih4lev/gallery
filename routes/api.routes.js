@@ -1,6 +1,9 @@
 const { Router } = require(`express`);
-const cors = require('cors');
-const { saveOrder } = require("../models/orders.model");
+const cors = require(`cors`);
+const {
+    saveOrder, requestOrderList, requestOrder, deleteOrder
+} = require("../models/orders.model");
+const { requestPosts } = require("../models/instagram.model");
 const router = new Router();
 
 const allowedOrigins = [
@@ -20,37 +23,55 @@ const corsOptions = {
     credentials: true,
 };
 
-router.get(`/`, (request, response) => {
+router.get(`/`, cors(corsOptions), (request, response) => {
     response.send(`index page API`);
 });
 
-router.get(`/options`, (request, response) => {
+router.get(`/options`, cors(corsOptions), (request, response) => {
     response.send(`options API`);
 });
 
-router.get(`/collection`, (request, response) => {
+router.get(`/collection`, cors(corsOptions), (request, response) => {
     response.send(`collection API`);
 });
 
-router.get(`/authors`, (request, response) => {
+router.get(`/authors`, cors(corsOptions), (request, response) => {
     response.send(`authors API`);
 });
 
-router.get(`/art-space`, (request, response) => {
+router.get(`/art-space`, cors(corsOptions), (request, response) => {
     response.send(`art space API`);
 });
 
-router.get(`/delivery`, (request, response) => {
+router.get(`/delivery`, cors(corsOptions), (request, response) => {
     response.send(`delivery API`);
 });
 
-router.get(`/orders`, cors(corsOptions), (request, response) => {
-    response.send(`GET options API`);
+router.get(`/orders`, cors(corsOptions), async (request, response) => {
+    const data = await requestOrderList();
+    response.send(data);
+});
+
+router.get(`/orders/:orderID`, cors(corsOptions), async (request, response) => {
+    const { params: { orderID }} = request;
+    const data = await requestOrder(orderID);
+    response.send(data);
 });
 
 router.post(`/orders`, cors(corsOptions), async (request, response) => {
-    const sendResponse = await saveOrder(request.body);
-    await response.json(sendResponse);
+    const data = await saveOrder(request.body);
+    await response.json(data);
+});
+
+router.delete(`/orders/:orderID`, cors(corsOptions), async (request, response) => {
+    const { params: { orderID }} = request;
+    const data = await deleteOrder(orderID);
+    response.send(data);
+});
+
+router.get(`/instagram`, cors(corsOptions), async (request, response) => {
+    const data = await requestPosts();
+    await response.json(data);
 });
 
 module.exports = router;

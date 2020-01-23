@@ -17,6 +17,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 // static source path
 app.use(`/css`, express.static(__dirname + `/public/css`));
 app.use(`/images`, express.static(__dirname + `/public/images`));
+app.use(`/photos`, express.static(__dirname + `/public/photos`));
 app.use(`/scripts`, express.static(__dirname + `/public/scripts`));
 app.use(`/fonts`, express.static(__dirname + `/public/fonts`));
 app.use(`/lang`, express.static(__dirname + `/public/lang`));
