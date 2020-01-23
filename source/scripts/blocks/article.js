@@ -75,7 +75,6 @@ export const shareList = () => {
     const url = location.href;
     const imageSource = document.querySelector(`.articlePicture`).src;
     const image = `${imageSource}`;
-    console.log(image);
     const title = document.querySelector(`title`).innerText;
     const metaDescription = document.querySelector(`meta[name="description"]`);
     const description = (metaDescription) ? metaDescription.getAttribute(`content`) : ``;
@@ -113,7 +112,6 @@ export const shareList = () => {
             // create new window for shared link
             const newWindowOptions = `toolbar=0,status=0,width=626,height=436`;
             const URL = linksMAP[social].join(``);
-            console.log(URL);
             window.open(URL, `new`, newWindowOptions);
         })
     });

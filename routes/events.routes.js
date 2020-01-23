@@ -20,7 +20,7 @@ router.get(`/:id`, (request, response) => {
         language,
         isEventsActive: true,
         pageTitle: `arTE Gallery | article`,
-        metaDescription: ``,
+        metaDescription: `Небольшое описание для новости.`,
         metaKeywords: ``,
         eventID
     };
