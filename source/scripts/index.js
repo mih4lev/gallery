@@ -6,6 +6,7 @@ import { headerNav } from "./blocks/header-nav";
 import { respondInterestBlock } from "./blocks/events";
 import { setDesktopLinks, setPicturesLayout } from "./blocks/collection";
 import { basketDelivery, basketForm } from "./blocks/basket";
+import { articleScroll } from "./blocks/article";
 
 similarPhoto();
 recallForm();
@@ -17,3 +18,4 @@ setDesktopLinks();
 setPicturesLayout();
 basketDelivery();
 basketForm();
+articleScroll();

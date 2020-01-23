@@ -141,6 +141,8 @@
         }
     }
     .articleTextWrapper {
+        flex-grow: 1;
+        position: relative;
         margin-left: 40px;
         padding-top: 40px;
         padding-left: 40px;
@@ -173,21 +175,50 @@
             padding-bottom: 0;
             border: none;
         }
-        .articleText {
-            height: 532px;
+        .overflowWrapper {
+            height: 14px * 36;
             overflow: hidden;
+            @include respond(desktop) {
+                height: 14px * 36;
+            }
             @include respond(tablet) {
-                height: 364px;
+                height: 14px * 24;
+            }
+            @include respond(tabletMini) {
+                margin-bottom: 20px;
+                height: 100%;
+                overflow: visible;
             }
             @include respond(mobile) {
                 height: 100%;
+                overflow: visible;
             }
+        }
+        .articleText {
+            transition: all .3s ease-in;
             p {
                 margin-top: 0;
                 margin-bottom: 14px;
                 &:last-of-type {
                     margin-bottom: 0;
                 }
+            }
+        }
+        .scrollNode {
+            position: absolute;
+            top: 0;
+            right: -5px;
+            display: block;
+            width: 1px;
+            height: 0;
+            transform: translateY(-1px);
+            background-color: $secondaryColor;
+            transition: all .3s ease-in;
+            @include respond(tabletMini) {
+                display: none;
+            }
+            @include respond(mobile) {
+                display: none;
             }
         }
     }
