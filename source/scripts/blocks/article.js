@@ -1,4 +1,4 @@
-const articleScroll = () => {
+export const articleScroll = () => {
     const articleWrapper = document.querySelector(`.articleTextWrapper`);
     if (!articleWrapper) return false;
     const overflowWrapper = document.querySelector(`.overflowWrapper`);
@@ -69,4 +69,50 @@ const articleScroll = () => {
     }, false);
 };
 
-module.exports = { articleScroll };
+export const shareList = () => {
+    const socialLinks = document.querySelectorAll(`.socialLink`);
+    if (!socialLinks) return false;
+    const url = location.href;
+    const imageSource = document.querySelector(`.articlePicture`).src;
+    const image = `${url}${imageSource}`;
+    const title = document.querySelector(`title`).innerText;
+    const metaDescription = document.querySelector(`meta[name="description"]`);
+    const description = (metaDescription) ? metaDescription.getAttribute(`content`) : ``;
+    const linksMAP = {
+        facebook: [
+            `https://www.facebook.com/sharer.php`,
+            `?u=${encodeURIComponent(url)}`,
+            `&p[images][0]=${encodeURIComponent(image)}`
+        ],
+        twitter: [
+            `https://twitter.com/intent/tweet`,
+            `?url=${url}`,
+            `&text=${title}`,
+            `&hashtags=`
+        ],
+        vk: [
+            `https://vk.com/share.php`,
+            `?url=${encodeURIComponent(url)}`,
+            `&image=${encodeURIComponent(image)}`,
+            `&title=${encodeURIComponent(title)}`,
+            `&description=${encodeURIComponent(description)}`
+        ],
+        ok: [
+            `https://connect.ok.ru/dk?st.cmd=WidgetSharePreview`,
+            `&st.shareUrl=${encodeURIComponent(url)}`,
+            `&st.imageUrl=${encodeURIComponent(image)}`,
+            `&st.title=${encodeURIComponent(title)}`,
+            `&st.description=${encodeURIComponent(description)}`
+        ]
+    };
+    [...socialLinks].forEach((link) => {
+        link.addEventListener(`click`, () => {
+            const { dataset: { social }} = link;
+            // create new window for shared link
+            const newWindowOptions = `toolbar=0,status=0,width=626,height=436`;
+            const URL = linksMAP[social].join(``);
+            console.log(URL);
+            window.open(URL, `new`, newWindowOptions);
+        })
+    });
+};
