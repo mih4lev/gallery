@@ -5,10 +5,10 @@ const requestPosts = async () => {
     const {
         graphql: { user: { edge_owner_to_timeline_media: { edges: posts }}}
     } = await JSON.json();
-    const data = [];
-    posts.forEach(({ node: { thumbnail_src }}) => data.push(thumbnail_src));
-    data.length = 6;
-    return data;
+    const filter = ({ node: { thumbnail_src, shortcode }}) => {
+        return { thumb: thumbnail_src, link: `https://instagram.com/p/${shortcode}/` };
+    };
+    return posts.map(filter);
 };
 
 module.exports = { requestPosts };

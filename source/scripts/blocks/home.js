@@ -4,6 +4,7 @@ export const instagramPosts = async () => {
     const response = await fetch(`/api/instagram`);
     const photos = await response.json();
     instagramPhotos.forEach((photo, index) => {
-        photo.src = photos[index];
+        photo.closest(`.instagramLink`).href = photos[index].link;
+        photo.src = photos[index].thumb;
     });
 };
