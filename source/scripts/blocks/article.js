@@ -74,7 +74,8 @@ export const shareList = () => {
     if (!socialLinks) return false;
     const url = location.href;
     const imageSource = document.querySelector(`.articlePicture`).src;
-    const image = `${url}${imageSource}`;
+    const image = `${imageSource}`;
+    console.log(image);
     const title = document.querySelector(`title`).innerText;
     const metaDescription = document.querySelector(`meta[name="description"]`);
     const description = (metaDescription) ? metaDescription.getAttribute(`content`) : ``;
@@ -106,7 +107,8 @@ export const shareList = () => {
         ]
     };
     [...socialLinks].forEach((link) => {
-        link.addEventListener(`click`, () => {
+        link.addEventListener(`click`, (event) => {
+            event.preventDefault();
             const { dataset: { social }} = link;
             // create new window for shared link
             const newWindowOptions = `toolbar=0,status=0,width=626,height=436`;
