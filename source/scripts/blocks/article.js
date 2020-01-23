@@ -52,11 +52,15 @@ const articleScroll = () => {
     let touchStartY = 0;
     let touchEndY = 0;
     articleWrapper.addEventListener(`touchstart`, (event) => {
+        const windowSize = window.innerWidth;
+        if (windowSize < 768) return false;
         event.preventDefault();
         event.stopPropagation();
         touchStartY = event.changedTouches[0].clientY;
     }, false);
     articleWrapper.addEventListener(`touchend`, (event) => {
+        const windowSize = window.innerWidth;
+        if (windowSize < 768) return false;
         event.preventDefault();
         event.stopPropagation();
         touchEndY = event.changedTouches[0].clientY;

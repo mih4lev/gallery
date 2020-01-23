@@ -178,9 +178,6 @@
         .overflowWrapper {
             height: 14px * 36;
             overflow: hidden;
-            @include respond(desktop) {
-                height: 14px * 36;
-            }
             @include respond(tablet) {
                 height: 14px * 24;
             }
