@@ -3,6 +3,7 @@ const detectLanguage = (request, response, next) => {
         headers: { 'accept-language': headerLanguage },
         cookies: { language: cookieLanguage }
     } = request;
+    if (!headerLanguage) return next();
     request.language = (cookieLanguage) ?
         cookieLanguage :
         headerLanguage.substr(0, 2);

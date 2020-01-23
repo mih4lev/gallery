@@ -1,5 +1,6 @@
 const { Router } = require(`express`);
 const cors = require(`cors`);
+const { saveAuthor } = require("../models/authors.model");
 const {
     saveOrder, requestOrderList, requestOrder, deleteOrder
 } = require("../models/orders.model");
@@ -37,6 +38,12 @@ router.get(`/collection`, cors(corsOptions), (request, response) => {
 
 router.get(`/authors`, cors(corsOptions), (request, response) => {
     response.send(`authors API`);
+});
+
+router.post(`/authors`, cors(corsOptions), async (request, response) => {
+    console.log(request.body);
+    const data = await saveAuthor(request.body);
+    response.json(data);
 });
 
 router.get(`/art-space`, cors(corsOptions), (request, response) => {
