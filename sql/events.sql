@@ -1,39 +1,39 @@
 CREATE TABLE categories (
     categoryID serial,
+    categoryLink varchar(64) UNIQUE NOT NULL,
     categoryTitleRU varchar(64) UNIQUE NOT NULL,
-    categoryTitleEN varchar(64) UNIQUE NOT NULL,
-    categoryLink varchar(64) UNIQUE NOT NULL
+    categoryTitleEN varchar(64) UNIQUE NOT NULL
 );
 
 INSERT INTO categories (
+    categoryLink,
     categoryTitleRU,
-    categoryTitleEN,
-    categoryLink
+    categoryTitleEN
 ) VALUES (
+    'news',
     'Новости',
-    'News',
-    'news'
+    'News'
 );
 
 INSERT INTO categories (
+    categoryLink,
     categoryTitleRU,
-    categoryTitleEN,
-    categoryLink
+    categoryTitleEN
 ) VALUES (
+    'posters',
     'Афиша',
-    'poster',
-    'posters'
+    'poster'
 );
 
 CREATE TABLE events (
   eventID serial,
-  categoryID int,
-  eventTitleRU text UNIQUE NOT NULL,
-  eventTitleEN text UNIQUE NOT NULL,
+  categoryID int(6) NOT NULL,
+  eventTitleRU text NOT NULL,
+  eventTitleEN text NOT NULL,
   eventAnnotationRU text NOT NULL,
   eventAnnotationEN text NOT NULL,
-  eventTextRU text NOT NULL,
-  eventTextEN text NOT NULL
+  eventTextRU text NULL,
+  eventTextEN text NULL
 );
 
 INSERT INTO events (
@@ -65,7 +65,7 @@ INSERT INTO events (
 ) VALUES (
     1,
     'Инсталляции группы Numen/For Use «Оклеим Москву»',
-    'Installations of the Numen/For Use group “Okleim Moscow”',
+    'Installations of the Numen/For Use group «Okleim Moscow»',
     'Во время работы выставки ее посещение будет разбито на четыре акта. В каждом акте выставочное пространство будет менять свои очертания, заметки и артефакты будут сменять друг друга, создавая среду для исполнения партитур приглашенными танцовщиками.',
     'During the exhibition, her visit will be divided into four acts. In each act, the exhibition space will change its shape, notes and artifacts will replace each other, creating an environment for the performance of scores by invited dancers.',
     '... ru',

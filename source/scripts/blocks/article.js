@@ -11,12 +11,17 @@ export const articleScroll = () => {
         return (wrapperHeight / textHeight) * wrapperHeight;
     };
     scrollNode.style.height = `${scrollHeight()}px`;
-    window.addEventListener('resize', () => {
+    let windowSize = window.innerWidth;
+    const resetOptions = () => {
+        if (windowSize === window.innerWidth) return false;
+        windowSize = window.innerWidth;
         scrollNode.style.height = `${scrollHeight()}px`;
         scrollNode.style.top = `0`;
         articleText.style.marginTop = `0`;
         articleText.dataset.overflow = `0`;
-    });
+    };
+    window.addEventListener(`resize`, resetOptions);
+    window.addEventListener(`orientationchange`, resetOptions);
     const scrollText = (scrollSize) => {
         // variables
         const wrapperHeight = articleWrapper.offsetHeight;
@@ -41,8 +46,7 @@ export const articleScroll = () => {
         scrollNode.style.top = `${scrollTop}px`;
     };
     articleWrapper.addEventListener(`wheel`, (event) => {
-        const windowSize = window.innerWidth;
-        if (windowSize < 768) return false;
+        if (window.innerWidth < 768) return false;
         event.preventDefault();
         const { deltaY } = event;
         const isScrollDown = (deltaY > 0);
@@ -52,15 +56,13 @@ export const articleScroll = () => {
     let touchStartY = 0;
     let touchEndY = 0;
     articleWrapper.addEventListener(`touchstart`, (event) => {
-        const windowSize = window.innerWidth;
-        if (windowSize < 768) return false;
+        if (window.innerWidth < 768) return false;
         event.preventDefault();
         event.stopPropagation();
         touchStartY = event.changedTouches[0].clientY;
     }, false);
     articleWrapper.addEventListener(`touchend`, (event) => {
-        const windowSize = window.innerWidth;
-        if (windowSize < 768) return false;
+        if (window.innerWidth < 768) return false;
         event.preventDefault();
         event.stopPropagation();
         touchEndY = event.changedTouches[0].clientY;

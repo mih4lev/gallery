@@ -1,23 +1,6 @@
 const { requestDB } = require(`../models/db.model`);
 
-const requestAuthorList = async () => {
-    const query = `SELECT * FROM authors`;
-    return await requestDB(query);
-};
-
-const requestAuthor = async (authorID) => {
-    const authorQuery = `SELECT * FROM authors WHERE authorID = ${authorID}`;
-    const rewardsQuery = `SELECT * FROM rewards WHERE authorID = ${authorID}`;
-    const exhibitionsQuery = `SELECT * FROM exhibitions WHERE authorID = ${authorID}`;
-    const educationsQuery = `SELECT * FROM educations WHERE authorID = ${authorID}`;
-    const { 0: authorData } = await requestDB(authorQuery);
-    return Object.assign(authorData, {
-        rewards: await requestDB(rewardsQuery),
-        exhibitions: await requestDB(exhibitionsQuery),
-        educations: await requestDB(educationsQuery)
-    });
-};
-
+// INSERT | CREATE
 const saveAuthor = async (params) => {
     const {
         authorLink, authorRU, authorEN, authorPhoto,
@@ -44,6 +27,79 @@ const saveAuthor = async (params) => {
     }
 };
 
+// SELECT | READ
+const requestAuthorList = async () => {
+    const query = `SELECT * FROM authors`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `authors not found` };
+        return (data.length) ? data : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestAuthor = async (authorID) => {
+    const authorQuery = `SELECT * FROM authors WHERE authorID = ${authorID}`;
+    const rewardsQuery = `
+        SELECT 
+            rewardID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
+        FROM rewards WHERE authorID = ${authorID}`;
+    const exhibitionsQuery = `
+        SELECT 
+            exhibitionID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
+        FROM exhibitions WHERE authorID = ${authorID}`;
+    const educationsQuery = `
+        SELECT 
+            educationID, educationYearRU, educationYearEN, educationRU, educationEN
+        FROM educations WHERE authorID = ${authorID}`;
+    const { 0: authorData } = await requestDB(authorQuery);
+    return Object.assign(authorData, {
+        rewards: await requestDB(rewardsQuery),
+        exhibitions: await requestDB(exhibitionsQuery),
+        educations: await requestDB(educationsQuery)
+    });
+};
+const requestAuthorRewards = async (authorID) => {
+    const query = `
+        SELECT 
+            rewardID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
+        FROM rewards WHERE authorID = ${authorID}`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `authorID ${authorID} rewards not found` };
+        return (data.length) ? data : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestAuthorEducations = async (authorID) => {
+    const query = `
+        SELECT 
+            educationID, educationYearRU, educationYearEN, educationRU, educationEN
+        FROM educations WHERE authorID = ${authorID}`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `authorID ${authorID} educations not found` };
+        return (data.length) ? data : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestAuthorExhibitions = async (authorID) => {
+    const query = `
+        SELECT 
+            exhibitionID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
+        FROM exhibitions WHERE authorID = ${authorID}`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `authorID ${authorID} exhibitions not found` };
+        return (data.length) ? data : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+
+// UPDATE
 const updateAuthor = async (authorID, params) => {
     const {
         authorRU, authorEN, authorPhoto, authorLink,
@@ -54,7 +110,7 @@ const updateAuthor = async (authorID, params) => {
             authorRU = '${authorRU}', authorEN = '${authorEN}', 
             authorLink = '${authorLink}', authorPhoto = '${authorPhoto}', 
             authorAboutRU = '${authorAboutRU}', authorAboutEN = '${authorAboutEN}', 
-            authorCityRU = '${authorCityRU}', authorCityEN = '${authorCityEN}'
+            authorCityRU = '${authorCityRU}', authorCityEN = '${authorCityEN}' 
         WHERE authorID = ${authorID}`;
     try {
         const { changedRows } = await requestDB(query);
@@ -67,6 +123,7 @@ const updateAuthor = async (authorID, params) => {
     }
 };
 
+// DELETE
 const deleteAuthor = async (authorID) => {
     const query = `DELETE FROM authors WHERE authorID = ${authorID}`;
     try {
@@ -80,4 +137,8 @@ const deleteAuthor = async (authorID) => {
     }
 };
 
-module.exports = { requestAuthorList, requestAuthor, saveAuthor, updateAuthor, deleteAuthor };
+module.exports = {
+    requestAuthorList, requestAuthor, saveAuthor,
+    updateAuthor, deleteAuthor, requestAuthorRewards,
+    requestAuthorEducations, requestAuthorExhibitions
+};
