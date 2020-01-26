@@ -27,6 +27,30 @@ const requestLanguage = async (language) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestSelectors = async () => {
+    const query = `SELECT langSelector FROM language`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `selectors not found` };
+        const formatData = data.map(({ langSelector }) => langSelector);
+        return (data.length) ? formatData : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestSelectorLanguage = async (langSelector) => {
+    const query = `
+        SELECT langRU, langEN FROM language 
+        WHERE langSelector = '${langSelector}'
+    `;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `selector not found` };
+        return (data.length) ? data[0] : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 const updateLanguage = async (langSelector, params) => {
@@ -47,5 +71,6 @@ const updateLanguage = async (langSelector, params) => {
 };
 
 module.exports = {
-    requestLanguageList, requestLanguage, updateLanguage
+    requestLanguageList, requestLanguage, requestSelectors, 
+    requestSelectorLanguage, updateLanguage
 };

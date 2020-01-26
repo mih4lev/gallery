@@ -3,7 +3,7 @@ import { changeCurrency, changeMetric } from "../utils";
 export const headerLanguage = () => {
     const downloadLocalization = async (lang) => {
         if (!lang) return false;
-        const receive = await fetch(`/api/language/${lang}`);
+        const receive = await fetch(`/api/language/list/${lang}`);
         const data = await receive.json();
         for (const phrase in data) {
             const phraseNode = [...document.querySelectorAll(`.${phrase}`)];

@@ -6,7 +6,7 @@ export const changePhotos = () => {
     const thumbs = [...document.querySelectorAll(`.pictureSimilarPhoto`)];
     let wrapperWidth = photoWrapper.offsetWidth;
     let wrapperHeight = photoWrapper.offsetHeight;
-    setTimeout(() => {
+    setTimeout(() => { 
         wrapperWidth = photoWrapper.offsetWidth;
         wrapperHeight = photoWrapper.offsetHeight;
         if (!thumbs[0]) return false;
@@ -45,6 +45,6 @@ export const changePhotos = () => {
             const { dataset: { picture }} = thumb;
             tempPicture.addEventListener(`load`, loadHandler(picture));
             tempPicture.src = picture;
-        });
+        }); 
     });
 };

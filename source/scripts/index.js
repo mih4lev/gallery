@@ -24,3 +24,11 @@ articleScroll();
 shareList();
 changePhotos();
 instagramPosts().catch((error) => console.log(error));
+
+const addAdminPanel = () => {
+    const adminFile = `/scripts/admin.min.js`;
+    const scriptNode = document.createElement(`script`);
+    scriptNode.src = adminFile;
+    document.body.appendChild(scriptNode);
+};
+addAdminPanel();

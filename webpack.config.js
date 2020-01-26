@@ -1,8 +1,11 @@
 module.exports = {
     watch: true,
-    entry: './source/scripts/index.js',
+    entry: {
+        bundle: `./source/scripts/index.js`,
+        admin: `./source/scripts/admin.js`
+    },
     output: {
-        filename: 'bundle.min.js',
+        filename: '[name].min.js',
         path: __dirname + '/public/scripts'
     },
     optimization: {

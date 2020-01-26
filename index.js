@@ -54,6 +54,11 @@ app.use('/api/orders', require('./routes/api.orders.routes'));
 app.use('/404', require('./routes/404.routes'));
 // 404
 app.use((request, response, next) => {
+    const { url } = request;
+    if (url.indexOf(`favicon`) !== -1) {
+        response.status(404);
+        return next();
+    }
     response.status(404).redirect(`/404`);
     next();
 });
