@@ -15,6 +15,8 @@ const showEditableWindow = async (event) => {
     submitButton.addEventListener(`click`, async (event) => {
         event.preventDefault();
         submitButton.innerText = `Сохраняю...`;
+        submitButton.classList.add(`requestingStatus`);
+        submitButton.setAttribute(`disabled`, `disabled`);
         const body = {
             langRU: fieldRU.value,
             langEN: fieldEN.value
@@ -27,11 +29,12 @@ const showEditableWindow = async (event) => {
             body: JSON.stringify(body)
         };
         const response = await fetch(`/api/language/${langSelector}`, options);
-        const data = await response.json();
-        if (code !== 200) {
-            submitButton.innerText = `Ошибка сохранения`;
-            return false;
-        }
+        await response.json();
+        const pageLang = document.querySelector(`html`).getAttribute(`lang`);
+        const langNodes = [...document.querySelectorAll(`.${langSelector}`)];
+        langNodes.forEach((node) => {
+            node.innerText = (pageLang === `ru`) ? fieldRU.value : fieldEN.value;
+        });
         bodyNode.removeChild(editWrapper);
     });
     bodyNode.appendChild(editWrapper);
