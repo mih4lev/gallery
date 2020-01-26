@@ -1,12 +1,9 @@
 import { changeCurrency, changeMetric } from "../utils";
 
 export const headerLanguage = () => {
-
-    // default language is ru-RU (delete)
-    // localStorage.setItem(`options`, JSON.stringify({ language: `ru-RU` }));
     const downloadLocalization = async (lang) => {
         if (!lang) return false;
-        const receive = await fetch(`/lang/${lang}.json`);
+        const receive = await fetch(`/api/language/${lang}`);
         const data = await receive.json();
         for (const phrase in data) {
             const phraseNode = [...document.querySelectorAll(`.${phrase}`)];
@@ -86,8 +83,7 @@ export const headerLanguage = () => {
         const { language } = JSON.parse(localStorage.getItem(`options`));
         const { 0: lang } = language.split(`-`);
         const htmlNode = document.querySelector(`html`);
-        // RETURN
-        // if (htmlNode.lang === lang) return false;
+        if (htmlNode.lang === lang) return false;
         changeLanguage({ dataset: { language }})();
     }
 

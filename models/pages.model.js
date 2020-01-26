@@ -21,6 +21,22 @@ const requestPage = async (pageLink) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestLangPage = async(pageLink, language) => {
+    const errorData = { code: 404, result: `page ${pageLink} not found` };
+    const lang = language.toUpperCase();
+    if (lang !== `RU` && lang !== `EN`) return errorData;
+    const query = `
+        SELECT title${lang} as title, metaDescription${lang} as metaDescription, 
+            metaKeywords${lang} as metaKeywords
+        FROM pages WHERE pageLink = '${pageLink}'
+    `;
+    try {
+        const data = await requestDB(query);
+        return (data.length) ? data[0] : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 const updatePage = async (pageID, params) => {
@@ -49,4 +65,4 @@ const updatePage = async (pageID, params) => {
 };
 
 
-module.exports = { requestPageList, requestPage, updatePage };
+module.exports = { requestPageList, requestPage, requestLangPage, updatePage };

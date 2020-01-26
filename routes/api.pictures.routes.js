@@ -1,6 +1,6 @@
 const { Router } = require(`express`);
 const {
-    requestPictureList, deletePicture
+    requestPictureList, requestPicture, deletePicture
 } = require("../models/pictures.model");
 
 const router = new Router();
@@ -11,6 +11,11 @@ const router = new Router();
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestPictureList();
+    response.send(data);
+});
+router.get(`/:pictureID`, async (request, response) => {
+    const { params: { pictureID }} = request;
+    const data = await requestPicture(pictureID);
     response.send(data);
 });
 

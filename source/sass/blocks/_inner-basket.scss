@@ -1,4 +1,4 @@
-.basketWrapper {
+.innerPage .basketWrapper {
     display: flex;
     justify-content: center;
     background-image: linear-gradient(264.54deg, #000000 24.57%, #1E1B1E 82.74%);
@@ -700,7 +700,7 @@
     }
 }
 
-.orderWrapper {
+.innerPage .orderWrapper {
     display: none;
     flex-direction: column;
     align-items: center;

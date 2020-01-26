@@ -1,36 +1,38 @@
-const { requestDB } = require(`../models/db.model`);
+const { requestDB } = require(`./db.model`);
+const { authorData, photosArray, colorsArray, genreArray, techniqueArray } = require(`./pictures-data.model`);
 
 // INSERT | CREATE
 
 
 // SELECT | READ
-const photosArray = async (picture) => {
-    const { pictureID } = picture;
-    const photosQuery = `
-        SELECT 
-            photoID, photoNameRU, photoNameEN, photoLink 
-        FROM photos WHERE pictureID = ${pictureID}
-    `;
-    picture.photos = await requestDB(photosQuery);
-};
-const colorsArray = async (picture) => {
-    const { pictureID } = picture;
-    const colorsQuery = `
-        SELECT pictureID, colorID
-        FROM colorList WHERE pictureID = ${pictureID}
-    `;
-    picture.colors = await requestDB(colorsQuery);
-};
 const requestPictureList = async () => {
     try {
         const query = `SELECT * FROM pictures`;
         const data = await requestDB(query);
         if (!data.length) return { code: 404, result: `pictures not found` };
         for (const picture of data) {
+            await authorData(picture);
             await photosArray(picture);
             await colorsArray(picture);
+            await genreArray(picture);
+            await techniqueArray(picture);
         }
         return data;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestPicture = async (pictureID) => {
+    try {
+        const query = `SELECT * FROM pictures WHERE pictureID = '${pictureID}'`;
+        const data = await requestDB(query);
+        if (!data.length) return { code: 404, result: `pictures not found` };
+        await authorData(data[0]);
+        await photosArray(data[0]);
+        await colorsArray(data[0]);
+        await genreArray(data[0]);
+        await techniqueArray(data[0]);
+        return data[0];
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
@@ -54,5 +56,5 @@ const deletePicture = async (pictureID) => {
 };
 
 module.exports = {
-    requestPictureList, deletePicture
+    requestPictureList, requestPicture, deletePicture
 };

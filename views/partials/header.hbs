@@ -18,7 +18,7 @@
                         </a>
                         <div class="headerBasket">
                             <div class="addedPictures">
-                                <p class="basketHeader">Вы добавили в корзину:</p>
+                                <p class="basketHeader">{{{ basketHeader }}}</p>
                                 <div class="basketPicture">
                                     <img class="basketPhoto" src="/images/basket_added2.png" alt="added basket photo">
                                     <div class="basketData">
@@ -34,51 +34,60 @@
                                         <em class="picturePrice price price--rub" data-rub="49000">49 000</em>
                                     </div>
                                 </div>
-                                <button class="basketButton">Перейти в корзину</button>
+                                <button class="basketButton">{{{ basketButton }}}</button>
                             </div>
                             <button class="headerBasket--closeButton" disabled></button>
                         </div>
                     </li>
                     {{/if}}
                     <li class="headerNav--item headerNav--language">
-                        <span class="headerNav--link headerLanguage">RU</span>
+                        <span class="headerNav--link headerLanguage">{{{ languageTitle }}}</span>
                         <ul class="headerLanguage--list">
-                            <li class="headerLanguage--item">
-                                <a class="headerLanguage--link headerLanguage--active" data-language="ru-RU" href="#">RU</a>
-                            </li>
-                            <li class="headerLanguage--item">
-                                <a class="headerLanguage--link" data-language="en-EN" href="#">EN</a>
-                            </li>
+                            {{#if isActiveRU}}
+                                <li class="headerLanguage--item">
+                                    <a class="headerLanguage--link headerLanguage--active" data-language="ru-RU" href="#">RU</a>
+                                </li>
+                                <li class="headerLanguage--item">
+                                    <a class="headerLanguage--link" data-language="en-EN" href="#">EN</a>
+                                </li>
+                            {{else}}
+                                <li class="headerLanguage--item">
+                                    <a class="headerLanguage--link headerLanguage--active" data-language="en-EN" href="#">EN</a>
+                                </li>
+                                <li class="headerLanguage--item">
+                                    <a class="headerLanguage--link" data-language="ru-RU" href="#">RU</a>
+                                </li>
+                            {{/if}}
                         </ul>
                     </li>
                     <li class="headerNav--item mainNav">
                         <ul class="mainNavList">
                             <li class="headerNav--item">
                                 {{#if isCollectionActive}}
-                                    <span class="headerNav--active headerNav--collections">Коллекция</span>
+                                    <span class="headerNav--active headerNav--collections">{{{ headerNav--collections }}}</span>
                                 {{else}}
-                                    <a class="headerNav--link headerNav--collections" href="/collection">Коллекция</a>
+                                    <a class="headerNav--link headerNav--collections" href="/collection">{{{ headerNav--collections }}}</a>
                                 {{/if}}
                             </li>
                             <li class="headerNav--item">
                                 {{#if isAuthorsActive}}
-                                    <span class="headerNav--active headerNav--authors">Авторы</span>
+                                    <span class="headerNav--active headerNav--authors">{{{ headerNav--authors }}}</span>
                                 {{else}}
-                                    <a class="headerNav--link headerNav--authors" href="/authors">Авторы</a>
+                                    <a class="headerNav--link headerNav--authors" href="/authors">{{{ headerNav--authors }}}</a>
                                 {{/if}}
                             </li>
                             <li class="headerNav--item">
                                 {{#if isEventsActive}}
-                                    <span class="headerNav--active headerNav--artPlacement">Арт-пространство</span>
+                                    <span class="headerNav--active headerNav--artPlacement">{{{ headerNav--artPlacement }}}</span>
                                 {{else}}
-                                    <a class="headerNav--link headerNav--artPlacement" href="/events">Арт-пространство</a>
+                                    <a class="headerNav--link headerNav--artPlacement" href="/events">{{{ headerNav--artPlacement }}}</a>
                                 {{/if}}
                             </li>
                             <li class="headerNav--item">
                                 {{#if isDeliveryActive}}
-                                    <span class="headerNav--active headerNav--delivery">Доставка</span>
+                                    <span class="headerNav--active headerNav--delivery">{{{ headerNav--delivery }}}</span>
                                 {{else}}
-                                    <a class="headerNav--link headerNav--delivery" href="/delivery">Доставка</a>
+                                    <a class="headerNav--link headerNav--delivery" href="/delivery">{{{ headerNav--delivery }}}</a>
                                 {{/if}}
                             </li>
                         </ul>

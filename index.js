@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(require(`./middlewares/lang.middleware`));
 app.use('/api', cors(corsOptions));
 // routes
-app.use('/', require('./routes/main.routes'));
+app.use('/', require('./routes/home.routes'));
 app.use('/collection', require('./routes/collection.routes'));
 app.use('/authors', require('./routes/authors.routes'));
 app.use('/events', require('./routes/events.routes'));
@@ -38,6 +38,7 @@ app.use('/basket', require('./routes/basket.routes'));
 app.use('/api', require('./routes/api.routes'));
 app.use('/api/options', require('./routes/api.options.routes'));
 app.use('/api/pages', require('./routes/api.pages.routes'));
+app.use('/api/language', require('./routes/api.language.routes'));
 app.use('/api/categories', require('./routes/api.categories.routes'));
 app.use('/api/events', require('./routes/api.events.routes'));
 app.use('/api/authors', require('./routes/api.authors.routes'));
@@ -50,6 +51,7 @@ app.use('/api/techniques', require('./routes/api.techniques.routes'));
 app.use('/api/photos', require('./routes/api.photos.routes'));
 app.use('/api/pictures', require('./routes/api.pictures.routes'));
 app.use('/api/orders', require('./routes/api.orders.routes'));
+app.use('/404', require('./routes/404.routes'));
 // 404
 app.use((request, response, next) => {
     response.status(404).redirect(`/404`);

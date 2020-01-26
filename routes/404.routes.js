@@ -4,9 +4,8 @@ const { collectData } = require(`../models/data.model`);
 const router = new Router();
 
 router.get(`/`, async (request, response) => {
-    const pageLink = `delivery`;
+    const pageLink = `404`;
     const data = await collectData(request, pageLink);
-    data.isDeliveryActive = true;
     response.render(pageLink, data);
 });
 

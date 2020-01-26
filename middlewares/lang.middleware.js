@@ -4,9 +4,13 @@ const detectLanguage = (request, response, next) => {
         cookies: { language: cookieLanguage }
     } = request;
     if (!headerLanguage) return next();
-    request.language = (cookieLanguage) ?
+    const lang = (cookieLanguage) ?
         cookieLanguage :
         headerLanguage.substr(0, 2);
+    request.language = lang;
+    request.languageTitle = lang.toUpperCase();
+    request.isActiveRU = (lang === `ru`);
+    request.isActiveEN = (lang === `en`);
     next();
 };
 

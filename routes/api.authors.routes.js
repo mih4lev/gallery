@@ -2,7 +2,8 @@ const { Router } = require(`express`);
 const {
     requestAuthorList, requestAuthor, saveAuthor,
     updateAuthor, deleteAuthor, requestAuthorRewards,
-    requestAuthorEducations, requestAuthorExhibitions
+    requestAuthorEducations, requestAuthorExhibitions, 
+    requestAuthorPictures
 } = require("../models/authors.model");
 
 const router = new Router();
@@ -36,6 +37,11 @@ router.get(`/:authorID/educations`, async (request, response) => {
 router.get(`/:authorID/exhibitions`, async (request, response) => {
     const { params: { authorID }} = request;
     const data = await requestAuthorExhibitions(authorID);
+    response.send(data);
+});
+router.get(`/:authorID/pictures`, async (request, response) => {
+    const { params: { authorID }} = request;
+    const data = await requestAuthorPictures(authorID);
     response.send(data);
 });
 

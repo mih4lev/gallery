@@ -1,6 +1,6 @@
 const { Router } = require(`express`);
 const {
-    requestPageList, requestPage, updatePage
+    requestPageList, requestPage, requestLangPage, updatePage
 } = require("../models/pages.model");
 
 const router = new Router();
@@ -13,6 +13,11 @@ router.get(`/`, async (request, response) => {
 router.get(`/:pageLink`, async (request, response) => {
     const { params: { pageLink }} = request;
     const data = await requestPage(pageLink);
+    response.send(data);
+});
+router.get(`/:pageLink/:lang`, async (request, response) => {
+    const { params: { pageLink, lang }} = request;
+    const data = await requestLangPage(pageLink, lang);
     response.send(data);
 });
 

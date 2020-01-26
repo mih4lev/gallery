@@ -75,7 +75,9 @@ export const shareList = () => {
     const socialLinks = [...document.querySelectorAll(`.socialLink`)];
     if (!socialLinks.length) return false;
     const url = location.href;
-    const imageSource = document.querySelector(`.articlePicture`).src;
+    const imageSourceNode = document.querySelector(`.articlePicture`);
+    if (!imageSourceNode) return false;
+    const imageSource = imageSourceNode.src;
     const image = `${imageSource}`;
     const title = document.querySelector(`title`).innerText;
     const metaDescription = document.querySelector(`meta[name="description"]`);

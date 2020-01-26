@@ -1,4 +1,7 @@
 const { requestDB } = require(`../models/db.model`);
+const { 
+    authorData, photosArray, colorsArray, genreArray, techniqueArray 
+} = require(`./pictures-data.model`);
 
 // INSERT | CREATE
 const saveAuthor = async (params) => {
@@ -98,6 +101,27 @@ const requestAuthorExhibitions = async (authorID) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestAuthorPictures = async (authorID) => {
+    try {
+        const query = `
+            SELECT pictureID, pictureRU, pictureEN, pictureSizeWidth, pictureSizeHeight, 
+            pictureOrientation, picturePrice, picturePriceSale, pictureAboutRU, pictureAboutEN,
+            picturePosition, picturePhoto
+            FROM pictures WHERE authorID = '${authorID}'
+        `;
+        const data = await requestDB(query);
+        if (!data.length) return { code: 404, result: `pictures not found` };
+        for (const picture of data) {
+            await photosArray(picture);
+            await colorsArray(picture);
+            await genreArray(picture);
+            await techniqueArray(picture);
+        }
+        return data;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 const updateAuthor = async (authorID, params) => {
@@ -140,5 +164,6 @@ const deleteAuthor = async (authorID) => {
 module.exports = {
     requestAuthorList, requestAuthor, saveAuthor,
     updateAuthor, deleteAuthor, requestAuthorRewards,
-    requestAuthorEducations, requestAuthorExhibitions
+    requestAuthorEducations, requestAuthorExhibitions,
+    requestAuthorPictures
 };

@@ -1,11 +1,11 @@
 <div class="innerPage">
     <div class="basketWrapper">
         <div class="wrapper">
-            <h1 class="pageTitle basketTitle">Корзина</h1>
+            <h1 class="pageTitle basketTitle">{{{ basketTitle }}}</h1>
             <div class="basketTable">
                 <div class="basketTableHeader">
-                    <span class="basketHeaderTitle basketTitleName">Название</span>
-                    <span class="basketHeaderTitle basketTitlePrice">Цена</span>
+                    <span class="basketHeaderTitle basketTitleName">{{{ basketTitleName }}}</span>
+                    <span class="basketHeaderTitle basketTitlePrice">{{{ basketTitlePrice }}}</span>
                 </div>
                 <div class="basketTableBody">
                     <div class="basketItem">
@@ -15,7 +15,7 @@
                                 <a class="basketItemLink" href="/collection/1" target="_blank">Неширокая но длинная синяя картина</a>
                             </div>
                             <div class="pictureSize">
-                                <span class="sizeLabel">Размер</span>
+                                <span class="sizeLabel">{{{ sizeLabel }}}</span>
                                 <span class="pictureWidth metric metric--ru">100</span>
                                 <span class="pictureHeight metric metric--ru">180</span>
                             </div>
@@ -33,7 +33,7 @@
                                 <a class="basketItemLink" href="/collection/2" target="_blank">Широкая желтая картина</a>
                             </div>
                             <div class="pictureSize">
-                                <span class="sizeLabel">Размер</span>
+                                <span class="sizeLabel">{{{ sizeLabel }}}</span>
                                 <span class="pictureWidth metric metric--ru">200</span>
                                 <span class="pictureHeight metric metric--ru">120</span>
                             </div>
@@ -46,37 +46,37 @@
                     </div>
                 </div>
                 <div class="basketTableFooter">
-                    <span class="basketSummaryTitle">Итого</span>
+                    <span class="basketSummaryTitle">{{{ basketSummaryTitle }}}</span>
                     <span class="basketSummaryValue price price--rub" data-rub="350000">350 000</span>
                 </div>
             </div>
-            <div class="pageTitle deliveryTitle">Вид доставки</div>
+            <div class="pageTitle deliveryTitle">{{{ deliveryTitle }}}</div>
             <ul class="checkedForm deliveryForm">
                 <li class="checkedItem checkedItem--pickup" data-delivery="pickup">
                     <span class="checkedElement"></span>
-                    <span class="checkedLabel checkedLabel--pickup">Самовывоз</span>
-                    <span class="checkedAdditional checkedAdditional--pickup">г. Москва ул. Рождественская д.5. Ежедневно с 11-00 до 22-00</span>
+                    <span class="checkedLabel checkedLabel--pickup">{{{ checkedLabel--pickup }}}</span>
+                    <span class="checkedAdditional checkedAdditional--pickup">{{{ checkedAdditional--pickup }}}</span>
                 </li>
-                <li class="checkedItem checkedItem--courier"  data-delivery="courier">
+                <li class="checkedItem checkedItem--courier" data-delivery="courier">
                     <span class="checkedElement"></span>
-                    <span class="checkedLabel checkedLabel--courier">Доставка курьером</span>
-                    <span class="checkedAdditional checkedAdditional--courier">в пределах МКАД</span>
+                    <span class="checkedLabel checkedLabel--courier">{{{ checkedLabel--courier }}}</span>
+                    <span class="checkedAdditional checkedAdditional--courier">{{{ checkedAdditional--courier }}}</span>
                 </li>
                 <li class="checkedItem checkedItem--delivery" data-delivery="package">
                     <span class="checkedElement"></span>
-                    <span class="checkedLabel checkedLabel--delivery">Доставка транспортной компанией</span>
-                    <span class="checkedAdditional checkedAdditional--delivery">доставка по России и за границу</span>
+                    <span class="checkedLabel checkedLabel--delivery">{{{ checkedLabel--delivery }}}</span>
+                    <span class="checkedAdditional checkedAdditional--delivery">{{{ checkedAdditional--delivery }}}</span>
                 </li>
             </ul>
-            <div class="pageTitle paymentTitle">Способ оплаты</div>
+            <div class="pageTitle paymentTitle">{{{ paymentTitle }}}</div>
             <ul class="checkedForm paymentForm">
                 <li class="checkedItem checkedItem--cash" data-payment="cash">
                     <span class="checkedElement"></span>
-                    <span class="checkedLabel checkedLabel--cash">Оплата наличными</span>
+                    <span class="checkedLabel checkedLabel--cash">{{{ checkedLabel--cash }}}</span>
                 </li>
                 <li class="checkedItem checkedItem--online" data-payment="online">
                     <span class="checkedElement"></span>
-                    <span class="checkedLabel checkedLabel--online">Оплата онлайн</span>
+                    <span class="checkedLabel checkedLabel--online">{{{ checkedLabel--online }}}</span>
                     <ul class="paymentList">
                         <li class="payment">
                             <img class="paymentIcon" src="/images/card_icon--visa.png" alt="Visa payment system">
@@ -93,36 +93,36 @@
             <div class="clientFormWrapper">
                 <form class="clientForm">
                     <div class="clientFields">
-                        <div class="pageTitle clientTitle">Данные получателя</div>
+                        <div class="pageTitle clientTitle">{{{ clientTitle }}}</div>
                         <div class="clientForm--item sended--hide">
                             <label class="clientForm--label" for="clientName">
                                 <span class="clientForm--require">*</span>
-                                <span class="clientForm--title clientForm--name">Ваше имя</span>
+                                <span class="clientForm--title clientForm--name">{{{ clientForm--name }}}</span>
                             </label>
-                            <div class="errorBlock--field clientError--name">Укажите Ваше имя</div>
+                            <div class="errorBlock--field clientError--name">{{{ clientError--name }}}</div>
                             <input class="clientForm--field formField" type="text" id="clientName" name="clientName" data-type="name">
                         </div>
                         <div class="clientForm--item sended--hide">
                             <label class="clientForm--label" for="clientPhone">
                                 <span class="clientForm--require">*</span>
-                                <span class="clientForm--title clientForm--phone">Телефон</span>
+                                <span class="clientForm--title clientForm--phone">{{{ clientForm--phone }}}</span>
                             </label>
-                            <div class="errorBlock--field clientError--phone">Некорректный номер</div>
+                            <div class="errorBlock--field clientError--phone">{{{ clientError--phone }}}</div>
                             <input class="clientForm--field formField" type="text" id="clientPhone" name="clientPhone" data-type="phone">
                         </div>
                         <div class="clientForm--item sended--hide">
                             <label class="clientForm--label" for="clientEmail">
                                 <span class="clientForm--require">*</span>
-                                <span class="clientForm--title clientForm--email">E-mail</span>
+                                <span class="clientForm--title clientForm--email">{{{ clientForm--email }}}</span>
                             </label>
-                            <div class="errorBlock--field clientError--email">Некорректный e-mail</div>
+                            <div class="errorBlock--field clientError--email">{{{ clientError--email }}}</div>
                             <input class="clientForm--field formField" type="text" id="clientEmail" name="clientEmail" data-type="email">
                         </div>
                         <div class="clientForm--item sended--hide">
                             <label class="clientForm--label" for="clientComment">
-                                <span class="clientForm--title clientForm--comment">Комментарий к заказу</span>
+                                <span class="clientForm--title clientForm--comment">{{{ clientForm--comment }}}</span>
                             </label>
-                            <div class="errorBlock--field clientError--comment">Некорректный комментарий</div>
+                            <div class="errorBlock--field clientError--comment">{{{ clientError--comment }}}</div>
                             <textarea class="clientForm--textarea formField" id="clientComment" name="clientComment" data-type="comment"></textarea>
                         </div>
                     </div>
@@ -130,33 +130,33 @@
                         <div class="galleryMap formAdditional">
                             <img class="mapPin" src="/images/map_pin.png" alt="map pin">
                             <img class="logo" src="/images/logo.svg" alt="arTE logo">
-                            <address class="galleryAddress">ул. Рождественская д.5</address>
-                            <span class="galleryTimeline">Ежедневно с 11.00 - 22.00</span>
+                            <address class="galleryAddress">{{{ galleryAddress }}}</address>
+                            <span class="galleryTimeline">{{{ galleryTimeline }}}</span>
                         </div>
                         <div class="deliveryData formAdditional">
-                            <div class="pageTitle dataTitle dataTitle--address">Адрес доставки</div>
+                            <div class="pageTitle dataTitle dataTitle--address">{{{ dataTitle--address }}}</div>
                             <div class="clientForm--item sended--hide">
                                 <label class="clientForm--label" for="clientCity">
                                     <span class="clientForm--require">*</span>
-                                    <span class="clientForm--title clientForm--city">Город</span>
+                                    <span class="clientForm--title clientForm--city">{{{ clientForm--city }}}</span>
                                 </label>
-                                <div class="errorBlock--field clientError--city">Укажите город доставки</div>
+                                <div class="errorBlock--field clientError--city">{{{ clientError--city }}}</div>
                                 <input class="clientForm--field formField" type="text" id="clientCity" name="clientCity" data-type="city">
                             </div>
                             <div class="clientForm--item sended--hide">
                                 <label class="clientForm--label" for="clientAddress">
                                     <span class="clientForm--require">*</span>
-                                    <span class="clientForm--title clientForm--address">Адрес</span>
+                                    <span class="clientForm--title clientForm--address">{{{ clientForm--address }}}</span>
                                 </label>
-                                <div class="errorBlock--field clientError--address">Укажите адрес доставки</div>
+                                <div class="errorBlock--field clientError--address">{{{ clientError--address }}}</div>
                                 <input class="clientForm--field formField" type="text" id="clientAddress" name="clientAddress" data-type="address">
                             </div>
                             <div class="rulesFieldWrapper">
                                 <span class="rulesField"></span>
-                                <span class="rulesLabel">Согласен с условиями оплаты и доставки</span>
+                                <span class="rulesLabel">{{{ rulesLabel }}}</span>
                             </div>
                         </div>
-                        <button class="clientForm--button sended--hide" type="submit" disabled="disabled">Оформить заказ</button>
+                        <button class="clientForm--button sended--hide" type="submit" disabled="disabled">{{{ clientForm--button }}}</button>
                     </div>
                 </form>
             </div>
@@ -165,14 +165,14 @@
     <div class="orderWrapper">
         <div class="wrapper">
             <div class="order">
-                <p class="orderTitle">Спасибо за заказ</p>
+                <p class="orderTitle">{{{ orderTitle }}}</p>
                 <p class="orderNumberWrapper">
-                    <span class="orderNumberTitle">№ Заказа</span>
+                    <span class="orderNumberTitle">{{{ orderNumberTitle }}}</span>
                     <span class="orderNumber"></span>
                 </p>
-                <p class="orderConfirm">Ваш заказ принят. Мы свяжемся с Вами, когда заказ будет готов к отправке. Сообщение о подтверждении заказа было выслано на оставленный e-mail.</p>
+                <p class="orderConfirm">{{{ orderConfirm }}}</p>
                 <div class="followWrapper">
-                    <span class="followLabel">Следите за нами</span>
+                    <span class="followLabel">{{{ followLabel }}}</span>
                     <ul class="followList">
                         <li class="followItem">
                             <a href="#" class="followLink followLink--instagram" target="_blank">Instagram</a>
@@ -189,7 +189,7 @@
                         </a>
                         <a class="eventLink similarLink" href="/events/2">Instagram-интенсив «Теперь так»</a>
                         <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                        <span class="eventTheme interestTheme--poster">Афиша</span>
+                        <span class="eventTheme">Афиша</span>
                     </li>
                     <li class="event similarParent">
                         <a class="eventPhotoWrapper" href="/events/2">
@@ -197,7 +197,7 @@
                         </a>
                         <a class="eventLink similarLink" href="/events/3">Инсталляции группы Numen/For Use «Оклеим Москву»</a>
                         <p class="eventDescription">Во время работы выставки ее посещение будет разбито на четыре акта. В каждом акте выставочное пространство будет менять свои очертания, заметки и артефакты будут сменять друг друга, создавая среду для исполнения партитур приглашенными танцовщиками.</p>
-                        <span class="eventTheme interestTheme--news">Новости</span>
+                        <span class="eventTheme">Новости</span>
                     </li>
                     <li class="event similarParent">
                         <a class="eventPhotoWrapper" href="/events/2">
@@ -205,10 +205,10 @@
                         </a>
                         <a class="eventLink similarLink" href="/events/4">День открытых дверей в ARTE</a>
                         <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                        <span class="eventTheme interestTheme--poster">Афиша</span>
+                        <span class="eventTheme">Афиша</span>
                     </li>
                 </ul>
-                <a href="/events" class="eventsButton">Загляните в наш блог</a>
+                <a href="/events" class="eventsButton">{{{ eventsButton }}}</a>
             </div>
         </div>
     </div>

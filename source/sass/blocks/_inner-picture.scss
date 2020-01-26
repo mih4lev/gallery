@@ -75,342 +75,332 @@
 
 .pictureWrapper .picture {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     position: relative;
     margin-bottom: 40px;
-    padding-left: 773px;
     box-sizing: border-box;
-    min-height: 445px;
-    @include respond(desktop) {
-        min-height: 345px;
-        padding-left: 600px;
-    }
     @include respond(tablet) {
+        flex-direction: column;
         padding-left: 0;
     }
     @include respond(tabletMini) {
+        flex-direction: column;
         padding-left: 0;
     }
     @include respond(mobile) {
+        flex-direction: column;
         padding-left: 0;
     }
     .picturePhotoWrapper {
         display: flex;
+        flex-grow: 1;
+        flex-shrink: 0;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 773px;
-        height: 100%;
+        transition: all .25s ease-in;
+        // overflow: hidden;
+        background-image: url(/images/loader_gold--icon.svg);
+        background-repeat: no-repeat;
+        background-position: center center;
         @include respond(desktop) {
             width: 600px;
         }
         @include respond(tablet) {
-            order: 2;
-            position: unset;
             margin-bottom: 20px;
             width: 100%;
+            height: 360px;
         }
         @include respond(tabletMini) {
-            order: 2;
-            position: unset;
             margin-bottom: 20px;
             width: 100%;
+            height: 360px;
         }
         @include respond(mobile) {
-            order: 2;
-            position: unset;
             margin-bottom: 20px;
             width: 100%;
+            height: 360px;
         }
         .picturePhoto {
-            max-width: 753px;
-            cursor: pointer;
+            transition: all .15s ease-in;
+            opacity: 0;
+        }
+    }
+    .pictureDataWrapper {
+        display: flex;
+        flex-direction: column;
+        transition: all .25s ease-in;
+        .pictureHeader {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 25px;
+            font-weight: 700;
+            line-height: 30px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
             @include respond(desktop) {
-                max-width: 530px;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: 0.1375em;
             }
             @include respond(tablet) {
-                width: 100%;
+                order: 1;
+                margin-bottom: 20px;
             }
             @include respond(tabletMini) {
-                width: 100%;
+                order: 1;
+                margin-bottom: 20px;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: 0.1375em;
             }
             @include respond(mobile) {
-                width: 100%;
-            }
-        }
-    }
-    .pictureHeader {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 25px;
-        font-weight: 700;
-        line-height: 30px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        @include respond(desktop) {
-            font-size: 20px;
-            line-height: 24px;
-            letter-spacing: 0.1375em;
-        }
-        @include respond(tablet) {
-            order: 1;
-            margin-bottom: 20px;
-        }
-        @include respond(tabletMini) {
-            order: 1;
-            margin-bottom: 20px;
-            font-size: 20px;
-            line-height: 24px;
-            letter-spacing: 0.1375em;
-        }
-        @include respond(mobile) {
-            order: 1;
-            margin-bottom: 20px;
-            font-size: 15px;
-            line-height: 18px;
-            letter-spacing: 0.125em;
-        }
-    }
-    .pictureAuthorWrapper {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        @include respond(tablet) {
-            order: 4;
-            margin-top: 0;
-        }
-        @include respond(tabletMini) {
-            order: 4;
-            margin-top: 0;
-        }
-        @include respond(mobile) {
-            order: 4;
-            margin-top: 0;
-        }
-        .pictureAuthor {
-            transition: all .25s ease-in;
-            @extend %middleSecondaryText;
-            @include respond(desktop) {
-                font-size: 12px;
-                line-height: 14px;
-                letter-spacing: 0.1em;
-            }
-            @include respond(tabletMini) {
+                order: 1;
+                margin-bottom: 20px;
                 font-size: 15px;
                 line-height: 18px;
                 letter-spacing: 0.125em;
             }
+        }
+        .pictureAuthorWrapper {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            @include respond(tablet) {
+                order: 4;
+                margin-top: 0;
+            }
+            @include respond(tabletMini) {
+                order: 4;
+                margin-top: 0;
+            }
             @include respond(mobile) {
-                font-size: 12px;
-                line-height: 14px;
-                letter-spacing: 0.1em;
+                order: 4;
+                margin-top: 0;
+            }
+            .pictureAuthor {
+                transition: all .25s ease-in;
+                @extend %middleSecondaryText;
+                @include respond(desktop) {
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                }
+                @include respond(tabletMini) {
+                    font-size: 15px;
+                    line-height: 18px;
+                    letter-spacing: 0.125em;
+                }
+                @include respond(mobile) {
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                }
+                &:hover {
+                    color: $primaryColor;
+                }
+            }
+        }
+        .picturePrice {
+            margin-top: auto;
+            margin-bottom: auto;
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: 0.1em;
+            @extend %largePrimaryText;
+            @include respond(desktop) {
+                font-size: 30px;
+                line-height: 36px;
+                letter-spacing: 0.1675em;
+            }
+            @include respond(tablet) {
+                order: 5;
+                font-size: 25px;
+                line-height: 30px;
+                letter-spacing: 0.15em;
+            }
+            @include respond(tabletMini) {
+                order: 5;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: 0.1375em;
+            }
+            @include respond(mobile) {
+                order: 5;
+                font-size: 15px;
+                line-height: 18px;
+                letter-spacing: 0.125em;
+            }
+        }
+        .pictureSize{
+            margin-top: 20px;
+            margin-bottom: 10px;
+            @include respond(tablet) {
+                order: 6;
+            }
+            @include respond(tabletMini) {
+                order: 6;
+            }
+            @include respond(mobile) {
+                order: 6;
+            }
+            .sizeLabel {
+                &:after {
+                    content: ":"
+                }
+            }
+            .pictureHeight {
+                &:before {
+                    padding-right: 5px;
+                    content: "x";
+                }
+            }
+        }
+        .pictureGenre {
+            margin-top: 0;
+            margin-bottom: 10px;
+            @include respond(tablet) {
+                order: 7;
+            }
+            @include respond(tabletMini) {
+                order: 7;
+            }
+            @include respond(mobile) {
+                order: 7;
+            }
+            .genreLabel {
+                &:after {
+                    content: ":"
+                }
+            }
+        }
+        .pictureTechnique {
+            margin-top: 0;
+            margin-bottom: 20px;
+            @include respond(tablet) {
+                order: 8;
+            }
+            @include respond(tabletMini) {
+                order: 8;
+            }
+            @include respond(mobile) {
+                order: 8;
+            }
+            .techniqueLabel {
+                &:after {
+                    content: ":"
+                }
+            }
+        }
+        .pictureSimilarList {
+            display: flex;
+            flex-direction: row;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-left: 0;
+            list-style-type: none;
+            @include respond(tablet) {
+                order: 3;
+            }
+            @include respond(tabletMini) {
+                order: 3;
+            }
+            @include respond(mobile) {
+                order: 3;
+            }
+            .pictureSimilar {
+                margin-right: 10px;
+                cursor: pointer;
+                &:hover {
+                    @extend %photoFilter;
+                }
+            }
+        }
+        .pictureDeliveryText {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.075em;
+            @include respond(tablet) {
+                order: 9;
+                width: 370px;
+            }
+            @include respond(tabletMini) {
+                order: 9;
+            }
+            @include respond(mobile) {
+                order: 9;
+            }
+        }
+        .cartButton {
+            position: relative;
+            margin-top: 20px;
+            width: inherit;
+            height: 40px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: $secondaryColor;
+            border: 1px solid $secondaryColor;
+            background: #000;
+            cursor: pointer;
+            outline: none;
+            transition: all .25s ease-in;
+            @include respond(tablet) {
+                order: 10;
+                margin-top: -38px;
+                margin-left: 397px;
+                width: 300px;
+            }
+            @include respond(tabletMini) {
+                order: 10;
+            }
+            @include respond(mobile) {
+                order: 10;
+            }
+            &:before {
+                content: "";
+                position: absolute;
+                transform: translate(-28px, -4px) scale(0.7);
+                width: 18px;
+                height: 19px;
+                background-image: url(/images/basket--icon.svg);
+                transition: all .25s ease-in;
+                @include respond(tablet) {
+                    transform: translate(-28px, -4px) scale(0.7);
+                }
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                transform: translate(10px, 3px);
+                width: 20px;
+                height: 8px;
+                background-image: url(/images/arrow_right--icon.svg);
+                transition: all .25s ease-in;
+                @include respond(tablet) {
+                    transform: translate(7px, 2px) scale(0.8);
+                }
             }
             &:hover {
                 color: $primaryColor;
-            }
-        }
-    }
-    .picturePrice {
-        margin-top: auto;
-        margin-bottom: auto;
-        font-weight: 700;
-        font-style: normal;
-        letter-spacing: 0.1em;
-        @extend %largePrimaryText;
-        @include respond(desktop) {
-            font-size: 30px;
-            line-height: 36px;
-            letter-spacing: 0.1675em;
-        }
-        @include respond(tablet) {
-            order: 5;
-            font-size: 25px;
-            line-height: 30px;
-            letter-spacing: 0.15em;
-        }
-        @include respond(tabletMini) {
-            order: 5;
-            font-size: 20px;
-            line-height: 24px;
-            letter-spacing: 0.1375em;
-        }
-        @include respond(mobile) {
-            order: 5;
-            font-size: 15px;
-            line-height: 18px;
-            letter-spacing: 0.125em;
-        }
-    }
-    .pictureSize{
-        margin-top: 20px;
-        margin-bottom: 10px;
-        @include respond(tablet) {
-            order: 6;
-        }
-        @include respond(tabletMini) {
-            order: 6;
-        }
-        @include respond(mobile) {
-            order: 6;
-        }
-        .sizeLabel {
-            &:after {
-                content: ":"
-            }
-        }
-        .pictureHeight {
-            &:before {
-                padding-right: 5px;
-                content: "x";
-            }
-        }
-    }
-    .pictureGenre {
-        margin-top: 0;
-        margin-bottom: 10px;
-        @include respond(tablet) {
-            order: 7;
-        }
-        @include respond(tabletMini) {
-            order: 7;
-        }
-        @include respond(mobile) {
-            order: 7;
-        }
-        .genreLabel {
-            &:after {
-                content: ":"
-            }
-        }
-    }
-    .pictureTechnique {
-        margin-top: 0;
-        margin-bottom: 20px;
-        @include respond(tablet) {
-            order: 8;
-        }
-        @include respond(tabletMini) {
-            order: 8;
-        }
-        @include respond(mobile) {
-            order: 8;
-        }
-        .techniqueLabel {
-            &:after {
-                content: ":"
-            }
-        }
-    }
-    .pictureSimilarList {
-        display: flex;
-        flex-direction: row;
-        margin-top: 0;
-        margin-bottom: 20px;
-        padding-left: 0;
-        list-style-type: none;
-        @include respond(tablet) {
-            order: 3;
-        }
-        @include respond(tabletMini) {
-            order: 3;
-        }
-        @include respond(mobile) {
-            order: 3;
-        }
-        .pictureSimilar {
-            margin-right: 10px;
-            cursor: pointer;
-            &:hover {
-                @extend %photoFilter;
-            }
-        }
-    }
-    .pictureDeliveryText {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 10px;
-        line-height: 12px;
-        letter-spacing: 0.075em;
-        @include respond(tablet) {
-            order: 9;
-            width: 370px;
-        }
-        @include respond(tabletMini) {
-            order: 9;
-        }
-        @include respond(mobile) {
-            order: 9;
-        }
-    }
-    .cartButton {
-        position: relative;
-        margin-top: 20px;
-        width: inherit;
-        height: 40px;
-        text-align: center;
-        font-size: 12px;
-        line-height: 14px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: $secondaryColor;
-        border: 1px solid $secondaryColor;
-        background: #000;
-        cursor: pointer;
-        outline: none;
-        transition: all .25s ease-in;
-        @include respond(tablet) {
-            order: 10;
-            margin-top: -38px;
-            margin-left: 397px;
-            width: 300px;
-        }
-        @include respond(tabletMini) {
-            order: 10;
-        }
-        @include respond(mobile) {
-            order: 10;
-        }
-        &:before {
-            content: "";
-            position: absolute;
-            transform: translate(-28px, -4px) scale(0.7);
-            width: 18px;
-            height: 19px;
-            background-image: url(/images/basket--icon.svg);
-            transition: all .25s ease-in;
-            @include respond(tablet) {
-                transform: translate(-28px, -4px) scale(0.7);
-            }
-        }
-        &:after {
-            content: "";
-            position: absolute;
-            transform: translate(10px, 3px);
-            width: 20px;
-            height: 8px;
-            background-image: url(/images/arrow_right--icon.svg);
-            transition: all .25s ease-in;
-            @include respond(tablet) {
-                transform: translate(7px, 2px) scale(0.8);
-            }
-        }
-        &:hover {
-            color: $primaryColor;
-            border: 1px solid $primaryColor;
-            &:before {
-                background-image: url(/images/basket_white--icon.svg);
-            }
-            &:after {
-                transform: translate(20px, 3px);
-                background-image: url(/images/arrow_right_white--icon.svg);
-                @include respond(tablet) {
-                    transform: translate(17px, 3px) scale(0.8);
+                border: 1px solid $primaryColor;
+                &:before {
+                    background-image: url(/images/basket_white--icon.svg);
+                }
+                &:after {
+                    transform: translate(20px, 3px);
+                    background-image: url(/images/arrow_right_white--icon.svg);
+                    @include respond(tablet) {
+                        transform: translate(17px, 3px) scale(0.8);
+                    }
                 }
             }
         }
     }
-}
+ }
 
 .pictureWrapper .pictureText {
     margin-bottom: 40px;

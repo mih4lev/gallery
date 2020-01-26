@@ -3,49 +3,49 @@
             <div class="wrapper">
                 <ul class="breadcrumbs">
                     <li class="breadcrumb">
-                        <a class="breadcrumbLink headerNav--collections" href="/collection">Коллекция</a>
+                        <a class="breadcrumbLink headerNav--collections" href="/collection">{{{ headerNav--collections }}}</a>
                     </li>
                     <li class="breadcrumb">
                         <span class="breadcrumbLink--active">Женщина на желтом фоне</span>
                     </li>
                 </ul>
                 <div class="picture">
-                    <h1 class="pictureHeader">Женщина на желтом фоне</h1>
                     <div class="picturePhotoWrapper">
-                        <img class="picturePhoto" src="/photos/big_photo1.jpeg" alt="picture 1 photo">
+                        <img class="picturePhoto">
                     </div>
-                    <div class="pictureAuthorWrapper">
-                        <a class="pictureAuthor" href="/authors/1">Екатерина Жуковская</a>
+                    <div class="pictureDataWrapper">
+                        <h1 class="pictureHeader">Женщина на желтом фоне</h1>
+                        <div class="pictureAuthorWrapper">
+                            <a class="pictureAuthor" href="/authors/1">Екатерина Жуковская</a>
+                        </div>
+                        <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
+                        <p class="pictureSize">
+                            <span class="sizeLabel">{{{ sizeLabel }}}</span>
+                            <span class="pictureWidth metric metric--ru">100</span>
+                            <span class="pictureHeight metric metric--ru">150</span>
+                        </p>
+                        <p class="pictureGenre">
+                            <span class="genreLabel">{{{ genreLabel }}}</span>
+                            <span class="genreName">портрет</span>
+                        </p>
+                        <p class="pictureTechnique">
+                            <span class="techniqueLabel">{{{ techniqueLabel }}}</span>
+                            <span class="techniqueName">живопись</span>
+                        </p>
+                        <ul class="pictureSimilarList">
+                            <li class="pictureSimilar">
+                                <img src="/images/picture_photo1_small1.png" data-picture="/photos/big_photo1.jpeg" class="pictureSimilarPhoto" alt="another picture photo">
+                            </li>
+                            <li class="pictureSimilar">
+                                <img src="/images/picture_photo1_small2.png" data-picture="/photos/big_photo2.png" class="pictureSimilarPhoto" alt="another picture photo">
+                            </li>
+                            <li class="pictureSimilar">
+                                <img src="/images/picture_photo1_small3.png" data-picture="/photos/big_photo3.png" class="pictureSimilarPhoto" alt="another picture photo">
+                            </li>
+                        </ul>
+                        <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
+                        <button class="cartButton">{{{ cartButton }}}</button>
                     </div>
-                    <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
-                    <p class="pictureSize">
-                        <span class="sizeLabel">Размер</span>
-                        <span class="pictureWidth metric metric--ru">100</span>
-                        <span class="pictureHeight metric metric--ru">150</span>
-                    </p>
-                    <p class="pictureGenre">
-                        <span class="genreLabel">Жанр</span>
-                        <span class="genreName">портрет</span>
-                    </p>
-                    <p class="pictureTechnique">
-                        <span class="techniqueLabel">Техника</span>
-                        <span class="techniqueName">живопись</span>
-                    </p>
-                    <ul class="pictureSimilarList">
-                        <li class="pictureSimilar">
-                            <img src="/images/picture_photo1_small1.png" data-picture="/photos/big_photo1.jpeg" class="pictureSimilarPhoto" alt="another picture photo">
-                        </li>
-                        <li class="pictureSimilar">
-                            <img src="/images/picture_photo1_small2.png" data-picture="/photos/big_photo2.png" class="pictureSimilarPhoto" alt="another picture photo">
-                        </li>
-                        <li class="pictureSimilar">
-                            <img src="/images/picture_photo1_small3.png" data-picture="/photos/big_photo3.png" class="pictureSimilarPhoto" alt="another picture photo">
-                        </li>
-                    </ul>
-                    <p class="pictureDeliveryText">
-                        Вы можете уже сегодня заказать эту картину не выходя из дома. Добавьте ее в корзину и следуйте дальнейшим инструкциям. За ответами на вопросы обратитесь во вкладку: ДОСТАВКА
-                    </p>
-                    <button class="cartButton">Добавить в корзину</button>
                 </div>
                 <p class="pictureText">
                     Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор.
@@ -53,7 +53,7 @@
                 <div class="authorWrapper">
                     <div class="authorHeaderWrapper">
                         <img class="authorPhoto" src="/images/author1_photo.png" alt="author photo">
-                        <p class="authorHeaderAnother">Другие работы автора</p>
+                        <p class="authorHeaderAnother">{{{ authorHeaderAnother }}}</p>
                     </div>
                     <ul class="authorList">
                         <li class="authorPicture">
@@ -83,7 +83,7 @@
                         </li>
                     </ul>
                     <div class="buttonWrapper">
-                        <a class="picturesButton" href="/authors/1">Показать больше</a>
+                        <a class="picturesButton" href="/authors/1">{{{ picturesButton }}}</a>
                     </div>
                 </div>
             </div>

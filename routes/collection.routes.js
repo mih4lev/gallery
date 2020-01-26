@@ -1,30 +1,20 @@
 const { Router } = require(`express`);
+const { collectData } = require(`../models/data.model`);
 
 const router = new Router();
 
-router.get(`/`, (request, response) => {
-    const { language } = request;
-    const data = {
-        language,
-        isCollectionActive: true,
-        pageTitle: `arTE Gallery | collection`,
-        metaDescription: ``,
-        metaKeywords: ``
-    };
-    response.render('collection', data);
+router.get(`/`, async (request, response) => {
+    const pageLink = `collection`;
+    const data = await collectData(request, pageLink);
+    data.isCollectionActive = true;
+    response.render(pageLink, data);
 });
 
-router.get(`/:id`, (request, response) => {
-    const { language, params: { id: pictureID }} = request;
-    const data = {
-        language,
-        isCollectionActive: true,
-        pageTitle: `arTE Gallery | picture`,
-        metaDescription: ``,
-        metaKeywords: ``,
-        pictureID
-    };
-    response.render('picture', data);
+router.get(`/:id`, async (request, response) => {
+    const pageLink = `picture`;
+    const data = await collectData(request, pageLink);
+    data.isCollectionActive = true;
+    response.render(pageLink, data);
 });
 
 module.exports = router;

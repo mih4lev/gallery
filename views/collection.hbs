@@ -2,10 +2,10 @@
     <div class="wrapperFull">
         <div class="collection">
             <div class="filtersWrapper">
-                <div class="filtersHeader">Фильтры</div>
+                <div class="filtersHeader">{{{ filtersHeader }}}</div>
                 <ul class="filters">
                     <li class="filter">
-                        <p class="filterLabel filterPrice">Цена</p>
+                        <p class="filterLabel filterPrice">{{{ filterPrice }}}</p>
                         <div class="rangeWrapper">
                             <div class="rangeLine">
                                 <button class="rangeMin">min</button>
@@ -19,7 +19,7 @@
                         </div>
                     </li>
                     <li class="filter">
-                        <p class="filterLabel filterOrientation">Ориентация</p>
+                        <p class="filterLabel filterOrientation">{{{ filterOrientation }}}</p>
                         <div class="orientationWrapper">
                             <button class="orientation orientation--width" data-select="width">Width more</button>
                             <button class="orientation orientation--height" data-select="height">Height more</button>
@@ -27,9 +27,9 @@
                         </div>
                     </li>
                     <li class="filter">
-                        <p class="filterLabel filterSize">Размер</p>
+                        <p class="filterLabel filterSize">{{{ filterSize }}}</p>
                         <div class="rangeWrapper">
-                            <p class="rangeHeader rangeWidth">Ширина</p>
+                            <p class="rangeHeader rangeWidth">{{{ rangeWidth }}}</p>
                             <div class="rangeLine">
                                 <button class="rangeMin">min</button>
                                 <button class="rangeMax">max</button>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="rangeWrapper">
-                            <p class="rangeHeader rangeHeight">Высота</p>
+                            <p class="rangeHeader rangeHeight">{{{ rangeHeight }}}</p>
                             <div class="rangeLine">
                                 <button class="rangeMin">min</button>
                                 <button class="rangeMax">max</button>
@@ -54,7 +54,7 @@
                         </div>
                     </li>
                     <li class="filter">
-                        <p class="filterLabel filterColor">Цвет</p>
+                        <p class="filterLabel filterColor">{{{ filterColor }}}</p>
                         <div class="colorsWrapper">
                             <button class="color" data-select="dark-violet">Dark violet</button>
                             <button class="color" data-select="soft-magenta">Soft magenta</button>
@@ -73,7 +73,7 @@
                         </div>
                     </li>
                     <li class="filter">
-                        <p class="filterLabel filterLabel--dropdown filterGenre">Жанр</p>
+                        <p class="filterLabel filterLabel--dropdown filterGenre">{{{ filterGenre }}}</p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
                                 <ul class="dropdownList">
@@ -93,7 +93,7 @@
                         <ul class="chosenList"></ul>
                     </li>
                     <li class="filter">
-                        <p class="filterLabel filterLabel--dropdown filterTechnique">Техника</p>
+                        <p class="filterLabel filterLabel--dropdown filterTechnique">{{{ filterTechnique }}}</p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
                                 <ul class="dropdownList">
@@ -122,7 +122,7 @@
                         <ul class="chosenList"></ul>
                     </li>
                     <li class="filter">
-                        <p class="filterLabel filterLabel--dropdown filterAuthor">Автор</p>
+                        <p class="filterLabel filterLabel--dropdown filterAuthor">{{{ filterAuthor }}}</p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
                                 <ul class="dropdownList">

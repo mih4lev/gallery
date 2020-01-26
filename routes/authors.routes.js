@@ -1,30 +1,20 @@
 const { Router } = require(`express`);
+const { collectData } = require(`../models/data.model`);
 
 const router = new Router();
 
-router.get(`/`, (request, response) => {
-    const { language } = request;
-    const data = {
-        language,
-        isAuthorsActive: true,
-        pageTitle: `arTE Gallery | authors`,
-        metaDescription: ``,
-        metaKeywords: ``
-    };
-    response.render('authors', data);
+router.get(`/`, async (request, response) => {
+    const pageLink = `authors`;
+    const data = await collectData(request, pageLink);
+    data.isAuthorsActive = true;
+    response.render(pageLink, data);
 });
 
-router.get(`/:painter`, (request, response) => {
-    const { language, params: { painter: painterLink }} = request;
-    const data = {
-        language,
-        isAuthorsActive: true,
-        pageTitle: `arTE Gallery | painter`,
-        metaDescription: ``,
-        metaKeywords: ``,
-        painterLink
-    };
-    response.render('painter', data);
+router.get(`/:painter`, async (request, response) => {
+    const pageLink = `painter`;
+    const data = await collectData(request, pageLink);
+    data.isAuthorsActive = true;
+    response.render(pageLink, data);
 });
 
 module.exports = router;
