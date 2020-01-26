@@ -54,16 +54,19 @@ const requestSelectorLanguage = async (langSelector) => {
 
 // UPDATE
 const updateLanguage = async (langSelector, params) => {
-    const { langRu, langEN } = params;
+    const errorMessage = { code: 404, error: `language not found` };
+    if (!langSelector) return errorMessage;
+    const { langRU, langEN } = params;
     const query = `
         UPDATE language SET 
-            langRU = '${langRu}', langEN = '${langEN}'
-        WHERE langSelector = ${langSelector}`;
+            langRU = '${langRU}', langEN = '${langEN}'
+        WHERE langSelector = '${langSelector}'`;
     try {
-        const { changedRows } = await requestDB(query);
+        const response = await requestDB(query);
+        const { changedRows, message } = response;
         return {
-            code: (changedRows) ? 200 : 404,
-            result: (changedRows) ? `language updated` : `language not found`
+            code: (changedRows) ? 200 : 0,
+            result: (changedRows) ? `language updated` : message
         };
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
