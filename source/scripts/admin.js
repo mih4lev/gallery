@@ -53,4 +53,29 @@ const requestLangSelectors = async () => {
         });
     });
 };
-requestLangSelectors();
+
+const hideLangSelectors = async () => {
+    const response = await fetch(`/api/language/selectors`);
+    const data = await response.json();
+    data.forEach((dataItem) => {
+        const elementNodeList = document.querySelectorAll(`.${dataItem}`);
+        if (!elementNodeList.length) return false;
+        elementNodeList.forEach((elementNode) => {
+            elementNode.classList.remove(`editable`);
+            elementNode.removeAttribute(`data-lang-selector`);
+            elementNode.removeEventListener(`click`, showEditableWindow);
+        });
+    });
+};
+
+const adminEye = document.querySelector(`.adminEye`);
+adminEye.addEventListener(`click`, () => {
+    const isActivated = (adminEye.classList.contains(`activated`));
+    const method = (isActivated) ? `remove` : `add`;
+    adminEye.classList[method](`activated`);
+    if (isActivated) {
+        return hideLangSelectors();
+    }
+    adminEye.classList.add(`activated`);
+    return requestLangSelectors();
+});

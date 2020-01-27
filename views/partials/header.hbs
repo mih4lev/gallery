@@ -8,6 +8,11 @@
             </div>
             <nav class="headerNav">
                 <ul class="headerNav--list">
+                    {{#if isAdmin}}
+                        <li class="headerNav--item headerNav--eye">
+                            <button class="adminEye">show/hide admin panel</button>
+                        </li>
+                    {{/if}}
                     {{#if isBasketActive}}
 
                     {{else}}

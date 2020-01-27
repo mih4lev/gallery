@@ -7,7 +7,9 @@ const collectData = async (request, page) => {
     const langData = await requestLanguage(language);
     return Object.assign(
         langData, pageData, 
-        { language, languageTitle, isActiveRU, isActiveEN }
+        {
+            language, languageTitle, isActiveRU, isActiveEN, isAdmin: true
+        }
     );
 };
 
