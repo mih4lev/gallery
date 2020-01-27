@@ -3,13 +3,152 @@
         <form class="templateWrapper">
             <div class="templateElement">
                 <label class="templateLabel" for="langRU">RU Контент</label>
-                <textarea class="templateField fieldRU" id="langRU" type="text" name="langRU"></textarea>
+                <textarea class="templateField fieldRU" id="langRU" name="langRU"></textarea>
             </div>
             <div class="templateElement">
                 <label class="templateLabel" for="langRU">EN Контент</label>
-                <textarea class="templateField fieldEN" id="langRU" type="text" name="langRU"></textarea>
+                <textarea class="templateField fieldEN" id="langRU" name="langRU"></textarea>
             </div>
-            <button class="templateButton" type="submit">Сохранить</button>
+            <button class="templateButton adminLangButton" type="submit">Сохранить</button>
         </form>
+        <button class="adminButton templateCloseButton">Close</button>
+    </div>
+</template>
+
+<template class="authorTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorRU">Имя автора RU</label>
+                    <input class="templateField authorRU" id="authorRU" type="text" name="authorRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorEN">Имя автора EN</label>
+                    <input class="templateField authorEN" id="authorEN" type="text" name="authorEN">
+                </div>
+            </div>
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorLink">Линк на автора</label>
+                    <input class="templateField authorLink" id="authorLink" type="text" name="authorLink">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="authorAboutRU">Описание RU</label>
+                <textarea class="templateField authorAboutRU" id="authorAboutRU" name="authorAboutRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="authorAboutEN">Описание EN</label>
+                <textarea class="templateField authorAboutEN" id="authorAboutEN" name="authorAboutEN"></textarea>
+            </div>
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorCityRU">Город RU</label>
+                    <input class="templateField authorCityRU" id="authorCityRU" type="text" name="authorCityRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorCityEN">Город EN</label>
+                    <input class="templateField authorCityEN" id="authorCityEN" type="text" name="authorCityEN">
+                </div>
+            </div>
+            <button class="templateButton adminAuthorButton" type="submit">Создать</button>
+        </form>
+        <button class="adminButton templateCloseButton">Close</button>
+    </div>
+</template>
+
+<template class="authorDeleteTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <p class="templateHeader">Вы точно хотите удалить автора?</p>
+            <p class="templateText">(это действие необратимо, так же удалятся все картины данного автора)</p>
+            <button class="templateButton adminAuthorButton" type="submit">Удалить</button>
+        </form>
+        <button class="adminButton templateCloseButton">Close</button>
+    </div>
+</template>
+
+<template class="authorEducationTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="educationYearRU">Год RU</label>
+                    <input class="templateField educationYearRU" id="educationYearRU" type="text" name="educationYearRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="educationYearEN">Год EN</label>
+                    <input class="templateField educationYearEN" id="educationYearEN" type="text" name="educationYearEN">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="educationRU">Описание RU</label>
+                <textarea class="templateField educationRU" id="educationRU" name="educationRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="educationEN">Описание EN</label>
+                <textarea class="templateField educationEN" id="educationEN" name="educationEN"></textarea>
+            </div>
+            <button class="templateButton adminAuthorButton" type="submit">Добавить</button>
+            <button class="templateButton adminDeleteButton" type="submit">Удалить</button>
+        </form>
+        <button class="adminButton templateCloseButton">Close</button>
+    </div>
+</template>
+
+<template class="authorRewardsTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="rewardYearRU">Год RU</label>
+                    <input class="templateField rewardYearRU" id="rewardYearRU" type="text" name="rewardYearRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="rewardYearEN">Год EN</label>
+                    <input class="templateField rewardYearEN" id="rewardYearEN" type="text" name="rewardYearEN">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="rewardRU">Описание RU</label>
+                <textarea class="templateField rewardRU" id="rewardRU" name="rewardRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="rewardEN">Описание EN</label>
+                <textarea class="templateField rewardEN" id="rewardEN" name="rewardEN"></textarea>
+            </div>
+            <button class="templateButton adminAuthorButton" type="submit">Добавить</button>
+            <button class="templateButton adminDeleteButton" type="submit">Удалить</button>
+        </form>
+        <button class="adminButton templateCloseButton">Close</button>
+    </div>
+</template>
+
+<template class="authorExhibitionsTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="exhibitionYearRU">Год RU</label>
+                    <input class="templateField exhibitionYearRU" id="exhibitionYearRU" type="text" name="exhibitionYearRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="exhibitionYearEN">Год EN</label>
+                    <input class="templateField exhibitionYearEN" id="exhibitionYearEN" type="text" name="exhibitionYearEN">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="exhibitionRU">Описание RU</label>
+                <textarea class="templateField exhibitionRU" id="exhibitionRU" name="exhibitionRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="exhibitionEN">Описание EN</label>
+                <textarea class="templateField exhibitionEN" id="exhibitionEN" name="exhibitionEN"></textarea>
+            </div>
+            <button class="templateButton adminAuthorButton" type="submit">Добавить</button>
+            <button class="templateButton adminDeleteButton" type="submit">Удалить</button>
+        </form>
+        <button class="adminButton templateCloseButton">Close</button>
     </div>
 </template>

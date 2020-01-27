@@ -1,19 +1,26 @@
 const { Router } = require(`express`);
 const {
-    requestExhibitionList, saveExhibition, updateExhibition, deleteExhibition
+    requestExhibition, requestExhibitionList,
+    saveExhibition, updateExhibition, deleteExhibition
 } = require("../models/exhibitions.model");
 
 const router = new Router();
 
 // POST | CREATE
-router.post(`/`, async (request, response) => {
-    const data = await saveExhibition(request.body);
+router.post(`/:authorID`, async (request, response) => {
+    const { params: { authorID }} = request;
+    const data = await saveExhibition(authorID, request.body);
     await response.json(data);
 });
 
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestExhibitionList();
+    response.send(data);
+});
+router.get(`/:exhibitionID`, async (request, response) => {
+    const { params: { exhibitionID }} = request;
+    const data = await requestExhibition(exhibitionID);
     response.send(data);
 });
 

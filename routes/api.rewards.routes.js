@@ -1,19 +1,26 @@
 const { Router } = require(`express`);
 const {
-    requestRewardList, saveReward, updateReward, deleteReward
+    requestReward, requestRewardList,
+    saveReward, updateReward, deleteReward
 } = require("../models/rewards.model");
 
 const router = new Router();
 
 // POST | CREATE
-router.post(`/`, async (request, response) => {
-    const data = await saveReward(request.body);
+router.post(`/:authorID`, async (request, response) => {
+    const { params: { authorID }} = request;
+    const data = await saveReward(authorID, request.body);
     await response.json(data);
 });
 
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestRewardList();
+    response.send(data);
+});
+router.get(`/:rewardID`, async (request, response) => {
+    const { params: { rewardID }} = request;
+    const data = await requestReward(rewardID);
     response.send(data);
 });
 

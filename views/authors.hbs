@@ -1,4 +1,13 @@
 <div class="innerPage">
+    {{#if isAdmin}}
+        <div class="adminAuthorsWrapper">
+            <div class="wrapper">
+                <div class="adminAuthors">
+                    <button class="adminButton adminAuthorAddButton">Add author</button>
+                </div>
+            </div>
+        </div>
+    {{/if}}
     <div class="authorsWrapper">
         <div class="wrapper">
             <div class="authorBlock">

@@ -1,16 +1,19 @@
 const { requestDB } = require(`../models/db.model`);
 
 // INSERT | CREATE
-const saveReward = async (params) => {
+const saveReward = async (authorID, params) => {
     const {
-        authorID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
+        rewardYearRU, rewardYearEN, rewardRU, rewardEN
     } = params;
+    const countQuery = `SELECT COUNT(rewardID) as count FROM rewards`;
+    const { 0: { count }} = await requestDB(countQuery);
     const query = `
         INSERT INTO rewards (
-            authorID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
+            authorID, rewardYearRU, rewardYearEN, 
+            rewardRU, rewardEN, rewardPlace
         ) VALUES (
             '${authorID}', '${rewardYearRU}', '${rewardYearEN}', 
-            '${rewardRU}', '${rewardEN}'
+            '${rewardRU}', '${rewardEN}', ${count + 1}
         )`;
     try {
         const { insertId } = await requestDB(query);
@@ -29,9 +32,26 @@ const requestRewardList = async () => {
     const query = `SELECT * FROM rewards`;
     return await requestDB(query);
 };
+const requestReward = async (rewardID) => {
+    const query = `
+        SELECT 
+            rewardYearRU, rewardYearEN, rewardRU, 
+            rewardEN, rewardPlace
+        FROM rewards WHERE rewardID = '${rewardID}'
+    `;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `reward ${rewardID} not found` };
+        return (data.length) ? data[0] : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 const updateReward = async (rewardID, params) => {
+    const errorMessage = { code: 404, error: `reward not found` };
+    if (!rewardID) return errorMessage;
     const {
         rewardYearRU, rewardYearEN, rewardRU, rewardEN
     } = params;
@@ -41,10 +61,11 @@ const updateReward = async (rewardID, params) => {
             rewardRU = '${rewardRU}', rewardEN = '${rewardEN}' 
         WHERE rewardID = ${rewardID}`;
     try {
-        const { changedRows } = await requestDB(query);
+        const response = await requestDB(query);
+        const { changedRows, message } = response;
         return {
-            code: (changedRows) ? 200 : 404,
-            result: (changedRows) ? `reward updated` : `reward not found`
+            code: (changedRows) ? 200 : 0,
+            result: (changedRows) ? `reward updated` : message
         };
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
@@ -65,4 +86,7 @@ const deleteReward = async (rewardID) => {
     }
 };
 
-module.exports = { requestRewardList, saveReward, updateReward, deleteReward };
+module.exports = {
+    requestReward, requestRewardList,
+    saveReward, updateReward, deleteReward
+};

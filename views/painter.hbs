@@ -5,6 +5,9 @@
                 <h1 class="painterName">Екатерина Жуковская</h1>
                 <span class="painterCity">Москва</span>
                 <img class="painterPhoto" src="/images/author1_photo.png" alt="Author photo">
+                {{#if isAdmin}}
+                    <button class="adminButton adminAuthorRemoveButton">remove author</button>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -21,7 +24,7 @@
                 </ul>
                 <article class="painterDataArticle">
                     <h3 class="painterDataHeader headerEducation">{{{ headerEducation }}}</h3>
-                    <ul class="painterDataList">
+                    <ul class="painterDataList educationList">
                         <li class="painterEvent">
                             <em class="painterTimeline">2002-2009</em>
                             <span class="painterText">Московский Академический Художественный Лицей при Российской Академии Художеств.</span>
@@ -35,8 +38,9 @@
                             <span class="painterText">Школа современного искусства «Свободные мастерские» при Музее современного искусства.</span>
                         </li>
                     </ul>
+                    <button class="adminButton adminListButton adminEducationAddButton">Add</button>
                     <h3 class="painterDataHeader headerAwards">{{{ headerAwards }}}</h3>
-                    <ul class="painterDataList">
+                    <ul class="painterDataList rewardList">
                         <li class="painterEvent">
                             <em class="painterTimeline">2007</em>
                             <span class="painterText">Награждена золотой медалью Российской Академии Художеств.</span>
@@ -50,8 +54,9 @@
                             <span class="painterText">Член Союза Художников России</span>
                         </li>
                     </ul>
+                    <button class="adminButton adminListButton adminRewardsAddButton">Add</button>
                     <h3 class="painterDataHeader exhibitionHeader">{{{ exhibitionHeader }}}</h3>
-                    <ul class="painterDataList">
+                    <ul class="painterDataList exhibitionList">
                         <li class="painterEvent">
                             <em class="painterTimeline">2010</em>
                             <span class="painterText">Участие в выставке МОСХ России «Молодежная ХХХ», участие в выставке «Молодые художники России», ЦДХ.</span>
@@ -113,6 +118,7 @@
                             <span class="painterText">"Liza Tulchinskaya. Mimicry ", WUK, Vienna</span>
                         </li>
                     </ul>
+                    <button class="adminButton adminListButton adminExhibitionAddButton">Add</button>
                 </article>
             </div>
         </div>

@@ -6,6 +6,23 @@
         border: 1px solid $errorColor !important;
     }
 }
+
+.adminButton {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+    width: 16px;
+    height: 16px;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 16px 16px;
+    font-size: 0;
+    cursor: pointer;
+    outline: none;
+}
+
 .editWrapper {
     display: flex;
     justify-content: center;
@@ -20,13 +37,31 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        .templateHeader {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+            color: $secondaryColor;
+            text-transform: uppercase;
+        }
+        .templateText {
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+        .templateLine {
+            display: flex;
+            width: $wrapperWidth / 2;
+        }
         .templateElement {
             display: flex;
+            flex-grow: 1;
             flex-direction: column;
             margin-bottom: 20px;
         }
         .templateLabel {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: $secondaryColor;
             font-size: 12px;
             line-height: 14px;
@@ -34,53 +69,62 @@
         }
         .templateField {
             opacity: 0.65;
-            padding-top: 28px;
-            padding-left: 28px;
-            padding-right: 28px;
-            padding-bottom: 28px;
-            width: $wrapperWidth / 2;
-            height: 140px;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            box-sizing: border-box;
             color: $primaryColor;
             border: 1px solid $primaryColor;
             background-color: #000;
+            font-family: "Gilroy", Arial, sans-serif;
             font-size: 12px;
             line-height: 14px;
             letter-spacing: 0.1em;
             outline: none;
+            @include respond(tabletMini) {
+                width: $tabletMiniContentWidth;
+            }
+            @include respond(mobile) {
+                width: $mobileContentWidth;
+            }
             &:focus {
                 opacity: 1;
                 color: $secondaryColor;
                 border: 1px solid $secondaryColor;
             }
+        }
+        input.templateField {
+            width: ($wrapperWidth / 4) - 20;
+        }
+        textarea.templateField {
+            width: $wrapperWidth / 2;
+            height: 154px;
             @include respond(tabletMini) {
                 padding-top: 12px;
                 padding-left: 12px;
                 padding-right: 12px;
                 padding-bottom: 12px;
-                width: $tabletMiniContentWidth;
                 height: 144px;
                 font-size: 10px;
                 line-height: 12px;
                 letter-spacing: 0.075em;
-            
             }
             @include respond(mobile) {
                 padding-top: 12px;
                 padding-left: 12px;
                 padding-right: 12px;
                 padding-bottom: 12px;
-                width: $mobileContentWidth;
                 height: 144px;
                 font-size: 10px;
                 line-height: 12px;
                 letter-spacing: 0.075em;
-            
             }
         }
         .templateButton {
             opacity: 0.65;
-            width: $wrapperWidth / 4;
-            height: 40px;
+            width: ($wrapperWidth / 4) - 20;
+            height: 32px;
             background-color: #000;
             border: 1px solid $primaryColor;
             color: $primaryColor;
@@ -98,6 +142,67 @@
         .templateButton.requestingStatus {
             color: #000;
             background-color: $secondaryColor;
+        }
+        .templateButton.adminDeleteButton {
+            margin-top: 20px;
+            border-color: $errorColor;
+            color: $errorColor;
+        }
+    }
+    .templateCloseButton {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-image: url(/images/basket_close--icon.svg);
+        &:hover {
+            background-image: url(/images/basket_close_white--icon.svg);
+        }
+    }
+}
+
+.adminAuthorsWrapper {
+    margin-bottom: -20px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    background-image: linear-gradient(246.59deg,#000 24.57%,#1e1b1e 82.74%);
+    .adminAuthors {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .adminAuthorAddButton {
+        background-image: url(/images/people_add--icon.svg);
+        &:hover {
+            background-image: url(/images/people_add_white--icon.svg);
+        }
+    }
+}
+
+.adminAuthorRemoveButton {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-image: url(/images/author_delete--icon.svg);
+    &:hover {
+        background-image: url(/images/author_delete_white--icon.svg);
+    }
+}
+
+.adminListButton {
+    margin-left: 60px;
+    margin-bottom: 20px;
+    background-image: url(/images/admin_list_add--icon.svg);
+    &:hover {
+        background-image: url(/images/admin_list_add_white--icon.svg);
+    }
+}
+
+.editableItem {
+    cursor: pointer;
+    &:hover {
+        .painterText {
+            color: $secondaryColor;
         }
     }
 }
