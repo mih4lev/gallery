@@ -199,6 +199,7 @@
             .painterEvent {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
                 margin-bottom: 10px;
                 @include respond(mobile) {
                     flex-direction: column;

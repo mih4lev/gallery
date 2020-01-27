@@ -74,13 +74,30 @@ const updateReward = async (rewardID, params) => {
 
 // DELETE
 const deleteReward = async (rewardID) => {
-    const query = `DELETE FROM rewards WHERE rewardID = ${rewardID}`;
     try {
+        const placeQuery = `
+            SELECT rewardPlace 
+            FROM rewards WHERE rewardID = ${rewardID}
+        `;
+        const placeResult = await requestDB(placeQuery);
+        if (!placeResult.length) return { code: 404, error: `reward not found`};
+        let { 0: { rewardPlace }} = placeResult;
+        const query = `DELETE FROM rewards WHERE rewardID = ${rewardID}`;
         const { affectedRows } = await requestDB(query);
-        return {
-            code: (affectedRows) ? 200 : 404,
-            result: (affectedRows) ? `reward deleted` : `reward not found`
-        };
+        if (!affectedRows) return { code: 0, error: `reward delete error` };
+        const deletedQuery = `
+            SELECT rewardID 
+            FROM rewards WHERE rewardPlace > ${rewardPlace}
+        `;
+        const changeFields = await requestDB(deletedQuery);
+        for (const { rewardID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE rewards SET rewardPlace = ${rewardPlace++}
+                WHERE rewardID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+        return { code: 200, result: `reward ${rewardID} deleted` }
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }

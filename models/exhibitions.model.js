@@ -80,13 +80,30 @@ const updateExhibition = async (exhibitionID, params) => {
 
 // DELETE
 const deleteExhibition = async (exhibitionID) => {
-    const query = `DELETE FROM exhibitions WHERE exhibitionID = ${exhibitionID}`;
     try {
+        const placeQuery = `
+            SELECT exhibitionPlace 
+            FROM exhibitions WHERE exhibitionID = ${exhibitionID}
+        `;
+        const placeResult = await requestDB(placeQuery);
+        if (!placeResult.length) return { code: 404, error: `exhibition not found`};
+        let { 0: { exhibitionPlace }} = placeResult;
+        const query = `DELETE FROM exhibitions WHERE exhibitionID = ${exhibitionID}`;
         const { affectedRows } = await requestDB(query);
-        return {
-            code: (affectedRows) ? 200 : 404,
-            result: (affectedRows) ? `exhibition deleted` : `exhibition not found`
-        };
+        if (!affectedRows) return { code: 0, error: `exhibition delete error` };
+        const deletedQuery = `
+            SELECT exhibitionID 
+            FROM exhibitions WHERE exhibitionPlace > ${exhibitionPlace}
+        `;
+        const changeFields = await requestDB(deletedQuery);
+        for (const { exhibitionID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE exhibitions SET exhibitionPlace = ${exhibitionPlace++}
+                WHERE exhibitionID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+        return { code: 200, result: `exhibition ${exhibitionID} deleted` }
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }

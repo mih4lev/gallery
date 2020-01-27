@@ -270,7 +270,7 @@ if (adminExhibitionAddButton) {
     });
 }
 
-const educationEvents = [...document.querySelectorAll(`.educationList .painterEvent`)];
+const educationEvents = [...document.querySelectorAll(`.educationList .painterText`)];
 if (educationEvents.length) {
     educationEvents.forEach((event) => {
         event.classList.add(`editableItem`);
@@ -317,7 +317,7 @@ if (educationEvents.length) {
             deleteButton.addEventListener(`click`, async (event) => {
                 event.preventDefault();
                 const options = { method: `DELETE` };
-                const educationID = 4;
+                const educationID = 5;
                 await fetch(`/api/educations/${educationID}`, options);
                 bodyNode.removeChild(editWrapper);
             });
@@ -330,7 +330,7 @@ if (educationEvents.length) {
     });
 }
 
-const exhibitionEvents = [...document.querySelectorAll(`.exhibitionList .painterEvent`)];
+const exhibitionEvents = [...document.querySelectorAll(`.exhibitionList .painterText`)];
 if (exhibitionEvents.length) {
     exhibitionEvents.forEach((event) => {
         event.classList.add(`editableItem`);
@@ -377,7 +377,7 @@ if (exhibitionEvents.length) {
             deleteButton.addEventListener(`click`, async (event) => {
                 event.preventDefault();
                 const options = { method: `DELETE` };
-                const exhibitionID = 2;
+                const exhibitionID = 6;
                 await fetch(`/api/exhibitions/${exhibitionID}`, options);
                 bodyNode.removeChild(editWrapper);
             });
@@ -390,7 +390,7 @@ if (exhibitionEvents.length) {
     });
 }
 
-const rewardEvents = [...document.querySelectorAll(`.rewardList .painterEvent`)];
+const rewardEvents = [...document.querySelectorAll(`.rewardList .painterText`)];
 if (rewardEvents.length) {
     rewardEvents.forEach((event) => {
         event.classList.add(`editableItem`);
@@ -437,7 +437,7 @@ if (rewardEvents.length) {
             deleteButton.addEventListener(`click`, async (event) => {
                 event.preventDefault();
                 const options = { method: `DELETE` };
-                const rewardID = 4;
+                const rewardID = 7;
                 await fetch(`/api/rewards/${rewardID}`, options);
                 bodyNode.removeChild(editWrapper);
             });
@@ -446,6 +446,57 @@ if (rewardEvents.length) {
                 event.preventDefault();
                 bodyNode.removeChild(editWrapper);
             });
+        });
+    });
+}
+
+const moveEducationsArrows = [...document.querySelectorAll(`.educationList .adminMoveButton`)];
+if (moveEducationsArrows.length) {
+    moveEducationsArrows.forEach((button, index) => {
+        if (index === 0) button.style.display = `none`;
+        button.addEventListener(`click`, async (event) => {
+            event.preventDefault();
+            const options = {
+                method: `PUT`,
+                headers: {
+                    'Content-Type': `application/json;charset=utf-8`
+                }
+            };
+            await fetch(`/api/educations/place/7/6`, options);
+        });
+    });
+}
+
+const moveExhibitionsArrows = [...document.querySelectorAll(`.exhibitionList .adminMoveButton`)];
+if (moveExhibitionsArrows.length) {
+    moveExhibitionsArrows.forEach((button, index) => {
+        if (index === 0) button.style.display = `none`;
+        button.addEventListener(`click`, async (event) => {
+            event.preventDefault();
+            const options = {
+                method: `PUT`,
+                headers: {
+                    'Content-Type': `application/json;charset=utf-8`
+                }
+            };
+            await fetch(`/api/exhibitions/place/7/6`, options);
+        });
+    });
+}
+
+const moveRewardsArrows = [...document.querySelectorAll(`.rewardList .adminMoveButton`)];
+if (moveRewardsArrows.length) {
+    moveRewardsArrows.forEach((button, index) => {
+        if (index === 0) button.style.display = `none`;
+        button.addEventListener(`click`, async (event) => {
+            event.preventDefault();
+            const options = {
+                method: `PUT`,
+                headers: {
+                    'Content-Type': `application/json;charset=utf-8`
+                }
+            };
+            await fetch(`/api/rewards/place/7/6`, options);
         });
     });
 }

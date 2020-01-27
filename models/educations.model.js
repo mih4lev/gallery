@@ -77,16 +77,66 @@ const updateEducation = async (educationID, params) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const moveEducation = async (educationMasterID, educationSlaveID) => {
+    try {
+        const masterQuery = `
+            SELECT educationPlace 
+            FROM educations WHERE educationID = ${educationMasterID}
+        `;
+        const masterResult = await requestDB(masterQuery);
+        const slaveQuery = `
+            SELECT educationPlace 
+            FROM educations WHERE educationID = ${educationSlaveID}
+        `;
+        const slaveResult = await requestDB(slaveQuery);
+        const masterError = `education with ID ${educationMasterID} not found`;
+        const slaveError = `education with ID ${educationSlaveID} not found`;
+        if (!masterResult.length) return { code: 404, error: masterError };
+        if (!slaveResult.length) return { code: 404, error: slaveError };
+        const { 0: { educationPlace: educationMasterPlace }} = masterResult;
+        const { 0: { educationPlace: educationSlavePlace }} = slaveResult;
+        const updateMasterQuery = `
+            UPDATE educations SET educationPlace = ${ educationSlavePlace }
+            WHERE educationID = ${educationMasterID}
+        `;
+        await requestDB(updateMasterQuery);
+        const updateSlaveQuery = `
+            UPDATE educations SET educationPlace = ${ educationMasterPlace }
+            WHERE educationID = ${educationSlaveID}
+        `;
+        await requestDB(updateSlaveQuery);
+        return { code: 200, result: `education places changed` };
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // DELETE
 const deleteEducation = async (educationID) => {
-    const query = `DELETE FROM educations WHERE educationID = ${educationID}`;
     try {
+        const placeQuery = `
+            SELECT educationPlace 
+            FROM educations WHERE educationID = ${educationID}
+        `;
+        const placeResult = await requestDB(placeQuery);
+        if (!placeResult.length) return { code: 404, error: `education not found`};
+        let { 0: { educationPlace }} = placeResult;
+        const query = `DELETE FROM educations WHERE educationID = ${educationID}`;
         const { affectedRows } = await requestDB(query);
-        return {
-            code: (affectedRows) ? 200 : 404,
-            result: (affectedRows) ? `education deleted` : `education not found`
-        };
+        if (!affectedRows) return { code: 0, error: `education delete error` };
+        const deletedQuery = `
+            SELECT educationID 
+            FROM educations WHERE educationPlace > ${educationPlace}
+        `;
+        const changeFields = await requestDB(deletedQuery);
+        for (const { educationID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE educations SET educationPlace = ${educationPlace++}
+                WHERE educationID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+        return { code: 200, result: `education ${educationID} deleted` }
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
@@ -94,5 +144,6 @@ const deleteEducation = async (educationID) => {
 
 module.exports = {
     requestEducation, requestEducationList,
-    saveEducation, updateEducation, deleteEducation
+    saveEducation, moveEducation,
+    updateEducation, deleteEducation
 };

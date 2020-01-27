@@ -198,11 +198,37 @@
     }
 }
 
-.editableItem {
+.editableItem.painterText {
     cursor: pointer;
     &:hover {
-        .painterText {
-            color: $secondaryColor;
-        }
+        color: $secondaryColor;
     }
+}
+
+.adminMoveButton {
+    position: absolute;
+    left: 83px;
+    display: block;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 20px;
+    height: 8px;
+    background-image: url(/images/arrow_right--icon.svg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    font-size: 0;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+        background-image: url(/images/arrow_right_white--icon.svg);
+    }
+}
+.adminMoveButton.adminMoveUp {
+    transform: rotate(-90deg) scale(0.7);
+}
+.adminMoveButton.adminMoveDown {
+    transform: rotate(90deg) scale(0.7);
 }
