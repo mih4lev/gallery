@@ -3,7 +3,7 @@ const {
     requestAuthorList, requestAuthor, saveAuthor,
     updateAuthor, deleteAuthor, requestAuthorRewards,
     requestAuthorEducations, requestAuthorExhibitions, 
-    requestAuthorPictures
+    requestAuthorPictures, requestLanguageAuthor
 } = require("../models/authors.model");
 
 const router = new Router();
@@ -42,6 +42,11 @@ router.get(`/:authorID/exhibitions`, async (request, response) => {
 router.get(`/:authorID/pictures`, async (request, response) => {
     const { params: { authorID }} = request;
     const data = await requestAuthorPictures(authorID);
+    response.send(data);
+});
+router.get(`/:authorID/lang/:lang`, async (request, response) => {
+    const { params: { authorID, lang }} = request;
+    const data = await requestLanguageAuthor(authorID, lang);
     response.send(data);
 });
 

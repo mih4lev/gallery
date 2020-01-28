@@ -2,11 +2,11 @@
     <div class="painterHeader">
         <div class="wrapper">
             <div class="painterHeaderWrapper">
-                <h1 class="painterName">Екатерина Жуковская</h1>
-                <span class="painterCity">Москва</span>
-                <img class="painterPhoto" src="/images/author1_photo.png" alt="Author photo">
+                <h1 class="painterName">{{{ authorData.author }}}</h1>
+                <span class="painterCity">{{{ authorData.authorCity }}}</span>
+                <img class="painterPhoto" src="/images/{{{ authorData.authorPhoto }}}" alt="Author photo">
                 {{#if isAdmin}}
-                    <button class="adminButton adminAuthorRemoveButton">remove author</button>
+                    <button class="adminButton adminAuthorRemoveButton">remove</button>
                 {{/if}}
             </div>
         </div>
@@ -19,127 +19,61 @@
                         <a class="breadcrumbLink authorsBreadcrumbLink" href="/authors">{{{ authorsBreadcrumbLink }}}</a>
                     </li>
                     <li class="breadcrumb">
-                        <span class="breadcrumbLink--active">Екатерина Жуковская</span>
+                        <span class="breadcrumbLink--active">{{{ authorData.author }}}</span>
                     </li>
                 </ul>
                 <article class="painterDataArticle">
-                    <h3 class="painterDataHeader headerEducation">{{{ headerEducation }}}</h3>
-                    <ul class="painterDataList educationList">
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2002-2009</em>
-                            <span class="painterText">Московский Академический Художественный Лицей при Российской Академии Художеств.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2009-2015</em>
-                            <span class="painterText">Московский Академический Художественный Институт им.Сурикова, факультет живописи, мастерская современного искусства под руководством академика Салаховой А.Т. и Оссовского С.П.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2014-2015</em>
-                            <span class="painterText">Школа современного искусства «Свободные мастерские» при Музее современного искусства.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                    </ul>
-                    <button class="adminButton adminListButton adminEducationAddButton">Add</button>
-                    <h3 class="painterDataHeader headerAwards">{{{ headerAwards }}}</h3>
-                    <ul class="painterDataList rewardList">
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2007</em>
-                            <span class="painterText">Награждена золотой медалью Российской Академии Художеств.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2015</em>
-                            <span class="painterText">Награждена золотой медалью Российской Академии Художеств.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">с 2015</em>
-                            <span class="painterText">Член Союза Художников России</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                    </ul>
-                    <button class="adminButton adminListButton adminRewardsAddButton">Add</button>
-                    <h3 class="painterDataHeader exhibitionHeader">{{{ exhibitionHeader }}}</h3>
-                    <ul class="painterDataList exhibitionList">
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2010</em>
-                            <span class="painterText">Участие в выставке МОСХ России «Молодежная ХХХ», участие в выставке «Молодые художники России», ЦДХ.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2013-2015</em>
-                            <span class="painterText">Работала над своими проектами и выставлялась в открытой студии (AidanStudio, ЦСИ Винзавод).</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2015</em>
-                            <span class="painterText">Участие в выставке «Книга художника» при содействии МОММА иБиблиотеки «Проспект».</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2015</em>
-                            <span class="painterText">Участие в выставке «ONLINE/OFFLINE», ЦСИ Винзавод AidanStudio.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2015</em>
-                            <span class="painterText">Участие в выставке «SUB OBSERVATIONEM», Московский Музей Современного Искусства.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2015</em>
-                            <span class="painterText">Участие в выставке «EGOCENTRIYA», ЦСИ Винзавод, Цех Красного.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2015</em>
-                            <span class="painterText">Участие в выставке «Это мое место», TotalArtClub.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2016</em>
-                            <span class="painterText">Участие в выставке “Я хочу”, AidanStudio ЦСИ Винзавод</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2016</em>
-                            <span class="painterText">Участие в V Московской международной биеннале молодого искусства, галерея FineArt.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2017</em>
-                            <span class="painterText">Участие в выставке “Июнь 22. На стороне человека”, галерея ЗДЕСЬ на Таганке.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2017</em>
-                            <span class="painterText">Участие в выставке «Виновен», Московский Музей Современного Искусства.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2017</em>
-                            <span class="painterText">Участие в выставке «Там, где никому не снятся сны: от священнойгеографии к не-месту», Московский Музей Современного Искусства.</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2018</em>
-                            <span class="painterText">Участие в фестивале Пикник “Афиша”, инсталляция «Sexy Selfie»</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2018</em>
-                            <span class="painterText">Участие в выставке "5 лайфаков для чайников" , Omelchenko Gallery, паралельная программа 6 Московской международной биеннале молодого искусства</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                        <li class="painterEvent">
-                            <em class="painterTimeline">2019</em>
-                            <span class="painterText">"Liza Tulchinskaya. Mimicry ", WUK, Vienna</span>
-                            {{#if isAdmin}}<button class="adminMoveButton adminMoveUp">up</button>{{/if}}
-                        </li>
-                    </ul>
-                    <button class="adminButton adminListButton adminExhibitionAddButton">Add</button>
+                    {{#if authorData.educations.length }}
+                        <h3 class="painterDataHeader headerEducation">{{{ headerEducation }}}</h3>
+                        <ul class="painterDataList educationList">
+                            {{# each authorData.educations }}
+                                <li class="painterEvent" data-education-id="{{ educationID }}">
+                                    <em class="painterTimeline">{{{ educationYear }}}</em>
+                                    <span class="painterText">{{{ education }}}</span>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                    {{#if isAdmin}}
+                        <button
+                            class="adminButton adminListButton adminEducationAddButton"
+                            data-author-id="{{{ authorData.authorID }}}">
+                        </button>
+                    {{/if}}
+                    {{#if authorData.rewards.length }}
+                        <h3 class="painterDataHeader headerAwards">{{{ headerAwards }}}</h3>
+                        <ul class="painterDataList rewardList">
+                            {{# each authorData.rewards }}
+                                <li class="painterEvent" data-reward-id="{{ rewardID }}">
+                                    <em class="painterTimeline">{{{ rewardYear }}}</em>
+                                    <span class="painterText">{{{ reward }}}</span>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                    {{#if isAdmin}}
+                        <button
+                            class="adminButton adminListButton adminRewardAddButton"
+                            data-author-id="{{{ authorData.authorID }}}">
+                        </button>
+                    {{/if}}
+                    {{#if authorData.rewards.length }}
+                        <h3 class="painterDataHeader exhibitionHeader">{{{ exhibitionHeader }}}</h3>
+                        <ul class="painterDataList exhibitionList">
+                            {{# each authorData.exhibitions }}
+                                <li class="painterEvent" data-exhibition-id="{{ exhibitionID }}">
+                                    <em class="painterTimeline">{{{ exhibitionYear }}}</em>
+                                    <span class="painterText">{{{ exhibition }}}</span>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                    {{#if isAdmin}}
+                        <button
+                            class="adminButton adminListButton adminExhibitionAddButton"
+                            data-author-id="{{{ authorData.authorID }}}">
+                        </button>
+                    {{/if}}
                 </article>
             </div>
         </div>

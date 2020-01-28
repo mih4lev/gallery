@@ -62,6 +62,36 @@ const requestAuthor = async (authorID) => {
         educations: await requestDB(educationsQuery)
     });
 };
+const requestLanguageAuthor = async (authorID, language) => {
+    const lang = language.toUpperCase();
+    const authorQuery = `
+        SELECT 
+            authorID, authorLink, author${lang} as author, authorPhoto, 
+            authorAbout${lang} as authorAbout, 
+            authorCity${lang} as authorCity 
+        FROM authors WHERE authorID = ${authorID}`;
+    const rewardsQuery = `
+        SELECT 
+            rewardID, rewardYear${lang} as rewardYear, 
+            reward${lang} as reward 
+        FROM rewards WHERE authorID = ${authorID}`;
+    const exhibitionsQuery = `
+        SELECT 
+            exhibitionID, exhibitionYear${lang} as exhibitionYear, 
+            exhibition${lang} as exhibition 
+        FROM exhibitions WHERE authorID = ${authorID}`;
+    const educationsQuery = `
+        SELECT 
+            educationID, educationYear${lang} as educationYear, 
+            education${lang} as education 
+        FROM educations WHERE authorID = ${authorID}`;
+    const { 0: authorData } = await requestDB(authorQuery);
+    return Object.assign(authorData, {
+        rewards: await requestDB(rewardsQuery),
+        exhibitions: await requestDB(exhibitionsQuery),
+        educations: await requestDB(educationsQuery)
+    });
+};
 const requestAuthorRewards = async (authorID) => {
     const query = `
         SELECT 
@@ -165,5 +195,5 @@ module.exports = {
     requestAuthorList, requestAuthor, saveAuthor,
     updateAuthor, deleteAuthor, requestAuthorRewards,
     requestAuthorEducations, requestAuthorExhibitions,
-    requestAuthorPictures
+    requestAuthorPictures, requestLanguageAuthor
 };

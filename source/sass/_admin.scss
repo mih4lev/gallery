@@ -190,15 +190,38 @@
 }
 
 .adminListButton {
-    margin-left: 60px;
     margin-bottom: 20px;
     background-image: url(/images/admin_list_add--icon.svg);
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.1em;
+    color: $secondaryColor;
     &:hover {
         background-image: url(/images/admin_list_add_white--icon.svg);
     }
+    &:after {
+        margin-left: 24px;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+}
+.adminListButton.adminEducationAddButton {
+    &:after {
+        content: "добавить пункт образования";
+    }
+}
+.adminListButton.adminExhibitionAddButton {
+    &:after {
+        content: "добавить пункт с выставкой";
+    }
+}
+.adminListButton.adminRewardAddButton {
+    &:after {
+        content: "добавить пункт наград";
+    }
 }
 
-.editableItem.painterText {
+.editableItem.painterEvent {
     cursor: pointer;
     &:hover {
         color: $secondaryColor;
