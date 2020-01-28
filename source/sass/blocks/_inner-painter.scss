@@ -229,6 +229,7 @@
                     }
                 }
                 .painterText {
+                    align-self: flex-start;
                     flex-shrink: 1;
                     @include respond(tabletMini) {
                         margin-top: 2px;

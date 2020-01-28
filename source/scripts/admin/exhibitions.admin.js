@@ -15,10 +15,12 @@ const addEditExhibitionListener = (exhibition) => {
         const exhibitionYearEN = editWrapper.querySelector(`.exhibitionYearEN`);
         const exhibitionRU = editWrapper.querySelector(`.exhibitionRU`);
         const exhibitionEN = editWrapper.querySelector(`.exhibitionEN`);
+        const exhibitionPlace = editWrapper.querySelector(`.exhibitionPlace`);
         exhibitionYearRU.value = data.exhibitionYearRU;
         exhibitionYearEN.value = data.exhibitionYearEN;
         exhibitionRU.value = data.exhibitionRU;
         exhibitionEN.value = data.exhibitionEN;
+        exhibitionPlace.value = data.exhibitionPlace;
         const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
         adminAuthorButton.innerText = `Обновить`;
         bodyNode.appendChild(editWrapper);
@@ -28,7 +30,8 @@ const addEditExhibitionListener = (exhibition) => {
                 exhibitionYearRU: exhibitionYearRU.value,
                 exhibitionYearEN: exhibitionYearEN.value,
                 exhibitionRU: exhibitionRU.value,
-                exhibitionEN: exhibitionEN.value
+                exhibitionEN: exhibitionEN.value,
+                exhibitionPlace: exhibitionPlace.value
             };
             const options = {
                 method: `PUT`,
@@ -37,8 +40,12 @@ const addEditExhibitionListener = (exhibition) => {
                 },
                 body: JSON.stringify(body)
             };
-            await fetch(`/api/exhibitions/${exhibitionID}`, options);
-            bodyNode.removeChild(editWrapper);
+            const response = await fetch(`/api/exhibitions/${exhibitionID}`, options);
+            const { code } = await response.json();
+            if (code === 200) {
+                location.reload();
+                bodyNode.removeChild(editWrapper);
+            }
         });
         const deleteButton = editWrapper.querySelector(`.adminDeleteButton`);
         deleteButton.addEventListener(`click`, async (event) => {
@@ -80,7 +87,10 @@ const addExhibitionAddListeners = (event) => {
         const exhibitionYearEN = editWrapper.querySelector(`.exhibitionYearEN`).value;
         const exhibitionRU = editWrapper.querySelector(`.exhibitionRU`).value;
         const exhibitionEN = editWrapper.querySelector(`.exhibitionEN`).value;
-        const body = { exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN };
+        const exhibitionPlace = editWrapper.querySelector(`.exhibitionPlace`).value;
+        const body = {
+            exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN, exhibitionPlace
+        };
         const options = {
             method: `POST`,
             headers: {
@@ -89,19 +99,9 @@ const addExhibitionAddListeners = (event) => {
             body: JSON.stringify(body)
         };
         const response = await fetch(`/api/exhibitions/${Number(authorID)}`, options);
-        const { code, insertID } = await response.json();
+        const { code } = await response.json();
         if (code === 200) {
-            const parentNode = document.querySelector(`.exhibitionList`);
-            if (!parentNode || !parentNode.children.length) return location.reload();
-            const insertNode = parentNode.children[0].cloneNode(true);
-            insertNode.dataset.exhibitionId = insertID;
-            const insertTimeline = insertNode.querySelector(`.painterTimeline`);
-            const insertText = insertNode.querySelector(`.painterText`);
-            const pageLang = document.querySelector(`html`).getAttribute(`lang`);
-            insertTimeline.innerText = (pageLang === `ru`) ? exhibitionYearRU : exhibitionYearEN;
-            insertText.innerText = (pageLang === `ru`) ? exhibitionRU : exhibitionEN;
-            addEditExhibitionListener(insertNode);
-            parentNode.appendChild(insertNode);
+            location.reload();
             bodyNode.removeChild(editWrapper);
         }
     });

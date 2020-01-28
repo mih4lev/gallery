@@ -1,8 +1,7 @@
 const { Router } = require(`express`);
 const {
     requestEducation, requestEducationList,
-    saveEducation, moveEducation,
-    updateEducation, deleteEducation,
+    saveEducation, updateEducation, deleteEducation
 } = require("../models/educations.model");
 
 const router = new Router();
@@ -29,11 +28,6 @@ router.get(`/:educationID`, async (request, response) => {
 router.put(`/:educationID`, async (request, response) => {
     const { params: { educationID }} = request;
     const data = await updateEducation(educationID, request.body);
-    await response.json(data);
-});
-router.put(`/place/:educationMasterID/:educationSlaveID`, async (request, response) => {
-    const { params: { educationMasterID, educationSlaveID }} = request;
-    const data = await moveEducation(educationMasterID, educationSlaveID);
     await response.json(data);
 });
 

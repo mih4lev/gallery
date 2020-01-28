@@ -22,7 +22,9 @@
 
 {{> footer}}
 
-{{> templates}}
+{{#if isAdmin}}
+    {{> templates}}
+{{/if}}
 
 <script src="/scripts/bundle.min.js"></script>
 </body>

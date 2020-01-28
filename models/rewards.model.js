@@ -1,21 +1,48 @@
 const { requestDB } = require(`../models/db.model`);
 
+const updatePlaces = async (rewardPlace, authorID) => {
+    try {
+        const placeQuery = `
+            SELECT rewardID 
+            FROM rewards 
+            WHERE rewardPlace >= ${rewardPlace} AND authorID = ${authorID}
+            ORDER BY rewardPlace
+        `;
+        const changeFields = await requestDB(placeQuery);
+        let updatedPlace = Number(rewardPlace) + 1;
+        for (const { rewardID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE rewards SET rewardPlace = ${updatedPlace++}
+                WHERE rewardID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
 // INSERT | CREATE
 const saveReward = async (authorID, params) => {
     const {
-        rewardYearRU, rewardYearEN, rewardRU, rewardEN
+        rewardYearRU, rewardYearEN, rewardRU, rewardEN, rewardPlace
     } = params;
     const countQuery = `SELECT COUNT(rewardID) as count FROM rewards`;
     const { 0: { count }} = await requestDB(countQuery);
-    const query = `
-        INSERT INTO rewards (
-            authorID, rewardYearRU, rewardYearEN, 
-            rewardRU, rewardEN, rewardPlace
-        ) VALUES (
-            '${authorID}', '${rewardYearRU}', '${rewardYearEN}', 
-            '${rewardRU}', '${rewardEN}', ${count + 1}
-        )`;
+    let setPlace = count + 1;
+    if (rewardPlace) {
+        setPlace = rewardPlace;
+        await updatePlaces(rewardPlace, authorID);
+    }
     try {
+        const query = `
+            INSERT INTO rewards (
+                authorID, rewardYearRU, rewardYearEN, 
+                rewardRU, rewardEN, rewardPlace
+            ) VALUES (
+                '${authorID}', '${rewardYearRU}', '${rewardYearEN}', 
+                '${rewardRU}', '${rewardEN}', ${setPlace}
+            )`;
         const { insertId } = await requestDB(query);
         return {
             code: (insertId) ? 200 : 0,
@@ -29,7 +56,7 @@ const saveReward = async (authorID, params) => {
 
 // SELECT | READ
 const requestRewardList = async () => {
-    const query = `SELECT * FROM rewards`;
+    const query = `SELECT * FROM rewards ORDER BY rewardPlace`;
     return await requestDB(query);
 };
 const requestReward = async (rewardID) => {
@@ -37,7 +64,9 @@ const requestReward = async (rewardID) => {
         SELECT 
             rewardYearRU, rewardYearEN, rewardRU, 
             rewardEN, rewardPlace
-        FROM rewards WHERE rewardID = '${rewardID}'
+        FROM rewards 
+        WHERE rewardID = '${rewardID} 
+        ORDER BY rewardPlace'
     `;
     try {
         const data = await requestDB(query);
@@ -53,12 +82,21 @@ const updateReward = async (rewardID, params) => {
     const errorMessage = { code: 404, error: `reward not found` };
     if (!rewardID) return errorMessage;
     const {
-        rewardYearRU, rewardYearEN, rewardRU, rewardEN
+        rewardYearRU, rewardYearEN, rewardRU, rewardEN, rewardPlace
     } = params;
+    const authorQuery = `
+        SELECT authorID
+        FROM rewards WHERE rewardID = ${rewardID}
+    `;
+    const { 0: { authorID }} = await requestDB(authorQuery);
+    if (!authorID) return { code: 0, error: `updated authorID not found` };
+    if (rewardPlace) {
+        await updatePlaces(rewardPlace, authorID);
+    }
     const query = `
         UPDATE rewards SET 
             rewardYearRU = '${rewardYearRU}', rewardYearEN = '${rewardYearEN}', 
-            rewardRU = '${rewardRU}', rewardEN = '${rewardEN}' 
+            rewardRU = '${rewardRU}', rewardEN = '${rewardEN}', rewardPlace = ${rewardPlace}
         WHERE rewardID = ${rewardID}`;
     try {
         const response = await requestDB(query);

@@ -1,21 +1,48 @@
 const { requestDB } = require(`../models/db.model`);
 
+const updatePlaces = async (exhibitionPlace, authorID) => {
+    try {
+        const placeQuery = `
+            SELECT exhibitionID 
+            FROM exhibitions 
+            WHERE exhibitionPlace >= ${exhibitionPlace} AND authorID = ${authorID}
+            ORDER BY exhibitionPlace
+        `;
+        const changeFields = await requestDB(placeQuery);
+        let updatedPlace = Number(exhibitionPlace) + 1;
+        for (const { exhibitionID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE exhibitions SET exhibitionPlace = ${updatedPlace++}
+                WHERE exhibitionID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
 // INSERT | CREATE
 const saveExhibition = async (authorID, params) => {
     const {
-        exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
+        exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN, exhibitionPlace
     } = params;
     const countQuery = `SELECT COUNT(exhibitionID) as count FROM exhibitions`;
     const { 0: { count }} = await requestDB(countQuery);
-    const query = `
+    let setPlace = count + 1;
+    if (exhibitionPlace) {
+        setPlace = exhibitionPlace;
+        await updatePlaces(exhibitionPlace, authorID);
+    }
+    try {
+        const query = `
         INSERT INTO exhibitions (
             authorID, exhibitionYearRU, exhibitionYearEN, 
             exhibitionRU, exhibitionEN, exhibitionPlace
         ) VALUES (
             '${authorID}', '${exhibitionYearRU}', '${exhibitionYearEN}', 
-            '${exhibitionRU}', '${exhibitionEN}', ${count + 1}
+            '${exhibitionRU}', '${exhibitionEN}', ${setPlace}
         )`;
-    try {
         const { insertId } = await requestDB(query);
         return {
             code: (insertId) ? 200 : 0,
@@ -29,7 +56,7 @@ const saveExhibition = async (authorID, params) => {
 
 // SELECT | READ
 const requestExhibitionList = async () => {
-    const query = `SELECT * FROM exhibitions`;
+    const query = `SELECT * FROM exhibitions ORDER BY exhibitionPlace`;
     try {
         const data = await requestDB(query);
         const errorData = { code: 404, result: `exhibitions not found` };
@@ -43,7 +70,9 @@ const requestExhibition = async (exhibitionID) => {
         SELECT 
             exhibitionYearRU, exhibitionYearEN, exhibitionRU, 
             exhibitionEN, exhibitionPlace
-        FROM exhibitions WHERE exhibitionID = '${exhibitionID}'
+        FROM exhibitions 
+        WHERE exhibitionID = '${exhibitionID}
+        ORDER BY exhibitionPlace'
     `;
     try {
         const data = await requestDB(query);
@@ -59,12 +88,22 @@ const updateExhibition = async (exhibitionID, params) => {
     const errorMessage = { code: 404, error: `exhibition not found` };
     if (!exhibitionID) return errorMessage;
     const {
-        exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
+        exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN, exhibitionPlace
     } = params;
+    const authorQuery = `
+        SELECT authorID
+        FROM exhibitions WHERE exhibitionID = ${exhibitionID}
+    `;
+    const { 0: { authorID }} = await requestDB(authorQuery);
+    if (!authorID) return { code: 0, error: `updated authorID not found` };
+    if (exhibitionID) {
+        await updatePlaces(exhibitionPlace, authorID);
+    }
     const query = `
         UPDATE exhibitions SET 
             exhibitionYearRU = '${exhibitionYearRU}', exhibitionYearEN = '${exhibitionYearEN}', 
-            exhibitionRU = '${exhibitionRU}', exhibitionEN = '${exhibitionEN}' 
+            exhibitionRU = '${exhibitionRU}', exhibitionEN = '${exhibitionEN}',
+            exhibitionPlace = '${exhibitionPlace}'
         WHERE exhibitionID = ${exhibitionID}`;
     try {
         const response = await requestDB(query);

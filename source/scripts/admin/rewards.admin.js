@@ -16,10 +16,12 @@ const addEditRewardListener = (reward) => {
         const rewardYearEN = editWrapper.querySelector(`.rewardYearEN`);
         const rewardRU = editWrapper.querySelector(`.rewardRU`);
         const rewardEN = editWrapper.querySelector(`.rewardEN`);
+        const rewardPlace = editWrapper.querySelector(`.rewardPlace`);
         rewardYearRU.value = data.rewardYearRU;
         rewardYearEN.value = data.rewardYearEN;
         rewardRU.value = data.rewardRU;
         rewardEN.value = data.rewardEN;
+        rewardPlace.value = data.rewardPlace;
         const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
         adminAuthorButton.innerText = `Обновить`;
         bodyNode.appendChild(editWrapper);
@@ -29,7 +31,8 @@ const addEditRewardListener = (reward) => {
                 rewardYearRU: rewardYearRU.value,
                 rewardYearEN: rewardYearEN.value,
                 rewardRU: rewardRU.value,
-                rewardEN: rewardEN.value
+                rewardEN: rewardEN.value,
+                rewardPlace: rewardPlace.value
             };
             const options = {
                 method: `PUT`,
@@ -41,11 +44,7 @@ const addEditRewardListener = (reward) => {
             const response = await fetch(`/api/rewards/${rewardID}`, options);
             const { code } = await response.json();
             if (code === 200) {
-                const rewardTimeline = reward.querySelector(`.painterTimeline`);
-                const rewardText = reward.querySelector(`.painterText`);
-                const pageLang = document.querySelector(`html`).getAttribute(`lang`);
-                rewardTimeline.innerText = (pageLang === `ru`) ? rewardYearRU.value : rewardYearEN.value;
-                rewardText.innerText = (pageLang === `ru`) ? rewardRU.value : rewardEN.value;
+                location.reload();
                 bodyNode.removeChild(editWrapper);
             }
         });
@@ -89,7 +88,8 @@ const addRewardAddListeners = (event) => {
         const rewardYearEN = editWrapper.querySelector(`.rewardYearEN`).value;
         const rewardRU = editWrapper.querySelector(`.rewardRU`).value;
         const rewardEN = editWrapper.querySelector(`.rewardEN`).value;
-        const body = { rewardYearRU, rewardYearEN, rewardRU, rewardEN };
+        const rewardPlace = editWrapper.querySelector(`.rewardPlace`).value;
+        const body = { rewardYearRU, rewardYearEN, rewardRU, rewardEN, rewardPlace };
         const options = {
             method: `POST`,
             headers: {
@@ -98,19 +98,9 @@ const addRewardAddListeners = (event) => {
             body: JSON.stringify(body)
         };
         const response = await fetch(`/api/rewards/${Number(authorID)}`, options);
-        const { code, insertID } = await response.json();
+        const { code } = await response.json();
         if (code === 200) {
-            const parentNode = document.querySelector(`.rewardList`);
-            if (!parentNode || !parentNode.children.length) return location.reload();
-            const insertNode = parentNode.children[0].cloneNode(true);
-            insertNode.dataset.rewardId = insertID;
-            const insertTimeline = insertNode.querySelector(`.painterTimeline`);
-            const insertText = insertNode.querySelector(`.painterText`);
-            const pageLang = document.querySelector(`html`).getAttribute(`lang`);
-            insertTimeline.innerText = (pageLang === `ru`) ? rewardYearRU : rewardYearEN;
-            insertText.innerText = (pageLang === `ru`) ? rewardRU : rewardEN;
-            addEditRewardListener(insertNode);
-            parentNode.appendChild(insertNode);
+            location.reload();
             bodyNode.removeChild(editWrapper);
         }
     });

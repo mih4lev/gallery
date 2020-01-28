@@ -2,11 +2,17 @@
     <div class="painterHeader">
         <div class="wrapper">
             <div class="painterHeaderWrapper">
-                <h1 class="painterName">{{{ authorData.author }}}</h1>
+                <h1 class="painterName" data-author-id="{{{ authorData.authorID }}}">
+                    {{{ authorData.author }}}
+                </h1>
                 <span class="painterCity">{{{ authorData.authorCity }}}</span>
                 <img class="painterPhoto" src="/images/{{{ authorData.authorPhoto }}}" alt="Author photo">
                 {{#if isAdmin}}
-                    <button class="adminButton adminAuthorRemoveButton">remove</button>
+                    <button
+                        class="adminButton adminAuthorRemoveButton"
+                        data-author-id="{{{ authorData.authorID }}}">
+                        remove
+                    </button>
                 {{/if}}
             </div>
         </div>
@@ -36,8 +42,9 @@
                     {{/if}}
                     {{#if isAdmin}}
                         <button
-                            class="adminButton adminListButton adminEducationAddButton"
+                            class="adminListButton adminEducationAddButton"
                             data-author-id="{{{ authorData.authorID }}}">
+                            Добавить пункт с образованием
                         </button>
                     {{/if}}
                     {{#if authorData.rewards.length }}
@@ -53,8 +60,9 @@
                     {{/if}}
                     {{#if isAdmin}}
                         <button
-                            class="adminButton adminListButton adminRewardAddButton"
+                            class="adminListButton adminRewardAddButton"
                             data-author-id="{{{ authorData.authorID }}}">
+                            Добавить пункт с наградой
                         </button>
                     {{/if}}
                     {{#if authorData.rewards.length }}
@@ -70,8 +78,9 @@
                     {{/if}}
                     {{#if isAdmin}}
                         <button
-                            class="adminButton adminListButton adminExhibitionAddButton"
+                            class="adminListButton adminExhibitionAddButton"
                             data-author-id="{{{ authorData.authorID }}}">
+                            Добавить пункт с выставкой
                         </button>
                     {{/if}}
                 </article>

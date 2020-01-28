@@ -19,7 +19,6 @@ export const headerLanguage = () => {
         const customEvent = new CustomEvent("languageChange", eventOptions);
         document.dispatchEvent(customEvent);
     };
-    // boolean varible
     let isAlreadySelected = false;
     const block = document.querySelector(`.headerLanguage--list`);
     const link = document.querySelector(`.headerNav--language`);

@@ -1,4 +1,5 @@
 import { cloneTemplate } from "./admin/utils.admin";
+import { authorButtons } from "./admin/authors.admin";
 import { educationAdmin } from "./admin/educations.admin";
 import { rewardAdmin } from "./admin/rewards.admin";
 import { exhibitionAdmin } from "./admin/exhibitions.admin";
@@ -88,120 +89,7 @@ adminEye.addEventListener(`click`, () => {
     return requestLangSelectors();
 });
 
-const adminAuthorAddButton = document.querySelector(`.adminAuthorAddButton`);
-if (adminAuthorAddButton) {
-    adminAuthorAddButton.addEventListener(`click`, (event) => {
-        event.preventDefault();
-        const bodyNode = document.querySelector(`body`);
-        const editWrapper = cloneTemplate(`.authorTemplate`);
-        bodyNode.appendChild(editWrapper);
-        const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
-        if (!adminAuthorButton) return false;
-        adminAuthorButton.addEventListener(`click`, async (event) => {
-            event.preventDefault();
-            const body = {
-                authorLink: editWrapper.querySelector(`.authorLink`).value,
-                authorRU: editWrapper.querySelector(`.authorRU`).value,
-                authorEN: editWrapper.querySelector(`.authorEN`).value,
-                authorAboutRU: editWrapper.querySelector(`.authorAboutRU`).value,
-                authorAboutEN: editWrapper.querySelector(`.authorAboutEN`).value,
-                authorCityRU: editWrapper.querySelector(`.authorCityRU`).value,
-                authorCityEN: editWrapper.querySelector(`.authorCityEN`).value,
-            };
-            const options = {
-                method: `POST`,
-                headers: {
-                    'Content-Type': `application/json;charset=utf-8`
-                },
-                body: JSON.stringify(body)
-            };
-            await fetch(`/api/authors/`, options);
-            bodyNode.removeChild(editWrapper);
-        });
-        const closeButton = editWrapper.querySelector(`.templateCloseButton`);
-        const closeWindow = () => bodyNode.removeChild(editWrapper);
-        closeButton.addEventListener(`click`, closeWindow);
-    });
-}
-
-const adminAuthorRemoveButton = document.querySelector(`.adminAuthorRemoveButton`);
-if (adminAuthorRemoveButton) {
-    adminAuthorRemoveButton.addEventListener(`click`, (event) => {
-        event.preventDefault();
-        const bodyNode = document.querySelector(`body`);
-        const editWrapper = cloneTemplate(`.authorDeleteTemplate`);
-        bodyNode.appendChild(editWrapper);
-        const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
-        if (!adminAuthorButton) return false;
-        adminAuthorButton.addEventListener(`click`, async (event) => {
-            event.preventDefault();
-            const options = {
-                method: `DELETE`,
-                headers: {
-                    'Content-Type': `application/json;charset=utf-8`
-                }
-            };
-            const authorID = 13;
-            await fetch(`/api/authors/${authorID}`, options);
-            location.href = `/authors`;
-        });
-        const closeButton = editWrapper.querySelector(`.templateCloseButton`);
-        const closeWindow = () => bodyNode.removeChild(editWrapper);
-        closeButton.addEventListener(`click`, closeWindow);
-    });
-}
-
-const moveEducationsArrows = [...document.querySelectorAll(`.educationList .adminMoveButton`)];
-if (moveEducationsArrows.length) {
-    moveEducationsArrows.forEach((button, index) => {
-        if (index === 0) button.style.display = `none`;
-        button.addEventListener(`click`, async (event) => {
-            event.preventDefault();
-            const options = {
-                method: `PUT`,
-                headers: {
-                    'Content-Type': `application/json;charset=utf-8`
-                }
-            };
-            await fetch(`/api/educations/place/7/6`, options);
-        });
-    });
-}
-
-const moveExhibitionsArrows = [...document.querySelectorAll(`.exhibitionList .adminMoveButton`)];
-if (moveExhibitionsArrows.length) {
-    moveExhibitionsArrows.forEach((button, index) => {
-        if (index === 0) button.style.display = `none`;
-        button.addEventListener(`click`, async (event) => {
-            event.preventDefault();
-            const options = {
-                method: `PUT`,
-                headers: {
-                    'Content-Type': `application/json;charset=utf-8`
-                }
-            };
-            await fetch(`/api/exhibitions/place/7/6`, options);
-        });
-    });
-}
-
-const moveRewardsArrows = [...document.querySelectorAll(`.rewardList .adminMoveButton`)];
-if (moveRewardsArrows.length) {
-    moveRewardsArrows.forEach((button, index) => {
-        if (index === 0) button.style.display = `none`;
-        button.addEventListener(`click`, async (event) => {
-            event.preventDefault();
-            const options = {
-                method: `PUT`,
-                headers: {
-                    'Content-Type': `application/json;charset=utf-8`
-                }
-            };
-            await fetch(`/api/rewards/place/7/6`, options);
-        });
-    });
-}
-
+authorButtons();
 educationAdmin();
 rewardAdmin();
 exhibitionAdmin();

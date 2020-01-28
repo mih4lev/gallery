@@ -15,10 +15,12 @@ const addEditEducationListener = (education) => {
         const educationYearEN = editWrapper.querySelector(`.educationYearEN`);
         const educationRU = editWrapper.querySelector(`.educationRU`);
         const educationEN = editWrapper.querySelector(`.educationEN`);
+        const educationPlace = editWrapper.querySelector(`.educationPlace`);
         educationYearRU.value = data.educationYearRU;
         educationYearEN.value = data.educationYearEN;
         educationRU.value = data.educationRU;
         educationEN.value = data.educationEN;
+        educationPlace.value = data.educationPlace;
         const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
         adminAuthorButton.innerText = `Обновить`;
         bodyNode.appendChild(editWrapper);
@@ -28,7 +30,8 @@ const addEditEducationListener = (education) => {
                 educationYearRU: educationYearRU.value,
                 educationYearEN: educationYearEN.value,
                 educationRU: educationRU.value,
-                educationEN: educationEN.value
+                educationEN: educationEN.value,
+                educationPlace: educationPlace.value
             };
             const options = {
                 method: `PUT`,
@@ -37,8 +40,12 @@ const addEditEducationListener = (education) => {
                 },
                 body: JSON.stringify(body)
             };
-            await fetch(`/api/educations/${educationID}`, options);
-            bodyNode.removeChild(editWrapper);
+            const response = await fetch(`/api/educations/${educationID}`, options);
+            const { code } = await response.json();
+            if (code === 200) {
+                location.reload();
+                bodyNode.removeChild(editWrapper);
+            }
         });
         const deleteButton = editWrapper.querySelector(`.adminDeleteButton`);
         deleteButton.addEventListener(`click`, async (event) => {
@@ -80,7 +87,10 @@ const addEducationAddListeners = (event) => {
         const educationYearEN = editWrapper.querySelector(`.educationYearEN`).value;
         const educationRU = editWrapper.querySelector(`.educationRU`).value;
         const educationEN = editWrapper.querySelector(`.educationEN`).value;
-        const body = { educationYearRU, educationYearEN, educationRU, educationEN };
+        const educationPlace = editWrapper.querySelector(`.educationPlace`).value;
+        const body = {
+            educationYearRU, educationYearEN, educationRU, educationEN, educationPlace
+        };
         const options = {
             method: `POST`,
             headers: {
@@ -89,19 +99,9 @@ const addEducationAddListeners = (event) => {
             body: JSON.stringify(body)
         };
         const response = await fetch(`/api/educations/${Number(authorID)}`, options);
-        const { code, insertID } = await response.json();
+        const { code } = await response.json();
         if (code === 200) {
-            const parentNode = document.querySelector(`.educationList`);
-            if (!parentNode || !parentNode.children.length) return location.reload();
-            const insertNode = parentNode.children[0].cloneNode(true);
-            insertNode.dataset.educationId = insertID;
-            const insertTimeline = insertNode.querySelector(`.painterTimeline`);
-            const insertText = insertNode.querySelector(`.painterText`);
-            const pageLang = document.querySelector(`html`).getAttribute(`lang`);
-            insertTimeline.innerText = (pageLang === `ru`) ? educationYearRU : educationYearEN;
-            insertText.innerText = (pageLang === `ru`) ? educationRU : educationEN;
-            addEditEducationListener(insertNode);
-            parentNode.appendChild(insertNode);
+            location.reload();
             bodyNode.removeChild(editWrapper);
         }
     });

@@ -1,21 +1,50 @@
 const { requestDB } = require(`../models/db.model`);
 
+const updatePlaces = async (educationPlace, authorID) => {
+    try {
+        const placeQuery = `
+            SELECT educationID 
+            FROM educations
+            WHERE educationPlace >= ${educationPlace} AND authorID = ${authorID}
+            ORDER BY educationPlace
+        `;
+        const changeFields = await requestDB(placeQuery);
+        console.log(changeFields);
+        let updatedPlace = Number(educationPlace) + 1;
+        for (const { educationID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE educations SET educationPlace = ${updatedPlace++}
+                WHERE educationID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
+
 // INSERT | CREATE
 const saveEducation = async (authorID, params) => {
     const {
-        educationYearRU, educationYearEN, educationRU, educationEN
+        educationYearRU, educationYearEN, educationRU, educationEN, educationPlace
     } = params;
     const countQuery = `SELECT COUNT(educationID) as count FROM educations`;
     const { 0: { count }} = await requestDB(countQuery);
-    const query = `
+    let setPlace = count + 1;
+    if (educationPlace) {
+        setPlace = educationPlace;
+        await updatePlaces(educationPlace, authorID);
+    }
+    try {
+        const query = `
         INSERT INTO educations (
             authorID, educationYearRU, educationYearEN, 
             educationRU, educationEN, educationPlace
         ) VALUES (
             '${authorID}', '${educationYearRU}', '${educationYearEN}', 
-            '${educationRU}', '${educationEN}', ${count + 1}
+            '${educationRU}', '${educationEN}', ${setPlace}
         )`;
-    try {
         const { insertId } = await requestDB(query);
         return {
             code: (insertId) ? 200 : 0,
@@ -29,7 +58,7 @@ const saveEducation = async (authorID, params) => {
 
 // SELECT | READ
 const requestEducationList = async () => {
-    const query = `SELECT * FROM educations`;
+    const query = `SELECT * FROM educations ORDER BY educationPlace`;
     try {
         const data = await requestDB(query);
         const errorData = { code: 404, result: `educations not found` };
@@ -44,6 +73,7 @@ const requestEducation = async (educationID) => {
             educationYearRU, educationYearEN, educationRU, 
             educationEN, educationPlace 
         FROM educations WHERE educationID = '${educationID}'
+        ORDER BY educationPlace
     `;
     try {
         const data = await requestDB(query);
@@ -59,12 +89,22 @@ const updateEducation = async (educationID, params) => {
     const errorMessage = { code: 404, error: `education not found` };
     if (!educationID) return errorMessage;
     const {
-        educationYearRU, educationYearEN, educationRU, educationEN
+        educationYearRU, educationYearEN, educationRU, educationEN, educationPlace
     } = params;
+    const authorQuery = `
+        SELECT authorID
+        FROM educations WHERE educationID = ${educationID}
+    `;
+    const { 0: { authorID }} = await requestDB(authorQuery);
+    if (!authorID) return { code: 0, error: `updated authorID not found` };
+    if (educationPlace) {
+        await updatePlaces(educationPlace, authorID);
+    }
     const query = `
         UPDATE educations SET 
             educationYearRU = '${educationYearRU}', educationYearEN = '${educationYearEN}', 
-            educationRU = '${educationRU}', educationEN = '${educationEN}' 
+            educationRU = '${educationRU}', educationEN = '${educationEN}',
+            educationPlace = '${educationPlace}'
         WHERE educationID = ${educationID}`;
     try {
         const response = await requestDB(query);
@@ -73,39 +113,6 @@ const updateEducation = async (educationID, params) => {
             code: (changedRows) ? 200 : 0,
             result: (changedRows) ? `education updated` : message
         };
-    } catch ({ sqlMessage }) {
-        return { code: 0, error: sqlMessage }
-    }
-};
-const moveEducation = async (educationMasterID, educationSlaveID) => {
-    try {
-        const masterQuery = `
-            SELECT educationPlace 
-            FROM educations WHERE educationID = ${educationMasterID}
-        `;
-        const masterResult = await requestDB(masterQuery);
-        const slaveQuery = `
-            SELECT educationPlace 
-            FROM educations WHERE educationID = ${educationSlaveID}
-        `;
-        const slaveResult = await requestDB(slaveQuery);
-        const masterError = `education with ID ${educationMasterID} not found`;
-        const slaveError = `education with ID ${educationSlaveID} not found`;
-        if (!masterResult.length) return { code: 404, error: masterError };
-        if (!slaveResult.length) return { code: 404, error: slaveError };
-        const { 0: { educationPlace: educationMasterPlace }} = masterResult;
-        const { 0: { educationPlace: educationSlavePlace }} = slaveResult;
-        const updateMasterQuery = `
-            UPDATE educations SET educationPlace = ${ educationSlavePlace }
-            WHERE educationID = ${educationMasterID}
-        `;
-        await requestDB(updateMasterQuery);
-        const updateSlaveQuery = `
-            UPDATE educations SET educationPlace = ${ educationMasterPlace }
-            WHERE educationID = ${educationSlaveID}
-        `;
-        await requestDB(updateSlaveQuery);
-        return { code: 200, result: `education places changed` };
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
@@ -144,6 +151,5 @@ const deleteEducation = async (educationID) => {
 
 module.exports = {
     requestEducation, requestEducationList,
-    saveEducation, moveEducation,
-    updateEducation, deleteEducation
+    saveEducation, updateEducation, deleteEducation
 };

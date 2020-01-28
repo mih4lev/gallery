@@ -46,7 +46,8 @@ const requestAuthor = async (authorID) => {
     const rewardsQuery = `
         SELECT 
             rewardID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
-        FROM rewards WHERE authorID = ${authorID}`;
+        FROM rewards WHERE authorID = ${authorID}
+        ORDER BY rewardPlace`;
     const exhibitionsQuery = `
         SELECT 
             exhibitionID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
@@ -74,17 +75,20 @@ const requestLanguageAuthor = async (authorID, language) => {
         SELECT 
             rewardID, rewardYear${lang} as rewardYear, 
             reward${lang} as reward 
-        FROM rewards WHERE authorID = ${authorID}`;
+        FROM rewards WHERE authorID = ${authorID}
+        ORDER BY rewardPlace`;
     const exhibitionsQuery = `
         SELECT 
             exhibitionID, exhibitionYear${lang} as exhibitionYear, 
             exhibition${lang} as exhibition 
-        FROM exhibitions WHERE authorID = ${authorID}`;
+        FROM exhibitions WHERE authorID = ${authorID}
+        ORDER BY exhibitionPlace`;
     const educationsQuery = `
         SELECT 
             educationID, educationYear${lang} as educationYear, 
             education${lang} as education 
-        FROM educations WHERE authorID = ${authorID}`;
+        FROM educations WHERE authorID = ${authorID}
+        ORDER BY educationPlace`;
     const { 0: authorData } = await requestDB(authorQuery);
     return Object.assign(authorData, {
         rewards: await requestDB(rewardsQuery),

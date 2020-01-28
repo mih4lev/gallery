@@ -9,6 +9,7 @@ import { basketDelivery, basketForm } from "./blocks/basket";
 import { articleScroll, shareList } from "./blocks/article";
 import { changePhotos } from "./blocks/picture";
 import { instagramPosts } from "./blocks/home";
+import { translatePainter } from "./blocks/painter";
 
 similarPhoto();
 recallForm();
@@ -24,6 +25,7 @@ articleScroll();
 shareList();
 changePhotos();
 instagramPosts().catch((error) => console.log(error));
+translatePainter();
 
 const addAdminPanel = () => {
     const adminFile = `/scripts/admin.min.js`;

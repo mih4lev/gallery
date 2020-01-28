@@ -53,6 +53,12 @@
         .templateLine {
             display: flex;
             width: $wrapperWidth / 2;
+            @include respond(tabletMini) {
+                width: $tabletMiniContentWidth;
+            }
+            @include respond(mobile) {
+                width: $mobileContentWidth;
+            }
         }
         .templateElement {
             display: flex;
@@ -86,6 +92,10 @@
                 width: $tabletMiniContentWidth;
             }
             @include respond(mobile) {
+                padding-top: 5px;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-bottom: 5px;
                 width: $mobileContentWidth;
             }
             &:focus {
@@ -96,26 +106,34 @@
         }
         input.templateField {
             width: ($wrapperWidth / 4) - 20;
+            @include respond(tabletMini) {
+                width: ($tabletMiniWidth / 2) - 40;
+            }
+            @include respond(mobile) {
+                width: ($mobileWidth / 2) - 40;
+            }
         }
         textarea.templateField {
             width: $wrapperWidth / 2;
             height: 154px;
             @include respond(tabletMini) {
-                padding-top: 12px;
-                padding-left: 12px;
-                padding-right: 12px;
-                padding-bottom: 12px;
-                height: 144px;
+                padding-top: 5px;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-bottom: 5px;
+                width: $tabletMiniWidth;
+                height: 96px;
                 font-size: 10px;
                 line-height: 12px;
                 letter-spacing: 0.075em;
             }
             @include respond(mobile) {
-                padding-top: 12px;
-                padding-left: 12px;
-                padding-right: 12px;
-                padding-bottom: 12px;
-                height: 144px;
+                padding-top: 5px;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-bottom: 5px;
+                width: $mobileWidth;
+                height: 96px;
                 font-size: 10px;
                 line-height: 12px;
                 letter-spacing: 0.075em;
@@ -133,6 +151,7 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             cursor: pointer;
+            outline: none;
             &:hover {
                 opacity: 1;
                 color: $secondaryColor;
@@ -190,13 +209,26 @@
 }
 
 .adminListButton {
+    display: block;
+    height: 20px;
     margin-bottom: 20px;
-    background-image: url(/images/admin_list_add--icon.svg);
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: 0.1em;
+    padding-left: 25px;
+    padding-right: 0;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.075em;
     color: $secondaryColor;
+    text-transform: uppercase;
+    text-align: left;
+    border: none;
+    background-image: url(/images/admin_list_add--icon.svg);
+    background-position: left center;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
     &:hover {
+        color: $primaryColor;
         background-image: url(/images/admin_list_add_white--icon.svg);
     }
     &:after {
@@ -205,53 +237,10 @@
         white-space: nowrap;
     }
 }
-.adminListButton.adminEducationAddButton {
-    &:after {
-        content: "добавить пункт образования";
-    }
-}
-.adminListButton.adminExhibitionAddButton {
-    &:after {
-        content: "добавить пункт с выставкой";
-    }
-}
-.adminListButton.adminRewardAddButton {
-    &:after {
-        content: "добавить пункт наград";
-    }
-}
 
 .editableItem.painterEvent {
     cursor: pointer;
     &:hover {
         color: $secondaryColor;
     }
-}
-
-.adminMoveButton {
-    position: absolute;
-    left: 83px;
-    display: block;
-    margin-left: -4px;
-    margin-right: -4px;
-    padding-left: 0;
-    padding-right: 0;
-    width: 20px;
-    height: 8px;
-    background-image: url(/images/arrow_right--icon.svg);
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    font-size: 0;
-    cursor: pointer;
-    outline: none;
-    &:hover {
-        background-image: url(/images/arrow_right_white--icon.svg);
-    }
-}
-.adminMoveButton.adminMoveUp {
-    transform: rotate(-90deg) scale(0.7);
-}
-.adminMoveButton.adminMoveDown {
-    transform: rotate(90deg) scale(0.7);
 }
