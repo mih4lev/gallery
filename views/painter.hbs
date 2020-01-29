@@ -11,7 +11,7 @@
                     <button
                         class="adminButton adminAuthorRemoveButton"
                         data-author-id="{{{ authorData.authorID }}}">
-                        remove
+                        Удалить автора
                     </button>
                 {{/if}}
             </div>
@@ -96,3 +96,10 @@
         </div>
     </div>
 </div>
+
+{{#if isAdmin}}
+    {{> templates/author.template}}
+    {{> templates/education.template}}
+    {{> templates/reward.template}}
+    {{> templates/exhibition.template}}
+{{/if}}

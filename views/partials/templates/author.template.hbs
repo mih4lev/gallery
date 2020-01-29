@@ -1,0 +1,92 @@
+<template class="authorTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorRU">Имя автора RU</label>
+                    <input
+                        class="templateField authorRU"
+                        id="authorRU"
+                        type="text"
+                        name="authorRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorEN">Имя автора EN</label>
+                    <input
+                        class="templateField authorEN"
+                        id="authorEN"
+                        type="text"
+                        name="authorEN">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorLink">Линк на автора</label>
+                    <input
+                        class="templateField authorLink"
+                        id="authorLink"
+                        type="text"
+                        name="authorLink">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="authorAboutRU">Описание RU</label>
+                <textarea
+                    class="templateField authorAboutRU"
+                    id="authorAboutRU"
+                    name="authorAboutRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="authorAboutEN">Описание EN</label>
+                <textarea
+                    class="templateField authorAboutEN"
+                    id="authorAboutEN"
+                    name="authorAboutEN"></textarea>
+            </div>
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorCityRU">Город RU</label>
+                    <input
+                        class="templateField authorCityRU"
+                        id="authorCityRU"
+                        type="text"
+                        name="authorCityRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="authorCityEN">Город EN</label>
+                    <input
+                        class="templateField authorCityEN"
+                        id="authorCityEN"
+                        type="text"
+                        name="authorCityEN">
+                </div>
+            </div>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Создать
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>
+
+<template class="authorDeleteTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <p class="templateHeader">Вы точно хотите удалить автора?</p>
+            <p class="templateText">
+                (это действие необратимо, так же удалятся все картины данного автора)
+            </p>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Удалить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

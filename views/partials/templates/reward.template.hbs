@@ -1,0 +1,60 @@
+<template class="authorRewardTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="rewardYearRU">Год RU</label>
+                    <input
+                        class="templateField rewardYearRU"
+                        id="rewardYearRU"
+                        type="text"
+                        name="rewardYearRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="rewardYearEN">Год EN</label>
+                    <input
+                        class="templateField rewardYearEN"
+                        id="rewardYearEN"
+                        type="text"
+                        name="rewardYearEN">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="rewardPlace">Позиция</label>
+                    <input
+                        class="templateField rewardPlace"
+                        id="rewardPlace"
+                        type="text"
+                        name="rewardPlace">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="rewardRU">Описание RU</label>
+                <textarea
+                    class="templateField rewardRU"
+                    id="rewardRU"
+                    name="rewardRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="rewardEN">Описание EN</label>
+                <textarea
+                    class="templateField rewardEN"
+                    id="rewardEN"
+                    name="rewardEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button
+                    class="templateButton deleteButton"
+                    type="submit">
+                    Удалить
+                </button>
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Добавить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

@@ -1,0 +1,60 @@
+<template class="authorExhibitionTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="exhibitionYearRU">Год RU</label>
+                    <input
+                        class="templateField exhibitionYearRU"
+                        id="exhibitionYearRU"
+                        type="text"
+                        name="exhibitionYearRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="exhibitionYearEN">Год EN</label>
+                    <input
+                        class="templateField exhibitionYearEN"
+                        id="exhibitionYearEN"
+                        type="text"
+                        name="exhibitionYearEN">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="exhibitionPlace">Позиция</label>
+                    <input
+                        class="templateField exhibitionPlace"
+                        id="exhibitionPlace"
+                        type="text"
+                        name="exhibitionPlace">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="exhibitionRU">Описание RU</label>
+                <textarea
+                    class="templateField exhibitionRU"
+                    id="exhibitionRU"
+                    name="exhibitionRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="exhibitionEN">Описание EN</label>
+                <textarea
+                    class="templateField exhibitionEN"
+                    id="exhibitionEN"
+                    name="exhibitionEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button
+                    class="templateButton deleteButton"
+                    type="submit">
+                    Удалить
+                </button>
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Добавить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

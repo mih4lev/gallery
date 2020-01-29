@@ -1,0 +1,29 @@
+<template class="langTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateElement">
+                <label class="templateLabel" for="langRU">RU Контент</label>
+                <textarea
+                    class="templateField langRU"
+                    id="langRU"
+                    name="langRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="langEN">EN Контент</label>
+                <textarea
+                    class="templateField langEN"
+                    id="langEN"
+                    name="langEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Сохранить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

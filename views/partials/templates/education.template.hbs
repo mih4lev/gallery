@@ -1,0 +1,60 @@
+<template class="authorEducationTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine templateLine3">
+                <div class="templateElement">
+                    <label class="templateLabel" for="educationYearRU">Год RU</label>
+                    <input
+                        class="templateField educationYearRU"
+                        id="educationYearRU"
+                        type="text"
+                        name="educationYearRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="educationYearEN">Год EN</label>
+                    <input
+                        class="templateField educationYearEN"
+                        id="educationYearEN"
+                        type="text"
+                        name="educationYearEN">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="educationPlace">Позиция</label>
+                    <input
+                        class="templateField educationPlace"
+                        id="educationPlace"
+                        type="text"
+                        name="educationPlace">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="educationRU">Описание RU</label>
+                <textarea
+                    class="templateField educationRU"
+                    id="educationRU"
+                    name="educationRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="educationEN">Описание EN</label>
+                <textarea
+                    class="templateField educationEN"
+                    id="educationEN"
+                    name="educationEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button
+                    class="templateButton deleteButton"
+                    type="submit">
+                    Удалить
+                </button>
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Добавить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

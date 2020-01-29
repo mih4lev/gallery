@@ -1,53 +1,31 @@
-import { cloneTemplate } from "./utils.admin";
+import {
+    cloneTemplate, collectData, hideLoader, hideTemplate,
+    requestMainButton, showLoader
+} from "./utils.admin";
 
-const addAuthorListener = (event) => {
-    event.preventDefault();
-    const bodyNode = document.querySelector(`body`);
-    const editWrapper = cloneTemplate(`.authorTemplate`);
-    bodyNode.appendChild(editWrapper);
-    const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
-    if (!adminAuthorButton) return false;
-    adminAuthorButton.addEventListener(`click`, async (event) => {
+const addHandler = (editWrapper) => {
+    return async (event) => {
         event.preventDefault();
-        const body = {
-            authorLink: editWrapper.querySelector(`.authorLink`).value,
-            authorRU: editWrapper.querySelector(`.authorRU`).value,
-            authorEN: editWrapper.querySelector(`.authorEN`).value,
-            authorAboutRU: editWrapper.querySelector(`.authorAboutRU`).value,
-            authorAboutEN: editWrapper.querySelector(`.authorAboutEN`).value,
-            authorCityRU: editWrapper.querySelector(`.authorCityRU`).value,
-            authorCityEN: editWrapper.querySelector(`.authorCityEN`).value,
-        };
+        showLoader(editWrapper);
         const options = {
             method: `POST`,
             headers: {
                 'Content-Type': `application/json;charset=utf-8`
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(collectData(editWrapper))
         };
-        await fetch(`/api/authors/`, options);
-        bodyNode.removeChild(editWrapper);
-    });
-    const closeButton = editWrapper.querySelector(`.templateCloseButton`);
-    const closeWindow = () => bodyNode.removeChild(editWrapper);
-    closeButton.addEventListener(`click`, closeWindow);
+        const response = await fetch(`/api/authors/`, options);
+        const { code } = await response.json();
+        if (code === 200) {
+            location.reload();
+            return hideTemplate(editWrapper);
+        }
+        // add errors visible
+    }
 };
 
-const buttonAddAuthorListener = () => {
-    const adminAuthorAddButton = document.querySelector(`.adminAuthorAddButton`);
-    if (!adminAuthorAddButton) return false;
-    adminAuthorAddButton.addEventListener(`click`, addAuthorListener);
-};
-
-const removeAuthorListener = (event) => {
-    event.preventDefault();
-    const { dataset: { authorId }} = event.target;
-    const bodyNode = document.querySelector(`body`);
-    const editWrapper = cloneTemplate(`.authorDeleteTemplate`);
-    bodyNode.appendChild(editWrapper);
-    const adminAuthorButton = editWrapper.querySelector(`.adminAuthorButton`);
-    if (!adminAuthorButton) return false;
-    adminAuthorButton.addEventListener(`click`, async (event) => {
+const deleteHandler = (authorID) => {
+    return async (event) => {
         event.preventDefault();
         const options = {
             method: `DELETE`,
@@ -55,13 +33,32 @@ const removeAuthorListener = (event) => {
                 'Content-Type': `application/json;charset=utf-8`
             }
         };
-        const authorID = Number(authorId);
         await fetch(`/api/authors/${authorID}`, options);
         location.href = `/authors`;
-    });
-    const closeButton = editWrapper.querySelector(`.templateCloseButton`);
-    const closeWindow = () => bodyNode.removeChild(editWrapper);
-    closeButton.addEventListener(`click`, closeWindow);
+    }
+};
+
+const addAuthorListener = (event) => {
+    event.preventDefault();
+    const editWrapper = cloneTemplate(`.authorTemplate`);
+    const mainButton = requestMainButton(editWrapper);
+    mainButton.addEventListener(`click`, addHandler(editWrapper));
+    hideLoader(editWrapper);
+};
+
+const removeAuthorListener = (event) => {
+    event.preventDefault();
+    const editWrapper = cloneTemplate(`.authorDeleteTemplate`);
+    const authorID = Number(event.target.dataset.authorId);
+    const mainButton = requestMainButton(editWrapper);
+    mainButton.addEventListener(`click`, deleteHandler(authorID));
+    hideLoader(editWrapper);
+};
+
+const buttonAddAuthorListener = () => {
+    const adminAuthorAddButton = document.querySelector(`.adminAuthorAddButton`);
+    if (!adminAuthorAddButton) return false;
+    adminAuthorAddButton.addEventListener(`click`, addAuthorListener);
 };
 
 const buttonRemoveAuthorListener = () => {
