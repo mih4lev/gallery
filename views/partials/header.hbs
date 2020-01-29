@@ -10,7 +10,41 @@
                 <ul class="headerNav--list">
                     {{#if isAdmin}}
                         <li class="headerNav--item headerNav--eye">
-                            <button class="adminEye">show/hide admin panel</button>
+                            <button class="adminEye">show/hide admin layout</button>
+                            <ul class="adminLayoutList">
+                                <li class="adminLinkWrapper">
+                                    <a class="adminLink langLayout" data-action="showLayout" href="#">Показать элементы</a>
+                                </li>
+                                <li class="adminLinkWrapper">
+                                    <a class="adminLink authorLayout" data-action="addAuthor" href="#">Добавить автора</a>
+                                </li>
+                                <li class="adminLinkWrapper">
+                                    <a class="adminLink eventLayout" data-action="addEvent" href="#">Добавить новость</a>
+                                </li>
+                                <li class="adminLinkWrapper">
+                                    <a class="adminLink pictureAddLayout" href="#">Добавить картину</a>
+                                </li>
+                                {{#if isPainterActive}}
+                                <li class="adminLinkWrapper">
+                                    <a class="adminLink subLink pictureDeleteLayout"
+                                       data-action="deleteAuthor"
+                                       data-author-id="{{{ authorData.authorID }}}"
+                                       href="#">Удалить автора</a>
+                                </li>
+                                {{/if}}
+                                {{#if isArticleActive}}
+                                    <li class="adminLinkWrapper">
+                                        <a class="adminLink subLink eventEditLayout"
+                                           data-action="editEvent"
+                                           href="#">Редактировать новость</a>
+                                    </li>
+                                    <li class="adminLinkWrapper">
+                                        <a class="adminLink subLink eventDeleteLayout"
+                                           data-action="deleteEvent"
+                                           href="#">Удалить новость</a>
+                                    </li>
+                                {{/if}}
+                            </ul>
                         </li>
                     {{/if}}
                     {{#if isBasketActive}}

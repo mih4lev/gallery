@@ -1,0 +1,85 @@
+<template class="eventTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="eventTitleRU">Загаловок RU</label>
+                    <input type="text"
+                           class="templateField eventTitleRU"
+                           id="eventTitleRU"
+                           name="eventTitleRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="eventTitleEN">Загаловок EN</label>
+                    <input type="text"
+                           class="templateField eventTitleEN"
+                           id="eventTitleEN"
+                           name="eventTitleEN">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="eventLink">Линк</label>
+                    <input type="text"
+                           class="templateField eventLink"
+                           id="eventLink"
+                           name="eventLink">
+                </div>
+            </div>
+            <div class="templateSelect">
+                <p class="selectLabel">Категория</p>
+            </div>
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="eventAnnotationRU">Аннотация RU</label>
+                    <input type="text"
+                           class="templateField eventAnnotationRU"
+                           id="eventAnnotationRU"
+                           name="eventAnnotationRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="eventAnnotationEN">Аннотация EN</label>
+                    <input type="text"
+                           class="templateField eventAnnotationEN"
+                           id="eventAnnotationEN"
+                           name="eventAnnotationEN">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="eventTextRU">Описание RU</label>
+                <textarea
+                        class="templateField eventTextRU"
+                        id="eventTextRU"
+                        name="eventTextRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="eventTextEN">Описание EN</label>
+                <textarea
+                        class="templateField eventTextEN"
+                        id="eventTextEN"
+                        name="eventTextEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button type="button"
+                        class="templateButton deleteButton">
+                    Удалить
+                </button>
+                <button type="submit"
+                        class="templateButton mainButton">
+                    Добавить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>
+
+<template class="eventSelect">
+    <ul class="templateList">
+        <li class="templateItem">
+            <span class="selectLink">Новости</span>
+        </li>
+        <li class="templateItem">
+            <span class="selectLink">Афиша</span>
+        </li>
+    </ul>
+</template>

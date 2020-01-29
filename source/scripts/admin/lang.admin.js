@@ -1,5 +1,6 @@
 import {
-    cloneTemplate, collectData, fillFields, hideLoader, hideTemplate, requestMainButton, showLoader
+    cloneTemplate, collectData, fillFields, hideLoader,
+    hideTemplate, requestMainButton, showLoader
 } from "./utils.admin";
 
 const selectData = async (langSelector) => {
@@ -44,7 +45,7 @@ const showEditableWindow = async (event) => {
     hideLoader(editWrapper);
 };
 
-const requestLangSelectors = async () => {
+export const showLayout = async () => {
     const response = await fetch(`/api/language/selectors`);
     const data = await response.json();
     data.forEach((dataItem) => {
@@ -56,9 +57,12 @@ const requestLangSelectors = async () => {
             elementNode.addEventListener(`click`, showEditableWindow);
         });
     });
+    // change eye icon
+    const eyeButton = document.querySelector(`.adminEye`);
+    eyeButton.classList.add(`activated`);
 };
 
-const hideLangSelectors = async () => {
+export const hideLayout = async () => {
     const response = await fetch(`/api/language/selectors`);
     const data = await response.json();
     data.forEach((dataItem) => {
@@ -70,23 +74,7 @@ const hideLangSelectors = async () => {
             elementNode.removeEventListener(`click`, showEditableWindow);
         });
     });
-};
-
-const adminLangListener = () => {
+    // change eye icon
     const eyeButton = document.querySelector(`.adminEye`);
-    if (!eyeButton) return false;
-    eyeButton.addEventListener(`click`, () => {
-        const isActivated = (eyeButton.classList.contains(`activated`));
-        const method = (isActivated) ? `remove` : `add`;
-        eyeButton.classList[method](`activated`);
-        if (isActivated) {
-            return hideLangSelectors();
-        }
-        eyeButton.classList.add(`activated`);
-        return requestLangSelectors();
-    });
-};
-
-export const langAdmin = () => {
-    adminLangListener();
+    eyeButton.classList.remove(`activated`);
 };

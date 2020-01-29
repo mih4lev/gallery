@@ -15,9 +15,9 @@ const addHandler = (editWrapper) => {
             body: JSON.stringify(collectData(editWrapper))
         };
         const response = await fetch(`/api/authors/`, options);
-        const { code } = await response.json();
+        const { code, insertID } = await response.json();
         if (code === 200) {
-            location.reload();
+            location.href = `/authors/${insertID}`;
             return hideTemplate(editWrapper);
         }
         // add errors visible
@@ -38,7 +38,7 @@ const deleteHandler = (authorID) => {
     }
 };
 
-const addAuthorListener = (event) => {
+export const addAuthor = (event) => {
     event.preventDefault();
     const editWrapper = cloneTemplate(`.authorTemplate`);
     const mainButton = requestMainButton(editWrapper);
@@ -46,7 +46,7 @@ const addAuthorListener = (event) => {
     hideLoader(editWrapper);
 };
 
-const removeAuthorListener = (event) => {
+export const deleteAuthor = (event) => {
     event.preventDefault();
     const editWrapper = cloneTemplate(`.authorDeleteTemplate`);
     const authorID = Number(event.target.dataset.authorId);
@@ -58,13 +58,13 @@ const removeAuthorListener = (event) => {
 const buttonAddAuthorListener = () => {
     const adminAuthorAddButton = document.querySelector(`.adminAuthorAddButton`);
     if (!adminAuthorAddButton) return false;
-    adminAuthorAddButton.addEventListener(`click`, addAuthorListener);
+    adminAuthorAddButton.addEventListener(`click`, addAuthor);
 };
 
 const buttonRemoveAuthorListener = () => {
     const adminAuthorRemoveButton = document.querySelector(`.adminAuthorRemoveButton`);
     if (!adminAuthorRemoveButton) return false;
-    adminAuthorRemoveButton.addEventListener(`click`, removeAuthorListener);
+    adminAuthorRemoveButton.addEventListener(`click`, deleteAuthor);
 };
 
 export const authorButtons = () => {

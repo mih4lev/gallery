@@ -14,6 +14,7 @@ router.get(`/:id`, async (request, response) => {
     const pageLink = `article`;
     const data = await collectData(request, pageLink);
     data.isEventsActive = true;
+    data.isArticleActive = true;
     response.render(pageLink, data);
 });
 

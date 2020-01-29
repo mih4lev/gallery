@@ -1,0 +1,42 @@
+import { addAuthor, deleteAuthor } from "./authors.admin";
+import { hideLayout, showLayout } from "./lang.admin";
+import { addEvent } from "./events.admin";
+
+const hideHandler = (event) => {
+    event.preventDefault();
+    const adminLayoutList = document.querySelector(`.adminLayoutList`);
+    if (!adminLayoutList) return false;
+    adminLayoutList.style.display = `none`;
+    document.removeEventListener(`click`, hideHandler);
+};
+
+const showHandler = (event) => {
+    event.preventDefault();
+    const { target: layoutButton } = event;
+    if (layoutButton.classList.contains(`activated`)) return hideLayout();
+    const adminLayoutList = document.querySelector(`.adminLayoutList`);
+    if (!adminLayoutList) return false;
+    adminLayoutList.style.display = `block`;
+    setTimeout(() => {
+        document.addEventListener(`click`, hideHandler);
+    }, 100);
+};
+
+export const showAdminLayout = () => {
+    const layoutButton = document.querySelector(`.adminEye`);
+    if (!layoutButton) return false;
+    layoutButton.addEventListener(`click`, showHandler);
+    const adminLayoutList = document.querySelector(`.adminLayoutList`);
+    if (!adminLayoutList) return false;
+    const layoutLinks = [...adminLayoutList.querySelectorAll(`.adminLink`)];
+    const layoutMap = {
+        'addAuthor': addAuthor,
+        'deleteAuthor': deleteAuthor,
+        'showLayout': showLayout,
+        'addEvent': addEvent
+    };
+    layoutLinks.forEach((link) => {
+        const { dataset: { action }} = link;
+        link.addEventListener(`click`, layoutMap[action]);
+    });
+};

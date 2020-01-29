@@ -7,13 +7,6 @@
                 </h1>
                 <span class="painterCity">{{{ authorData.authorCity }}}</span>
                 <img class="painterPhoto" src="/images/{{{ authorData.authorPhoto }}}" alt="Author photo">
-                {{#if isAdmin}}
-                    <button
-                        class="adminButton adminAuthorRemoveButton"
-                        data-author-id="{{{ authorData.authorID }}}">
-                        Удалить автора
-                    </button>
-                {{/if}}
             </div>
         </div>
     </div>

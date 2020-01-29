@@ -11,6 +11,12 @@ export const cloneTemplate = (templateSelector) => {
     return editWrapper;
 };
 
+export const selectTemplate = (templateSelector) => {
+    const template = document.querySelector(templateSelector);
+    const templateWrapper = template.content.cloneNode(true);
+    return templateWrapper.querySelector(`.templateList`);
+};
+
 export const hideLoader = (editWrapper) => {
     const templateWrapper = editWrapper.querySelector(`.templateWrapper`);
     const templateLoader = editWrapper.querySelector(`.templateLoader`);
@@ -42,6 +48,13 @@ export const collectData = (editWrapper) => {
     const data = {};
     fields.forEach((field) => {
         data[field.id] = field.value;
+    });
+    const selects = [...editWrapper.querySelectorAll(`.templateSelect`)];
+    selects.forEach((select) => {
+        const chosenLink = select.querySelector(`.chosenLink`);
+        if (!chosenLink) return false;
+        const { dataset: { category }} = chosenLink;
+        data['categoryID'] = category;
     });
     return data;
 };

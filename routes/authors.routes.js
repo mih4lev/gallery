@@ -18,6 +18,7 @@ router.get(`/:painterID`, async (request, response) => {
     const lang = data.language;
     data.authorData = await requestLanguageAuthor(painterID, lang);
     data.isAuthorsActive = true;
+    data.isPainterActive = true;
     response.render(pageLink, data);
 });
 
