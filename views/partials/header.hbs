@@ -46,6 +46,20 @@
                                            href="#">Удалить новость</a>
                                     </li>
                                 {{/if}}
+                                {{#if isPictureActive}}
+                                    <li class="adminLinkWrapper">
+                                        <a class="adminLink subLink pictureEditLayout"
+                                           data-action="editPicture"
+                                           data-picture-id="{{{ pictureData.pictureID }}}"
+                                           href="#">Редактировать картину</a>
+                                    </li>
+                                    <li class="adminLinkWrapper">
+                                        <a class="adminLink subLink pictureDeleteLayout"
+                                           data-action="deletePicture"
+                                           data-picture-id="{{{ pictureData.pictureID }}}"
+                                           href="#">Удалить картину</a>
+                                    </li>
+                                {{/if}}
                             </ul>
                         </li>
                     {{/if}}

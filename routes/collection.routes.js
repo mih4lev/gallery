@@ -1,5 +1,6 @@
 const { Router } = require(`express`);
 const { collectData } = require(`../models/data.model`);
+const { requestLanguagePicture } = require("../models/pictures.model");
 
 const router = new Router();
 
@@ -10,10 +11,15 @@ router.get(`/`, async (request, response) => {
     response.render(pageLink, data);
 });
 
-router.get(`/:id`, async (request, response) => {
+router.get(`/:pictureID`, async (request, response) => {
+    const { params: { pictureID }} = request;
     const pageLink = `picture`;
     const data = await collectData(request, pageLink);
+    const lang = data.language;
+    data.pictureData = await requestLanguagePicture(pictureID, lang);
     data.isCollectionActive = true;
+    data.isPictureActive = true;
+    console.log(data);
     response.render(pageLink, data);
 });
 

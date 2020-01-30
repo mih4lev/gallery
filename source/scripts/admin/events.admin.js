@@ -44,7 +44,8 @@ const editHandler = (editWrapper, eventId) => {
         const response = await fetch(`/api/events/${eventID}`, options);
         const { code } = await response.json();
         if (code === 200) {
-            location.href = `/events/${newData.eventLink}`;
+            const { eventLink } = newData;
+            location.href = `/events/${eventLink}`;
             return hideTemplate(editWrapper);
         }
         // add errors visible

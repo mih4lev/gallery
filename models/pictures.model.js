@@ -1,5 +1,8 @@
 const { requestDB } = require(`./db.model`);
-const { authorData, photosArray, colorsArray, genreArray, techniqueArray } = require(`./pictures-data.model`);
+const {
+    authorData, photosArray, colorsArray,
+    genreArray, techniqueArray
+} = require(`./pictures-data.model`);
 
 // INSERT | CREATE
 
@@ -37,6 +40,35 @@ const requestPicture = async (pictureID) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestLanguagePicture = async (pictureID, language) => {
+    try {
+        const lang = language.toUpperCase();
+        const query = `
+            SELECT 
+                pictures.pictureID as pictureID,
+                pictures.picture${lang} as picture, authors.authorID as authorID,
+                authors.authorLink as authorLink, authors.author${lang} as author,
+                pictures.pictureSizeWidth as pictureSizeWidth,
+                pictures.pictureSizeHeight as pictureSizeHeight, 
+                pictures.pictureOrientation as pictureOrientation,
+                pictures.picturePrice as picturePrice, 
+                pictures.picturePriceSale as picturePriceSale, 
+                pictures.pictureAbout${lang} as pictureAbout
+            FROM pictures
+            INNER JOIN authors ON pictures.authorID = authors.authorID
+            WHERE pictures.pictureID = ${pictureID}
+        `;
+        const data = await requestDB(query);
+        if (!data.length) return { code: 404, result: `picture ${pictureID} not found` };
+        await photosArray(data[0]);
+        await colorsArray(data[0]);
+        await genreArray(data[0]);
+        await techniqueArray(data[0]);
+        return data[0];
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 
@@ -56,5 +88,6 @@ const deletePicture = async (pictureID) => {
 };
 
 module.exports = {
-    requestPictureList, requestPicture, deletePicture
+    requestPictureList, requestPicture, requestLanguagePicture,
+    deletePicture
 };
