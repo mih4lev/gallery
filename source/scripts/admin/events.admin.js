@@ -22,8 +22,8 @@ const addHandler = (editWrapper) => {
         const { eventLink } = await linkResponse.json();
         if (code === 200) {
             location.href = `/events/${eventLink}`;
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     };
 };
@@ -46,8 +46,8 @@ const editHandler = (editWrapper, eventId) => {
         if (code === 200) {
             const { eventLink } = newData;
             location.href = `/events/${eventLink}`;
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     };
 };
@@ -61,8 +61,8 @@ const deleteHandler = (eventID, editWrapper) => {
         const { code } = await response.json();
         if (code === 200) {
             location.href = `/events`;
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     };
 };

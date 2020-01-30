@@ -18,8 +18,8 @@ const addHandler = (editWrapper) => {
         const { code, insertID } = await response.json();
         if (code === 200) {
             location.href = `/authors/${insertID}`;
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     }
 };

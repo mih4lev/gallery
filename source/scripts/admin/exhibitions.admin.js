@@ -18,8 +18,8 @@ const addHandler = (editWrapper, authorID) => {
         const { code } = await response.json();
         if (code === 200) {
             location.reload();
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     };
 };
@@ -40,8 +40,8 @@ const editHandler = (editWrapper, exhibition) => {
         const { code } = await response.json();
         if (code === 200) {
             location.reload();
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     };
 };
@@ -56,8 +56,8 @@ const deleteHandler = (editWrapper, exhibition) => {
         const { code } = await response.json();
         if (code === 200) {
             exhibition.parentNode.removeChild(exhibition);
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     };
 };

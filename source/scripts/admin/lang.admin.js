@@ -28,8 +28,8 @@ const editHandler = (editWrapper, langSelector) => {
             langNodes.forEach((node) => {
                 node.innerText = (pageLang === `ru`) ? body.langRU : body.langEN;
             });
-            return hideTemplate(editWrapper);
         }
+        hideTemplate(editWrapper);
         // add errors visible
     }
 };

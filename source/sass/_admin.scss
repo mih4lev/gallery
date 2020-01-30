@@ -139,7 +139,6 @@
                 padding-left: 0;
                 list-style-type: none;
                 .templateItem {
-                    position: relative;
                     margin-left: 5px;
                     margin-right: 5px;
                     margin-bottom: 10px;
@@ -467,14 +466,16 @@
 .createCategoryForm {
     position: absolute;
     z-index: 100000;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
     background-color: #000;
     border: 1px solid $secondaryColor;
+    box-shadow: rgba(0, 0, 0, 0.85) 0 0 5000px 5000px;
+    transform: translate(-50%, -50%);
     .categoryList {
         display: flex;
         flex-direction: column;
