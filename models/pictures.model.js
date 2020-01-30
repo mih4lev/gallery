@@ -1,3 +1,4 @@
+const { changeCurrency } = require(`./currency.model`);
 const { requestDB } = require(`./db.model`);
 const {
     authorData, photosArray, colorsArray,
@@ -60,11 +61,13 @@ const requestLanguagePicture = async (pictureID, language) => {
         `;
         const data = await requestDB(query);
         if (!data.length) return { code: 404, result: `picture ${pictureID} not found` };
-        await photosArray(data[0]);
-        await colorsArray(data[0]);
-        await genreArray(data[0]);
-        await techniqueArray(data[0]);
-        return data[0];
+        const { 0: pictureData, 0: { picturePrice }} = data;
+        await photosArray(pictureData, lang);
+        await genreArray(pictureData, lang);
+        await techniqueArray(pictureData, lang);
+        pictureData.langPrice = await changeCurrency(picturePrice, lang);
+        console.log(pictureData.photos);
+        return pictureData;
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }

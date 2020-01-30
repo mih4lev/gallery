@@ -65,6 +65,7 @@ const requestLanguageEvent = async (eventLink, language) => {
     const lang = language.toUpperCase();
     const query = `
         SELECT
+            events.eventLink as eventLink,
             events.eventID as eventID, events.eventTitle${lang} as eventTitle, 
             events.eventAnnotation${lang} as eventAnnotation, events.eventText${lang} as eventText,
             events.eventPhoto as eventPhoto, categories.categoryLink as categoryLink, 

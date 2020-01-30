@@ -3,6 +3,31 @@ import { currency } from "../utils";
 
 const imagesLoaded = require('imagesloaded');
 
+export const translatePicture = () => {
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        const pictureHeader = document.querySelector(`.pictureHeaderID`);
+        if (!pictureHeader) return false;
+        const { dataset: { pictureId }} = pictureHeader;
+        const pictureID = Number(pictureId);
+        const response = await fetch(`/api/pictures/${pictureID}/lang/${lang}`);
+        const { picture, pictureAbout, author, genres, techniques } = await response.json();
+        pictureHeader.innerText = picture;
+        document.querySelector(`.breadcrumbLink--active`).innerText = picture;
+        document.querySelector(`.pictureAuthorData`).innerText = author;
+        document.querySelector(`.pictureText`).innerText = pictureAbout;
+        // genres
+        const genreList = [...document.querySelectorAll(`.genreTitle`)];
+        genres.forEach(({ genre }, index) => {
+            genreList[index].innerText = genre;
+        });
+        // genres
+        const techniqueList = [...document.querySelectorAll(`.techniqueTitle`)];
+        techniques.forEach(({ technique }, index) => {
+            techniqueList[index].innerText = technique;
+        });
+    });
+};
+
 export const setDesktopLinks = () => {
     const desktopLinks = document.querySelectorAll(`.collectionPhoto`);
     desktopLinks.forEach((link) => {

@@ -19,7 +19,6 @@ router.get(`/:pictureID`, async (request, response) => {
     data.pictureData = await requestLanguagePicture(pictureID, lang);
     data.isCollectionActive = true;
     data.isPictureActive = true;
-    console.log(data);
     response.render(pageLink, data);
 });
 

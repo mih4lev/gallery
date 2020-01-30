@@ -4,9 +4,9 @@ import { headerBasket } from "./blocks/header-basket";
 import { headerLanguage } from "./blocks/header-language";
 import { headerNav } from "./blocks/header-nav";
 import { respondInterestBlock } from "./blocks/events";
-import { setDesktopLinks, setPicturesLayout } from "./blocks/collection";
+import { setDesktopLinks, setPicturesLayout, translatePicture } from "./blocks/collection";
 import { basketDelivery, basketForm } from "./blocks/basket";
-import { articleScroll, shareList } from "./blocks/article";
+import { articleScroll, shareList, translateArticle } from "./blocks/article";
 import { changePhotos } from "./blocks/picture";
 import { instagramPosts } from "./blocks/home";
 import { translatePainter } from "./blocks/painter";
@@ -26,6 +26,8 @@ shareList();
 changePhotos();
 instagramPosts().catch((error) => console.log(error));
 translatePainter();
+translateArticle();
+translatePicture();
 
 const addAdminPanel = () => {
     const adminFile = `/scripts/admin.min.js`;

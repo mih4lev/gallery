@@ -15,10 +15,8 @@ export const similarPhoto = () => {
 };
 
 export const currency = async () => {
-    const API = `https://www.cbr-xml-daily.ru/daily_json.js`;
-    const response = await fetch(API);
-    const { Valute: { EUR: { Value: currency }}} = await response.json();
-    return currency;
+    const response = await fetch(`/api/currency`);
+    return await response.json();
 };
 
 export const changeCurrency = async (lang) => {

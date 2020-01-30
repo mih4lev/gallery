@@ -272,6 +272,18 @@
                     content: ":"
                 }
             }
+            .genreTitle {
+                font-style: normal;
+                text-transform: lowercase;
+                &:after {
+                    content: ",";
+                }
+                &:last-of-type {
+                    &:after {
+                        content: "";
+                    }
+                }
+            }
         }
         .pictureTechnique {
             margin-top: 0;
@@ -288,6 +300,18 @@
             .techniqueLabel {
                 &:after {
                     content: ":"
+                }
+            }
+            .techniqueTitle {
+                font-style: normal;
+                text-transform: lowercase;
+                &:after {
+                    content: ",";
+                }
+                &:last-of-type {
+                    &:after {
+                        content: "";
+                    }
                 }
             }
         }
@@ -312,6 +336,10 @@
                 cursor: pointer;
                 &:hover {
                     @extend %photoFilter;
+                }
+                .pictureSimilarPhoto {
+                    width: 56px;
+                    height: 56px;
                 }
             }
         }

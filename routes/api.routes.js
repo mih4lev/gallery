@@ -1,8 +1,6 @@
 const { Router } = require(`express`);
-const {
-    saveOrder, requestOrderList, requestOrder, deleteOrder
-} = require("../models/orders.model");
 const { requestPosts } = require("../models/instagram.model");
+const { currency } = require("../models/currency.model");
 const router = new Router();
 
 router.get(`/`, (request, response) => {
@@ -23,6 +21,11 @@ router.get(`/delivery`, (request, response) => {
 
 router.get(`/instagram`, async (request, response) => {
     const data = await requestPosts();
+    await response.json(data);
+});
+
+router.get(`/currency`, async (request, response) => {
+    const data = await currency();
     await response.json(data);
 });
 

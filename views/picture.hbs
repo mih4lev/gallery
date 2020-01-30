@@ -6,7 +6,7 @@
                         <a class="breadcrumbLink headerNav--collections" href="/collection">{{{ headerNav--collections }}}</a>
                     </li>
                     <li class="breadcrumb">
-                        <span class="breadcrumbLink--active">Женщина на желтом фоне</span>
+                        <span class="breadcrumbLink--active">{{{ pictureData.picture }}}</span>
                     </li>
                 </ul>
                 <div class="picture">
@@ -14,42 +14,52 @@
                         <img class="picturePhoto">
                     </div>
                     <div class="pictureDataWrapper">
-                        <h1 class="pictureHeader">Женщина на желтом фоне</h1>
+                        <h1 class="pictureHeader pictureHeaderID" data-picture-id="{{{ pictureData.pictureID }}}">{{{ pictureData.picture }}}</h1>
                         <div class="pictureAuthorWrapper">
-                            <a class="pictureAuthor" href="/authors/1">Екатерина Жуковская</a>
+                            <a class="pictureAuthor pictureAuthorData" href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
                         </div>
-                        <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
+                        {{# if isActiveRU }}
+                            <em class="picturePrice price price--rub" data-rub="25000">{{{ pictureData.langPrice }}}</em>
+                        {{/if}}
+                        {{# if isActiveEN }}
+                            <em class="picturePrice price price--euro" data-rub="25000">{{{ pictureData.langPrice }}}</em>
+                        {{/if}}
                         <p class="pictureSize">
                             <span class="sizeLabel">{{{ sizeLabel }}}</span>
-                            <span class="pictureWidth metric metric--ru">100</span>
-                            <span class="pictureHeight metric metric--ru">150</span>
+                            <span class="pictureWidth metric metric--{{{ language }}}">{{{ pictureData.pictureSizeWidth }}}</span>
+                            <span class="pictureHeight metric metric--{{{ language }}}">{{{ pictureData.pictureSizeHeight }}}</span>
                         </p>
                         <p class="pictureGenre">
                             <span class="genreLabel">{{{ genreLabel }}}</span>
-                            <span class="genreName">портрет</span>
+                            <span class="genreName">
+                                {{# each pictureData.genres }}
+                                    <em class="genreTitle">{{{ genre }}}</em>
+                                {{/each}}
+                            </span>
                         </p>
                         <p class="pictureTechnique">
                             <span class="techniqueLabel">{{{ techniqueLabel }}}</span>
-                            <span class="techniqueName">живопись</span>
+                            <span class="techniqueName">
+                                {{# each pictureData.techniques }}
+                                    <em class="techniqueTitle">{{{ technique }}}</em>
+                                {{/each}}
+                            </span>
                         </p>
                         <ul class="pictureSimilarList">
-                            <li class="pictureSimilar">
-                                <img src="/images/picture_photo1_small1.png" data-picture="/photos/big_photo1.jpeg" class="pictureSimilarPhoto" alt="another picture photo">
-                            </li>
-                            <li class="pictureSimilar">
-                                <img src="/images/picture_photo1_small2.png" data-picture="/photos/big_photo2.png" class="pictureSimilarPhoto" alt="another picture photo">
-                            </li>
-                            <li class="pictureSimilar">
-                                <img src="/images/picture_photo1_small3.png" data-picture="/photos/big_photo3.png" class="pictureSimilarPhoto" alt="another picture photo">
-                            </li>
+                            {{# each pictureData.photos }}
+                                <li class="pictureSimilar">
+                                    <img src="/photos/thumbs/{{{ thumbLink }}}"
+                                         data-picture="/photos/{{{ photoLink }}}"
+                                         class="pictureSimilarPhoto"
+                                         alt="{{{ photoName }}}">
+                                </li>
+                            {{/each}}
                         </ul>
                         <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
                         <button class="cartButton">{{{ cartButton }}}</button>
                     </div>
                 </div>
-                <p class="pictureText">
-                    Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор. Описание картина желты человек мазки головной убор.
-                </p>
+                <p class="pictureText">{{{ pictureData.pictureAbout }}}</p>
                 <div class="authorWrapper">
                     <div class="authorHeaderWrapper">
                         <img class="authorPhoto" src="/images/author1_photo.png" alt="author photo">

@@ -1,3 +1,17 @@
+export const translateArticle = () => {
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        const articleHeader = document.querySelector(`.articleHeader`);
+        if (!articleHeader) return false;
+        const { dataset: { eventLink }} = articleHeader;
+        const response = await fetch(`/api/events/${eventLink}/lang/${lang}`);
+        const { eventTitle, eventText, categoryTitle } = await response.json();
+        articleHeader.innerText = eventTitle;
+        document.querySelector(`.breadcrumbLink--active`).innerText = eventTitle;
+        document.querySelector(`.articleLable`).innerText = categoryTitle;
+        document.querySelector(`.articleText`).innerText = eventText;
+    });
+};
+
 export const articleScroll = () => {
     const articleWrapper = document.querySelector(`.articleTextWrapper`);
     if (!articleWrapper) return false;
