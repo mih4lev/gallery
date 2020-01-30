@@ -10,6 +10,8 @@ export const articleScroll = () => {
         const { offsetHeight: textHeight } = articleText;
         return (wrapperHeight / textHeight) * wrapperHeight;
     };
+    // if text less then wrapper
+    if (articleText.offsetHeight < articleWrapper.offsetHeight) return false;
     scrollNode.style.height = `${scrollHeight()}px`;
     let windowSize = window.innerWidth;
     const resetOptions = () => {

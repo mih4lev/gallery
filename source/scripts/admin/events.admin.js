@@ -1,6 +1,7 @@
 import {
-    cloneTemplate, collectData, fillFields, hideDeleteButton,
-    hideLoader, hideTemplate, requestMainButton, selectTemplate, showLoader
+    cloneTemplate, collectData, collectDataInner, fillFields,
+    hideDeleteButton, hideLoader, hideTemplate, requestMainButton,
+    selectTemplate, showLoader
 } from "./utils.admin";
 
 const addHandler = (editWrapper) => {
@@ -16,74 +17,53 @@ const addHandler = (editWrapper) => {
         };
         console.log(collectData(editWrapper));
         const response = await fetch(`/api/events`, options);
-        const { code } = await response.json();
+        const { code, insertID } = await response.json();
+        const linkResponse = await fetch(`/api/events/id/${insertID}`);
+        const { eventLink } = await linkResponse.json();
         if (code === 200) {
-            location.reload();
+            location.href = `/events/${eventLink}`;
             return hideTemplate(editWrapper);
         }
         // add errors visible
     };
 };
 
-const editHandler = (editWrapper, reward) => {
+const editHandler = (editWrapper, eventId) => {
     return async (event) => {
         event.preventDefault();
         showLoader(editWrapper);
-        const rewardID = Number(reward.dataset.rewardId);
+        const eventID = Number(eventId);
+        const newData = collectData(editWrapper);
         const options = {
             method: `PUT`,
             headers: {
                 'Content-Type': `application/json;charset=utf-8`
             },
-            body: JSON.stringify(collectData(editWrapper))
+            body: JSON.stringify(newData)
         };
-        const response = await fetch(`/api/rewards/${rewardID}`, options);
+        const response = await fetch(`/api/events/${eventID}`, options);
         const { code } = await response.json();
         if (code === 200) {
-            location.reload();
+            location.href = `/events/${newData.eventLink}`;
             return hideTemplate(editWrapper);
         }
         // add errors visible
     };
 };
 
-const deleteHandler = (editWrapper, reward) => {
+const deleteHandler = (eventID, editWrapper) => {
     return async (event) => {
         event.preventDefault();
         showLoader(editWrapper);
-        const rewardID = Number(reward.dataset.rewardId);
         const options = { method: `DELETE` };
-        const response = await fetch(`/api/rewards/${rewardID}`, options);
+        const response = await fetch(`/api/events/${eventID}`, options);
         const { code } = await response.json();
         if (code === 200) {
-            reward.parentNode.removeChild(reward);
+            location.href = `/events`;
             return hideTemplate(editWrapper);
         }
         // add errors visible
     };
-};
-
-const selectData = async (reward) => {
-    const rewardID = Number(reward.dataset.rewardId);
-    const response = await fetch(`/api/rewards/${rewardID}`);
-    return await response.json();
-};
-
-const addEditRewardListener = (reward) => {
-    reward.classList.add(`editableItem`);
-    reward.addEventListener(`click`, async (event) => {
-        event.preventDefault();
-        const editWrapper = cloneTemplate(`.authorRewardTemplate`);
-        // request fields value && fill them
-        const data = await selectData(reward);
-        fillFields(data, editWrapper);
-        // button listeners
-        const mainButton = requestMainButton(editWrapper, `Обновить`);
-        mainButton.addEventListener(`click`, editHandler(editWrapper, reward));
-        const deleteButton = editWrapper.querySelector(`.deleteButton`);
-        deleteButton.addEventListener(`click`, deleteHandler(editWrapper, reward));
-        hideLoader(editWrapper);
-    });
 };
 
 const selectClickHandler = (templateList) => {
@@ -96,10 +76,52 @@ const selectClickHandler = (templateList) => {
     };
 };
 
-const requestCategories = async () => {
+const closeAddCategoryForm = (createButton, categoryForm) => {
+    return (event) => {
+        event.preventDefault();
+        createButton.removeChild(categoryForm);
+    };
+};
+
+const createCategory = (createButton, categoryForm) => {
+    return async (event) => {
+        event.preventDefault();
+        const options = {
+            method: `POST`,
+            headers: {
+                'Content-Type': `application/json;charset=utf-8`
+            },
+            body: JSON.stringify(collectDataInner(categoryForm))
+        };
+        const response = await fetch(`/api/categories`, options);
+        const { code } = await response.json();
+        if (code === 200) {
+            //
+            const editWrapper = categoryForm.closest(`.editWrapper`);
+            const templateSelect = editWrapper.querySelector(`.templateSelect`);
+            templateSelect.innerHTML = ``;
+            templateSelect.appendChild(await requestCategories());
+            return createButton.removeChild(categoryForm);
+        }
+    };
+};
+
+const showCategoryForm = (createButton) => {
+    return async (event) => {
+        event.preventDefault();
+        const categoryForm = selectTemplate(`.createCategory`, `.createCategoryForm`);
+        const closeButton = categoryForm.querySelector(`.closeCategoryButton`);
+        closeButton.addEventListener(`click`, closeAddCategoryForm(createButton, categoryForm));
+        const submitButton = categoryForm.querySelector(`.categoryButton`);
+        submitButton.addEventListener(`click`, createCategory(createButton, categoryForm));
+        createButton.appendChild(categoryForm);
+    };
+};
+
+const requestCategories = async (activeCategoryID = false) => {
     const response = await fetch(`/api/categories`);
     const categories = await response.json();
-    const templateList = selectTemplate(`.eventSelect`);
+    const templateList = selectTemplate(`.eventSelect`, `.templateList`);
     const templateItem = templateList.querySelector(`.templateItem`).cloneNode(true);
     templateList.innerHTML = ``;
     categories.forEach((category) => {
@@ -108,10 +130,24 @@ const requestCategories = async () => {
         const selectLink = templateClone.querySelector(`.selectLink`);
         selectLink.innerText = categoryTitleRU;
         selectLink.dataset.category = categoryID;
+        if (activeCategoryID === categoryID) selectLink.classList.add(`chosenLink`);
         selectLink.addEventListener(`click`, selectClickHandler(templateList));
         templateList.appendChild(templateClone);
     });
+    // add create category button
+    const createButton = templateItem.cloneNode(true);
+    const selectLink = createButton.querySelector(`.selectLink`);
+    selectLink.classList.add(`createCategory`);
+    selectLink.innerText = `Создать`;
+    selectLink.addEventListener(`click`, showCategoryForm(createButton));
+    templateList.appendChild(createButton);
     return templateList;
+};
+
+const selectData = async (eventId) => {
+    const eventID = Number(eventId);
+    const response = await fetch(`/api/events/id/${eventID}`);
+    return await response.json();
 };
 
 export const addEvent = async (event) => {
@@ -120,7 +156,28 @@ export const addEvent = async (event) => {
     const templateSelect = editWrapper.querySelector(`.templateSelect`);
     templateSelect.appendChild(await requestCategories());
     hideLoader(editWrapper);
-    hideDeleteButton(editWrapper);
     const mainButton = requestMainButton(editWrapper);
     mainButton.addEventListener(`click`, addHandler(editWrapper));
+};
+
+export const deleteEvent = async (event) => {
+    event.preventDefault();
+    const editWrapper = cloneTemplate(`.eventDeleteTemplate`);
+    const eventID = Number(event.target.dataset.eventId);
+    const mainButton = requestMainButton(editWrapper);
+    mainButton.addEventListener(`click`, deleteHandler(eventID, editWrapper));
+    hideLoader(editWrapper);
+};
+
+export const editEvent = async (event) => {
+    event.preventDefault();
+    const { target: { dataset: { eventId }}} = event;
+    const editWrapper = cloneTemplate(`.eventTemplate`);
+    const data = await selectData(eventId);
+    fillFields(data, editWrapper);
+    const templateSelect = editWrapper.querySelector(`.templateSelect`);
+    templateSelect.appendChild(await requestCategories(data.categoryID));
+    const mainButton = requestMainButton(editWrapper, `Обновить`);
+    mainButton.addEventListener(`click`, editHandler(editWrapper, eventId));
+    hideLoader(editWrapper);
 };

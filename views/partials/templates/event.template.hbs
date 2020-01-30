@@ -59,10 +59,6 @@
                         name="eventTextEN"></textarea>
             </div>
             <div class="templateButtons">
-                <button type="button"
-                        class="templateButton deleteButton">
-                    Удалить
-                </button>
                 <button type="submit"
                         class="templateButton mainButton">
                     Добавить
@@ -82,4 +78,55 @@
             <span class="selectLink">Афиша</span>
         </li>
     </ul>
+</template>
+
+<template class="createCategory">
+    <form class="createCategoryForm">
+        <ul class="categoryList">
+            <li class="category">
+                <label class="categoryLabel" for="categoryTitleRU">Загаловок RU</label>
+                <input type="text"
+                       name="categoryTitleRU"
+                       class="categoryField categoryTitleRU"
+                       id="categoryTitleRU">
+            </li>
+            <li class="category">
+                <label class="categoryLabel" for="categoryTitleEN">Загаловок EN</label>
+                <input type="text"
+                       name="categoryTitleEN"
+                       class="categoryField categoryTitleEN"
+                       id="categoryTitleEN">
+            </li>
+            <li class="category">
+                <label class="categoryLabel" for="categoryLink">Линк</label>
+                <input type="text"
+                       name="categoryLink"
+                       class="categoryField categoryLink"
+                       id="categoryLink">
+            </li>
+            <li class="category">
+                <button type="submit"
+                        class="categoryButton">
+                    Создать
+                </button>
+            </li>
+        </ul>
+        <button class="adminButton closeCategoryButton">Закрыть</button>
+    </form>
+</template>
+
+<template class="eventDeleteTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <p class="templateHeader">Вы точно хотите удалить новость?</p>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Удалить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
 </template>

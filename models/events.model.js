@@ -51,6 +51,35 @@ const requestEvent = async (eventLink) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestEventWithID = async (eventID) => {
+    const query = `SELECT * FROM events WHERE eventID = '${eventID}'`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `event with ID ${eventID} not found` };
+        return (data.length) ? data[0] : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestLanguageEvent = async (eventLink, language) => {
+    const lang = language.toUpperCase();
+    const query = `
+        SELECT
+            events.eventID as eventID, events.eventTitle${lang} as eventTitle, 
+            events.eventAnnotation${lang} as eventAnnotation, events.eventText${lang} as eventText,
+            events.eventPhoto as eventPhoto, categories.categoryLink as categoryLink, 
+            categoryTitle${lang} as categoryTitle
+        FROM events 
+        INNER JOIN categories on events.categoryID = categories.categoryID
+        WHERE eventLink = '${eventLink}'`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `event ${eventLink} not found` };
+        return (data.length) ? data[0] : errorData;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 const updateEvent = async (eventID, params) => {
@@ -64,7 +93,7 @@ const updateEvent = async (eventID, params) => {
             eventTitleRU = '${eventTitleRU}', eventTitleEN = '${eventTitleEN}',
             eventAnnotationRU = '${eventAnnotationRU}', 
             eventAnnotationEN = '${eventAnnotationEN}',
-            eventTextRU = '${eventTextRU}', eventTextEN = '${eventTextEN}',
+            eventTextRU = '${eventTextRU}', eventTextEN = '${eventTextEN}'
         WHERE eventID = ${eventID}`;
     try {
         const { changedRows } = await requestDB(query);
@@ -95,5 +124,6 @@ const deleteEvent = async (eventID) => {
 
 module.exports = {
     saveEvent, requestEventList, requestEvent,
-    updateEvent, deleteEvent
+    requestEventWithID, requestLanguageEvent, updateEvent,
+    deleteEvent
 };

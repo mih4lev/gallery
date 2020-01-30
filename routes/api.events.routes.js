@@ -1,7 +1,7 @@
 const { Router } = require(`express`);
 const {
     saveEvent, requestEventList, requestEvent,
-    updateEvent, deleteEvent
+    requestEventWithID, updateEvent, deleteEvent
 } = require("../models/events.model");
 
 const router = new Router();
@@ -15,6 +15,11 @@ router.post(`/`, async (request, response) => {
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestEventList();
+    response.send(data);
+});
+router.get(`/id/:eventID`, async (request, response) => {
+    const { params: { eventID }} = request;
+    const data = await requestEventWithID(eventID);
     response.send(data);
 });
 router.get(`/:eventLink`, async (request, response) => {

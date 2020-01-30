@@ -11,10 +11,10 @@ export const cloneTemplate = (templateSelector) => {
     return editWrapper;
 };
 
-export const selectTemplate = (templateSelector) => {
+export const selectTemplate = (templateSelector, element) => {
     const template = document.querySelector(templateSelector);
     const templateWrapper = template.content.cloneNode(true);
-    return templateWrapper.querySelector(`.templateList`);
+    return templateWrapper.querySelector(element);
 };
 
 export const hideLoader = (editWrapper) => {
@@ -37,7 +37,7 @@ export const fillFields = (data, editWrapper) => {
     for (const fieldName in data) {
         if (data.hasOwnProperty(fieldName)) {
             const fieldNode = editWrapper.querySelector(`.${fieldName}`);
-            if (!fieldNode) return false;
+            if (!fieldNode) continue;
             fieldNode.value = data[fieldName];
         }
     }
@@ -55,6 +55,15 @@ export const collectData = (editWrapper) => {
         if (!chosenLink) return false;
         const { dataset: { category }} = chosenLink;
         data['categoryID'] = category;
+    });
+    return data;
+};
+
+export const collectDataInner = (formNode) => {
+    const fields = [...formNode.querySelectorAll(`input[type="text"]`)];
+    const data = {};
+    fields.forEach((field) => {
+        data[field.id] = field.value;
     });
     return data;
 };

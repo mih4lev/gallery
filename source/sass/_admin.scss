@@ -95,10 +95,20 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            width: ($wrapperWidth / 2) + 20;
+            width: ($wrapperWidth / 2) + 10;
+            @include respond(tabletMini) {
+                margin-left: -5px;
+                margin-right: -5px;
+                width: $tabletMiniContentWidth + 10;
+            }
+            @include respond(mobile) {
+                margin-left: -5px;
+                margin-right: -5px;
+                width: $mobileContentWidth + 10;
+            }
             .selectLabel {
                 margin-top: 0;
-                margin-left: 10px;
+                margin-left: 5px;
                 margin-bottom: 10px;
                 color: $secondaryColor;
                 font-size: 12px;
@@ -123,21 +133,28 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
+                flex-wrap: wrap;
                 margin-top: 0;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 padding-left: 0;
                 list-style-type: none;
                 .templateItem {
-                    margin-left: 10px;
-                    margin-right: 10px;
+                    position: relative;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                    margin-bottom: 10px;
                     .selectLink {
                         display: inline-block;
-                        padding-top: 5px;
+                        padding-top: 7px;
                         padding-left: 10px;
                         padding-right: 10px;
-                        padding-bottom: 5px;
+                        padding-bottom: 7px;
                         border: 1px dashed $primaryColor;
+                        font-size: 10px;
+                        line-height: 10px;
+                        letter-spacing: 0.075em;
                         color: $primaryColor;
+                        text-transform: uppercase;
                         cursor: pointer;
                         &:hover {
                             color: $secondaryColor;
@@ -148,6 +165,18 @@
                         color: #000;
                         border: 1px solid $secondaryColor;
                         background-color: $secondaryColor;
+                    }
+                    .createCategory {
+                        opacity: 0.4;
+                        &:before {
+                            padding-right: 5px;
+                            content: "+";
+                        }
+                        &:hover {
+                            opacity: 1;
+                            border-color: $errorColor;
+                            color: $errorColor;
+                        }
                     }
                 }
             }
@@ -431,6 +460,93 @@
             &:hover {
                 background-color: $secondaryColor;
             }
+        }
+    }
+}
+
+.createCategoryForm {
+    position: absolute;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    background-color: #000;
+    border: 1px solid $secondaryColor;
+    .categoryList {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style-type: none;
+        .category {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            .categoryLabel {
+                color: $secondaryColor;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                background-color: #000;
+            }
+            .categoryField {
+                opacity: 0.5;
+                padding-top: 7px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 7px;
+                font-family: "Gilroy", Arial, sans-serif;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                color: $primaryColor;
+                border: 1px solid $primaryColor;
+                background-color: #000;
+                outline: none;
+                &:focus {
+                    opacity: 1;
+                }
+            }
+            .categoryButton {
+                opacity: 0.5;
+                margin-top: 10px;
+                padding-top: 7px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 7px;
+                font-family: "Gilroy", Arial, sans-serif;
+                font-size: 12px;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                color: $primaryColor;
+                border: 1px solid $primaryColor;
+                background-color: #000;
+                text-transform: uppercase;
+                cursor: pointer;
+                outline: none;
+                &:hover {
+                    opacity: 1;
+                    color: #000;
+                    background-color: $primaryColor;
+                    border: 1px solid $primaryColor;
+                }
+            }
+        }
+    }
+    .closeCategoryButton {
+        position: absolute;
+        top: 3px;
+        right: -28px;
+        background-image: url(/images/basket_close--icon.svg);
+        &:hover {
+            background-image: url(/images/basket_close_white--icon.svg);
         }
     }
 }

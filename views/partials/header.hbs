@@ -36,11 +36,13 @@
                                     <li class="adminLinkWrapper">
                                         <a class="adminLink subLink eventEditLayout"
                                            data-action="editEvent"
+                                           data-event-id="{{{ eventData.eventID }}}"
                                            href="#">Редактировать новость</a>
                                     </li>
                                     <li class="adminLinkWrapper">
                                         <a class="adminLink subLink eventDeleteLayout"
                                            data-action="deleteEvent"
+                                           data-event-id="{{{ eventData.eventID }}}"
                                            href="#">Удалить новость</a>
                                     </li>
                                 {{/if}}
