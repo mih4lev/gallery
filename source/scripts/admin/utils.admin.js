@@ -51,10 +51,12 @@ export const collectData = (editWrapper) => {
     });
     const selects = [...editWrapper.querySelectorAll(`.templateSelect`)];
     selects.forEach((select) => {
-        const chosenLink = select.querySelector(`.chosenLink`);
-        if (!chosenLink) return false;
-        const { dataset: { category }} = chosenLink;
-        data['categoryID'] = category;
+        const chosenLinks = [...select.querySelectorAll(`.chosenLink`)];
+        if (!chosenLinks.length) return false;
+        chosenLinks.forEach(({ dataset: { field, value }}) => {
+            if (!data[field]) data[field] = [];
+            data[field].push(value);
+        });
     });
     return data;
 };

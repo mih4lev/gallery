@@ -1,13 +1,16 @@
 const { Router } = require(`express`);
 const {
-    requestPictureList, requestPicture, deletePicture,
-    requestLanguagePicture
+    requestPictureList, requestPicture, requestLanguagePicture,
+    savePicture, updatePicture, deletePicture
 } = require("../models/pictures.model");
 
 const router = new Router();
 
 // POST | CREATE
-
+router.post(`/`, async (request, response) => {
+    const data = await savePicture(request.body);
+    await response.json(data);
+});
 
 // GET | READ
 router.get(`/`, async (request, response) => {
@@ -26,7 +29,11 @@ router.get(`/:pictureID/lang/:lang`, async (request, response) => {
 });
 
 // PUT | UPDATE
-
+router.put(`/:pictureID`, async (request, response) => {
+    const { params: { pictureID }} = request;
+    const data = await updatePicture(pictureID, request.body);
+    await response.json(data);
+});
 
 // DELETE
 router.delete(`/:pictureID`, async (request, response) => {

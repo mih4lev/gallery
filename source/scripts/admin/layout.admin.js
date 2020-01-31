@@ -1,6 +1,7 @@
 import { addAuthor, deleteAuthor } from "./authors.admin";
 import { hideLayout, showLayout } from "./lang.admin";
 import { addEvent, editEvent, deleteEvent } from "./events.admin";
+import { addPicture, editPicture, deletePicture } from "./pictures.admin";
 
 const hideHandler = (event) => {
     event.preventDefault();
@@ -35,7 +36,10 @@ export const showAdminLayout = () => {
         'showLayout': showLayout,
         'addEvent': addEvent,
         'editEvent': editEvent,
-        'deleteEvent': deleteEvent
+        'deleteEvent': deleteEvent,
+        'addPicture': addPicture,
+        'editPicture': editPicture,
+        'deletePicture': deletePicture
     };
     layoutLinks.forEach((link) => {
         const { dataset: { action }} = link;

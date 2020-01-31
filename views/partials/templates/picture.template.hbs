@@ -1,0 +1,218 @@
+<template class="pictureTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="pictureRU">Название RU</label>
+                    <input type="text"
+                           class="templateField pictureRU"
+                           id="pictureRU"
+                           name="pictureRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="pictureEN">Название EN</label>
+                    <input type="text"
+                           class="templateField pictureEN"
+                           id="pictureEN"
+                           name="pictureEN">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="picturePlace">Позиция</label>
+                    <input type="text"
+                           class="templateField picturePlace"
+                           id="picturePlace"
+                           name="picturePlace">
+                </div>
+            </div>
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="pictureSizeWidth">Ширина</label>
+                    <input type="text"
+                           class="templateField pictureSizeWidth"
+                           id="pictureSizeWidth"
+                           name="pictureSizeWidth">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="pictureSizeHeight">Высота</label>
+                    <input type="text"
+                           class="templateField pictureSizeHeight"
+                           id="pictureSizeHeight"
+                           name="pictureSizeHeight">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="picturePrice">Цена</label>
+                    <input type="text"
+                           class="templateField picturePrice"
+                           id="picturePrice"
+                           name="picturePrice">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="picturePriceSale">Цена по скидке</label>
+                    <input type="text"
+                           class="templateField picturePriceSale"
+                           id="picturePriceSale"
+                           name="picturePriceSale">
+                </div>
+            </div>
+            <div class="templateSelect orientationSelect">
+                <p class="selectLabel">Ориентация</p>
+            </div>
+            <div class="templateSelect authorSelect">
+                <p class="selectLabel">Автор</p>
+            </div>
+            <div class="templateSelect genreSelect">
+                <p class="selectLabel">Жанр</p>
+            </div>
+            <div class="templateSelect techniqueSelect">
+                <p class="selectLabel">Техника</p>
+            </div>
+            <div class="templateSelect colorSelect">
+                <p class="selectLabel">Цвета</p>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="pictureAboutRU">Описание RU</label>
+                <textarea
+                        class="templateField pictureAboutRU"
+                        id="pictureAboutRU"
+                        name="pictureAboutRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="pictureAboutEN">Описание EN</label>
+                <textarea
+                        class="templateField pictureAboutEN"
+                        id="pictureAboutEN"
+                        name="pictureAboutEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button type="submit"
+                        class="templateButton mainButton">
+                    Добавить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>
+
+<template class="pictureSelect">
+    <ul class="templateList">
+        <li class="templateItem">
+            <span class="selectLink"></span>
+        </li>
+    </ul>
+</template>
+
+<template class="createGenre">
+    <form class="subForm">
+        <ul class="subFormList">
+            <li class="subFormElement">
+                <label class="subFormLabel" for="genreRU">Жанр RU</label>
+                <input type="text"
+                       name="genreRU"
+                       class="subFormField genreRU"
+                       id="genreRU">
+            </li>
+            <li class="subFormElement">
+                <label class="subFormLabel" for="genreEN">Жанр EN</label>
+                <input type="text"
+                       name="genreEN"
+                       class="subFormField genreEN"
+                       id="genreEN">
+            </li>
+            <li class="subFormElement">
+                <button type="submit"
+                        class="subFormButton">
+                    Создать
+                </button>
+            </li>
+        </ul>
+        <button class="adminButton closeSubFormButton">Закрыть</button>
+    </form>
+</template>
+
+<template class="createTechnique">
+    <form class="subForm">
+        <ul class="subFormList">
+            <li class="subFormElement">
+                <label class="subFormLabel" for="techniqueRU">Техника RU</label>
+                <input type="text"
+                       name="techniqueRU"
+                       class="subFormField techniqueRU"
+                       id="techniqueRU">
+            </li>
+            <li class="subFormElement">
+                <label class="subFormLabel" for="techniqueEN">Техника EN</label>
+                <input type="text"
+                       name="techniqueEN"
+                       class="subFormField techniqueEN"
+                       id="techniqueEN">
+            </li>
+            <li class="subFormElement">
+                <button type="submit"
+                        class="subFormButton">
+                    Создать
+                </button>
+            </li>
+        </ul>
+        <button class="adminButton closeSubFormButton">Закрыть</button>
+    </form>
+</template>
+
+<template class="createColor">
+    <form class="subForm">
+        <ul class="subFormList">
+            <li class="subFormElement">
+                <label class="subFormLabel" for="colorRU">Название RU</label>
+                <input type="text"
+                       name="colorRU"
+                       class="subFormField colorRU"
+                       id="colorRU">
+            </li>
+            <li class="subFormElement">
+                <label class="subFormLabel" for="colorEN">Название EN</label>
+                <input type="text"
+                       name="colorEN"
+                       class="subFormField colorEN"
+                       id="colorEN">
+            </li>
+            <li class="subFormElement">
+                <label class="subFormLabel" for="colorName">Линк EN</label>
+                <input type="text"
+                       name="colorName"
+                       class="subFormField colorName"
+                       id="colorName">
+            </li>
+            <li class="subFormElement">
+                <label class="subFormLabel" for="colorHEX">#HEX цвета</label>
+                <input type="text"
+                       name="colorHEX"
+                       class="subFormField colorHEX"
+                       id="colorHEX">
+            </li>
+            <li class="subFormElement">
+                <button type="submit"
+                        class="subFormButton">
+                    Создать
+                </button>
+            </li>
+        </ul>
+        <button class="adminButton closeSubFormButton">Закрыть</button>
+    </form>
+</template>
+
+<template class="pictureDeleteTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <p class="templateHeader">Вы точно хотите удалить картину?</p>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Удалить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

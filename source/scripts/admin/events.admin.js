@@ -110,10 +110,10 @@ const createCategory = (createButton, categoryForm) => {
 const showCategoryForm = (createButton) => {
     return async (event) => {
         event.preventDefault();
-        const categoryForm = selectTemplate(`.createCategory`, `.createCategoryForm`);
-        const closeButton = categoryForm.querySelector(`.closeCategoryButton`);
+        const categoryForm = selectTemplate(`.createCategory`, `.subForm`);
+        const closeButton = categoryForm.querySelector(`.closeSubFormButton`);
         closeButton.addEventListener(`click`, closeAddCategoryForm(createButton, categoryForm));
-        const submitButton = categoryForm.querySelector(`.categoryButton`);
+        const submitButton = categoryForm.querySelector(`.subFormButton`);
         submitButton.addEventListener(`click`, createCategory(createButton, categoryForm));
         createButton.appendChild(categoryForm);
     };
@@ -130,7 +130,9 @@ const requestCategories = async (activeCategoryID = false) => {
         const templateClone = templateItem.cloneNode(true);
         const selectLink = templateClone.querySelector(`.selectLink`);
         selectLink.innerText = categoryTitleRU;
-        selectLink.dataset.category = categoryID;
+        selectLink.dataset.value = categoryID;
+        selectLink.dataset.field = `categoryID`;
+        console.log(activeCategoryID);
         if (activeCategoryID === categoryID) selectLink.classList.add(`chosenLink`);
         selectLink.addEventListener(`click`, selectClickHandler(templateList));
         templateList.appendChild(templateClone);
@@ -138,7 +140,7 @@ const requestCategories = async (activeCategoryID = false) => {
     // add create category button
     const createButton = templateItem.cloneNode(true);
     const selectLink = createButton.querySelector(`.selectLink`);
-    selectLink.classList.add(`createCategory`);
+    selectLink.classList.add(`createSubLink`);
     selectLink.innerText = `Создать`;
     selectLink.addEventListener(`click`, showCategoryForm(createButton));
     templateList.appendChild(createButton);
@@ -177,7 +179,8 @@ export const editEvent = async (event) => {
     const data = await selectData(eventId);
     fillFields(data, editWrapper);
     const templateSelect = editWrapper.querySelector(`.templateSelect`);
-    templateSelect.appendChild(await requestCategories(data.categoryID));
+    const { categoryID } = data;
+    templateSelect.appendChild(await requestCategories(categoryID));
     const mainButton = requestMainButton(editWrapper, `Обновить`);
     mainButton.addEventListener(`click`, editHandler(editWrapper, eventId));
     hideLoader(editWrapper);
