@@ -323,9 +323,23 @@ const selectData = async (pictureId) => {
     return await response.json();
 };
 
+const requestOrientation = async (activeOrientation = false) => {
+    const templateList = selectTemplate(`.pictureOrientation`, `.templateList`);
+    const selectLinks = [...templateList.querySelectorAll(`.selectLink`)];
+    selectLinks.forEach((selectLink) => {
+        const { dataset: { value: orientation }} = selectLink;
+        if (activeOrientation === orientation) selectLink.classList.add(`chosenLink`);
+        selectLink.addEventListener(`click`, selectClickHandler(templateList));
+    });
+    return templateList;
+};
+
 export const addPicture = async (event) => {
     event.preventDefault();
     const editWrapper = cloneTemplate(`.pictureTemplate`);
+    // orientation select
+    const orientationSelect = editWrapper.querySelector(`.orientationSelect`);
+    orientationSelect.appendChild(await requestOrientation());
     // authors select
     const authorSelect = editWrapper.querySelector(`.authorSelect`);
     authorSelect.appendChild(await requestAuthors());
@@ -360,6 +374,10 @@ export const editPicture = async (event) => {
     const editWrapper = cloneTemplate(`.pictureTemplate`);
     const data = await selectData(pictureId);
     fillFields(data, editWrapper);
+    // orientation select
+    const orientationSelect = editWrapper.querySelector(`.orientationSelect`);
+    const { pictureOrientation } = data;
+    orientationSelect.appendChild(await requestOrientation(pictureOrientation));
     // authors select
     const authorSelect = editWrapper.querySelector(`.authorSelect`);
     const { author: { authorID }} = data;

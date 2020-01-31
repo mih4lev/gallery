@@ -13,9 +13,10 @@ const savePicture = async (params) => {
     const {
         authorID, pictureRU, pictureEN, picturePlace, pictureSizeWidth,
         pictureSizeHeight, picturePrice, picturePriceSale,
-        pictureAboutRU, pictureAboutEN,
+        pictureAboutRU, pictureAboutEN, pictureOrientation,
         genresID, techniquesID, colorsID
     } = params;
+    console.log(pictureOrientation);
     const query = `
         INSERT INTO pictures (
             pictureRU, pictureEN, picturePlace, 
@@ -28,7 +29,7 @@ const savePicture = async (params) => {
             '${picturePrice}', '${(picturePriceSale) ? picturePriceSale : 0}', 
             '${pictureSizeWidth}', '${pictureSizeHeight}', 
             '${pictureAboutRU}', '${pictureAboutEN}', 
-            '${authorID[0]}', 'width'
+            '${authorID[0]}', '${pictureOrientation}'
         )`;
     try {
         const { insertId } = await requestDB(query);
@@ -115,8 +116,10 @@ const updatePicture = async (pictureID, params) => {
         pictureRU, pictureEN, picturePlace, pictureSizeWidth,
         pictureSizeHeight, picturePrice, picturePriceSale,
         pictureAboutRU, pictureAboutEN, authorID,
+        pictureOrientation,
         genresID, techniquesID, colorsID
     } = params;
+    console.log(pictureOrientation);
     const query = `
         UPDATE pictures SET 
             pictureRU = '${pictureRU}', 
@@ -128,6 +131,7 @@ const updatePicture = async (pictureID, params) => {
             picturePriceSale = '${(picturePriceSale) ? picturePriceSale : 0}', 
             pictureAboutRU = '${pictureAboutRU}', 
             pictureAboutEN = '${pictureAboutEN}', 
+            pictureOrientation = '${pictureOrientation}', 
             authorID = '${authorID[0]}' 
         WHERE pictureID = ${pictureID}`;
     try {
