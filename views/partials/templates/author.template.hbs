@@ -5,26 +5,26 @@
             <div class="templateLine">
                 <div class="templateElement">
                     <label class="templateLabel" for="authorRU">Имя автора RU</label>
-                    <input
+                    <input type="text"
                         class="templateField authorRU"
                         id="authorRU"
-                        type="text"
+                        data-validate="authorRU"
                         name="authorRU">
                 </div>
                 <div class="templateElement">
                     <label class="templateLabel" for="authorEN">Имя автора EN</label>
-                    <input
+                    <input type="text"
                         class="templateField authorEN"
                         id="authorEN"
-                        type="text"
+                        data-validate="authorEN"
                         name="authorEN">
                 </div>
                 <div class="templateElement">
                     <label class="templateLabel" for="authorLink">Линк автора</label>
-                    <input
+                    <input type="text"
                         class="templateField authorLink"
                         id="authorLink"
-                        type="text"
+                        data-validate="link"
                         name="authorLink">
                 </div>
             </div>
@@ -33,6 +33,7 @@
                 <textarea
                     class="templateField authorAboutRU"
                     id="authorAboutRU"
+                    data-validate="langSymbolsRU"
                     name="authorAboutRU"></textarea>
             </div>
             <div class="templateElement">
@@ -40,6 +41,7 @@
                 <textarea
                     class="templateField authorAboutEN"
                     id="authorAboutEN"
+                    data-validate="langSymbolsEN"
                     name="authorAboutEN"></textarea>
             </div>
             <div class="templateLine">
@@ -49,6 +51,7 @@
                         class="templateField authorCityRU"
                         id="authorCityRU"
                         type="text"
+                        data-validate="city"
                         name="authorCityRU">
                 </div>
                 <div class="templateElement">
@@ -57,6 +60,7 @@
                         class="templateField authorCityEN"
                         id="authorCityEN"
                         type="text"
+                        data-validate="city"
                         name="authorCityEN">
                 </div>
             </div>

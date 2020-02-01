@@ -19,6 +19,9 @@ router.get(`/:pictureID`, async (request, response) => {
     data.pictureData = await requestLanguagePicture(pictureID, lang);
     data.isCollectionActive = true;
     data.isPictureActive = true;
+    if (!data.pictureData.pictureID) {
+        return response.status(404).redirect(`/404`);
+    }
     response.render(pageLink, data);
 });
 

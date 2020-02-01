@@ -8,13 +8,44 @@ export const cloneTemplate = (templateSelector) => {
     const closeWindow = () => bodyNode.removeChild(editWrapper);
     closeButton.addEventListener(`click`, closeWindow);
     bodyNode.appendChild(editWrapper);
+    validateForm(editWrapper, `.templateField`);
     return editWrapper;
 };
 
 export const selectTemplate = (templateSelector, element) => {
     const template = document.querySelector(templateSelector);
     const templateWrapper = template.content.cloneNode(true);
+    validateForm(templateWrapper, `.subFormField`);
     return templateWrapper.querySelector(element);
+};
+
+const validateForm = (editWrapper, selector) => {
+    const fields = [...editWrapper.querySelectorAll(selector)];
+    const regExpMap = {
+        place: /[^0-9]/,
+        number: /[^0-9\,\.]/,
+        text: /[^а-яА-Яa-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*]/,
+        link: /[^a-z0-9\_\-]/,
+        color: /[^a-zA-Z0-9\#]/,
+        city: /[^а-яА-Яa-zA-Z0-9\s\.\,\-\(\)\#]/,
+        langRU: /[^а-яА-Я]/,
+        langEN: /[^a-zA-Z]/,
+        yearRU: /[^а-яА-Я0-9\s\-]/,
+        yearEN: /[^a-zA-Z0-9\s\-]/,
+        authorRU: /[^а-яА-Я\s\-]/,
+        authorEN: /[^a-zA-Z\s\-]/,
+        langSymbolsRU: /[^а-яА-Я0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"]/,
+        langSymbolsEN: /[^a-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"]/
+    };
+    const regExp = /^[^0-9\,\.]{1,30}$/;
+    fields.forEach((field) => {
+        field.addEventListener(`input`, ({ target, target: { value, dataset: { validate }}}) => {
+            const method = (regExpMap[validate].test(value)) ? `add` : `remove`;
+            target.classList[method](`fieldHasError`);
+            target.value = value.replace(regExpMap[validate], ``);
+        });
+        field.addEventListener(`focusout`, ({ target }) => target.classList.remove(`fieldHasError`));
+    });
 };
 
 export const hideLoader = (editWrapper) => {

@@ -1,6 +1,6 @@
 import {
     cloneTemplate, collectData, hideLoader, hideTemplate,
-    requestMainButton, showLoader
+    requestMainButton, showLoader, fillFields
 } from "./utils.admin";
 
 const addHandler = (editWrapper) => {
@@ -24,6 +24,28 @@ const addHandler = (editWrapper) => {
     }
 };
 
+const editHandler = (editWrapper, authorId) => {
+    return async (event) => {
+        event.preventDefault();
+        showLoader(editWrapper);
+        const authorID = Number(authorId);
+        const options = {
+            method: `PUT`,
+            headers: {
+                'Content-Type': `application/json;charset=utf-8`
+            },
+            body: JSON.stringify(collectData(editWrapper))
+        };
+        const response = await fetch(`/api/authors/${authorID}`, options);
+        const { code } = await response.json();
+        if (code === 200) {
+            location.reload();
+        }
+        hideTemplate(editWrapper);
+        // add errors visible
+    };
+};
+
 const deleteHandler = (authorID) => {
     return async (event) => {
         event.preventDefault();
@@ -38,11 +60,29 @@ const deleteHandler = (authorID) => {
     }
 };
 
+const selectData = async (authorId) => {
+    const authorID = Number(authorId);
+    const response = await fetch(`/api/authors/${authorID}`);
+    return await response.json();
+};
+
 export const addAuthor = (event) => {
     event.preventDefault();
     const editWrapper = cloneTemplate(`.authorTemplate`);
     const mainButton = requestMainButton(editWrapper);
     mainButton.addEventListener(`click`, addHandler(editWrapper));
+    hideLoader(editWrapper);
+};
+
+export const editAuthor = async (event) => {
+    event.preventDefault();
+    const editWrapper = cloneTemplate(`.authorTemplate`);
+    const { target: { dataset: { authorId }}} = event;
+    const data = await selectData(authorId);
+    fillFields(data, editWrapper);
+    const mainButton = requestMainButton(editWrapper);
+    mainButton.innerText = `Обновить`;
+    mainButton.addEventListener(`click`, editHandler(editWrapper, authorId));
     hideLoader(editWrapper);
 };
 

@@ -19,6 +19,11 @@ router.get(`/:painterID`, async (request, response) => {
     data.authorData = await requestLanguageAuthor(painterID, lang);
     data.isAuthorsActive = true;
     data.isPainterActive = true;
+    console.log(data.authorData);
+    data.hasAuthorPhoto = data.authorData.authorPhoto !== `undefined`;
+    if (!data.authorData.authorID) {
+        return response.status(404).redirect(`/404`);
+    }
     response.render(pageLink, data);
 });
 

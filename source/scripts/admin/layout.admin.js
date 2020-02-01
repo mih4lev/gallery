@@ -1,4 +1,4 @@
-import { addAuthor, deleteAuthor } from "./authors.admin";
+import { addAuthor, editAuthor, deleteAuthor } from "./authors.admin";
 import { hideLayout, showLayout } from "./lang.admin";
 import { addEvent, editEvent, deleteEvent } from "./events.admin";
 import { addPicture, editPicture, deletePicture } from "./pictures.admin";
@@ -32,6 +32,7 @@ export const showAdminLayout = () => {
     const layoutLinks = [...adminLayoutList.querySelectorAll(`.adminLink`)];
     const layoutMap = {
         'addAuthor': addAuthor,
+        'editAuthor': editAuthor,
         'deleteAuthor': deleteAuthor,
         'showLayout': showLayout,
         'addEvent': addEvent,
@@ -41,6 +42,7 @@ export const showAdminLayout = () => {
         'editPicture': editPicture,
         'deletePicture': deletePicture
     };
+
     layoutLinks.forEach((link) => {
         const { dataset: { action }} = link;
         link.addEventListener(`click`, layoutMap[action]);

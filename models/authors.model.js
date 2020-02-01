@@ -1,3 +1,5 @@
+const sharp = require(`sharp`);
+const fs = require(`fs`);
 const { requestDB } = require(`../models/db.model`);
 const { 
     authorData, photosArray, colorsArray, genreArray, techniqueArray 
@@ -42,59 +44,69 @@ const requestAuthorList = async () => {
     }
 };
 const requestAuthor = async (authorID) => {
-    const authorQuery = `SELECT * FROM authors WHERE authorID = ${authorID}`;
-    const rewardsQuery = `
-        SELECT 
-            rewardID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
-        FROM rewards WHERE authorID = ${authorID}
-        ORDER BY rewardPlace`;
-    const exhibitionsQuery = `
-        SELECT 
-            exhibitionID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
-        FROM exhibitions WHERE authorID = ${authorID}`;
-    const educationsQuery = `
-        SELECT 
-            educationID, educationYearRU, educationYearEN, educationRU, educationEN
-        FROM educations WHERE authorID = ${authorID}`;
-    const { 0: authorData } = await requestDB(authorQuery);
-    return Object.assign(authorData, {
-        rewards: await requestDB(rewardsQuery),
-        exhibitions: await requestDB(exhibitionsQuery),
-        educations: await requestDB(educationsQuery)
-    });
+    try {
+        const authorQuery = `SELECT * FROM authors WHERE authorID = ${authorID}`;
+        const rewardsQuery = `
+            SELECT 
+                rewardID, rewardYearRU, rewardYearEN, rewardRU, rewardEN
+            FROM rewards WHERE authorID = ${authorID}
+            ORDER BY rewardPlace`;
+        const exhibitionsQuery = `
+            SELECT 
+                exhibitionID, exhibitionYearRU, exhibitionYearEN, exhibitionRU, exhibitionEN
+            FROM exhibitions WHERE authorID = ${authorID}`;
+        const educationsQuery = `
+            SELECT 
+                educationID, educationYearRU, educationYearEN, educationRU, educationEN
+            FROM educations WHERE authorID = ${authorID}`;
+        const { 0: authorData } = await requestDB(authorQuery);
+        if (!authorData.authorID) return { code: 404, error: `author ${authorID} not found` };
+        return Object.assign(authorData, {
+            rewards: await requestDB(rewardsQuery),
+            exhibitions: await requestDB(exhibitionsQuery),
+            educations: await requestDB(educationsQuery)
+        });
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
 };
 const requestLanguageAuthor = async (authorID, language) => {
-    const lang = language.toUpperCase();
-    const authorQuery = `
-        SELECT 
-            authorID, authorLink, author${lang} as author, authorPhoto, 
-            authorAbout${lang} as authorAbout, 
-            authorCity${lang} as authorCity 
-        FROM authors WHERE authorID = ${authorID}`;
-    const rewardsQuery = `
-        SELECT 
-            rewardID, rewardYear${lang} as rewardYear, 
-            reward${lang} as reward 
-        FROM rewards WHERE authorID = ${authorID}
-        ORDER BY rewardPlace`;
-    const exhibitionsQuery = `
-        SELECT 
-            exhibitionID, exhibitionYear${lang} as exhibitionYear, 
-            exhibition${lang} as exhibition 
-        FROM exhibitions WHERE authorID = ${authorID}
-        ORDER BY exhibitionPlace`;
-    const educationsQuery = `
-        SELECT 
-            educationID, educationYear${lang} as educationYear, 
-            education${lang} as education 
-        FROM educations WHERE authorID = ${authorID}
-        ORDER BY educationPlace`;
-    const { 0: authorData } = await requestDB(authorQuery);
-    return Object.assign(authorData, {
-        rewards: await requestDB(rewardsQuery),
-        exhibitions: await requestDB(exhibitionsQuery),
-        educations: await requestDB(educationsQuery)
-    });
+    try {
+        const lang = language.toUpperCase();
+        const authorQuery = `
+            SELECT 
+                authorID, authorLink, author${lang} as author, authorPhoto, 
+                authorAbout${lang} as authorAbout, 
+                authorCity${lang} as authorCity 
+            FROM authors WHERE authorID = ${authorID}`;
+        const rewardsQuery = `
+            SELECT 
+                rewardID, rewardYear${lang} as rewardYear, 
+                reward${lang} as reward 
+            FROM rewards WHERE authorID = ${authorID}
+            ORDER BY rewardPlace`;
+        const exhibitionsQuery = `
+            SELECT 
+                exhibitionID, exhibitionYear${lang} as exhibitionYear, 
+                exhibition${lang} as exhibition 
+            FROM exhibitions WHERE authorID = ${authorID}
+            ORDER BY exhibitionPlace`;
+        const educationsQuery = `
+            SELECT 
+                educationID, educationYear${lang} as educationYear, 
+                education${lang} as education 
+            FROM educations WHERE authorID = ${authorID}
+            ORDER BY educationPlace`;
+        const { 0: authorData } = await requestDB(authorQuery);
+        if (!authorData.authorID) return { code: 404, error: `author ${authorID} not found` };
+        return Object.assign(authorData, {
+            rewards: await requestDB(rewardsQuery),
+            exhibitions: await requestDB(exhibitionsQuery),
+            educations: await requestDB(educationsQuery)
+        });
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
 };
 const requestAuthorRewards = async (authorID) => {
     const query = `
@@ -181,6 +193,36 @@ const updateAuthor = async (authorID, params) => {
     }
 };
 
+const updateAuthorPhoto = async (authorID, file) => {
+    try {
+        const { path, filename } = file;
+        const fileDir = `public/photos/authors`;
+        // create 216x216 webp && png
+        await sharp(path).resize(216).webp({ quality: 100 }).toFile(`${fileDir}/${filename}.webp`);
+        await sharp(path).resize(216).png({ quality: 100 }).toFile(`${fileDir}/${filename}.png`); 
+        // create 55x55 webp && png
+        await sharp(path).resize(55).webp({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_55x55.webp`);
+        await sharp(path).resize(55).png({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_55x55.png`); 
+        // create 20x20 webp && png
+        await sharp(path).resize(20).webp({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_20x20.webp`);
+        await sharp(path).resize(20).png({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_20x20.png`); 
+        // delete temp multer file
+        fs.unlinkSync(`public/photos/${filename}`);
+        const query = `
+            UPDATE authors SET authorPhoto = '${filename}'
+            WHERE authorID = ${authorID}`;
+        const { changedRows } = await requestDB(query);
+        return {
+            code: (changedRows) ? 200 : 404,
+            result: (changedRows) ? filename : `author not found`
+        };
+    } catch (event) {
+        const { sqlMessage } = event;
+        console.log(event);
+        return { code: 0, error: sqlMessage }
+    }
+};
+
 // DELETE
 const deleteAuthor = async (authorID) => {
     const query = `DELETE FROM authors WHERE authorID = ${authorID}`;
@@ -199,5 +241,6 @@ module.exports = {
     requestAuthorList, requestAuthor, saveAuthor,
     updateAuthor, deleteAuthor, requestAuthorRewards,
     requestAuthorEducations, requestAuthorExhibitions,
-    requestAuthorPictures, requestLanguageAuthor
+    requestAuthorPictures, requestLanguageAuthor,
+    updateAuthorPhoto
 };

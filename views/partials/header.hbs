@@ -42,7 +42,13 @@
                                 </li>
                                 {{#if isPainterActive}}
                                 <li class="adminLinkWrapper">
-                                    <a class="adminLink subLink pictureDeleteLayout"
+                                    <a class="adminLink subLink authorEditLayout"
+                                       data-action="editAuthor"
+                                       data-author-id="{{{ authorData.authorID }}}"
+                                       href="#">Редактировать автора</a>
+                                </li>
+                                <li class="adminLinkWrapper">
+                                    <a class="adminLink subLink authorDeleteLayout"
                                        data-action="deleteAuthor"
                                        data-author-id="{{{ authorData.authorID }}}"
                                        href="#">Удалить автора</a>

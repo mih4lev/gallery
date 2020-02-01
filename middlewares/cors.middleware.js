@@ -1,7 +1,8 @@
 const allowedOrigins = [
     'http://artegallery.ru',
     'http://www.artegallery.ru',
-    'http://localhost:5000'
+    'http://localhost:5000',
+    'http://192.168.1.68:5000'
 ];
 const corsOptions = {
     origin: function(origin, callback){

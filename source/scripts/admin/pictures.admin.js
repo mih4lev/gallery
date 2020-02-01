@@ -15,7 +15,6 @@ const addHandler = (editWrapper) => {
             },
             body: JSON.stringify(collectData(editWrapper))
         };
-        console.log(collectData(editWrapper));
         const response = await fetch(`/api/pictures`, options);
         const { code, insertID } = await response.json();
         if (code === 200) {

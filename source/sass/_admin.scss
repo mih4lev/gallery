@@ -170,6 +170,9 @@
                         height: 25px;
                         font-size: 0;
                         border: none;
+                        background-image: url(/images/chosen--icon.svg);
+                        background-repeat: no-repeat;
+                        background-position: center center;
                         &:hover {
                             transform: scale(0.9);
                         }
@@ -182,7 +185,10 @@
                         width: 25px;
                         height: 25px;
                         font-size: 0;
-                        border: none;
+                        border: 1px solid $secondaryColor;
+                        background-image: url(/images/chosen--icon.svg);
+                        background-repeat: no-repeat;
+                        background-position: center center;
                         &:hover {
                             transform: scale(0.9);
                         }
@@ -190,17 +196,14 @@
                     .selectLink.orientationLink.orientationWidth {
                         width: 30px;
                         height: 20px;
-                        border: 1px solid $primaryColor;
                     }
                     .selectLink.orientationLink.orientationHeight {
                         width: 20px;
                         height: 30px;
-                        border: 1px solid $primaryColor;
                     }
                     .selectLink.orientationLink.orientationSquare {
                         width: 20px;
                         height: 20px;
-                        border: 1px solid $primaryColor;
                     }
                     .selectLink.chosenLink {
                         color: #000;
@@ -209,10 +212,12 @@
                     }
                     .selectLink.colorLink.chosenLink {
                         border: none;
+                        background-image: none;
                         transform: scale(1.2);
                     }
                     .selectLink.orientationLink.chosenLink {
-                        border: 1px solid $secondaryColor;
+                        border: 1px solid $primaryColor;
+                        background-image: none;
                         background-color: #000;
                         transform: scale(1.2);
                     }
@@ -310,6 +315,12 @@
                 border: 1px solid $secondaryColor;
             }
         }
+        .templateField.fieldHasError {
+            border: 1px solid $errorColor;
+            &:focus {
+                border: 1px solid $errorColor;
+            }
+        } 
         textarea.templateField {
             width: $wrapperWidth / 2;
             height: 154px;
@@ -566,6 +577,12 @@
                     opacity: 1;
                 }
             }
+            .subFormField.fieldHasError {
+                border: 1px solid $errorColor;
+                &:focus {
+                    border: 1px solid $errorColor;
+                }
+            } 
             .subFormButton {
                 opacity: 0.5;
                 margin-top: 10px;
@@ -601,4 +618,82 @@
             background-image: url(/images/basket_close_white--icon.svg);
         }
     }
+}
+
+.downloadPhoto {
+    position: relative;
+    background-color: #000;
+    background-image: url(/images/photo_download--icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50px;
+    overflow: hidden;
+    margin-top: -50px;
+    font-size: 0;
+    outline: none;
+    cursor: pointer;
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: inherit;
+        height: inherit;
+        border: none;
+        background: inherit;
+    }
+    @include respond(mobile) {
+        background-size: 30px;
+    }
+}
+
+.changePhoto {
+    position: relative;
+    background-image: url(/images/photo_download--icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50px;
+    overflow: hidden;
+    font-size: 0;
+    outline: none;
+    cursor: pointer;
+    &:after {
+        content: "";
+        position: absolute;
+        top: -100;
+        left: 0;
+        display: block;
+        width: inherit;
+        height: inherit;
+        border: none;
+    }
+    @include respond(mobile) {
+        background-size: 30px;
+    }
+}
+
+.photoCropper {
+    width: 600px !important;
+    height: 600px !important;
+    @include respond(tabletMini) {
+        width: $tabletMiniContentWidth !important;
+        height: $tabletMiniContentWidth !important;
+    }
+    @include respond(mobile) {
+        width: $mobileContentWidth !important;
+        height: $mobileContentWidth !important;
+    }
+}
+
+.photoWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.9);
 }

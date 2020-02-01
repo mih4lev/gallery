@@ -1,9 +1,10 @@
+const multer = require(`multer`);
+const upload = multer({ dest: `public/photos` });
 const { Router } = require(`express`);
 const {
-    requestAuthorList, requestAuthor, saveAuthor,
-    updateAuthor, deleteAuthor, requestAuthorRewards,
-    requestAuthorEducations, requestAuthorExhibitions, 
-    requestAuthorPictures, requestLanguageAuthor
+    requestAuthorList, requestAuthor, saveAuthor, updateAuthorPhoto, 
+    updateAuthor, deleteAuthor, requestAuthorRewards, requestAuthorEducations, 
+    requestAuthorExhibitions, requestAuthorPictures, requestLanguageAuthor
 } = require("../models/authors.model");
 
 const router = new Router();
@@ -12,6 +13,11 @@ const router = new Router();
 router.post(`/`, async (request, response) => {
     const data = await saveAuthor(request.body);
     await response.json(data);
+});
+router.post(`/:authorID/photo`, upload.single('authorPhoto'), async (request, response) => {
+    const { params: { authorID }, file } = request;
+    const data = await updateAuthorPhoto(authorID, file);
+    response.json(data);
 });
 
 // GET | READ

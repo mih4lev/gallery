@@ -171,3 +171,11 @@
         content: "cm";
     }
 }
+
+.defaultPhoto {
+    background-color: #000;
+    background-image: url(/images/photo_404--icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 30px 30px;
+}
