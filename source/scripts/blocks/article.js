@@ -4,11 +4,21 @@ export const translateArticle = () => {
         if (!articleHeader) return false;
         const { dataset: { eventLink }} = articleHeader;
         const response = await fetch(`/api/events/${eventLink}/lang/${lang}`);
-        const { eventTitle, eventText, categoryTitle } = await response.json();
+        const { eventID, eventTitle, eventText, categoryTitle } = await response.json();
         articleHeader.innerText = eventTitle;
         document.querySelector(`.breadcrumbLink--active`).innerText = eventTitle;
         document.querySelector(`.articleLable`).innerText = categoryTitle;
-        document.querySelector(`.articleText`).innerText = eventText;
+        const formatedText = (eventText) ? eventText.replace(/([\.\?\!])/g, "$1<br><br>") : ``;
+        document.querySelector(`.articleText`).innerHTML = formatedText;
+        // another events
+        const moreResponse = await fetch(`/api/events/lang/${lang}/limit/3/exclude/${eventID}`);
+        const result = await moreResponse.json();
+        const eventsList = [...document.querySelectorAll(`.eventsList .event`)];
+        eventsList.forEach((event, index) => {
+            event.querySelector(`.eventLink`).innerText = result[index].eventTitle;
+            event.querySelector(`.eventDescription`).innerText = result[index].eventAnnotation;
+            event.querySelector(`.eventTheme`).innerText = result[index].categoryTitle;
+        });
     });
 };
 

@@ -24,18 +24,19 @@ const validateForm = (editWrapper, selector) => {
     const regExpMap = {
         place: /[^0-9]/,
         number: /[^0-9\,\.]/,
-        text: /[^а-яА-Яa-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*]/,
+        text: /[^а-яА-Яa-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\«\»\"\–\:\;]/,
         link: /[^a-z0-9\_\-]/,
         color: /[^a-zA-Z0-9\#]/,
         city: /[^а-яА-Яa-zA-Z0-9\s\.\,\-\(\)\#]/,
+        header: /[^а-яА-Яa-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"\«\»]/,
         langRU: /[^а-яА-Я]/,
         langEN: /[^a-zA-Z]/,
         yearRU: /[^а-яА-Я0-9\s\-]/,
         yearEN: /[^a-zA-Z0-9\s\-]/,
         authorRU: /[^а-яА-Я\s\-]/,
         authorEN: /[^a-zA-Z\s\-]/,
-        langSymbolsRU: /[^а-яА-Я0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"]/,
-        langSymbolsEN: /[^a-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"]/
+        langSymbolsRU: /[^а-яА-Я0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"\«\»]/,
+        langSymbolsEN: /[^a-zA-Z0-9\s\!\?\.\,\+\-\(\)\%\#\@\\\/\*\"\«\»]/
     };
     const regExp = /^[^0-9\,\.]{1,30}$/;
     fields.forEach((field) => {

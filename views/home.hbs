@@ -21,41 +21,54 @@
     <div class="authorsWrapper">
         <h2 class="authorsHeader">{{{ authorsHeader }}}</h2>
         <div class="wrapper">
+            {{#if isSingleAuthor}}
             <div class="authorBlock">
                 <div class="authorWrapper">
                     <div class="authorInfoWrapper similarParent">
-                        <a class="authorPhotoLink" href="/authors/1">
-                            <img class="authorPhoto similarPhoto" src="/images/author1_photo.png" alt="arTE author 1 photo">
+                        <a class="authorPhotoLink" href="/authors/{{{ authors.authorID }}}">
+                            <img class="authorPhoto similarPhoto" src="/photos/authors/{{{ authors.authorPhoto }}}.png" alt="{{{ authors.author }}}">
                         </a>
                         <div class="authorInfo">
                             <div class="authorNameWrapper">
-                                <a href="/authors/1" class="authorName similarLink">Катерина Жуковская</a>
+                                <a href="/authors/{{{ authors.authorID }}}" class="authorName similarLink">{{{ authors.author }}}</a>
                             </div>
-                            <p class="authorDescription">
-                                Художник тра тата такие дела там была пришла основала примеры работ позитивная любовь к красоте во всех проявлениях
-                            </p>
+                            <p class="authorDescription">{{{ authors.authorAbout }}}</p>
                         </div>
                     </div>
+                    {{#if authors.pictures}}
                     <ul class="authorPictures--list">
+                        {{#each authors.pictures}}
                         <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/1">
+                            <a class="authorPictures-link" href="/authors/{{{ authorID }}}">
                                 <img class="authorPictures--photo" src="/images/author_picture1.png" alt="arTE author picture 1">
                             </a>
                         </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/1">
-                                <img class="authorPictures--photo" src="/images/author_picture2.png" alt="arTE author picture 2">
-                            </a>
-                        </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/1">
-                                <img class="authorPictures--photo" src="/images/author_picture3.png" alt="arTE author picture 3">
-                            </a>
-                        </li>
+                        {{/each}}
                     </ul>
-                </div>
-                <a class="authorButton" href="/authors/1">{{{ authorButton }}}</a>
+                    {{/if}}
+                </div>  
+                <a class="authorButton" href="/authors/{{{ authors.authorID }}}">{{{ authorButton }}}</a>
             </div>
+            {{else}}
+            <div class="authorsBlock">
+                {{#if authors.length}}
+                <ul class="authorsList">
+                    {{#each authors}}
+                    <li class="authorsItem similarParent">
+                        <a class="authorsImageLink" href="/authors/{{{ authorID }}}">
+                            <img class="authorsImage similarPhoto" src="/photos/authors/{{{ authorPhoto }}}.png" alt="{{{ author }}}">
+                        </a>
+                        <div class="authorsLinkWrapper">
+                            <a class="authorsLink similarLink" href="/authors/{{{ authorID }}}">{{{ author }}}</a>
+                        </div>
+                        <span class="authorsPlace">{{{ authorCity }}}</span>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+                <a class="authorsButton" href="/authors">Показать больше</a>
+            </div>
+            {{/if}}
         </div>
     </div>
     <div class="orderWrapper">
@@ -118,30 +131,16 @@
         <div class="wrapperFull">
             <div class="interestWrapper">
                 <ul class="interestList">
-                    <li class="interestItem similarParent">
-                        <a class="interestPhotoLink" href="/events/1">
-                            <img class="interestPhoto similarPhoto" src="/images/interest_photo1.png" alt="arTE interest photo 1">
+                    {{#each events }}
+                    <li class="interestItem {{#if isActive }}interestItem--active{{/if}} similarParent">
+                        <a class="interestPhotoLink" href="/events/{{{ eventLink }}}">
+                            <img class="interestPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
                         </a>
-                        <a class="interestLink similarLink" href="/events/1">Instagram-интенсив «Теперь так»</a>
-                        <p class="interestDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                        <a class="interestTheme interestTheme--news" href="/events/1">Новости</a>
+                        <a class="interestLink similarLink" href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
+                        <p class="interestDescription">{{{ eventAnnotation }}}</p>
+                        <a class="interestTheme interestTheme--news" href="/events/{{{ eventLink }}}">{{{ categoryTitle }}}</a>
                     </li>
-                    <li class="interestItem interestItem--active similarParent">
-                        <a class="interestPhotoLink" href="/events/2">
-                            <img class="interestPhoto similarPhoto" src="/images/interest_photo2.png" alt="arTE interest photo 2">
-                        </a>
-                        <a class="interestLink similarLink" href="/events/2">Инсталляции группы Numen/For Use «Оклеим Москву»</a>
-                        <p class="interestDescription">Во время работы выставки ее посещение будет разбито на четыре акта. В каждом акте выставочное пространство будет менять свои очертания, заметки и артефакты будут сменять друг друга, создавая среду для исполнения партитур приглашенными танцовщиками.</p>
-                        <a class="interestTheme interestTheme--poster" href="/events/1">Афиша</a>
-                    </li>
-                    <li class="interestItem similarParent">
-                        <a class="interestPhotoLink" href="/events/3">
-                            <img class="interestPhoto similarPhoto" src="/images/interest_photo3.png" alt="arTE interest photo 3">
-                        </a>
-                        <a class="interestLink similarLink" href="/events/3">День открытых дверей в ARTE</a>
-                        <p class="interestDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                        <a class="interestTheme interestTheme--poster" href="/events/1">Афиша</a>
-                    </li>
+                    {{/each}}
                 </ul>
                 <a class="interestButton" href="/events">{{{ interestButton }}}</a>
             </div>

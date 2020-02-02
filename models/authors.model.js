@@ -1,9 +1,9 @@
-const sharp = require(`sharp`);
 const fs = require(`fs`);
 const { requestDB } = require(`../models/db.model`);
 const { 
-    authorData, photosArray, colorsArray, genreArray, techniqueArray 
+    photosArray, colorsArray, genreArray, techniqueArray 
 } = require(`./pictures-data.model`);
+const { savePhoto, saveThumb } = require(`./utils.model`);
 
 // INSERT | CREATE
 const saveAuthor = async (params) => {
@@ -70,7 +70,7 @@ const requestAuthor = async (authorID) => {
         return { code: 0, error: sqlMessage }
     }
 };
-const requestLanguageAuthors = async (language) => {
+const requestLanguageAuthors = async (language, limit = 100) => {
     try {
         const lang = language.toUpperCase();
         const authorQuery = `
@@ -78,7 +78,7 @@ const requestLanguageAuthors = async (language) => {
                 authorID, authorLink, author${lang} as author, authorPhoto, 
                 authorAbout${lang} as authorAbout, 
                 authorCity${lang} as authorCity 
-            FROM authors`;
+            FROM authors LIMIT ${limit}`;
         const result = await requestDB(authorQuery);
         if (!result.length) return { code: 404, error: `authors not found` };
         const authorData = [];
@@ -199,7 +199,7 @@ const requestAuthorPictures = async (authorID) => {
 // UPDATE
 const updateAuthor = async (authorID, params) => {
     const {
-        authorRU, authorEN, authorPhoto, authorLink,
+        authorRU, authorEN, authorLink,
         authorAboutRU, authorAboutEN, authorCityRU, authorCityEN
     } = params;
     const query = `
@@ -218,29 +218,6 @@ const updateAuthor = async (authorID, params) => {
         return { code: 0, error: sqlMessage }
     }
 };
-
-const savePhoto = async (fileDir, { filename, path }, width, height) => {
-    await sharp(path)
-        .resize(width, height)
-        .webp({ quality: 100 })
-        .toFile(`${fileDir}/${filename}.webp`);
-    await sharp(path)
-        .resize(width, height)
-        .png({ quality: 100 })
-        .toFile(`${fileDir}/${filename}.png`); 
-};
-
-const saveThumb = async (fileDir, { filename, path }, width, height) => {
-    await sharp(path)
-        .resize(width, height)
-        .webp({ quality: 100 })
-        .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.webp`);
-    await sharp(path)
-        .resize(width, height)
-        .png({ quality: 100 })
-        .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.png`); 
-};
-
 const deletePreviousPhoto = async (authorID) => {
     const selectQuery = `SELECT authorPhoto FROM authors WHERE authorID = ${authorID}`;
     const { 0: { authorPhoto: filename }} = await requestDB(selectQuery);
@@ -252,7 +229,6 @@ const deletePreviousPhoto = async (authorID) => {
     fs.unlinkSync(`public/photos/authors/thumbs/${filename}_20x20.png`);
     fs.unlinkSync(`public/photos/authors/thumbs/${filename}_20x20.webp`);
 };
-
 const updateAuthorPhoto = async (authorID, file) => {
     try {
         const { filename } = file;

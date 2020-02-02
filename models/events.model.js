@@ -1,4 +1,6 @@
+const fs = require(`fs`);
 const { requestDB } = require(`../models/db.model`);
+const { savePhoto } = require(`./utils.model`);
 
 // INSERT | CREATE
 const saveEvent = async (params) => {
@@ -9,7 +11,7 @@ const saveEvent = async (params) => {
     const query = `
         INSERT INTO events (
             eventLink, categoryID, 
-            eventTitleRU, eventTitleEN,
+            eventTitleRU, eventTitleEN, 
             eventAnnotationRU, eventAnnotationEN, 
             eventTextRU, eventTextEN
         ) VALUES (
@@ -61,6 +63,29 @@ const requestEventWithID = async (eventID) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestLanguageEvents = async (language, limit = 100, eventID = false) => {
+    const lang = language.toUpperCase();
+    const query = `
+        SELECT
+            events.eventLink as eventLink,
+            events.eventID as eventID, events.eventTitle${lang} as eventTitle, 
+            events.eventAnnotation${lang} as eventAnnotation, events.eventText${lang} as eventText,
+            events.eventPhoto as eventPhoto, categories.categoryLink as categoryLink, 
+            categoryTitle${lang} as categoryTitle
+        FROM events 
+        INNER JOIN categories on events.categoryID = categories.categoryID
+        ${(eventID) ? `WHERE eventID not like '${eventID}'` : ``}
+        ORDER BY eventID DESC LIMIT ${limit}`;
+    try {
+        const data = await requestDB(query);
+        const errorData = { code: 404, result: `events not found` };
+        return (data.length) ? data : errorData;
+    } catch (error) {
+        console.log(error);
+        const { sqlMessage } = error;
+        return { code: 0, error: sqlMessage }
+    }
+};
 const requestLanguageEvent = async (eventLink, language) => {
     const lang = language.toUpperCase();
     const query = `
@@ -107,6 +132,35 @@ const updateEvent = async (eventID, params) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const deletePreviousPhoto = async (eventID) => {
+    const selectQuery = `SELECT eventPhoto FROM events WHERE eventID = ${eventID}`;
+    const { 0: { eventPhoto: filename }} = await requestDB(selectQuery);
+    if (filename === `NULL` || filename === null) return false;
+    fs.unlinkSync(`public/photos/events/${filename}.png`);
+    fs.unlinkSync(`public/photos/events/${filename}.webp`);
+};
+const updateEventPhoto = async (eventID, file) => {
+    try {
+        const { filename } = file;
+        const fileDir = `public/photos/events`;
+        await deletePreviousPhoto(eventID);
+        await savePhoto(fileDir, file, 470, 269);
+        // delete temp multer file
+        fs.unlinkSync(`public/photos/${filename}`);
+        const query = `
+            UPDATE events SET eventPhoto = '${filename}'
+            WHERE eventID = ${eventID}`;
+        const { changedRows } = await requestDB(query);
+        return {
+            code: (changedRows) ? 200 : 404,
+            result: (changedRows) ? filename : `event not found`
+        };
+    } catch (event) {
+        const { sqlMessage } = event;
+        console.log(event);
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // DELETE
 const deleteEvent = async (eventID) => {
@@ -125,6 +179,6 @@ const deleteEvent = async (eventID) => {
 
 module.exports = {
     saveEvent, requestEventList, requestEvent,
-    requestEventWithID, requestLanguageEvent, updateEvent,
-    deleteEvent
+    requestEventWithID, requestLanguageEvent, requestLanguageEvents,
+    updateEvent, updateEventPhoto, deleteEvent
 };

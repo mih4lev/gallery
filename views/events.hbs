@@ -25,81 +25,27 @@
     <div class="events">
         <div class="wrapper">
             <h3 class="eventsHeader">{{{ eventsHeader }}}</h3>
-            <ul class="eventsList">
-                <li class="event similarParent">
-                    <a href="/events/1" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo1.png" alt="events photo 1">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/1">Instagram-интенсив «Теперь так»</a>
-                    <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                    <span class="eventTheme">Афиша</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/2" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo2.png" alt="events photo 2">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/2">Инсталляции группы Numen/For Use «Оклеим Москву»</a>
-                    <p class="eventDescription">Во время работы выставки ее посещение будет разбито на четыре акта. В каждом акте выставочное пространство будет менять свои очертания, заметки и артефакты будут сменять друг друга, создавая среду для исполнения партитур приглашенными танцовщиками.</p>
-                    <span class="eventTheme">Новости</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/1" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo3.png" alt="events photo 3">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/3">День открытых дверей в ARTE</a>
-                    <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                    <span class="eventTheme">Афиша</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/4" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo2.png" alt="events photo 2">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/4">Инсталляции группы Numen/For Use «Оклеим Москву»</a>
-                    <p class="eventDescription">Во время работы выставки ее посещение будет разбито на четыре акта. В каждом акте выставочное пространство будет менять свои очертания, заметки и артефакты будут сменять друг друга, создавая среду для исполнения партитур приглашенными танцовщиками.</p>
-                    <span class="eventTheme">Новости</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/5" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo3.png" alt="events photo 3">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/5">День открытых дверей в ARTE</a>
-                    <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                    <span class="eventTheme">Афиша</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/6" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo1.png" alt="events photo 1">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/6">Instagram-интенсив «Теперь так»</a>
-                    <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                    <span class="eventTheme">Афиша</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/7" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo1.png" alt="events photo 1">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/7">Instagram-интенсив «Теперь так»</a>
-                    <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                    <span class="eventTheme">Афиша</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/8" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo3.png" alt="events photo 3">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/8">День открытых дверей в ARTE</a>
-                    <p class="eventDescription">В процессе работы над партитурами создаются ситуации «встречи», которые понимаются как метафора сложных динамических процессов определения, различения, совместности.</p>
-                    <span class="eventTheme">Афиша</span>
-                </li>
-                <li class="event similarParent">
-                    <a href="/events/9" class="eventPhotoLink">
-                        <img class="eventPhoto similarPhoto" src="/images/interest_photo2.png" alt="events photo 2">
-                    </a>
-                    <a class="eventLink similarLink" href="/events/9">Инсталляции группы Numen/For Use «Оклеим Москву»</a>
-                    <p class="eventDescription">Во время работы выставки ее посещение будет разбито на четыре акта. В каждом акте выставочное пространство будет менять свои очертания, заметки и артефакты будут сменять друг друга, создавая среду для исполнения партитур приглашенными танцовщиками.</p>
-                    <span class="eventTheme">Новости</span>
-                </li>
-            </ul>
-            <button class="arrowDownButton interestButton" href="#">{{{ interestButton }}}</button>
+            {{#if events.length }}
+                <ul class="eventsList">
+                    {{# each events }}
+                        <li class="event similarParent">
+                            <a href="/events/{{{ eventLink }}}" class="eventPhotoLink">
+                                {{#if hasPhoto }}
+                                    <img class="eventPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
+                                {{else}}
+                                    <div class="eventPhoto similarPhoto defaultPhoto"></div>
+                                {{/if}}
+                            </a>
+                            <a class="eventLink similarLink" href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
+                            <p class="eventDescription">{{{ eventAnnotation }}}</p>
+                            <span class="eventTheme">{{{ categoryTitle }}}</span>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            {{#if hasMoreButton }}
+                <button class="arrowDownButton interestButton" href="#">{{{ interestButton }}}</button>
+            {{/if}}
         </div>
     </div>
 </div>

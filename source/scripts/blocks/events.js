@@ -1,3 +1,62 @@
+export const translateEvents = () => {
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        const eventsList = [...document.querySelectorAll(`.eventsList .event`)];
+        if (!eventsList.length) return false;
+        const moreResponse = await fetch(`/api/events/lang/${lang}`);
+        const result = await moreResponse.json();
+        eventsList.forEach((event, index) => {
+            event.querySelector(`.eventLink`).innerText = result[index].eventTitle;
+            event.querySelector(`.eventDescription`).innerText = result[index].eventAnnotation;
+            event.querySelector(`.eventTheme`).innerText = result[index].categoryTitle;
+        });
+    });
+};
+
+export const showMoreEvents = async () => {
+    const interestButton = document.querySelector(`.interestButton`);
+    const eventList = document.querySelector(`.eventsList`);
+    if (!interestButton || !eventList) return false;
+    const lang = document.querySelector(`html`).getAttribute(`lang`);
+    const eventsResponse = await fetch(`/api/events/lang/${lang}`);
+    const result = await eventsResponse.json();
+    const eventsCount = result.length;
+    const checkButton = () => {
+        const visibleCount = [...document.querySelectorAll(`.eventsList .event`)].length;
+        if (visibleCount < eventsCount) return false;
+        document.querySelector(`.events .wrapper`).removeChild(interestButton);
+    };
+    interestButton.addEventListener(`click`, (event) => {
+        event.preventDefault();
+        const visibleCount = [...document.querySelectorAll(`.eventsList .event`)].length;
+        result.forEach((event, index) => {
+            if (index < visibleCount) return false;
+            if (index > (visibleCount + 8)) return false;
+            const cloneNode = document.querySelector(`.eventsList .event`).cloneNode(true);
+            const photoLink = cloneNode.querySelector(`.eventPhotoLink`);
+            photoLink.setAttribute(`href`, `/events/${event.eventLink}`);
+            photoLink.innerHTML = ``;
+            if (event.eventPhoto !== null || event.eventPhoto !== `NULL`) {
+                const photoNode = document.createElement(`img`);
+                photoNode.src = `/photos/events/${event.eventPhoto}.png`;
+                photoNode.setAttribute(`alt`, event.eventTitle);
+                photoNode.classList.add(`eventPhoto`, `similarPhoto`);
+                photoLink.appendChild(photoNode);
+            } else {
+                const photoNode = document.createElement(`div`);
+                photoNode.classList.add(`eventPhoto`, `similarPhoto`, `defaultPhoto`);
+                photoLink.appendChild(photoNode);
+            }
+            const eventLink = document.querySelector(`.eventLink`);
+            eventLink.setAttribute(`href`, `/events/${event.eventLink}`);
+            eventLink.innerText = event.eventTitle;
+            document.querySelector(`.eventDescription`).innerText = event.eventAnnotation;
+            document.querySelector(`.eventTheme`).innerText = event.categoryTitle;
+            eventList.appendChild(cloneNode);
+        });
+        checkButton();
+    });
+};
+
 export const respondInterestBlock = () => {
 
     const interestBlocks = [...document.querySelectorAll(`.interestItem`)];

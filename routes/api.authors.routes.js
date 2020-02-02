@@ -1,6 +1,6 @@
+const { Router } = require(`express`);
 const multer = require(`multer`);
 const upload = multer({ dest: `public/photos` });
-const { Router } = require(`express`);
 const {
     requestAuthorList, requestAuthor, saveAuthor, updateAuthorPhoto, 
     updateAuthor, deleteAuthor, requestAuthorRewards, requestAuthorEducations, 
@@ -24,6 +24,11 @@ router.post(`/:authorID/photo`, upload.single('authorPhoto'), async (request, re
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestAuthorList();
+    response.send(data);
+});
+router.get(`/lang/:lang/limit/:limit`, async (request, response) => {
+    const { params: { lang, limit }} = request;
+    const data = await requestLanguageAuthors(lang, limit);
     response.send(data);
 });
 router.get(`/lang/:lang`, async (request, response) => {

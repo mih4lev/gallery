@@ -37,6 +37,10 @@ const requestAPI = (options, value) => {
         'author': {
             URL: `/api/authors/${value}/photo`,
             selector: `authorPhoto`
+        },
+        'event': {
+            URL: `/api/events/${value}/photo`,
+            selector: `eventPhoto`
         }
     };
     return { URL: linksMAP[options].URL, selector: linksMAP[options].selector };

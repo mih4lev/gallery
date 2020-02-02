@@ -1,7 +1,10 @@
 const { Router } = require(`express`);
+const multer = require(`multer`);
+const upload = multer({ dest: `public/photos` });
 const {
     saveEvent, requestEventList, requestEvent, requestLanguageEvent,
-    requestEventWithID, updateEvent, deleteEvent
+    requestEventWithID, requestLanguageEvents,
+    updateEvent, updateEventPhoto, deleteEvent
 } = require("../models/events.model");
 
 const router = new Router();
@@ -10,6 +13,11 @@ const router = new Router();
 router.post(`/`, async (request, response) => {
     const data = await saveEvent(request.body);
     await response.json(data);
+});
+router.post(`/:eventID/photo`, upload.single('eventPhoto'), async (request, response) => {
+    const { params: { eventID }, file } = request;
+    const data = await updateEventPhoto(eventID, file);
+    response.json(data);
 });
 
 // GET | READ
@@ -20,6 +28,21 @@ router.get(`/`, async (request, response) => {
 router.get(`/id/:eventID`, async (request, response) => {
     const { params: { eventID }} = request;
     const data = await requestEventWithID(eventID);
+    response.send(data);
+});
+router.get(`/lang/:lang/limit/:limit/exclude/:eventID`, async (request, response) => {
+    const { params: { lang, limit, eventID }} = request;
+    const data = await requestLanguageEvents(lang, limit, eventID);
+    response.send(data);
+});
+router.get(`/lang/:lang/limit/:limit`, async (request, response) => {
+    const { params: { lang, limit }} = request;
+    const data = await requestLanguageEvents(lang, limit);
+    response.send(data);
+});
+router.get(`/lang/:lang`, async (request, response) => {
+    const { params: { lang }} = request;
+    const data = await requestLanguageEvents(lang);
     response.send(data);
 });
 router.get(`/:eventLink`, async (request, response) => {
