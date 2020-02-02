@@ -6,14 +6,19 @@
                     {{{ authorData.author }}}
                 </h1>
                 <span class="painterCity">{{{ authorData.authorCity }}}</span>
-                {{#if hasAuthorPhoto }}
-                    <img class="painterPhoto" src="/photos/authors/{{{ authorData.authorPhoto }}}.png" alt="{{{ authorData.author }}}">
-                {{else}}
-                    <div class="painterPhoto defaultPhoto"></div>
-                    {{#if isAdmin}}
-                        <input type="file" class="painterPhoto downloadPhoto" data-author-id="{{{ authorData.authorID }}}"></input>
+                <div class="painterPhotoWrapper">
+                    {{#if hasAuthorPhoto }}
+                        <img class="painterPhoto" src="/photos/authors/{{{ authorData.authorPhoto }}}.png" alt="{{{ authorData.author }}}">
+                    {{else}}
+                        <div class="painterPhoto defaultPhoto"></div>
                     {{/if}}
-                {{/if}}
+                    {{#if isAdmin}}
+                        <input type="file" 
+                            class="painterPhoto downloadPhoto" 
+                            data-options="author"
+                            data-value="{{{ authorData.authorID }}}"></input>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>

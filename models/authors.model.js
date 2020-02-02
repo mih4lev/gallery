@@ -8,15 +8,15 @@ const {
 // INSERT | CREATE
 const saveAuthor = async (params) => {
     const {
-        authorLink, authorRU, authorEN, authorPhoto,
+        authorLink, authorRU, authorEN,
         authorAboutRU, authorAboutEN, authorCityRU, authorCityEN
     } = params;
     const query = `
         INSERT INTO authors (
-            authorLink, authorRU, authorEN, authorPhoto,
-            authorAboutRU, authorAboutEN, authorCityRU, authorCityEN
+            authorLink, authorRU, authorEN, authorAboutRU, 
+            authorAboutEN, authorCityRU, authorCityEN
         ) VALUES (
-            '${authorLink}', '${authorRU}', '${authorEN}', '${authorPhoto}', 
+            '${authorLink}', '${authorRU}', '${authorEN}',
             '${authorAboutRU}', '${authorAboutEN}', 
             '${authorCityRU}', '${authorCityEN}' 
         )`;
@@ -66,6 +66,33 @@ const requestAuthor = async (authorID) => {
             exhibitions: await requestDB(exhibitionsQuery),
             educations: await requestDB(educationsQuery)
         });
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestLanguageAuthors = async (language) => {
+    try {
+        const lang = language.toUpperCase();
+        const authorQuery = `
+            SELECT 
+                authorID, authorLink, author${lang} as author, authorPhoto, 
+                authorAbout${lang} as authorAbout, 
+                authorCity${lang} as authorCity 
+            FROM authors`;
+        const result = await requestDB(authorQuery);
+        if (!result.length) return { code: 404, error: `authors not found` };
+        const authorData = [];
+        for (const author of result) {
+            const { authorID } = author;
+            const pictureQuery = `
+                SELECT pictureID, picture${lang} as picture, picturePlace, picturePhoto
+                FROM pictures WHERE authorID = ${authorID}
+                ORDER BY picturePlace LIMIT 3`;
+            authorData.push(Object.assign(
+                author, { pictures: await requestDB(pictureQuery) }
+            ));
+        }
+        return authorData;
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
@@ -177,8 +204,7 @@ const updateAuthor = async (authorID, params) => {
     } = params;
     const query = `
         UPDATE authors SET 
-            authorRU = '${authorRU}', authorEN = '${authorEN}', 
-            authorLink = '${authorLink}', authorPhoto = '${authorPhoto}', 
+            authorRU = '${authorRU}', authorEN = '${authorEN}', authorLink = '${authorLink}', 
             authorAboutRU = '${authorAboutRU}', authorAboutEN = '${authorAboutEN}', 
             authorCityRU = '${authorCityRU}', authorCityEN = '${authorCityEN}' 
         WHERE authorID = ${authorID}`;
@@ -193,19 +219,48 @@ const updateAuthor = async (authorID, params) => {
     }
 };
 
+const savePhoto = async (fileDir, { filename, path }, width, height) => {
+    await sharp(path)
+        .resize(width, height)
+        .webp({ quality: 100 })
+        .toFile(`${fileDir}/${filename}.webp`);
+    await sharp(path)
+        .resize(width, height)
+        .png({ quality: 100 })
+        .toFile(`${fileDir}/${filename}.png`); 
+};
+
+const saveThumb = async (fileDir, { filename, path }, width, height) => {
+    await sharp(path)
+        .resize(width, height)
+        .webp({ quality: 100 })
+        .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.webp`);
+    await sharp(path)
+        .resize(width, height)
+        .png({ quality: 100 })
+        .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.png`); 
+};
+
+const deletePreviousPhoto = async (authorID) => {
+    const selectQuery = `SELECT authorPhoto FROM authors WHERE authorID = ${authorID}`;
+    const { 0: { authorPhoto: filename }} = await requestDB(selectQuery);
+    if (filename === `NULL` || filename === null) return false;
+    fs.unlinkSync(`public/photos/authors/${filename}.png`);
+    fs.unlinkSync(`public/photos/authors/${filename}.webp`);
+    fs.unlinkSync(`public/photos/authors/thumbs/${filename}_55x55.png`);
+    fs.unlinkSync(`public/photos/authors/thumbs/${filename}_55x55.webp`);
+    fs.unlinkSync(`public/photos/authors/thumbs/${filename}_20x20.png`);
+    fs.unlinkSync(`public/photos/authors/thumbs/${filename}_20x20.webp`);
+};
+
 const updateAuthorPhoto = async (authorID, file) => {
     try {
-        const { path, filename } = file;
+        const { filename } = file;
         const fileDir = `public/photos/authors`;
-        // create 216x216 webp && png
-        await sharp(path).resize(216).webp({ quality: 100 }).toFile(`${fileDir}/${filename}.webp`);
-        await sharp(path).resize(216).png({ quality: 100 }).toFile(`${fileDir}/${filename}.png`); 
-        // create 55x55 webp && png
-        await sharp(path).resize(55).webp({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_55x55.webp`);
-        await sharp(path).resize(55).png({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_55x55.png`); 
-        // create 20x20 webp && png
-        await sharp(path).resize(20).webp({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_20x20.webp`);
-        await sharp(path).resize(20).png({ quality: 100 }).toFile(`${fileDir}/thumbs/${filename}_20x20.png`); 
+        await deletePreviousPhoto(authorID);
+        await savePhoto(fileDir, file, 216, 216);
+        await saveThumb(fileDir, file, 55, 55);
+        await saveThumb(fileDir, file, 20, 20);
         // delete temp multer file
         fs.unlinkSync(`public/photos/${filename}`);
         const query = `
@@ -242,5 +297,5 @@ module.exports = {
     updateAuthor, deleteAuthor, requestAuthorRewards,
     requestAuthorEducations, requestAuthorExhibitions,
     requestAuthorPictures, requestLanguageAuthor,
-    updateAuthorPhoto
+    requestLanguageAuthors, updateAuthorPhoto
 };

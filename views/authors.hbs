@@ -1,123 +1,41 @@
 <div class="innerPage">
+    {{# each authorData }}
     <div class="authorsWrapper">
         <div class="wrapper">
             <div class="authorBlock">
                 <div class="authorWrapper">
                     <div class="authorInfoWrapper similarParent">
-                        <a href="/authors/1" class="authorPhotoLink">
-                            <img class="authorPhoto similarPhoto" src="/images/author1_photo.png" alt="arTE author 1 photo">
+                        <a href="/authors/{{{ authorID }}}" class="authorPhotoLink">
+                            {{#if hasAuthorPhoto }}
+                                <img class="authorPhoto similarPhoto" src="/photos/authors/{{{ authorPhoto }}}.png" alt="{{{ author }}}">
+                            {{else}}
+                                <div class="authorPhoto defaultPhoto similarPhoto"></div>
+                            {{/if}}
                         </a>
                         <div class="authorInfo">
                             <div class="authorNameWrapper">
-                                <a href="/authors/1" class="authorName similarLink">Катерина Жуковская</a>
+                                <a href="/authors/{{{ authorID }}}" class="authorName similarLink">{{{ author }}}</a>
                             </div>
-                            <p class="authorDescription">
-                                Художник тра тата такие дела там была пришла основала примеры работ позитивная любовь к красоте во всех проявлениях
-                            </p>
+                            <p class="authorDescription">{{{ authorAbout }}}</p>
                         </div>
                     </div>
+                    {{#if pictures.length }}
                     <ul class="authorPictures--list">
+                        {{# each pictures }}
                         <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/1">
-                                <img class="authorPictures--photo" src="/images/author_picture1.png" alt="arTE author picture 1">
+                            <a class="authorPictures-link" href="/authors/{{{ authorID }}}">
+                                <img class="authorPictures--photo" src="/images/author_picture1.png" alt="{{{ picture }}}">
                             </a>
                         </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/1">
-                                <img class="authorPictures--photo" src="/images/author_picture2.png" alt="arTE author picture 2">
-                            </a>
-                        </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/1">
-                                <img class="authorPictures--photo" src="/images/author_picture3.png" alt="arTE author picture 3">
-                            </a>
-                        </li>
+                        {{/each}}
                     </ul>
+                    {{/if}}
                 </div>
+                {{#if pictures.length }}
                 <a class="authorButton" href="/authors/1">{{{ authorButton }}}</a>
+                {{/if}}
             </div>
         </div>
     </div>
-    <div class="authorsWrapper">
-        <div class="wrapper">
-            <div class="authorBlock">
-                <div class="authorWrapper">
-                    <div class="authorInfoWrapper similarParent">
-                        <a href="/authors/1" class="authorPhotoLink">
-                            <img class="authorPhoto similarPhoto" src="/images/author2_photo.png" alt="arTE author 2 photo">
-                        </a>
-                        <div class="authorInfo">
-                            <div class="authorNameWrapper">
-                                <a href="/authors/2" class="authorName similarLink">Изабелла Лебедева</a>
-                            </div>
-                            <p class="authorDescription">
-                                Художник тра тата такие дела там была пришла основала примеры работ позитивная любовь к красоте во всех проявлениях
-                            </p>
-                        </div>
-                    </div>
-                    <ul class="authorPictures--list">
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/2">
-                                <img class="authorPictures--photo" src="/images/author2_picture1.png" alt="arTE author picture 1">
-                            </a>
-                        </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/2">
-                                <img class="authorPictures--photo" src="/images/author2_picture2.png" alt="arTE author picture 2">
-                            </a>
-                        </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/2">
-                                <img class="authorPictures--photo" src="/images/author2_picture3.png" alt="arTE author picture 3">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <a class="authorButton" href="/authors/2">{{{ authorButton }}}</a>
-            </div>
-        </div>
-    </div>
-    <div class="authorsWrapper">
-        <div class="wrapper">
-            <div class="authorBlock">
-                <div class="authorWrapper">
-                    <div class="authorInfoWrapper similarParent">
-                        <a href="/authors/1" class="authorPhotoLink">
-                            <img class="authorPhoto similarPhoto" src="/images/author3_photo.png" alt="arTE author 3 photo">
-                        </a>
-                        <div class="authorInfo">
-                            <div class="authorNameWrapper">
-                                <a href="/authors/3" class="authorName similarLink">Sasha Ignatiadou</a>
-                            </div>
-                            <p class="authorDescription">
-                                Художник тра тата такие дела там была пришла основала примеры работ позитивная любовь к красоте во всех проявлениях
-                            </p>
-                        </div>
-                    </div>
-                    <ul class="authorPictures--list">
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/3">
-                                <img class="authorPictures--photo" src="/images/author3_picture1.png" alt="arTE author picture 1">
-                            </a>
-                        </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/3">
-                                <img class="authorPictures--photo" src="/images/author3_picture2.png" alt="arTE author picture 2">
-                            </a>
-                        </li>
-                        <li class="authorPictures--item">
-                            <a class="authorPictures-link" href="/authors/3">
-                                <img class="authorPictures--photo" src="/images/author3_picture3.png" alt="arTE author picture 3">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <a class="authorButton" href="/authors/3">{{{ authorButton }}}</a>
-            </div>
-        </div>
-    </div>
+    {{/each}}
 </div>
-
-{{#if isAdmin}}
-    {{> templates/author.template}}
-{{/if}}

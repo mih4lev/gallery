@@ -19,6 +19,9 @@ router.get(`/:eventLink`, async (request, response) => {
     data.eventData = await requestLanguageEvent(eventLink, lang);
     data.isEventsActive = true;
     data.isArticleActive = true;
+    console.log(data);
+    const eventPhoto = data.eventData.eventPhoto;
+    data.hasEventPhoto = (eventPhoto !== `NULL` && eventPhoto !== null);
     response.render(pageLink, data);
 });
 

@@ -4,7 +4,8 @@ const { Router } = require(`express`);
 const {
     requestAuthorList, requestAuthor, saveAuthor, updateAuthorPhoto, 
     updateAuthor, deleteAuthor, requestAuthorRewards, requestAuthorEducations, 
-    requestAuthorExhibitions, requestAuthorPictures, requestLanguageAuthor
+    requestAuthorExhibitions, requestAuthorPictures, requestLanguageAuthor,
+    requestLanguageAuthors
 } = require("../models/authors.model");
 
 const router = new Router();
@@ -23,6 +24,11 @@ router.post(`/:authorID/photo`, upload.single('authorPhoto'), async (request, re
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestAuthorList();
+    response.send(data);
+});
+router.get(`/lang/:lang`, async (request, response) => {
+    const { params: { lang }} = request;
+    const data = await requestLanguageAuthors(lang);
     response.send(data);
 });
 router.get(`/:authorID`, async (request, response) => {

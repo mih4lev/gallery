@@ -621,68 +621,43 @@
 }
 
 .downloadPhoto {
-    position: relative;
-    background-color: #000;
-    background-image: url(/images/photo_download--icon.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 50px;
-    overflow: hidden;
-    margin-top: -50px;
-    font-size: 0;
+    position: absolute;
+    left: 0;
+    top: -100px;
+    width: 100%;
+    height: 200%;
     outline: none;
     cursor: pointer;
     &:after {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 100px;
+        left: 50%;
+        margin-top: 40px;
+        transform: translate(-50%, -50%);
         display: block;
-        width: inherit;
-        height: inherit;
-        border: none;
-        background: inherit;
-    }
-    @include respond(mobile) {
+        width: 50px;
+        height: 50px;
+        background-image: url(/images/photo_download--icon.svg);
+        background-repeat: no-repeat;
+        background-position: center center;
         background-size: 30px;
-    }
-}
-
-.changePhoto {
-    position: relative;
-    background-image: url(/images/photo_download--icon.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 50px;
-    overflow: hidden;
-    font-size: 0;
-    outline: none;
-    cursor: pointer;
-    &:after {
-        content: "";
-        position: absolute;
-        top: -100;
-        left: 0;
-        display: block;
-        width: inherit;
-        height: inherit;
-        border: none;
-    }
-    @include respond(mobile) {
-        background-size: 30px;
+        @include respond(mobile) {
+            background-size: 30px;
+        }
     }
 }
 
 .photoCropper {
     width: 600px !important;
-    height: 600px !important;
+    // height: 600px !important;
     @include respond(tabletMini) {
         width: $tabletMiniContentWidth !important;
-        height: $tabletMiniContentWidth !important;
+        // height: $tabletMiniContentWidth !important;
     }
     @include respond(mobile) {
         width: $mobileContentWidth !important;
-        height: $mobileContentWidth !important;
+        // height: $mobileContentWidth !important;
     }
 }
 

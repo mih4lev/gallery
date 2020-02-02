@@ -127,16 +127,26 @@
                 letter-spacing: 0.1375em;
             }
         }
-        .articlePicture {
+        .articlePictureWrapper {
+            position: relative;
+            overflow: hidden;
             width: 470px;
+            height: 269px;
             @include respond(tablet) {
                 width: 340px;
+                height: (269 / 470) * 340;
             }
             @include respond(tabletMini) {
                 width: $tabletMiniContentWidth;
+                height: (269 / 470) * $tabletMiniContentWidth;
             }
             @include respond(mobile) {
                 width: $mobileContentWidth;
+                height: (269 / 470) * $mobileContentWidth;
+            }
+            .articlePicture {
+                width: 100%;
+                height: 100%;
             }
         }
     }

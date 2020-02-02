@@ -84,7 +84,8 @@
                 }
             }
         }
-        .painterPhoto {
+        .painterPhotoWrapper {
+            overflow: hidden;
             right: 0;
             bottom: 0;
             transform: translateY(50%);
@@ -94,6 +95,11 @@
             height: 216px;
             border: 1px solid $secondaryColor;
             border-radius: 50%;
+            background-color: #000;
+            background-image: url(/images/logo.svg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 60px;
             @include respond(tabletMini) {
                 width: 130px;
                 height: 130px;
