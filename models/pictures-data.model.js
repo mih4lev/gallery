@@ -75,10 +75,13 @@ const techniqueArray = async (picture, language) => {
 };
 const photosArray = async (picture, language) => {
     const { pictureID } = picture;
-    const lang = language.toUpperCase();
-    const photosQuery = `
-        SELECT pictureID, photoID, photoName${lang}, photoLink
-        FROM photos WHERE pictureID = ${pictureID}`;
+    let photosQuery = `SELECT * FROM photos WHERE pictureID = ${pictureID}`;
+    if (language) {
+        const lang = language.toUpperCase();
+        photosQuery = `
+            SELECT pictureID, photoID, photoName${lang}, photoLink
+            FROM photos WHERE pictureID = ${pictureID}`;
+    }
     picture.photos = await requestDB(photosQuery);
 };
 const addGenres = async (pictureID, genresID) => {

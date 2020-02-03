@@ -85,7 +85,7 @@ const requestLanguageAuthors = async (language, limit = 100) => {
         for (const author of result) {
             const { authorID } = author;
             const pictureQuery = `
-                SELECT pictureID, picture${lang} as picture, picturePlace, picturePhoto
+                SELECT pictureID, picture${lang} as picture, picturePlace
                 FROM pictures WHERE authorID = ${authorID}
                 ORDER BY picturePlace LIMIT 3`;
             authorData.push(Object.assign(
