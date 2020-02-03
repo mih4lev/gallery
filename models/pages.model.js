@@ -26,7 +26,9 @@ const requestLangPage = async(pageLink, language) => {
     const lang = language.toUpperCase();
     if (lang !== `RU` && lang !== `EN`) return errorData;
     const query = `
-        SELECT title${lang} as title, metaDescription${lang} as metaDescription, 
+        SELECT 
+            pageLink, pageID, title${lang} as title, 
+            metaDescription${lang} as metaDescription, 
             metaKeywords${lang} as metaKeywords
         FROM pages WHERE pageLink = '${pageLink}'
     `;

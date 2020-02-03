@@ -95,10 +95,11 @@
                 width: 305px;
                 height: 807px;
             }
-            .collectionPhoto {
+            .collectionPhotoWrapper {
                 position: absolute;
                 cursor: pointer;
                 transition: all .25s ease-in;
+                overflow: hidden;
                 &:hover {
                     @extend %photoFilter;
                 }
@@ -107,29 +108,49 @@
                     left: 33px;
                     width: 319px;
                     height: 515px;
+                    .collectionPhoto {
+                        width: 319px;
+                        height: 515px;
+                    }
                     @include respond(desktop) {
                         top: 0;
                         left: 34px;
                         width: 274px;
                         height: 442px;
+                        .collectionPhoto {
+                            width: 274px;
+                            height: 442px;
+                        }
                     }
                     @include respond(tablet) {
                         top: 0;
                         left: 25px;
                         width: 208px;
                         height: 335px;
+                        .collectionPhoto {
+                            width: 208px;
+                            height: 335px;
+                        }
                     }
                     @include respond(tabletMini) {
                         top: 0;
                         left: 0;
                         width: 173px;
                         height: 278px;
+                        .collectionPhoto {
+                            width: 173px;
+                            height: 278px;
+                        }
                     }
                     @include respond(mobile) {
                         top: 0;
                         left: 0;
                         width: 118px;
                         height: 190px;
+                        .collectionPhoto {
+                            width: 118px;
+                            height: 190px;
+                        }
                     }
                 }
                 &:nth-of-type(2) {
@@ -137,29 +158,49 @@
                     left: 388px;
                     width: 358px;
                     height: 327px;
+                    .collectionPhoto {
+                        width: 358px;
+                        height: 327px;
+                    }
                     @include respond(desktop) {
                         top: 30px;
                         left: 325px;
                         width: 307px;
                         height: 281px;
+                        .collectionPhoto {
+                            width: 307px;
+                            height: 281px;
+                        }
                     }
                     @include respond(tablet) {
                         top: 30px;
                         left: 245px;
                         width: 233px;
                         height: 213px;
+                        .collectionPhoto {
+                            width: 233px;
+                            height: 213px;
+                        }
                     }
                     @include respond(tabletMini) {
                         top: 35px;
                         left: 185px;
                         width: 265px;
                         height: 243px;
+                        .collectionPhoto {
+                            width: 265px;
+                            height: 243px;
+                        }
                     }
                     @include respond(mobile) {
                         top: 27px;
                         left: 127px;
                         width: 178px;
                         height: 163px;
+                        .collectionPhoto {
+                            width: 178px;
+                            height: 163px;
+                        }
                     }
                 }
                 &:nth-of-type(3) {
@@ -167,29 +208,49 @@
                     right: 0;
                     width: 365px;
                     height: 274px;
+                    .collectionPhoto {
+                        width: 365px;
+                        height: 274px;
+                    }
                     @include respond(desktop) {
                         top: 76px;
                         right: 0;
                         width: 313px;
                         height: 235px;
+                        .collectionPhoto {
+                            width: 313px;
+                            height: 235px;
+                        }
                     }
                     @include respond(tablet) {
                         top: 65px;
                         right: 0;
                         width: 238px;
                         height: 178px;
+                        .collectionPhoto {
+                            width: 238px;
+                            height: 178px;
+                        }
                     }
                     @include respond(tabletMini) {
                         top: 975px;
                         right: 234px;
                         width: 216px;
                         height: 161px;
+                        .collectionPhoto {
+                            width: 216px;
+                            height: 161px;
+                        }
                     }
                     @include respond(mobile) {
                         top: 661px;
                         right: 160px;
                         width: 145px;
                         height: 109px;
+                        .collectionPhoto {
+                            width: 145px;
+                            height: 109px;
+                        }
                     }
                 }
                 &:nth-of-type(4) {
@@ -197,29 +258,49 @@
                     right: 66px;
                     width: 687px;
                     height: 515px;
+                    .collectionPhoto {
+                        width: 687px;
+                        height: 515px;
+                    }
                     @include respond(desktop) {
                         top: 327px;
                         right: 46px;
                         width: 589px;
                         height: 442px;
+                        .collectionPhoto {
+                            width: 589px;
+                            height: 442px;
+                        }
                     }
                     @include respond(tablet) {
                         top: 256px;
                         right: 36px;
                         width: 447px;
                         height: 335px;
+                        .collectionPhoto {
+                            width: 447px;
+                            height: 335px;
+                        }
                     }
                     @include respond(tabletMini) {
                         top: 290px;
                         right: 0;
                         width: 450px;
                         height: 339px;
+                        .collectionPhoto {
+                            width: 450px;
+                            height: 339px;
+                        }
                     }
                     @include respond(mobile) {
                         top: 199px;
                         right: 0;
                         width: 305px;
                         height: 228px;
+                        .collectionPhoto {
+                            width: 305px;
+                            height: 228px;
+                        }
                     }
                 }
                 &:nth-of-type(5) {
@@ -227,29 +308,49 @@
                     left: 0;
                     width: 357px;
                     height: 535px;
+                    .collectionPhoto {
+                        width: 357px;
+                        height: 535px;
+                    }
                     @include respond(desktop) {
                         top: 460px;
                         left: 0;
                         width: 307px;
                         height: 459px;
+                        .collectionPhoto {
+                            width: 307px;
+                            height: 459px;
+                        }
                     }
                     @include respond(tablet) {
                         top: 348px;
                         left: 0;
                         width: 233px;
                         height: 348px;
+                        .collectionPhoto {
+                            width: 233px;
+                            height: 348px;
+                        }
                     }
                     @include respond(tabletMini) {
                         top: 641px;
                         left: 0;
                         width: 216px;
                         height: 323px;
+                        .collectionPhoto {
+                            width: 216px;
+                            height: 323px;
+                        }
                     }
                     @include respond(mobile) {
                         top: 435px;
                         left: 0;
                         width: 145px;
                         height: 217px;
+                        .collectionPhoto {
+                            width: 145px;
+                            height: 217px;
+                        }
                     }
                 }
                 &:nth-of-type(6) {
@@ -257,29 +358,49 @@
                     bottom: 0;
                     width: 358px;
                     height: 447px;
+                    .collectionPhoto {
+                        width: 358px;
+                        height: 447px;
+                    }
                     @include respond(desktop) {
                         left: 325px;
                         bottom: 0;
                         width: 307px;
                         height: 384px;
+                        .collectionPhoto {
+                            width: 307px;
+                            height: 384px;
+                        }
                     }
                     @include respond(tablet) {
                         left: 245px;
                         bottom: 0;
                         width: 233px;
                         height: 291px;
+                        .collectionPhoto {
+                            width: 233px;
+                            height: 291px;
+                        }
                     }
                     @include respond(tabletMini) {
                         left: 227px;
                         bottom: 268px;
                         width: 223px;
                         height: 278px;
+                        .collectionPhoto {
+                            width: 223px;
+                            height: 278px;
+                        }
                     }
                     @include respond(mobile) {
                         left: 154px;
                         bottom: 184px;
                         width: 151px;
                         height: 188px;
+                        .collectionPhoto {
+                            width: 151px;
+                            height: 188px;
+                        }
                     }
                 }
                 &:nth-of-type(7) {
@@ -287,29 +408,49 @@
                     bottom: 56px;
                     width: 338px;
                     height: 391px;
+                    .collectionPhoto {
+                        width: 338px;
+                        height: 391px;
+                    }
                     @include respond(desktop) {
                         right: 21px;
                         bottom: 48px;
                         width: 290px;
                         height: 336px;
+                        .collectionPhoto {
+                            width: 290px;
+                            height: 336px;
+                        }
                     }
                     @include respond(tablet) {
                         right: 17px;
                         bottom: 36px;
                         width: 220px;
                         height: 255px;
+                        .collectionPhoto {
+                            width: 220px;
+                            height: 255px;
+                        }
                     }
                     @include respond(tabletMini) {
                         right: 0;
                         bottom: 0;
                         width: 223px;
                         height: 256px;
+                        .collectionPhoto {
+                            width: 223px;
+                            height: 256px;
+                        }
                     }
                     @include respond(mobile) {
                         right: 0;
                         bottom: 0;
                         width: 151px;
                         height: 175px;
+                        .collectionPhoto {
+                            width: 151px;
+                            height: 175px;
+                        }
                     }
                 }
             }

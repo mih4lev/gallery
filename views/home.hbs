@@ -6,13 +6,20 @@
                 <p class="mainDescription">{{{ mainDescription }}}</p>
                 <a class="mainHeader" href="/collection">{{{ mainHeader }}}</a>
                 <div class="mainCollection">
-                    <img class="collectionPhoto" src="/images/collection_photo1.png" alt="arTE collection photo 1">
-                    <img class="collectionPhoto" src="/images/collection_photo2.png" alt="arTE collection photo 2">
-                    <img class="collectionPhoto" src="/images/collection_photo3.png" alt="arTE collection photo 3">
-                    <img class="collectionPhoto" src="/images/collection_photo4.png" alt="arTE collection photo 4">
-                    <img class="collectionPhoto" src="/images/collection_photo5.png" alt="arTE collection photo 5">
-                    <img class="collectionPhoto" src="/images/collection_photo6.png" alt="arTE collection photo 6">
-                    <img class="collectionPhoto" src="/images/collection_photo7.png" alt="arTE collection photo 7">
+                    {{#each collection}}
+                        <div class="collectionPhotoWrapper">
+                            <img class="collectionPhoto"
+                                 data-picture-id="{{{ pictureID }}}"
+                                 src="/photos/collection/{{{ picturePhoto }}}.png"
+                                 alt="{{{ picture }}}">
+                            {{#if isAdmin}}
+                                <input type="file"
+                                       class="downloadPhoto"
+                                       data-options="collection{{{ pictureID }}}"
+                                       data-value="{{{ eventData.eventID }}}">
+                            {{/if}}
+                        </div>
+                    {{/each}}
                     <a class="collectionLink" href="/collection">{{{ collectionLink }}}</a>
                 </div>
             </div>
@@ -66,7 +73,7 @@
                     {{/each}}
                 </ul>
                 {{/if}}
-                <a class="authorsButton" href="/authors">Показать больше</a>
+                <a class="authorsButton" href="/authors">{{{ authorsButton }}}</a>
             </div>
             {{/if}}
         </div>

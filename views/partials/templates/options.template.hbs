@@ -1,0 +1,66 @@
+<template class="optionsTemplate">
+    <div class="editWrapper">
+        <div class="templateLoader"></div>
+        <form class="templateWrapper templateWrapper--hidden">
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="titleRU">Title RU</label>
+                    <input type="text"
+                           class="templateField titleRU"
+                           id="titleRU"
+                           data-validate="text"
+                           name="titleRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="titleEN">Title EN</label>
+                    <input type="text"
+                           class="templateField titleEN"
+                           id="titleEN"
+                           data-validate="text"
+                           name="titleEN">
+                </div>
+            </div>
+            <div class="templateLine">
+                <div class="templateElement">
+                    <label class="templateLabel" for="metaKeywordsRU">Meta Keywords RU</label>
+                    <input type="text"
+                           class="templateField metaKeywordsRU"
+                           id="metaKeywordsRU"
+                           data-validate="text"
+                           name="metaKeywordsRU">
+                </div>
+                <div class="templateElement">
+                    <label class="templateLabel" for="metaKeywordsEN">Meta Keywords EN</label>
+                    <input type="text"
+                           class="templateField metaKeywordsEN"
+                           id="metaKeywordsEN"
+                           data-validate="text"
+                           name="metaKeywordsEN">
+                </div>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="metaDescriptionRU">Meta Description RU</label>
+                <textarea
+                        class="templateField metaDescriptionRU"
+                        id="metaDescriptionRU"
+                        data-validate="text"
+                        name="metaDescriptionRU"></textarea>
+            </div>
+            <div class="templateElement">
+                <label class="templateLabel" for="metaDescriptionEN">Meta Description EN</label>
+                <textarea
+                        class="templateField metaDescriptionEN"
+                        id="metaDescriptionEN"
+                        data-validate="text"
+                        name="metaDescriptionEN"></textarea>
+            </div>
+            <div class="templateButtons">
+                <button type="submit"
+                        class="templateButton mainButton">
+                    Обновить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

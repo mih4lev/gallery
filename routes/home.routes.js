@@ -2,6 +2,7 @@ const { Router } = require(`express`);
 const { collectData } = require(`../models/data.model`);
 const { requestLanguageEvents } = require("../models/events.model");
 const { requestLanguageAuthors } = require(`../models/authors.model`);
+const { requestLangCollectionList } = require("../models/collection.model");
 
 const router = new Router();
 
@@ -10,9 +11,13 @@ router.get(`/`, async (request, response) => {
     const data = await collectData(request, pageLink);
     const lang = data.language;
     await Promise.all([
+        data.collection = await requestLangCollectionList(lang),
         data.authors = await requestLanguageAuthors(lang, 3),
         data.events = await requestLanguageEvents(lang, 3)
-    ])
+    ]);
+    data.collection.forEach((picture) => {
+        picture.isAdmin = true;
+    });
     data.isSingleAuthor = (data.authors.length === 1);
     // data.isSingleAuthor = true;
     if (data.isSingleAuthor) {

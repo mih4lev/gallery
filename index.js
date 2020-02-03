@@ -39,6 +39,7 @@ app.use('/api', require('./routes/api.routes'));
 app.use('/api/options', require('./routes/api.options.routes'));
 app.use('/api/pages', require('./routes/api.pages.routes'));
 app.use('/api/language', require('./routes/api.language.routes'));
+app.use('/api/collection', require('./routes/api.collection.routes'));
 app.use('/api/categories', require('./routes/api.categories.routes'));
 app.use('/api/events', require('./routes/api.events.routes'));
 app.use('/api/authors', require('./routes/api.authors.routes'));
