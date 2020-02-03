@@ -29,6 +29,97 @@ const cropperOptionsMap = {
         cropBoxMovable: false,
         cropBoxResizable: false,
         toggleDragModeOnDblclick: false,
+    },
+    'collection1': {
+        dragMode: 'move',
+        initialAspectRatio: 319 / 515,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+    },
+    'collection2': {
+        dragMode: 'move',
+        initialAspectRatio: 358 / 327,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+    },
+    'collection3': {
+        dragMode: 'move',
+        initialAspectRatio: 365 / 274,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+    },
+    'collection4': {
+        dragMode: 'move',
+        initialAspectRatio: 687 / 515,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+    },
+    'collection5': {
+        dragMode: 'move',
+        initialAspectRatio: 357 / 535,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+    },
+    'collection6': {
+        dragMode: 'move',
+        initialAspectRatio: 358 / 447,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+    },
+    'collection7': {
+        dragMode: 'move',
+        initialAspectRatio: 338 / 391,
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
     }
 };
 
@@ -41,6 +132,34 @@ const requestAPI = (options, value) => {
         'event': {
             URL: `/api/events/${value}/photo`,
             selector: `eventPhoto`
+        },
+        'collection1': {
+            URL: `/api/collection/1/photo`,
+            selector: `collectionPhoto`
+        },
+        'collection2': {
+            URL: `/api/collection/2/photo`,
+            selector: `collectionPhoto`
+        },
+        'collection3': {
+            URL: `/api/collection/3/photo`,
+            selector: `collectionPhoto`
+        },
+        'collection4': {
+            URL: `/api/collection/4/photo`,
+            selector: `collectionPhoto`
+        },
+        'collection5': {
+            URL: `/api/collection/5/photo`,
+            selector: `collectionPhoto`
+        },
+        'collection6': {
+            URL: `/api/collection/6/photo`,
+            selector: `collectionPhoto`
+        },
+        'collection7': {
+            URL: `/api/collection/7/photo`,
+            selector: `collectionPhoto`
         }
     };
     return { URL: linksMAP[options].URL, selector: linksMAP[options].selector };

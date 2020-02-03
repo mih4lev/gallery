@@ -25,7 +25,7 @@ basketDelivery();
 basketForm();
 articleScroll();
 shareList();
-changePhotos();
+// changePhotos();
 instagramPosts().catch((error) => console.log(error));
 translateHomepage();
 translateAuthors();

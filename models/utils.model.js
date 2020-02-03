@@ -11,22 +11,22 @@ const requestLanguage = (request) => {
 const savePhoto = async (fileDir, { filename, path }, width, height) => {
     await sharp(path)
         .resize(width, height)
-        .webp({ quality: 100 })
+        .webp({ quality: 80 })
         .toFile(`${fileDir}/${filename}.webp`);
     await sharp(path)
         .resize(width, height)
-        .png({ quality: 100 })
-        .toFile(`${fileDir}/${filename}.png`); 
+        .png({ quality: 80, compressionLevel: 7 })
+        .toFile(`${fileDir}/${filename}.png`);
 };
 
 const saveThumb = async (fileDir, { filename, path }, width, height) => {
     await sharp(path)
         .resize(width, height)
-        .webp({ quality: 100 })
+        .webp({ quality: 80 })
         .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.webp`);
     await sharp(path)
         .resize(width, height)
-        .png({ quality: 100 })
+        .png({ quality: 80, compressionLevel: 7 })
         .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.png`); 
 };
 

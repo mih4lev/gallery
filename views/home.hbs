@@ -8,10 +8,10 @@
                 <div class="mainCollection">
                     {{#each collection}}
                         <div class="collectionPhotoWrapper">
-                            <img class="collectionPhoto"
-                                 data-picture-id="{{{ pictureID }}}"
-                                 src="/photos/collection/{{{ picturePhoto }}}.png"
-                                 alt="{{{ picture }}}">
+                            <picture class="collectionPhoto">
+                                <source srcset="/photos/collection/{{{ picturePhoto }}}.webp" type="image/webp">
+                                <img class="collectionPhoto" src="/photos/collection/{{{ picturePhoto }}}.png" alt="{{{ picture }}}">
+                            </picture>
                             {{#if isAdmin}}
                                 <input type="file"
                                        class="downloadPhoto"
@@ -33,7 +33,10 @@
                 <div class="authorWrapper">
                     <div class="authorInfoWrapper similarParent">
                         <a class="authorPhotoLink" href="/authors/{{{ authors.authorID }}}">
-                            <img class="authorPhoto similarPhoto" src="/photos/authors/{{{ authors.authorPhoto }}}.png" alt="{{{ authors.author }}}">
+                            <picture class="authorPhoto similarPhoto">
+                                <source srcset="/photos/authors/{{{ authors.authorPhoto }}}.webp" type="image/webp">
+                                <img class="authorPhoto similarPhoto" src="/photos/authors/{{{ authors.authorPhoto }}}.png" alt="{{{ authors.author }}}">
+                            </picture>
                         </a>
                         <div class="authorInfo">
                             <div class="authorNameWrapper">
@@ -63,7 +66,10 @@
                     {{#each authors}}
                     <li class="authorsItem similarParent">
                         <a class="authorsImageLink" href="/authors/{{{ authorID }}}">
-                            <img class="authorsImage similarPhoto" src="/photos/authors/{{{ authorPhoto }}}.png" alt="{{{ author }}}">
+                            <picture class="authorsImage similarPhoto">
+                                <source srcset="/photos/authors/{{{ authorPhoto }}}.webp" type="image/webp">
+                                <img class="authorsImage similarPhoto" src="/photos/authors/{{{ authorPhoto }}}.png" alt="{{{ author }}}">
+                            </picture>
                         </a>
                         <div class="authorsLinkWrapper">
                             <a class="authorsLink similarLink" href="/authors/{{{ authorID }}}">{{{ author }}}</a>
@@ -141,7 +147,10 @@
                     {{#each events }}
                     <li class="interestItem {{#if isActive }}interestItem--active{{/if}} similarParent">
                         <a class="interestPhotoLink" href="/events/{{{ eventLink }}}">
-                            <img class="interestPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
+                            <picture>
+                                <source srcset="/photos/events/{{{ eventPhoto }}}.webp" type="image/webp">
+                                <img class="interestPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
+                            </picture>
                         </a>
                         <a class="interestLink similarLink" href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
                         <p class="interestDescription">{{{ eventAnnotation }}}</p>
