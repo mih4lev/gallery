@@ -103,6 +103,7 @@ const requestLanguagePicture = async (pictureID, language) => {
         await photosArray(pictureData, lang);
         await genreArray(pictureData, lang);
         await techniqueArray(pictureData, lang);
+        await photosArray(pictureData, lang);
         pictureData.langPrice = await changeCurrency(picturePrice, lang);
         return pictureData;
     } catch ({ sqlMessage }) {

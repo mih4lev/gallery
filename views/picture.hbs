@@ -11,7 +11,19 @@
                 </ul>
                 <div class="picture">
                     <div class="picturePhotoWrapper">
-                        <img class="picturePhoto" src="">
+                        {{# if pictureData.mainPicture.hasPhoto }}
+                            <img class="picturePhoto"
+                                 src="/photos/pictures/{{{ pictureData.mainPicture.hasPhoto }}}.png"
+                                 alt="{{{ pictureData.mainPicture.picture }}}">
+                        {{ else }}
+                            <div class="picturePhoto defaultPhoto"></div>
+                        {{/if}}
+                        {{#if isAdmin}}
+                            <input type="file"
+                                   class="painterPhoto downloadPhoto"
+                                   data-options="author"
+                                   data-value="{{{ pictureData.pictureID }}}">
+                        {{/if}}
                     </div>
                     <div class="pictureDataWrapper">
                         <h1 class="pictureHeader pictureHeaderID" data-picture-id="{{{ pictureData.pictureID }}}">{{{ pictureData.picture }}}</h1>
@@ -47,13 +59,23 @@
                         </p>
                         <ul class="pictureSimilarList">
                             {{# each pictureData.photos }}
+                                {{# if hasPhoto }}
                                 <li class="pictureSimilar">
-                                    <img src="/photos/thumbs/{{{ thumbLink }}}"
+                                    <img src="/photos/thumbs/{{{ photoLink }}}"
                                          data-picture="/photos/{{{ photoLink }}}"
                                          class="pictureSimilarPhoto"
                                          alt="{{{ photoName }}}">
                                 </li>
+                                {{/if}}
                             {{/each}}
+                            {{#if isAdmin}}
+                                <li class="pictureSimilar downloadSimilarPhoto">
+                                    <input type="file"
+                                           class="picturePhoto downloadPhoto"
+                                           data-options="author"
+                                           data-value="{{{ authorData.authorID }}}">
+                                </li>
+                            {{/if}}
                         </ul>
                         <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
                         <button class="cartButton">{{{ cartButton }}}</button>

@@ -10,21 +10,6 @@ const authorData = async (picture) => {
     const authodData = await requestDB(authorQuery);
     picture.author = authodData[0];
 };
-const photosArray = async (picture, language) => {
-    const { pictureID } = picture;
-    let photosQuery = `
-        SELECT photoID, photoNameRU, photoNameEN, photoLink, thumbLink
-        FROM photos WHERE pictureID = ${pictureID}
-    `;
-    if (language) {
-        const lang = language.toUpperCase();
-        photosQuery = `
-            SELECT photoID, photoName${lang} as photoName, photoLink, thumbLink
-            FROM photos WHERE pictureID = ${pictureID}
-        `;
-    }
-    picture.photos = await requestDB(photosQuery);
-};
 const colorsArray = async (picture, language) => {
     const { pictureID } = picture;
     picture.colors = [];
@@ -87,6 +72,14 @@ const techniqueArray = async (picture, language) => {
         const technique= await requestDB(techniqueQuery);
         picture.techniques.push(technique[0]);
     }
+};
+const photosArray = async (picture, language) => {
+    const { pictureID } = picture;
+    const lang = language.toUpperCase();
+    const photosQuery = `
+        SELECT pictureID, photoID, photoName${lang}, photoLink
+        FROM photos WHERE pictureID = ${pictureID}`;
+    picture.photos = await requestDB(photosQuery);
 };
 const addGenres = async (pictureID, genresID) => {
     for (const genreID of genresID) {
