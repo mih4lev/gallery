@@ -17,6 +17,9 @@ router.get(`/:pictureID`, async (request, response) => {
     const data = await collectData(request, pageLink);
     const lang = data.language;
     data.pictureData = await requestLanguagePicture(pictureID, lang);
+    if (!data.pictureData.pictureID) {
+        return response.status(404).redirect(`/404`);
+    }
     data.isCollectionActive = true;
     data.isPictureActive = true;
     data.pictureData.photos.forEach((photo) => {
@@ -24,9 +27,6 @@ router.get(`/:pictureID`, async (request, response) => {
         photo.hasPhoto = (photo.photoLink !== `NULL` && photo.photoLink !== null);
     });
     data.pictureData.mainPicture = data.pictureData.photos[0];
-    if (!data.pictureData.pictureID) {
-        return response.status(404).redirect(`/404`);
-    }
     console.log(data.pictureData.photos);
     response.render(pageLink, data);
 });

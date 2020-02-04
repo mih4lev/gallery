@@ -23,10 +23,10 @@
                         <a class="pictureAuthor pictureAuthorData" href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
                     </div>
                     {{# if isActiveRU }}
-                        <em class="picturePrice price price--rub" data-rub="25000">{{{ pictureData.langPrice }}}</em>
+                        <em class="picturePrice price price--rub" data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
                     {{/if}}
                     {{# if isActiveEN }}
-                        <em class="picturePrice price price--euro" data-rub="25000">{{{ pictureData.langPrice }}}</em>
+                        <em class="picturePrice price price--euro" data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
                     {{/if}}
                     <p class="pictureSize">
                         <span class="sizeLabel">{{{ sizeLabel }}}</span>
