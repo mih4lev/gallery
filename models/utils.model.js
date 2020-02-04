@@ -9,14 +9,45 @@ const requestLanguage = (request) => {
 };
 
 const savePhoto = async (fileDir, { filename, path }, width, height) => {
+    if (height) {
+        await sharp(path)
+            .resize(width, height)
+            .webp({ quality: 80 })
+            .toFile(`${fileDir}/${filename}.webp`);
+        await sharp(path)
+            .resize(width, height)
+            .png({ quality: 80, compressionLevel: 7 })
+            .toFile(`${fileDir}/${filename}.png`);
+    } else {
+        await sharp(path)
+            .resize(width)
+            .webp({ quality: 80 })
+            .toFile(`${fileDir}/${filename}.webp`);
+        await sharp(path)
+            .resize(width)
+            .png({ quality: 80, compressionLevel: 7 })
+            .toFile(`${fileDir}/${filename}.png`);
+    }
+};
+
+const saveOriginal = async (fileDir, { filename, path }) => {
     await sharp(path)
-        .resize(width, height)
         .webp({ quality: 80 })
-        .toFile(`${fileDir}/${filename}.webp`);
+        .toFile(`${fileDir}/original/${filename}.webp`);
     await sharp(path)
-        .resize(width, height)
-        .png({ quality: 80, compressionLevel: 7 })
-        .toFile(`${fileDir}/${filename}.png`);
+        .jpeg({ quality: 80 })
+        .toFile(`${fileDir}/original/${filename}.jpg`);
+};
+
+const saveOriginalThumb = async (fileDir, { filename, path }, width) => {
+    await sharp(path)
+        .resize(width)
+        .webp({ quality: 80 })
+        .toFile(`${fileDir}/original/${filename}_preview.webp`);
+    await sharp(path)
+        .resize(width)
+        .jpeg({ quality: 80 })
+        .toFile(`${fileDir}/original/${filename}_preview.jpg`);
 };
 
 const saveThumb = async (fileDir, { filename, path }, width, height) => {
@@ -27,7 +58,9 @@ const saveThumb = async (fileDir, { filename, path }, width, height) => {
     await sharp(path)
         .resize(width, height)
         .png({ quality: 80, compressionLevel: 7 })
-        .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.png`); 
+        .toFile(`${fileDir}/thumbs/${filename}_${width}x${height}.png`);
 };
 
-module.exports = { requestLanguage, savePhoto, saveThumb };
+module.exports = {
+    requestLanguage, savePhoto, saveThumb, saveOriginal, saveOriginalThumb
+};

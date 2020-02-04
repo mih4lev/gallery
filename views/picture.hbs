@@ -1,123 +1,128 @@
 <div class="innerPage">
-        <div class="pictureWrapper">
-            <div class="wrapper">
-                <ul class="breadcrumbs">
-                    <li class="breadcrumb">
-                        <a class="breadcrumbLink headerNav--collections" href="/collection">{{{ headerNav--collections }}}</a>
+    <div class="pictureWrapper">
+        <div class="wrapper">
+            <ul class="breadcrumbs">
+                <li class="breadcrumb">
+                    <a class="breadcrumbLink headerNav--collections" href="/collection">{{{ headerNav--collections }}}</a>
+                </li>
+                <li class="breadcrumb">
+                    <span class="breadcrumbLink--active">{{{ pictureData.picture }}}</span>
+                </li>
+            </ul>
+            <div class="picture">
+                <div class="picturePhotoWrapper">
+                    {{# if pictureData.mainPicture.hasPhoto }}
+                        <img class="picturePhoto"
+                             src="/photos/pictures/original/{{{ pictureData.mainPicture.photoLink }}}_preview.jpg"
+                             alt="{{{ pictureData.picture }}}">
+                    {{/if}}
+                </div>
+                <div class="pictureDataWrapper">
+                    <h1 class="pictureHeader pictureHeaderID" data-picture-id="{{{ pictureData.pictureID }}}">{{{ pictureData.picture }}}</h1>
+                    <div class="pictureAuthorWrapper">
+                        <a class="pictureAuthor pictureAuthorData" href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
+                    </div>
+                    {{# if isActiveRU }}
+                        <em class="picturePrice price price--rub" data-rub="25000">{{{ pictureData.langPrice }}}</em>
+                    {{/if}}
+                    {{# if isActiveEN }}
+                        <em class="picturePrice price price--euro" data-rub="25000">{{{ pictureData.langPrice }}}</em>
+                    {{/if}}
+                    <p class="pictureSize">
+                        <span class="sizeLabel">{{{ sizeLabel }}}</span>
+                        <span class="pictureWidth metric metric--{{{ language }}}">{{{ pictureData.pictureSizeWidth }}}</span>
+                        <span class="pictureHeight metric metric--{{{ language }}}">{{{ pictureData.pictureSizeHeight }}}</span>
+                    </p>
+                    <p class="pictureGenre">
+                        <span class="genreLabel">{{{ genreLabel }}}</span>
+                        <span class="genreName">
+                            {{# each pictureData.genres }}
+                                <em class="genreTitle">{{{ genre }}}</em>
+                            {{/each}}
+                        </span>
+                    </p>
+                    <p class="pictureTechnique">
+                        <span class="techniqueLabel">{{{ techniqueLabel }}}</span>
+                        <span class="techniqueName">
+                            {{# each pictureData.techniques }}
+                                <em class="techniqueTitle">{{{ technique }}}</em>
+                            {{/each}}
+                        </span>
+                    </p>
+                    <ul class="pictureSimilarList">
+                        {{# each pictureData.photos }}
+                            {{# if hasPhoto }}
+                            <li class="pictureSimilar">
+                                <picture class="interestPhoto similarPhoto"
+                                         data-picture="/photos/pictures/original/{{{ photoLink }}}_preview.jpg"
+                                         data-orignial="/photos/pictures/original/{{{ photoLink }}}.jpg">
+                                    <source srcset="/photos/pictures/thumbs/{{{ photoLink }}}_56x56.webp" type="image/webp">
+                                    <img
+                                         src="/photos/pictures/thumbs/{{{ photoLink }}}_56x56.png"
+                                         alt="{{{ picture }}}">
+                                </picture>
+                                {{#if isAdmin}}
+                                    <button class="deletePhoto" data-photo-id="{{{ photoID }}}">X</button>
+                                {{/if}}
+                            </li>
+                            {{/if}}
+                        {{/each}}
+                        {{#if isAdmin}}
+                            <li class="pictureSimilar downloadSimilarPhoto">
+                                <input type="file"
+                                       class="picturePhoto downloadPhoto"
+                                       data-options="picture"
+                                       data-value="{{{ pictureData.pictureID }}}">
+                            </li>
+                        {{/if}}
+                    </ul>
+                    <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
+                    <button class="cartButton">{{{ cartButton }}}</button>
+                </div>
+            </div>
+            <p class="pictureText">{{{ pictureData.pictureAbout }}}</p>
+            <div class="authorWrapper">
+                <div class="authorHeaderWrapper">
+                    <img class="authorPhoto" src="/images/author1_photo.png" alt="author photo">
+                    <p class="authorHeaderAnother">{{{ authorHeaderAnother }}}</p>
+                </div>
+                <ul class="authorList">
+                    <li class="authorPicture">
+                        <a class="authorPictureLink" href="/collection/1">
+                            <img class="authorPicturePhoto" src="/images/author_pictures_1.png" alt="author picture 1">
+                        </a>
                     </li>
-                    <li class="breadcrumb">
-                        <span class="breadcrumbLink--active">{{{ pictureData.picture }}}</span>
+                    <li class="authorPicture">
+                        <a class="authorPictureLink" href="/collection/2">
+                            <img class="authorPicturePhoto" src="/images/author_pictures_2.png" alt="author picture 2">
+                        </a>
+                    </li>
+                    <li class="authorPicture">
+                        <a class="authorPictureLink" href="/collection/3">
+                            <img class="authorPicturePhoto" src="/images/author_pictures_3.png" alt="author picture 3">
+                        </a>
+                    </li>
+                    <li class="authorPicture">
+                        <a class="authorPictureLink" href="/collection/4">
+                            <img class="authorPicturePhoto" src="/images/author_pictures_4.png" alt="author picture 4">
+                        </a>
+                    </li>
+                    <li class="authorPicture">
+                        <a class="authorPictureLink" href="/collection/5">
+                            <img class="authorPicturePhoto" src="/images/author_pictures_5.png" alt="author picture 5">
+                        </a>
                     </li>
                 </ul>
-                <div class="picture">
-                    <div class="picturePhotoWrapper">
-                        {{# if pictureData.mainPicture.hasPhoto }}
-                            <img class="picturePhoto"
-                                 src="/photos/pictures/{{{ pictureData.mainPicture.hasPhoto }}}.png"
-                                 alt="{{{ pictureData.mainPicture.picture }}}">
-                        {{ else }}
-                            <div class="picturePhoto defaultPhoto"></div>
-                        {{/if}}
-                        {{#if isAdmin}}
-                            <input type="file"
-                                   class="painterPhoto downloadPhoto"
-                                   data-options="author"
-                                   data-value="{{{ pictureData.pictureID }}}">
-                        {{/if}}
-                    </div>
-                    <div class="pictureDataWrapper">
-                        <h1 class="pictureHeader pictureHeaderID" data-picture-id="{{{ pictureData.pictureID }}}">{{{ pictureData.picture }}}</h1>
-                        <div class="pictureAuthorWrapper">
-                            <a class="pictureAuthor pictureAuthorData" href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
-                        </div>
-                        {{# if isActiveRU }}
-                            <em class="picturePrice price price--rub" data-rub="25000">{{{ pictureData.langPrice }}}</em>
-                        {{/if}}
-                        {{# if isActiveEN }}
-                            <em class="picturePrice price price--euro" data-rub="25000">{{{ pictureData.langPrice }}}</em>
-                        {{/if}}
-                        <p class="pictureSize">
-                            <span class="sizeLabel">{{{ sizeLabel }}}</span>
-                            <span class="pictureWidth metric metric--{{{ language }}}">{{{ pictureData.pictureSizeWidth }}}</span>
-                            <span class="pictureHeight metric metric--{{{ language }}}">{{{ pictureData.pictureSizeHeight }}}</span>
-                        </p>
-                        <p class="pictureGenre">
-                            <span class="genreLabel">{{{ genreLabel }}}</span>
-                            <span class="genreName">
-                                {{# each pictureData.genres }}
-                                    <em class="genreTitle">{{{ genre }}}</em>
-                                {{/each}}
-                            </span>
-                        </p>
-                        <p class="pictureTechnique">
-                            <span class="techniqueLabel">{{{ techniqueLabel }}}</span>
-                            <span class="techniqueName">
-                                {{# each pictureData.techniques }}
-                                    <em class="techniqueTitle">{{{ technique }}}</em>
-                                {{/each}}
-                            </span>
-                        </p>
-                        <ul class="pictureSimilarList">
-                            {{# each pictureData.photos }}
-                                {{# if hasPhoto }}
-                                <li class="pictureSimilar">
-                                    <img src="/photos/thumbs/{{{ photoLink }}}"
-                                         data-picture="/photos/{{{ photoLink }}}"
-                                         class="pictureSimilarPhoto"
-                                         alt="{{{ photoName }}}">
-                                </li>
-                                {{/if}}
-                            {{/each}}
-                            {{#if isAdmin}}
-                                <li class="pictureSimilar downloadSimilarPhoto">
-                                    <input type="file"
-                                           class="picturePhoto downloadPhoto"
-                                           data-options="author"
-                                           data-value="{{{ authorData.authorID }}}">
-                                </li>
-                            {{/if}}
-                        </ul>
-                        <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
-                        <button class="cartButton">{{{ cartButton }}}</button>
-                    </div>
-                </div>
-                <p class="pictureText">{{{ pictureData.pictureAbout }}}</p>
-                <div class="authorWrapper">
-                    <div class="authorHeaderWrapper">
-                        <img class="authorPhoto" src="/images/author1_photo.png" alt="author photo">
-                        <p class="authorHeaderAnother">{{{ authorHeaderAnother }}}</p>
-                    </div>
-                    <ul class="authorList">
-                        <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/1">
-                                <img class="authorPicturePhoto" src="/images/author_pictures_1.png" alt="author picture 1"> 
-                            </a>
-                        </li>
-                        <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/2">
-                                <img class="authorPicturePhoto" src="/images/author_pictures_2.png" alt="author picture 2"> 
-                            </a>
-                        </li>
-                        <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/3">
-                                <img class="authorPicturePhoto" src="/images/author_pictures_3.png" alt="author picture 3"> 
-                            </a>
-                        </li>
-                        <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/4">
-                                <img class="authorPicturePhoto" src="/images/author_pictures_4.png" alt="author picture 4"> 
-                            </a>
-                        </li>
-                        <li class="authorPicture">
-                            <a class="authorPictureLink" href="/collection/5">
-                                <img class="authorPicturePhoto" src="/images/author_pictures_5.png" alt="author picture 5"> 
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="buttonWrapper">
-                        <a class="picturesButton" href="/authors/1">{{{ picturesButton }}}</a>
-                    </div>
+                <div class="buttonWrapper">
+                    <a class="picturesButton" href="/authors/1">{{{ picturesButton }}}</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<template class="pictureGallery">
+    <div class="galleryWrapper">
+
+    </div>
+</template>

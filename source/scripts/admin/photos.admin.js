@@ -30,6 +30,18 @@ const cropperOptionsMap = {
         cropBoxResizable: false,
         toggleDragModeOnDblclick: false,
     },
+    'picture': {
+        dragMode: 'move',
+        autoCropArea: 1,
+        viewMode: 1,
+        restore: false,
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick: false,
+    },
     'collection1': {
         dragMode: 'move',
         initialAspectRatio: 319 / 515,
@@ -133,6 +145,10 @@ const requestAPI = (options, value) => {
             URL: `/api/events/${value}/photo`,
             selector: `eventPhoto`
         },
+        'picture': {
+            URL: `/api/pictures/${value}/photo`,
+            selector: `picturePhoto`
+        },
         'collection1': {
             URL: `/api/collection/1/photo`,
             selector: `collectionPhoto`
@@ -211,5 +227,36 @@ export const downloadPhoto = () => {
     const downloadFields = [...document.querySelectorAll(`.downloadPhoto`)];
     downloadFields.forEach((downloadField) => {
         downloadField.addEventListener(`change`, downloadHandler);
+    });
+};
+
+const deletePhotoRequest = (editWrapper, photoId) => {
+    return async (event) => {
+        event.preventDefault();
+        showLoader(editWrapper);
+        const fetchOptions = { method: `DELETE` };
+        const photoID = Number(photoId);
+        const response = await fetch(`/api/pictures/photo/${photoID}`, fetchOptions);
+        const result = await response.json();
+        hideTemplate(editWrapper);
+        const { code } = result;
+        if (code === 200) {
+            location.reload();
+        }
+    }
+};
+
+const deleteHandler = async (event) => {
+    event.preventDefault();
+    const { target: { dataset: { photoId }}} = event;
+    const editWrapper = cloneTemplate(`.photoDeleteTemplate`);
+    const mainButton = requestMainButton(editWrapper);
+    mainButton.addEventListener(`click`, deletePhotoRequest(editWrapper, photoId));
+};
+
+export const deletePhoto = () => {
+    const deleteButtons = [...document.querySelectorAll(`.deletePhoto`)];
+    deleteButtons.forEach((deleteButton) => {
+        deleteButton.addEventListener(`click`, deleteHandler);
     });
 };

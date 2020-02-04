@@ -20,6 +20,7 @@ router.get(`/:pictureID`, async (request, response) => {
     data.isCollectionActive = true;
     data.isPictureActive = true;
     data.pictureData.photos.forEach((photo) => {
+        photo.isAdmin = true;
         photo.hasPhoto = (photo.photoLink !== `NULL` && photo.photoLink !== null);
     });
     data.pictureData.mainPicture = data.pictureData.photos[0];

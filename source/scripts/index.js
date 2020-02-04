@@ -7,7 +7,7 @@ import { respondInterestBlock, showMoreEvents, translateEvents } from "./blocks/
 import { setDesktopLinks, setPicturesLayout, translatePicture } from "./blocks/collection";
 import { basketDelivery, basketForm } from "./blocks/basket";
 import { articleScroll, shareList, translateArticle } from "./blocks/article";
-import { changePhotos } from "./blocks/picture";
+import { changePhotos, showGallery } from "./blocks/picture";
 import { translateHomepage, instagramPosts } from "./blocks/home";
 import { translatePainter } from "./blocks/painter";
 import { translateAuthors } from "./blocks/authors";
@@ -25,7 +25,8 @@ basketDelivery();
 basketForm();
 articleScroll();
 shareList();
-// changePhotos();
+changePhotos();
+showGallery();
 instagramPosts().catch((error) => console.log(error));
 translateHomepage();
 translateAuthors();

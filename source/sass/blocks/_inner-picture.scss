@@ -46,10 +46,7 @@
             background-image: url(/images/arrow_right_breadcrumbs--icon.svg);
             background-repeat: no-repeat;
             @include respond(mobile) {
-                top: 0;
-                left: 50%;
-                margin-top: 22px;
-                transform: translate(0, -50%) rotate(90deg);
+                display: none;
             }
         }
         &:last-of-type {
@@ -116,19 +113,27 @@
         @include respond(tabletMini) {
             margin-bottom: 20px;
             width: 100%;
-            height: 360px;
         }
         @include respond(mobile) {
             margin-bottom: 20px;
             width: 100%;
-            height: 360px;
         }
         .picturePhoto {
+            opacity: 0;
+            max-height: 445px;
             transition: all .15s ease-in;
-        }
-        .defaultPhoto {
-            width: 100%;
-            height: 100%;
+            cursor: pointer;
+            @include respond(desktop) {
+                max-width: 520px;
+            }
+            @include respond(tabletMini) {
+                max-width: 410px;
+                max-height: 100%;
+            }
+            @include respond(mobile) {
+                max-width: 290px;
+                max-height: 100%;
+            }
         }
     }
     .pictureDataWrapper {
@@ -323,8 +328,9 @@
         .pictureSimilarList {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             padding-left: 0;
             list-style-type: none;
             @include respond(tablet) {
@@ -337,15 +343,45 @@
                 order: 3;
             }
             .pictureSimilar {
+                position: relative;
                 margin-right: 10px;
+                margin-bottom: 7px;
                 cursor: pointer;
+                box-sizing: border-box;
                 &:hover {
                     @extend %photoFilter;
                 }
                 .pictureSimilarPhoto {
                     width: 56px;
                     height: 56px;
+                    display: block;
+                    opacity: 0.7;
+                    &:hover {
+                        opacity: 1;
+                    }
                 }
+                .deletePhoto {
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    padding-left: 0;
+                    padding-right: 0;
+                    width: 20px;
+                    height: 20px;
+                    border: 1px solid $errorColor;
+                    font-size: 0;
+                    background-color: #000;
+                    background-image: url(/images/basket_close_red--icon.svg);
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: 12px;
+                    cursor: pointer;
+                    opacity: 0.5;
+                }
+            }
+            .pictureSimilar.activePicture {
+                opacity: 1;
+                border: 1px solid $secondaryColor;
             }
             .downloadSimilarPhoto {
                 position: relative;
@@ -354,6 +390,11 @@
                 height: 56px;
                 border: 1px dashed $secondaryColor;
                 box-sizing: border-box;
+                opacity: 0.5;
+                &:hover {
+                    border: 1px dashed $primaryColor;
+                    opacity: 1;
+                }
                 .downloadPhoto {
                     height: 300%;
                     &:after {

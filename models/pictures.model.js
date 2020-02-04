@@ -1,3 +1,4 @@
+const fs = require(`fs`);
 const { changeCurrency } = require(`./currency.model`);
 const { requestDB } = require(`./db.model`);
 const {
@@ -7,6 +8,7 @@ const {
     addTechniques, editTechniques, deleteTechniques,
     addColors, editColors, deleteColors
 } = require(`./pictures-data.model`);
+const { savePhoto, saveThumb, saveOriginal, saveOriginalThumb } = require(`./utils.model`);
 
 // INSERT | CREATE
 const savePicture = async (params) => {
@@ -16,7 +18,6 @@ const savePicture = async (params) => {
         pictureAboutRU, pictureAboutEN, pictureOrientation,
         genresID, techniquesID, colorsID
     } = params;
-    console.log(pictureOrientation);
     const query = `
         INSERT INTO pictures (
             pictureRU, pictureEN, picturePlace, 
@@ -45,6 +46,33 @@ const savePicture = async (params) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const addPicturePhoto = async (pictureID, file) => {
+    try {
+        const { filename } = file;
+        const fileDir = `public/photos/pictures`;
+        await saveOriginal(fileDir, file);
+        await saveOriginalThumb(fileDir, file, 690);
+        await savePhoto(fileDir, file, 346);
+        await saveThumb(fileDir, file, 194, 194);
+        await saveThumb(fileDir, file, 56, 56);
+        // delete temp multer file
+        fs.unlinkSync(`public/photos/${filename}`);
+        const query = `
+            INSERT INTO photos ( pictureID, photoLink )
+            VALUES ( '${pictureID}', '${filename}' )`;
+        const { insertId } = await requestDB(query);
+        return {
+            code: (insertId) ? 200 : 0,
+            result: (insertId) ? `photo added` : `picture add error`,
+            insertID: insertId
+        };
+    } catch (event) {
+        const { sqlMessage } = event;
+        console.log(event);
+        return { code: 0, error: sqlMessage }
+    }
+};
+
 
 // SELECT | READ
 const requestPictureList = async () => {
@@ -120,7 +148,6 @@ const updatePicture = async (pictureID, params) => {
         pictureOrientation,
         genresID, techniquesID, colorsID
     } = params;
-    console.log(pictureOrientation);
     const query = `
         UPDATE pictures SET 
             pictureRU = '${pictureRU}', 
@@ -165,8 +192,41 @@ const deletePicture = async (pictureID) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const deletePhotos = async (photoID) => {
+    try {
+        const filenameQuery = `SELECT photoLink FROM photos WHERE photoID = '${photoID}'`;
+        const { 0: { photoLink }} = await requestDB(filenameQuery);
+        if (photoLink === `NULL` || photoLink === null) return false;
+        fs.unlinkSync(`public/photos/pictures/${photoLink}.png`);
+        fs.unlinkSync(`public/photos/pictures/${photoLink}.webp`);
+        fs.unlinkSync(`public/photos/pictures/original/${photoLink}.webp`);
+        fs.unlinkSync(`public/photos/pictures/original/${photoLink}.jpg`);
+        fs.unlinkSync(`public/photos/pictures/original/${photoLink}_preview.webp`);
+        fs.unlinkSync(`public/photos/pictures/original/${photoLink}_preview.jpg`);
+        fs.unlinkSync(`public/photos/pictures/thumbs/${photoLink}_194x194.png`);
+        fs.unlinkSync(`public/photos/pictures/thumbs/${photoLink}_194x194.webp`);
+        fs.unlinkSync(`public/photos/pictures/thumbs/${photoLink}_56x56.png`);
+        fs.unlinkSync(`public/photos/pictures/thumbs/${photoLink}_56x56.webp`);
+    } catch (error) {
+        console.log(error);
+    }
+};
+const deletePicturePhoto = async (photoID) => {
+    const query = `DELETE FROM photos WHERE photoID = ${photoID}`;
+    try {
+        await deletePhotos(photoID);
+        const { affectedRows } = await requestDB(query);
+        return {
+            code: (affectedRows) ? 200 : 404,
+            result: (affectedRows) ? `photo deleted` : `photo not found`
+        };
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 module.exports = {
     requestPictureList, requestPicture, requestLanguagePicture,
-    savePicture, updatePicture, deletePicture
+    savePicture, updatePicture, addPicturePhoto, deletePicture,
+    deletePicturePhoto
 };

@@ -17,7 +17,7 @@ router.post(`/`, async (request, response) => {
 router.post(`/:eventID/photo`, upload.single('eventPhoto'), async (request, response) => {
     const { params: { eventID }, file } = request;
     const data = await updateEventPhoto(eventID, file);
-    response.json(data);
+    await response.json(data);
 });
 
 // GET | READ
