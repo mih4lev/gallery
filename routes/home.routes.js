@@ -16,7 +16,7 @@ router.get(`/`, async (request, response) => {
         data.events = await requestLanguageEvents(lang, 3)
     ]);
     data.collection.forEach((picture) => {
-        picture.isAdmin = true;
+        picture.isAdmin = request.isAdmin;
     });
     data.isSingleAuthor = (data.authors.length === 1);
     // data.isSingleAuthor = true;

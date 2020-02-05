@@ -27,6 +27,7 @@ app.use(`/lang`, express.static(__dirname + `/public/lang`));
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
 app.use(require(`./middlewares/lang.middleware`));
+app.use(require(`./middlewares/admin.middleware`));
 app.use('/api', cors(corsOptions));
 // routes
 app.use('/', require('./routes/home.routes'));
