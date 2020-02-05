@@ -14,8 +14,10 @@ router.get(`/`, async (request, response) => {
     data.authorData.forEach((author) => {
         author.authorButton = data.authorButton;
         author.hasAuthorPhoto = (author.authorPhoto !== `NULL` && author.authorPhoto  !== null);
+        author.pictures.forEach((picture) => {
+            picture.authorID = author.authorID;
+        });
     });
-    console.log(data.authorData[0].pictures);
     response.render(pageLink, data);
 });
 

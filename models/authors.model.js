@@ -88,8 +88,16 @@ const requestLanguageAuthors = async (language, limit = 100) => {
                 SELECT pictureID, picture${lang} as picture, picturePlace
                 FROM pictures WHERE authorID = ${authorID}
                 ORDER BY picturePlace LIMIT 3`;
+            const pictures = await requestDB(pictureQuery);
+            for (const picture of pictures) {
+                const { pictureID } = picture;
+                const photosQuery = `SELECT photoLink FROM photos WHERE pictureID = '${pictureID}'`;
+                const result = await requestDB(photosQuery);
+                picture.photoLink = result[0].photoLink;
+            }
             authorData.push(Object.assign(
-                author, { pictures: await requestDB(pictureQuery) }
+                author,
+                { pictures: pictures }
             ));
         }
         return authorData;

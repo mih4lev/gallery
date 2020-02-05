@@ -24,7 +24,9 @@
                         {{# each pictures }}
                         <li class="authorPictures--item">
                             <a class="authorPictures-link" href="/authors/{{{ authorID }}}">
-                                <img class="authorPictures--photo" src="/images/author_picture1.png" alt="{{{ picture }}}">
+                                <img class="authorPictures--photo"
+                                     src="/photos/pictures/thumbs/{{{ photoLink }}}_194x194.png"
+                                     alt="{{{ picture }}}">
                             </a>
                         </li>
                         {{/each}}
