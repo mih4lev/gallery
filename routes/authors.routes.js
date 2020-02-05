@@ -1,6 +1,7 @@
 const { Router } = require(`express`);
 const { collectData } = require(`../models/data.model`);
 const { requestLanguageAuthors, requestLanguageAuthor } = require(`../models/authors.model`);
+const { requestLanguageAuthorPictures } = require("../models/pictures.model");
 
 const router = new Router();
 
@@ -14,6 +15,7 @@ router.get(`/`, async (request, response) => {
         author.authorButton = data.authorButton;
         author.hasAuthorPhoto = (author.authorPhoto !== `NULL` && author.authorPhoto  !== null);
     });
+    console.log(data.authorData[0].pictures);
     response.render(pageLink, data);
 });
 
@@ -30,6 +32,14 @@ router.get(`/:painterID`, async (request, response) => {
     if (!data.authorData.authorID) {
         return response.status(404).redirect(`/404`);
     }
+    data.picturesData = await requestLanguageAuthorPictures(painterID, lang, 10);
+    data.picturesData.forEach((picture) => {
+        picture.cartButton = data.cartButton;
+        picture.sizeLabel = data.sizeLabel;
+        picture.lang = data.language;
+        picture.priceTitle = (lang === `en`) ? `euro` : `rub`;
+        picture.photo = picture.photos[0].photoLink;
+    });
     response.render(pageLink, data);
 });
 

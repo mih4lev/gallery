@@ -13,19 +13,32 @@
                                 <span class="range"></span>
                             </div>
                             <div class="rangeLabels">
-                                <span class="labelMin price price--rub" data-rub="5000">5 000</span>
-                                <span class="labelMax price price--rub" data-rub="280000">280 000</span>
+                                <span
+                                    class="labelMin price price--{{{ filters.priceTitle }}}"
+                                    data-rub="{{{ filters.minPrice }}}">
+                                    {{{ filters.langMinPrice }}}
+                                </span>
+                                <span
+                                    class="labelMax price price--{{{ filters.priceTitle }}}"
+                                    data-rub="{{{ filters.maxPrice }}}">
+                                    {{{ filters.langMaxPrice }}}
+                                </span>
                             </div>
                         </div>
                     </li>
+                    {{#if filters.orientations.length }}
                     <li class="filter">
                         <p class="filterLabel filterOrientation">{{{ filterOrientation }}}</p>
                         <div class="orientationWrapper">
-                            <button class="orientation orientation--width" data-select="width">Width more</button>
-                            <button class="orientation orientation--height" data-select="height">Height more</button>
-                            <button class="orientation orientation--both" data-select="both">Both are equal</button>
+                            {{# each filters.orientations }}
+                            <button class="orientation orientation--{{{ pictureOrientation }}}"
+                                    data-select="{{{ pictureOrientation }}}">
+                                {{{ pictureOrientation }}}
+                            </button>
+                            {{/each}}
                         </div>
                     </li>
+                    {{/if}}
                     <li class="filter">
                         <p class="filterLabel filterSize">{{{ filterSize }}}</p>
                         <div class="rangeWrapper">
@@ -36,8 +49,16 @@
                                 <span class="range"></span>
                             </div>
                             <div class="rangeLabels">
-                                <span class="labelMin metric metric--ru" data-default="20">20</span>
-                                <span class="labelMax metric metric--ru" data-default="250">250</span>
+                                <span
+                                    class="labelMin metric metric--{{{ language }}}"
+                                    data-default="{{{ filters.minWidth }}}">
+                                    {{{ filters.minWidth }}}
+                                </span>
+                                <span
+                                    class="labelMax metric metric--{{{ language }}}"
+                                    data-default="{{{ filters.maxWidth }}}">
+                                    {{{ filters.maxWidth }}}
+                                </span>
                             </div>
                         </div>
                         <div class="rangeWrapper">
@@ -48,150 +69,99 @@
                                 <span class="range"></span>
                             </div>
                             <div class="rangeLabels">
-                                <span class="labelMin metric metric--ru" data-default="20">20</span>
-                                <span class="labelMax metric metric--ru" data-default="250">250</span>
+                                <span
+                                    class="labelMin metric metric--{{{ language }}}"
+                                    data-default="{{{ filters.minHeight }}}">
+                                    {{{ filters.minHeight }}}
+                                </span>
+                                <span
+                                    class="labelMax metric metric--{{{ language }}}"
+                                    data-default="{{{ filters.maxHeight }}}">
+                                    {{{ filters.maxHeight }}}
+                                </span>
                             </div>
                         </div>
                     </li>
+                    {{#if filters.colors.length }}
                     <li class="filter">
                         <p class="filterLabel filterColor">{{{ filterColor }}}</p>
                         <div class="colorsWrapper">
-                            <button class="color" data-select="dark-violet">Dark violet</button>
-                            <button class="color" data-select="soft-magenta">Soft magenta</button>
-                            <button class="color" data-select="mostly-desaturated-dark-orange">Mostly desaturated dark orange</button>
-                            <button class="color" data-select="very-dark-green">Very dark green</button>
-                            <button class="color" data-select="dark-cyan">Dark cyan</button>
-                            <button class="color" data-select="very-soft-blue">Very soft blue</button>
-                            <button class="color" data-select="dark-blue">Dark blue</button>
-                            <button class="color" data-select="very-dark-pink">Very dark pink</button>
-                            <button class="color" data-select="dark-red">Dark red</button>
-                            <button class="color" data-select="vivid-orange">Vivid orange</button>
-                            <button class="color" data-select="bright-yellow">Bright yellow</button>
-                            <button class="color" data-select="dark-grayish-blue">Dark grayish blue</button>
-                            <button class="color" data-select="very-light-gray">Very light gray</button>
-                            <button class="color" data-select="very-dark-blue">Very dark (mostly black) blue</button>
+                            {{# each filters.colors }}
+                                <button class="color"
+                                        data-color-id="{{{ colorID }}}"
+                                        style="background-color: {{{ colorHEX }}};"
+                                        data-select="{{{ colorName }}}">
+                                    {{{ color }}}
+                                </button>
+                            {{/each}}
                         </div>
                     </li>
+                    {{/if}}
+                    {{#if filters.genres.length }}
                     <li class="filter">
-                        <p class="filterLabel filterLabel--dropdown filterGenre">{{{ filterGenre }}}</p>
+                        <p class="filterLabel filterLabel--dropdown filterGenre">
+                            {{{ filterGenre }}}
+                        </p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
                                 <ul class="dropdownList">
-                                    <li class="dropdownItem" data-select="1">
-                                        <span class="dropdownLink">Портрет</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="2">
-                                        <span class="dropdownLink">Пейзаж</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="3">
-                                        <span class="dropdownLink">Абстракция</span>
-                                    </li>
+                                    {{#each filters.genres}}
+                                        <li class="dropdownItem"
+                                            data-select="{{{ genreID }}}">
+                                            <span class="dropdownLink">{{{ genre }}}</span>
+                                        </li>
+                                    {{/each}}
                                 </ul>
                             </div>
                             <div class="dropdownScroll"></div>
                         </div>
                         <ul class="chosenList"></ul>
                     </li>
+                    {{/if}}
+                    {{#if filters.techniques.length }}
                     <li class="filter">
-                        <p class="filterLabel filterLabel--dropdown filterTechnique">{{{ filterTechnique }}}</p>
+                        <p class="filterLabel filterLabel--dropdown filterTechnique">
+                            {{{ filterTechnique }}}
+                        </p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
                                 <ul class="dropdownList">
-                                    <li class="dropdownItem" data-select="1">
-                                        <span class="dropdownLink">Масла</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="2">
-                                        <span class="dropdownLink">Коллаж</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="3">
-                                        <span class="dropdownLink">Акрил</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="4">
-                                        <span class="dropdownLink">Пастель</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="5">
-                                        <span class="dropdownLink">Маркер</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="6">
-                                        <span class="dropdownLink">Акварель</span>
-                                    </li>
+                                    {{#each filters.techniques}}
+                                        <li class="dropdownItem"
+                                            data-select="{{{ techniqueID }}}">
+                                            <span class="dropdownLink">{{{ technique }}}</span>
+                                        </li>
+                                    {{/each}}
                                 </ul>
                             </div>
                             <div class="dropdownScroll"></div>
                         </div>
                         <ul class="chosenList"></ul>
                     </li>
+                    {{/if}}
+                    {{#if filters.authors.length }}
                     <li class="filter">
-                        <p class="filterLabel filterLabel--dropdown filterAuthor">{{{ filterAuthor }}}</p>
+                        <p class="filterLabel filterLabel--dropdown filterAuthor">
+                            {{{ filterAuthor }}}
+                        </p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
                                 <ul class="dropdownList">
-                                    <li class="dropdownItem" data-select="1">
-                                        <img class="authorPhoto" src="/images/author1_photo.png" alt="author 1 photo">
-                                        <span class="dropdownLink">Катерина Жуковская</span>
+                                    {{#each filters.authors}}
+                                    <li class="dropdownItem" data-select="{{{ authorID }}}">
+                                        <img class="authorPhoto"
+                                             src="/photos/authors/thumbs/{{{ authorPhoto }}}_20x20.png"
+                                             alt="{{{ author }}}">
+                                        <span class="dropdownLink">{{{ author }}}</span>
                                     </li>
-                                    <li class="dropdownItem" data-select="2">
-                                        <img class="authorPhoto" src="/images/author2_photo.png" alt="author 2 photo">
-                                        <span class="dropdownLink">Марина Лебедева</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="3">
-                                        <img class="authorPhoto" src="/images/author3_photo.png" alt="author 3 photo">
-                                        <span class="dropdownLink">Sasha Ignatiadou</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="4">
-                                        <img class="authorPhoto" src="/images/author1_photo.png" alt="author 1 photo">
-                                        <span class="dropdownLink">Валентина Нарыжная</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="5">
-                                        <img class="authorPhoto" src="/images/author2_photo.png" alt="author 2 photo">
-                                        <span class="dropdownLink">Оля Пахомова</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="6">
-                                        <img class="authorPhoto" src="/images/author3_photo.png" alt="author 3 photo">
-                                        <span class="dropdownLink">Дмитрий Маликов</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="7">
-                                        <img class="authorPhoto" src="/images/author1_photo.png" alt="author 1 photo">
-                                        <span class="dropdownLink">Анастасия Иванова</span>
-                                    </li>
-                                    <li class="dropdownItem" data-author="8">
-                                        <img class="authorPhoto" src="/images/author2_photo.png" alt="author 2 photo">
-                                        <span class="dropdownLink">Оля Кулевина</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="9">
-                                        <img class="authorPhoto" src="/images/author3_photo.png" alt="author 3 photo">
-                                        <span class="dropdownLink">Антон Антонов</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="10">
-                                        <img class="authorPhoto" src="/images/author1_photo.png" alt="author 1 photo">
-                                        <span class="dropdownLink">Светлана Светлакова</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="11">
-                                        <img class="authorPhoto" src="/images/author2_photo.png" alt="author 2 photo">
-                                        <span class="dropdownLink">Марина Левобережная</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="12">
-                                        <img class="authorPhoto" src="/images/author3_photo.png" alt="author 3 photo">
-                                        <span class="dropdownLink">Аркадий Новиков</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="13">
-                                        <img class="authorPhoto" src="/images/author1_photo.png" alt="author 1 photo">
-                                        <span class="dropdownLink">Артем Безволосый</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="14">
-                                        <img class="authorPhoto" src="/images/author2_photo.png" alt="author 2 photo">
-                                        <span class="dropdownLink">Екатерина Смирнова</span>
-                                    </li>
-                                    <li class="dropdownItem" data-select="15">
-                                        <img class="authorPhoto" src="/images/author3_photo.png" alt="author 3 photo">
-                                        <span class="dropdownLink">Вика Красильникова</span>
-                                    </li>
+                                    {{/each}}
                                 </ul>
                             </div>
                             <div class="dropdownScroll"></div>
                         </div>
                         <ul class="chosenList"></ul>
                     </li>
+                    {{/if}}
                 </ul>
             </div>
             {{> picture-list }}

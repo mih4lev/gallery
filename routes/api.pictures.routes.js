@@ -3,8 +3,9 @@ const multer = require(`multer`);
 const upload = multer({ dest: `public/photos` });
 const {
     requestPictureList, requestPicture, requestLanguagePicture,
-    savePicture, updatePicture, addPicturePhoto, deletePicture,
-    deletePicturePhoto
+    requestLanguagePictures, requestLanguageFilters,
+    requestLanguageAuthorPictures, savePicture, updatePicture,
+    addPicturePhoto, deletePicture, deletePicturePhoto
 } = require("../models/pictures.model");
 
 const router = new Router();
@@ -25,6 +26,26 @@ router.get(`/`, async (request, response) => {
     const data = await requestPictureList();
     response.send(data);
 });
+router.get(`/lang/:lang`, async (request, response) => {
+    const { params: { lang }} = request;
+    const data = await requestLanguagePictures(lang);
+    response.send(data);
+});
+router.get(`/lang/:lang/limit/:limit`, async (request, response) => {
+    const { params: { lang, limit }} = request;
+    const data = await requestLanguagePictures(lang, limit);
+    response.send(data);
+});
+router.get(`/author/:authorID/lang/:lang`, async (request, response) => {
+    const { params: { authorID, lang }} = request;
+    const data = await requestLanguageAuthorPictures(authorID, lang);
+    response.send(data);
+});
+router.get(`/author/:authorID/lang/:lang/limit/:limit`, async (request, response) => {
+    const { params: { authorID, lang, limit }} = request;
+    const data = await requestLanguageAuthorPictures(authorID, lang, limit);
+    response.send(data);
+});
 router.get(`/:pictureID`, async (request, response) => {
     const { params: { pictureID }} = request;
     const data = await requestPicture(pictureID);
@@ -33,6 +54,11 @@ router.get(`/:pictureID`, async (request, response) => {
 router.get(`/:pictureID/lang/:lang`, async (request, response) => {
     const { params: { pictureID, lang }} = request;
     const data = await requestLanguagePicture(pictureID, lang);
+    response.send(data);
+});
+router.get(`/filters/:lang`, async (request, response) => {
+    const { params: { lang }} = request;
+    const data = await requestLanguageFilters(lang);
     response.send(data);
 });
 

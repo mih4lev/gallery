@@ -13,65 +13,64 @@ const authorData = async (picture) => {
 const colorsArray = async (picture, language) => {
     const { pictureID } = picture;
     picture.colors = [];
-    const colorListQuery = `SELECT colorID FROM colorList WHERE pictureID = ${pictureID}`;
-    const colorList = await requestDB(colorListQuery);
-    for (const { colorID } of colorList) {
+    let colorQuery = `
+        SELECT 
+            colors.colorID, colors.colorRU, colors.colorEN, 
+            colors.colorName, colors.colorHEX 
+        FROM colorList
+        INNER JOIN colors ON colors.colorID = colorList.colorID
+        WHERE colorList.pictureID = ${pictureID}
+    `;
+    if (language) {
+        const lang = language.toUpperCase();
         let colorQuery = `
-            SELECT colorID, colorRU, colorEN, colorName, colorHEX
-            FROM colors WHERE colorID = '${colorID}'
+            SELECT 
+                colors.colorID, colors.color${lang},
+                colors.colorName, colors.colorHEX 
+            FROM colorList
+            INNER JOIN colors ON colors.colorID = colorList.colorID
+            WHERE colorList.pictureID = ${pictureID}
         `;
-        if (language) {
-            const lang = language.toUpperCase();
-            colorQuery = `
-                SELECT colorID, color${lang} as color, colorName, colorHEX
-                FROM colors WHERE colorID = '${colorID}'
-            `;
-        }
-        const color = await requestDB(colorQuery);
-        picture.colors.push(color[0]);
     }
+    picture.colors = await requestDB(colorQuery);
 };
 const genreArray = async (picture, language) => {
     const { pictureID } = picture;
-    picture.genres = [];
-    const genreListQuery = `SELECT genreID FROM genreList WHERE pictureID = ${pictureID}`;
-    const genreList = await requestDB(genreListQuery);
-    for (const { genreID } of genreList) {
-        let genreQuery = `
-            SELECT genreID, genreRU, genreEN
-            FROM genres WHERE genreID = '${genreID}'
+    let genreQuery = `
+        SELECT genres.genreID, genreRU, genreEN
+        FROM genreList
+        INNER JOIN genres ON genres.genreID = genreList.genreID
+        WHERE genreList.pictureID = ${pictureID}
+    `;
+    if (language) {
+        const lang = language.toUpperCase();
+        genreQuery = `
+            SELECT genres.genreID, genres.genre${lang} as genre
+            FROM genreList
+            INNER JOIN genres ON genres.genreID = genreList.genreID
+            WHERE genreList.pictureID = ${pictureID}
         `;
-        if (language) {
-            const lang = language.toUpperCase();
-            genreQuery = `
-                SELECT genreID, genre${lang} as genre
-                FROM genres WHERE genreID = '${genreID}'
-            `;
-        }
-        const genre = await requestDB(genreQuery);
-        picture.genres.push(genre[0]);
     }
+    picture.genres = await requestDB(genreQuery);
 };
 const techniqueArray = async (picture, language) => {
     const { pictureID } = picture;
-    picture.techniques = [];
-    const techniqueListQuery = `SELECT techniqueID FROM techniqueList WHERE pictureID = ${pictureID}`;
-    const techniqueList = await requestDB(techniqueListQuery);
-    for (const { techniqueID } of techniqueList) {
-        let techniqueQuery = `
-            SELECT techniqueID, techniqueRU, techniqueEN
-            FROM techniques WHERE techniqueID = '${techniqueID}'
+    let techniqueQuery = `
+        SELECT techniques.techniqueID, techniques.techniqueRU, techniques.techniqueEN
+        FROM techniqueList
+        INNER JOIN techniques ON techniques.techniqueID = techniqueList.techniqueID
+        WHERE techniqueList.pictureID = ${pictureID}
+    `;
+    if (language) {
+        const lang = language.toUpperCase();
+        techniqueQuery = `
+            SELECT techniques.techniqueID, techniques.technique${lang} as technique
+            FROM techniqueList
+            INNER JOIN techniques ON techniques.techniqueID = techniqueList.techniqueID
+            WHERE techniqueList.pictureID = ${pictureID}
         `;
-        if (language) {
-            const lang = language.toUpperCase();
-            techniqueQuery = `
-                SELECT techniqueID, technique${lang} as technique
-                FROM techniques WHERE techniqueID = '${techniqueID}'
-            `;
-        }
-        const technique= await requestDB(techniqueQuery);
-        picture.techniques.push(technique[0]);
     }
+    picture.techniques = await requestDB(techniqueQuery);
 };
 const photosArray = async (picture, language) => {
     const { pictureID } = picture;

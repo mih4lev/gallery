@@ -28,6 +28,76 @@ export const translatePicture = () => {
     });
 };
 
+const visiblePicturesCount = () => {
+    return document.querySelectorAll(`.pictureList .picture`).length;
+};
+
+const checkButtonVisible = (picturesCount) => {
+    const showMoreButton = document.querySelector(`.picturesButton`);
+    if (picturesCount > visiblePicturesCount()) {
+        return showMoreButton.style.display = `block`;
+    }
+    return showMoreButton.style.display = `none`;
+};
+
+const cloneTemplate = (picture) => {
+    const {
+        picture: pictureTitle, pictureID, author, authorID,
+        pictureSizeWidth, pictureSizeHeight, langPrice, picturePrice,
+        photos: { 0: { photoLink }}
+    } = picture;
+    const sourcePicture = document.querySelector(`.pictureList .picture`);
+    const pictureTemplate = sourcePicture.cloneNode(true);
+    const pictureHeader = pictureTemplate.querySelector(`.pictureHeader`);
+    const pictureAuthor = pictureTemplate.querySelector(`.pictureAuthor`);
+    const picturePhoto = pictureTemplate.querySelector(`.picturePhoto`);
+    const picturePhotoLink = pictureTemplate.querySelector(`.picturePhotoWrapper`);
+    const pictureWidth = pictureTemplate.querySelector(`.pictureWidth`);
+    const pictureHeight = pictureTemplate.querySelector(`.pictureHeight`);
+    const mainPrice = pictureTemplate.querySelector(`.picturePrice--main`);
+    const cartButton = pictureTemplate.querySelector(`.cartButton`);
+    pictureHeader.innerText = pictureTitle;
+    pictureHeader.setAttribute(`href`, `/collection/${pictureID}`);
+    pictureAuthor.innerText = author;
+    pictureAuthor.setAttribute(`href`, `/authors/${authorID}`);
+    picturePhoto.src = `/photos/pictures/${photoLink}.png`;
+    picturePhoto.setAttribute(`alt`, pictureTitle);
+    picturePhotoLink.setAttribute(`href`, `/collection/${pictureID}`);
+    pictureWidth.innerText = pictureSizeWidth;
+    pictureHeight.innerText = pictureSizeHeight;
+    mainPrice.innerText = langPrice;
+    mainPrice.dataset.rub = picturePrice;
+    cartButton.dataset.pictureId = pictureID;
+    return pictureTemplate;
+};
+
+export const collectionFilters = async () => {
+    const filtersNode = document.querySelector(`.filters`);
+    const pictureList = document.querySelector(`.pictureList`);
+    if (!filtersNode || !pictureList) return false;
+    const lang = document.querySelector(`html`).getAttribute(`lang`);
+    const collectionResponse = await fetch(`/api/pictures/lang/${lang}`);
+    const pictures = await collectionResponse.json();
+    const picturesCount = pictures.length;
+    const showMoreButton = document.querySelector(`.picturesButton`);
+    checkButtonVisible(picturesCount);
+    showMoreButton.addEventListener(`click`, () => {
+        pictures.forEach((picture, index) => {
+            if (index < visiblePicturesCount()) return false;
+            if (index > visiblePicturesCount() + 10) return false;
+            const clonedPicture = cloneTemplate(picture);
+            pictureList.appendChild(clonedPicture);
+            imagesLoaded( pictureList, function() {
+                new Masonry( pictureList, {
+                    itemSelector: `.picture`
+                });
+            });
+            checkButtonVisible(picturesCount);
+        });
+    });
+
+};
+
 export const setDesktopLinks = () => {
     const desktopLinks = document.querySelectorAll(`.collectionPhoto`);
     desktopLinks.forEach((link) => {

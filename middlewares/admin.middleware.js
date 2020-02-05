@@ -1,5 +1,5 @@
 const checkAdmin = (request, response, next) => {
-    request.isAdmin = true;
+    request.isAdmin = false;
     next();
 };
 

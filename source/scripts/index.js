@@ -4,7 +4,10 @@ import { headerBasket } from "./blocks/header-basket";
 import { headerLanguage } from "./blocks/header-language";
 import { headerNav } from "./blocks/header-nav";
 import { respondInterestBlock, showMoreEvents, translateEvents } from "./blocks/events";
-import { setDesktopLinks, setPicturesLayout, translatePicture } from "./blocks/collection";
+import {
+    setDesktopLinks, setPicturesLayout, translatePicture,
+    collectionFilters
+} from "./blocks/collection";
 import { basketDelivery, basketForm } from "./blocks/basket";
 import { articleScroll, shareList, translateArticle } from "./blocks/article";
 import { changePhotos, showGallery } from "./blocks/picture";
@@ -19,6 +22,7 @@ headerLanguage();
 headerNav();
 respondInterestBlock();
 showMoreEvents();
+collectionFilters();
 setDesktopLinks();
 setPicturesLayout();
 basketDelivery();

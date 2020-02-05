@@ -138,6 +138,156 @@ const requestLanguagePicture = async (pictureID, language) => {
         return { code: 0, error: sqlMessage }
     }
 };
+const requestLanguagePictures = async (language, limit = 1000) => {
+    try {
+        const lang = language.toUpperCase();
+        const query = `
+            SELECT 
+                pictures.pictureID as pictureID,
+                pictures.picture${lang} as picture, authors.authorID as authorID,
+                authors.authorLink as authorLink, authors.author${lang} as author,
+                pictures.pictureSizeWidth as pictureSizeWidth,
+                pictures.pictureSizeHeight as pictureSizeHeight, 
+                pictures.pictureOrientation as pictureOrientation,
+                pictures.picturePrice as picturePrice, 
+                pictures.picturePriceSale as picturePriceSale, 
+                pictures.pictureAbout${lang} as pictureAbout
+            FROM pictures
+            INNER JOIN authors ON pictures.authorID = authors.authorID
+            ORDER BY pictures.picturePlace
+            LIMIT ${limit}
+        `;
+        const data = await requestDB(query);
+        if (!data.length) return { code: 404, result: `pictures not found` };
+        for (const picture of data) {
+            await Promise.all([
+                colorsArray(picture, lang),
+                photosArray(picture, lang),
+                genreArray(picture, lang),
+                techniqueArray(picture, lang),
+                photosArray(picture, lang)
+            ]);
+            picture.langPrice = await changeCurrency(picture.picturePrice, lang);
+        }
+        return data;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestLanguageAuthorPictures = async (authorID, language, limit = 1000) => {
+    try {
+        const lang = language.toUpperCase();
+        const query = `
+            SELECT 
+                pictures.pictureID as pictureID, 
+                pictures.picture${lang} as picture, authors.authorID as authorID, 
+                authors.authorLink as authorLink, authors.author${lang} as author, 
+                pictures.pictureSizeWidth as pictureSizeWidth, 
+                pictures.pictureSizeHeight as pictureSizeHeight, 
+                pictures.pictureOrientation as pictureOrientation, 
+                pictures.picturePrice as picturePrice, 
+                pictures.picturePriceSale as picturePriceSale, 
+                pictures.pictureAbout${lang} as pictureAbout 
+            FROM pictures 
+            INNER JOIN authors ON pictures.authorID = authors.authorID 
+            WHERE pictures.authorID = ${authorID} 
+            ORDER BY pictures.picturePlace 
+            LIMIT ${limit}
+        `;
+        const data = await requestDB(query);
+        if (!data.length) return { code: 404, result: `pictures not found` };
+        for (const picture of data) {
+            await Promise.all([
+                colorsArray(picture, lang),
+                photosArray(picture, lang),
+                genreArray(picture, lang),
+                techniqueArray(picture, lang),
+                photosArray(picture, lang)
+            ]);
+            picture.langPrice = await changeCurrency(picture.picturePrice, lang);
+        }
+        return data;
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+const requestLanguageFilters = async (language = `ru`) => {
+    try {
+        const lang = language.toUpperCase();
+        const picturesQuery = `
+            SELECT 
+                MIN(picturePrice) as minPrice, 
+                MAX(picturePrice) as maxPrice,
+                MIN(pictureSizeWidth) as minWidth,
+                MAX(pictureSizeWidth) as maxWidth,
+                MIN(pictureSizeHeight) as minHeight,
+                MAX(pictureSizeHeight) as maxHeight
+            FROM pictures`;
+        const colorsQuery = `
+            SELECT 
+                colors.colorID, 
+                colors.colorName, 
+                colors.colorHEX, 
+                colors.color${lang} as color,
+                COUNT(colors.colorID) as count
+            FROM colorList 
+            INNER JOIN colors ON colors.colorID = colorList.colorID
+            GROUP BY colors.colorID`;
+        const genresQuery = `
+            SELECT 
+                genres.genreID, 
+                genres.genre${lang} as genre,
+                COUNT(genres.genreID) as count
+            FROM genreList
+            INNER JOIN genres ON genres.genreID = genreList.genreID
+            GROUP BY genres.genreID`;
+        const techniquesQuery = `
+            SELECT 
+                techniques.techniqueID, 
+                techniques.technique${lang} as technique, 
+                COUNT(techniques.techniqueID) as count
+            FROM techniqueList
+            INNER JOIN techniques ON techniques.techniqueID = techniqueList.techniqueID
+            GROUP BY techniques.techniqueID`;
+        const authorsQuery = `
+            SELECT 
+                authors.authorID, 
+                authors.author${lang} as author, 
+                authors.authorPhoto,
+                COUNT(pictures.authorID) as count
+            FROM pictures
+            INNER JOIN authors ON pictures.authorID = authors.authorID
+            GROUP BY authors.authorID
+        `;
+        const orientationsQuery = `
+            SELECT 
+                pictures.pictureOrientation,
+                COUNT(pictures.pictureOrientation) as count
+            FROM pictures
+            GROUP BY pictures.pictureOrientation`;
+        const filters = await Promise.all([
+            requestDB(picturesQuery),
+            requestDB(colorsQuery),
+            requestDB(genresQuery),
+            requestDB(techniquesQuery),
+            requestDB(authorsQuery),
+            requestDB(orientationsQuery)
+        ]);
+        const picturesData = filters[0][0];
+        picturesData.langMinPrice = await changeCurrency(picturesData.minPrice, lang);
+        picturesData.langMaxPrice = await changeCurrency(picturesData.maxPrice, lang);
+        return Object.assign(
+            picturesData,
+            { colors: filters[1] },
+            { genres: filters[2] },
+            { techniques: filters[3] },
+            { authors: filters[4] },
+            { orientations: filters[5] }
+        );
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
 
 // UPDATE
 const updatePicture = async (pictureID, params) => {
@@ -227,6 +377,7 @@ const deletePicturePhoto = async (photoID) => {
 
 module.exports = {
     requestPictureList, requestPicture, requestLanguagePicture,
-    savePicture, updatePicture, addPicturePhoto, deletePicture,
-    deletePicturePhoto
+    requestLanguagePictures, requestLanguageFilters,
+    requestLanguageAuthorPictures, savePicture, updatePicture,
+    addPicturePhoto, deletePicture, deletePicturePhoto
 };
