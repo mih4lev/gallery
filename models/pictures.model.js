@@ -115,6 +115,7 @@ const requestLanguagePicture = async (pictureID, language) => {
                 pictures.pictureID as pictureID,
                 pictures.picture${lang} as picture, authors.authorID as authorID,
                 authors.authorLink as authorLink, authors.author${lang} as author,
+                authors.authorPhoto as authorPhoto,
                 pictures.pictureSizeWidth as pictureSizeWidth,
                 pictures.pictureSizeHeight as pictureSizeHeight, 
                 pictures.pictureOrientation as pictureOrientation,
@@ -146,6 +147,7 @@ const requestLanguagePictures = async (language, limit = 1000) => {
                 pictures.pictureID as pictureID,
                 pictures.picture${lang} as picture, authors.authorID as authorID,
                 authors.authorLink as authorLink, authors.author${lang} as author,
+                authors.authorPhoto as authorPhoto,
                 pictures.pictureSizeWidth as pictureSizeWidth,
                 pictures.pictureSizeHeight as pictureSizeHeight, 
                 pictures.pictureOrientation as pictureOrientation,
@@ -174,7 +176,7 @@ const requestLanguagePictures = async (language, limit = 1000) => {
         return { code: 0, error: sqlMessage }
     }
 };
-const requestLanguageAuthorPictures = async (authorID, language, limit = 1000) => {
+const requestLanguageAuthorPictures = async (authorID, language, limit = 1000, exceptID = false) => {
     try {
         const lang = language.toUpperCase();
         const query = `
@@ -191,6 +193,7 @@ const requestLanguageAuthorPictures = async (authorID, language, limit = 1000) =
             FROM pictures 
             INNER JOIN authors ON pictures.authorID = authors.authorID 
             WHERE pictures.authorID = ${authorID} 
+            ${(exceptID) ? `AND pictureID not like '${exceptID}'` : ``}
             ORDER BY pictures.picturePlace 
             LIMIT ${limit}
         `;

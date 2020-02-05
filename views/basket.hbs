@@ -2,54 +2,8 @@
     <div class="basketWrapper">
         <div class="wrapper">
             <h1 class="pageTitle basketTitle">{{{ basketTitle }}}</h1>
-            <div class="basketTable">
-                <div class="basketTableHeader">
-                    <span class="basketHeaderTitle basketTitleName">{{{ basketTitleName }}}</span>
-                    <span class="basketHeaderTitle basketTitlePrice">{{{ basketTitlePrice }}}</span>
-                </div>
-                <div class="basketTableBody">
-                    <div class="basketItem">
-                        <img class="basketPhoto" src="/images/basket_item1_photo.png" alt="basket item 1 photo">
-                        <div class="basketItemData">
-                            <div class="basketItemHeader">
-                                <a class="basketItemLink" href="/collection/1" target="_blank">Неширокая но длинная синяя картина</a>
-                            </div>
-                            <div class="pictureSize">
-                                <span class="sizeLabel">{{{ sizeLabel }}}</span>
-                                <span class="pictureWidth metric metric--ru">100</span>
-                                <span class="pictureHeight metric metric--ru">180</span>
-                            </div>
-                            <div class="pictureAuthor">
-                                <a class="pictureAuthorLink" href="/authors/1" target="_blank">Екатерина Жуковская</a>
-                            </div>
-                        </div>
-                        <em class="picturePrice price price--rub" data-rub="325000">325 000</em>
-                        <button class="removeButton">Удалить</button>
-                    </div>
-                    <div class="basketItem">
-                        <img class="basketPhoto" src="/images/basket_item2_photo.png" alt="basket item 2 photo">
-                        <div class="basketItemData">
-                            <div class="basketItemHeader">
-                                <a class="basketItemLink" href="/collection/2" target="_blank">Широкая желтая картина</a>
-                            </div>
-                            <div class="pictureSize">
-                                <span class="sizeLabel">{{{ sizeLabel }}}</span>
-                                <span class="pictureWidth metric metric--ru">200</span>
-                                <span class="pictureHeight metric metric--ru">120</span>
-                            </div>
-                            <div class="pictureAuthor">
-                                <a class="pictureAuthorLink" href="/authors/1" target="_blank">Екатерина Жуковская</a>
-                            </div>
-                        </div>
-                        <em class="picturePrice price price--rub" data-rub="25000">25 000</em>
-                        <button class="removeButton">Удалить</button>
-                    </div>
-                </div>
-                <div class="basketTableFooter">
-                    <span class="basketSummaryTitle">{{{ basketSummaryTitle }}}</span>
-                    <span class="basketSummaryValue price price--rub" data-rub="350000">350 000</span>
-                </div>
-            </div>
+            <div class="basketLoader"></div>
+            <div class="basketTableWrapper"></div>
             <div class="pageTitle deliveryTitle">{{{ deliveryTitle }}}</div>
             <ul class="checkedForm deliveryForm">
                 <li class="checkedItem checkedItem--pickup" data-delivery="pickup">
@@ -213,3 +167,36 @@
         </div>
     </div>
 </div>
+
+<template class="basketTableTemplate">
+    <div class="basketTable">
+        <div class="basketTableHeader">
+            <span class="basketHeaderTitle basketTitleName">{{{ basketTitleName }}}</span>
+            <span class="basketHeaderTitle basketTitlePrice">{{{ basketTitlePrice }}}</span>
+        </div>
+        <div class="basketTableBody">
+            <div class="basketItem">
+                <img class="basketPhoto" src="" alt="">
+                <div class="basketItemData">
+                    <div class="basketItemHeader">
+                        <a class="basketItemLink" href="" target="_blank"></a>
+                    </div>
+                    <div class="pictureSize">
+                        <span class="sizeLabel">{{{ sizeLabel }}}</span>
+                        <span class="pictureWidth metric metric--ru"></span>
+                        <span class="pictureHeight metric metric--ru"></span>
+                    </div>
+                    <div class="pictureAuthor">
+                        <a class="pictureAuthorLink" href="" target="_blank"></a>
+                    </div>
+                </div>
+                <em class="picturePrice price price--rub" data-rub=""></em>
+                <button class="removeButton">X</button>
+            </div>
+        </div>
+        <div class="basketTableFooter">
+            <span class="basketSummaryTitle">{{{ basketSummaryTitle }}}</span>
+            <span class="basketSummaryValue price" data-rub=""></span>
+        </div>
+    </div>
+</template>

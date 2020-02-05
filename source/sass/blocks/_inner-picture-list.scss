@@ -381,5 +381,21 @@
                 }
             }
         }
+        .cartButton--active {
+            opacity: 0.2;
+            border: 1px solid $primaryColor;
+            background-color: $primaryColor;
+            color: #000;
+            cursor: default;
+            &:before {
+                display: none;
+            }
+            &:after {
+                display: none;
+            }
+            &:hover {
+                color: #000;
+            }
+        }
     }
 }

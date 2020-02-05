@@ -1,5 +1,137 @@
+import {currency} from "../utils";
+
 const basketWrapper = document.querySelector(`.basketWrapper`);
 const orderWrapper = document.querySelector(`.orderWrapper`);
+
+export const cartButtons = async () => {
+    const buttons = [...document.querySelectorAll(`.cartButton`)];
+    buttons.forEach((button) => {
+        button.addEventListener(`click`, () => {
+            const { dataset: { pictureId }} = button;
+            const pictureID = Number(pictureId);
+            console.log(pictureID);
+            const storage = localStorage.getItem(`basket`);
+            const basketPictures = (storage) ? JSON.parse(storage) : [];
+            basketPictures.push(pictureID);
+            localStorage.setItem(`basket`, JSON.stringify(basketPictures));
+            button.classList.add(`cartButton--active`);
+            // basket icon
+            const basketCountNode = document.querySelector(`.basketCount`);
+            basketCountNode.innerText = basketPictures.length;
+            basketCountNode.classList.add(`basketCount--active`);
+            const basketIcon = document.querySelector(`.headerNav--basket`);
+            basketIcon.click();
+        });
+    });
+};
+
+const changeCurrency = async (lang, node) => {
+    const format = (value) => value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    const isDefault = (lang === `ru`);
+    const rate = await currency();
+    const { dataset: { rub: valueRub }} = node;
+    const valueEuro = Math.round((valueRub / rate) * 100) / 100;
+    const value = (isDefault) ? format(valueRub) : valueEuro.toFixed(2);
+    const SL = (isDefault) ? [ `euro`, `rub` ] : [ `rub`, `euro` ];
+    node.classList.remove(`price--${SL[0]}`);
+    node.classList.add(`price--${SL[1]}`);
+    node.innerText = value;
+    return node;
+};
+
+const removePicture = async ({ target }) => {
+    const { dataset: { pictureId }} = target;
+    const pictureID = Number(pictureId);
+    const lang = document.querySelector(`html`).getAttribute(`lang`);
+    const basketTableBody = document.querySelector(`.basketTableBody`);
+    const deletedPicture = document.querySelector(`.basketItem[data-picture-id="${pictureID}"]`);
+    const picturePriceNode = deletedPicture.querySelector(`.picturePrice`);
+    const picturePrice = Number(picturePriceNode.dataset.rub);
+    basketTableBody.removeChild(deletedPicture);
+    // total sum
+    const totalSum = document.querySelector(`.basketSummaryValue`);
+    const oldValue = Number(totalSum.dataset.rub);
+    totalSum.dataset.rub = String(oldValue - picturePrice);
+    await changeCurrency(lang, totalSum);
+    // remove from localStorage
+    const storage = localStorage.getItem(`basket`);
+    if (!storage) return false;
+    const basketPictures = JSON.parse(storage);
+    basketPictures.splice(basketPictures.indexOf(pictureID), 1);
+    localStorage.setItem(`basket`, JSON.stringify(basketPictures));
+    if (!basketPictures.length) location.href = `/collection`;
+};
+
+const cloneTemplate = async (picturesData) => {
+    const lang = document.querySelector(`html`).getAttribute(`lang`);
+    const priceClass = (lang === `ru`) ? `price--rub` : `price--euro`;
+    const basketTemplate = document.querySelector(`.basketTableTemplate`);
+    const clonedTemplate = basketTemplate.content.cloneNode(true);
+    const basketTable = clonedTemplate.querySelector(`.basketTable`);
+    const clonedPicture = basketTable.querySelector(`.basketItem`).cloneNode(true);
+    const basketTableBody = basketTable.querySelector(`.basketTableBody`);
+    basketTableBody.innerHTML = ``;
+    // pictures
+    for (const pictureData of picturesData) {
+        const {
+            pictureID, picture, photos: { 0: { photoLink }},
+            pictureSizeWidth, pictureSizeHeight, authorID, author,
+            picturePrice, langPrice
+        } = pictureData;
+        const wrapper = clonedPicture.cloneNode(true);
+        const picturePhoto = wrapper.querySelector(`.basketPhoto`);
+        const pictureTitle = wrapper.querySelector(`.basketItemLink`);
+        const pictureWidth = wrapper.querySelector(`.pictureWidth`);
+        const pictureHeight = wrapper.querySelector(`.pictureHeight`);
+        const pictureAuthor = wrapper.querySelector(`.pictureAuthorLink`);
+        const picturePriceNode = wrapper.querySelector(`.picturePrice`);
+        wrapper.dataset.pictureId = pictureID;
+        picturePhoto.src = `/photos/pictures/${photoLink}.png`;
+        picturePhoto.setAttribute(`alt`, picture);
+        pictureTitle.innerText = picture;
+        pictureTitle.setAttribute(`href`, `/collection/${pictureID}`);
+        pictureWidth.innerText = pictureSizeWidth;
+        pictureWidth.classList.add(`metric--${lang}`);
+        pictureHeight.innerText = pictureSizeHeight;
+        pictureHeight.classList.add(`metric--${lang}`);
+        pictureAuthor.innerText = author;
+        pictureAuthor.setAttribute(`href`, `/authors/${authorID}`);
+        picturePriceNode.innerText = langPrice;
+        picturePriceNode.classList.add(priceClass);
+        picturePriceNode.dataset.rub = picturePrice;
+        // remove button
+        const removeButton = wrapper.querySelector(`.removeButton`);
+        removeButton.dataset.pictureId = pictureID;
+        removeButton.addEventListener(`click`, removePicture);
+        basketTableBody.appendChild(wrapper);
+    }
+    // total sum
+    const totalPrice = picturesData.reduce((sum, { picturePrice }) => sum + picturePrice, 0);
+    const totalSum = basketTable.querySelector(`.basketSummaryValue`);
+    totalSum.dataset.rub = totalPrice;
+    await changeCurrency(lang, totalSum);
+    return basketTable;
+};
+
+export const basketTable = async () => {
+    const basketTableWrapper = document.querySelector(`.basketTableWrapper`);
+    if (!basketTableWrapper) return false;
+    const storage = localStorage.getItem(`basket`);
+    if (!storage) return location.href = `/404`;
+    const basketPictures = JSON.parse(storage);
+    const lang = document.querySelector(`html`).getAttribute(`lang`);
+    const picturesData = [];
+    for (const picture of basketPictures) {
+        const response = await fetch(`/api/pictures/${picture}/lang/${lang}`);
+        const data = await response.json();
+        picturesData.push(data);
+    }
+    const tableTemplate = await cloneTemplate(picturesData);
+    const mainWrapper = basketTableWrapper.parentNode;
+    const basketLoader = mainWrapper.querySelector(`.basketLoader`);
+    mainWrapper.removeChild(basketLoader);
+    basketTableWrapper.appendChild(tableTemplate);
+};
 
 export const basketDelivery = () => {
     const formAdditionalWrappers = [...document.querySelectorAll(`.clientAdditional .formAdditional`)];
@@ -109,6 +241,7 @@ export const basketForm = () => {
     const sendOrder = async () => {
         const delivery = document.querySelector(`.deliveryForm .checkedItem--active`);
         const payment = document.querySelector(`.paymentForm .checkedItem--active`);
+        const orderPictures = JSON.parse(localStorage.getItem(`basket`));
         const orderBody = {
             delivery: delivery.dataset.delivery,
             payment: payment.dataset.payment,
@@ -117,7 +250,8 @@ export const basketForm = () => {
             clientEmail: document.querySelector(`#clientEmail`).value,
             clientComment: document.querySelector(`#clientComment`).value,
             clientCity: document.querySelector(`#clientCity`).value,
-            clientAddress: document.querySelector(`#clientAddress`).value
+            clientAddress: document.querySelector(`#clientAddress`).value,
+            orderPictures
         };
         const orderOptions = {
             method: `POST`,
@@ -129,6 +263,7 @@ export const basketForm = () => {
         const response = await fetch(`/api/orders`, orderOptions);
         const { code, orderNumber } = await response.json();
         if (code !== 200) return false;
+        localStorage.removeItem(`basket`);
         basketWrapper.style.display = `none`;
         orderWrapper.style.display = `flex`;
         const orderNumberNode = document.querySelector(`.orderNumber`);

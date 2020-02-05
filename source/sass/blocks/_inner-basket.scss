@@ -41,6 +41,15 @@
     }
 }
 
+.basketLoader {
+    width: 100%;
+    height: 300px;
+    background-image: url(/images/loader_gold--icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60px;
+}
+
 .basketTable {
     margin-top: 0;
     margin-bottom: 0;

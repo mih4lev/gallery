@@ -342,11 +342,14 @@
                             line-height: 12px;
                             letter-spacing: 0.075em;
                         }
+                        .sizeLabel {
+                            &:after {
+                                content: ":";
+                            }
+                        }
                         .pictureWidth {
                             &:after {
                                 content: "x";
-                                padding-left: 5px;
-                                padding-right: 5px;
                             }
                         }
                     }

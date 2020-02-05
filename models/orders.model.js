@@ -9,15 +9,18 @@ const saveOrder = async (typedData) => {
     const orderNumber = 118205 + lastID;
     const {
         delivery, payment, clientName, clientPhone,
-        clientEmail, clientComment, clientCity, clientAddress
+        clientEmail, clientComment, clientCity, clientAddress,
+        orderPictures
     } = typedData;
     const query = `
         INSERT INTO orders (
             orderNumber, delivery, payment, clientName, clientPhone, 
-            clientEmail, clientComment, clientCity, clientAddress
+            clientEmail, clientComment, clientCity, clientAddress, 
+            orderPictures
         ) VALUES (
             '${orderNumber}', '${delivery}', '${payment}', '${clientName}', '${clientPhone}',
-            '${clientEmail}', '${clientComment}', '${clientCity}', '${clientAddress}' 
+            '${clientEmail}', '${clientComment}', '${clientCity}', '${clientAddress}',
+            '${orderPictures}'
         )`;
     const result = await requestDB(query);
     return { code: (result.insertId) ? 200 : 0, orderNumber };

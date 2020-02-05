@@ -99,28 +99,10 @@
                     <li class="headerNav--item">
                         <a class="headerNav--link headerNav--basket" href="#">
                             <img src="/images/basket--icon.svg" width="18" height="19" alt="Basket">
-                            <span class="basketCount basketCount--active">1</span>
+                            <span class="basketCount"></span>
                         </a>
                         <div class="headerBasket">
-                            <div class="addedPictures">
-                                <p class="basketHeader">{{{ basketHeader }}}</p>
-                                <div class="basketPicture">
-                                    <img class="basketPhoto" src="/images/basket_added2.png" alt="added basket photo">
-                                    <div class="basketData">
-                                        <div class="pictureHeaderWrapper">
-                                            <a href="/collection/1" class="pictureHeader">Небольшая, но дорогая и очень красивая картина</a>
-                                        </div>
-                                        <p class="pictureSize">
-                                            <span class="sizeLabel">Размер</span>
-                                            <span class="pictureWidth metric metric--ru">200</span>
-                                            <span class="pictureHeight metric metric--ru">150</span>
-                                        </p>
-                                        <a class="pictureAuthor" href="/authors/1">Екатерина Жуковская</a>
-                                        <em class="picturePrice price price--rub" data-rub="49000">49 000</em>
-                                    </div>
-                                </div>
-                                <button class="basketButton">{{{ basketButton }}}</button>
-                            </div>
+                            <div class="headerBasket--empty">Ваша корзина пуста</div>
                             <button class="headerBasket--closeButton" disabled></button>
                         </div>
                     </li>

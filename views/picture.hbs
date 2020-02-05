@@ -77,45 +77,36 @@
                         {{/if}}
                     </ul>
                     <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
-                    <button class="cartButton">{{{ cartButton }}}</button>
+                    <button class="cartButton"
+                            data-picture-id="{{{ pictureData.pictureID }}}">
+                        {{{ cartButton }}}
+                    </button>
                 </div>
             </div>
             <p class="pictureText">{{{ pictureData.pictureAbout }}}</p>
             <div class="authorWrapper">
                 <div class="authorHeaderWrapper">
-                    <img class="authorPhoto" src="/images/author1_photo.png" alt="author photo">
+                    <img class="authorPhoto"
+                         src="/photos/authors/thumbs/{{{ pictureData.authorPhoto }}}_55x55.png"
+                         alt="{{{ pictureData.author }}}">
                     <p class="authorHeaderAnother">{{{ authorHeaderAnother }}}</p>
                 </div>
+                {{#if anotherPictures.length }}
                 <ul class="authorList">
+                    {{#each anotherPictures}}
                     <li class="authorPicture">
-                        <a class="authorPictureLink" href="/collection/1">
-                            <img class="authorPicturePhoto" src="/images/author_pictures_1.png" alt="author picture 1">
+                        <a class="authorPictureLink" href="/collection/{{{ pictureID }}}">
+                            <img class="authorPicturePhoto"
+                                 src="/photos/pictures/thumbs/{{{ photoLink }}}_194x194.png"
+                                 alt="{{{ picture }}}">
                         </a>
                     </li>
-                    <li class="authorPicture">
-                        <a class="authorPictureLink" href="/collection/2">
-                            <img class="authorPicturePhoto" src="/images/author_pictures_2.png" alt="author picture 2">
-                        </a>
-                    </li>
-                    <li class="authorPicture">
-                        <a class="authorPictureLink" href="/collection/3">
-                            <img class="authorPicturePhoto" src="/images/author_pictures_3.png" alt="author picture 3">
-                        </a>
-                    </li>
-                    <li class="authorPicture">
-                        <a class="authorPictureLink" href="/collection/4">
-                            <img class="authorPicturePhoto" src="/images/author_pictures_4.png" alt="author picture 4">
-                        </a>
-                    </li>
-                    <li class="authorPicture">
-                        <a class="authorPictureLink" href="/collection/5">
-                            <img class="authorPicturePhoto" src="/images/author_pictures_5.png" alt="author picture 5">
-                        </a>
-                    </li>
+                    {{/each}}
                 </ul>
                 <div class="buttonWrapper">
-                    <a class="picturesButton" href="/authors/1">{{{ picturesButton }}}</a>
+                    <a class="picturesButton" href="/authors/{{{ authorID }}}">{{{ picturesButton }}}</a>
                 </div>
+                {{/if}}
             </div>
         </div>
     </div>

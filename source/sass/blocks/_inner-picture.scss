@@ -487,6 +487,22 @@
                 }
             }
         }
+        .cartButton--active {
+            opacity: 0.2;
+            border: 1px solid $primaryColor;
+            background-color: $primaryColor;
+            color: #000;
+            cursor: default;
+            &:before {
+                display: none;
+            }
+            &:after {
+                display: none;
+            }
+            &:hover {
+                color: #000;
+            }
+        }
     }
  }
 
@@ -503,6 +519,7 @@
             margin-right: 20px;
             width: 55px;
             height: 55px;
+            border-radius: 50%;
         }
         .authorHeaderAnother {
             flex-grow: 1;
@@ -536,23 +553,39 @@
     .authorList {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin-top: 20px;
         margin-bottom: 0;
+        margin-left: -10px;
+        margin-right: -10px;
         padding-left: 0;
         list-style-type: none;
+        @include respond(tablet) {
+            margin-left: 0;
+            margin-right: 0;
+        }
         @include respond(tabletMini) {
             flex-wrap: wrap;
         }
         @include respond(mobile) {
             flex-wrap: wrap;
+            margin-left: -5px;
+            margin-right: -5px;
         }
         .authorPicture {
+            margin-left: 10px;
+            margin-right: 10px;
+            @include respond(tablet) {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
             @include respond(tabletMini) {
                 margin-bottom: 20px;
             }
             @include respond(mobile) {
                 margin-bottom: 10px;
+                margin-left: 6px;
+                margin-right: 6px;
             }
             .authorPicturePhoto {
                 width: 208px;

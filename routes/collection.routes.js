@@ -2,7 +2,7 @@ const { Router } = require(`express`);
 const { collectData } = require(`../models/data.model`);
 const {
     requestLanguagePictures, requestLanguagePicture,
-    requestLanguageFilters
+    requestLanguageFilters, requestLanguageAuthorPictures
 } = require("../models/pictures.model");
 
 const router = new Router();
@@ -42,6 +42,12 @@ router.get(`/:pictureID`, async (request, response) => {
         photo.hasPhoto = (photo.photoLink !== `NULL` && photo.photoLink !== null);
     });
     data.pictureData.mainPicture = data.pictureData.photos[0];
+    data.authorID = data.pictureData.authorID;
+    data.anotherPictures = await requestLanguageAuthorPictures(data.authorID, lang, 5, pictureID);
+    data.anotherPictures.forEach((picture) => {
+        picture.photoLink = picture.photos[0].photoLink;
+    });
+    console.log(data);
     response.render(pageLink, data);
 });
 
