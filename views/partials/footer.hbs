@@ -19,17 +19,21 @@
                 </li>
             </ul>
             <div class="loginWrapper">
+                {{#if isAdmin}}
+
+                {{else}}
                 <form class="loginForm">
                     <div class="loginFieldWrapper">
                         <label class="loginLabel" for="userLogin">Логин</label>
                         <input class="loginField" name="userLogin" id="userLogin" type="text">
                     </div>
                     <div class="loginFieldWrapper">
-                        <label class="loginLabel" for="userLogin">Пароль</label>
-                        <input class="loginField" name="userLogin" id="userLogin" type="text">
+                        <label class="loginLabel" for="userPassword">Пароль</label>
+                        <input class="loginField" name="userPassword" id="userPassword" type="password">
                     </div>
                     <button type="submit" class="loginButton">=></button>
                 </form>
+                {{/if}}
             </div>
         </div>
     </div>

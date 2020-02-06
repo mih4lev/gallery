@@ -25,7 +25,7 @@ app.use(`/fonts`, express.static(__dirname + `/public/fonts`));
 app.use(`/lang`, express.static(__dirname + `/public/lang`));
 // middleware
 app.use(express.json({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser('some_secret_numbers_123409853532'));
 app.use(require(`./middlewares/lang.middleware`));
 app.use(require(`./middlewares/admin.middleware`));
 app.use('/api', cors(corsOptions));

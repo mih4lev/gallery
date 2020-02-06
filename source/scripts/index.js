@@ -1,3 +1,4 @@
+import { userLogin } from "./login";
 import { similarPhoto } from "./utils";
 import { recallForm } from "./blocks/recall-form";
 import { checkBasketStorage, headerBasket } from "./blocks/header-basket";
@@ -14,6 +15,7 @@ import { translateHomepage, instagramPosts } from "./blocks/home";
 import { translatePainter } from "./blocks/painter";
 import { translateAuthors } from "./blocks/authors";
 
+userLogin();
 similarPhoto();
 recallForm();
 checkBasketStorage();

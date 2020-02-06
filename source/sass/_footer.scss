@@ -215,6 +215,7 @@
 
 .loginWrapper {
     opacity: 0;
+    z-index: -10;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -240,19 +241,32 @@
                 display: block;
                 height: 26px;
                 line-height: 26px;
+                font-size: 12px;
+                letter-spacing: 0.1em;
+                color: $primaryColor;
             }
             .loginField {
+                opacity: 0.7;
                 padding-left: 10px;
                 padding-right: 10px;
                 box-sizing: border-box;
                 width: 120px;
                 height: 26px;
                 line-height: 26px;
+                font-family: "Gilroy", Arial, sans-serif;
+                font-size: 12px;
+                letter-spacing: 0.1em;
+                color: $primaryColor;
                 background-color: #000;
                 border: 1px solid $secondaryColor;
+                outline: none;
+                &:focus {
+                    opacity: 1;
+                }
             }
         }
         .loginButton {
+            opacity: 0.7;
             position: absolute;
             top: 0;
             right: -36px;
@@ -266,6 +280,10 @@
             background-repeat: no-repeat;
             background-size: 16px;
             cursor: pointer;
+            outline: none;
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }
