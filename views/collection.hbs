@@ -1,5 +1,6 @@
 <div class="innerPage">
     <div class="wrapperFull">
+        <div class="collectionLoader"></div>
         <div class="collection">
             <div class="filtersWrapper">
                 <div class="filtersHeader">{{{ filtersHeader }}}</div>
@@ -50,12 +51,12 @@
                             </div>
                             <div class="rangeLabels">
                                 <span
-                                    class="labelMin metric metric--{{{ language }}}"
+                                    class="labelMin metric metricWidth metric--{{{ language }}}"
                                     data-default="{{{ filters.minWidth }}}">
                                     {{{ filters.minWidth }}}
                                 </span>
                                 <span
-                                    class="labelMax metric metric--{{{ language }}}"
+                                    class="labelMax metric metricWidth metric--{{{ language }}}"
                                     data-default="{{{ filters.maxWidth }}}">
                                     {{{ filters.maxWidth }}}
                                 </span>
@@ -70,12 +71,12 @@
                             </div>
                             <div class="rangeLabels">
                                 <span
-                                    class="labelMin metric metric--{{{ language }}}"
+                                    class="labelMin metric metricHeight metric--{{{ language }}}"
                                     data-default="{{{ filters.minHeight }}}">
                                     {{{ filters.minHeight }}}
                                 </span>
                                 <span
-                                    class="labelMax metric metric--{{{ language }}}"
+                                    class="labelMax metric metricHeight metric--{{{ language }}}"
                                     data-default="{{{ filters.maxHeight }}}">
                                     {{{ filters.maxHeight }}}
                                 </span>
@@ -90,7 +91,7 @@
                                 <button class="color"
                                         data-color-id="{{{ colorID }}}"
                                         style="background-color: {{{ colorHEX }}};"
-                                        data-select="{{{ colorName }}}">
+                                        data-select="{{{ colorID }}}">
                                     {{{ color }}}
                                 </button>
                             {{/each}}
@@ -104,7 +105,7 @@
                         </p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
-                                <ul class="dropdownList">
+                                <ul class="dropdownList genreList">
                                     {{#each filters.genres}}
                                         <li class="dropdownItem"
                                             data-select="{{{ genreID }}}">
@@ -115,7 +116,7 @@
                             </div>
                             <div class="dropdownScroll"></div>
                         </div>
-                        <ul class="chosenList"></ul>
+                        <ul class="chosenList genreList"></ul>
                     </li>
                     {{/if}}
                     {{#if filters.techniques.length }}
@@ -125,7 +126,7 @@
                         </p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
-                                <ul class="dropdownList">
+                                <ul class="dropdownList techniqueList">
                                     {{#each filters.techniques}}
                                         <li class="dropdownItem"
                                             data-select="{{{ techniqueID }}}">
@@ -136,7 +137,7 @@
                             </div>
                             <div class="dropdownScroll"></div>
                         </div>
-                        <ul class="chosenList"></ul>
+                        <ul class="chosenList techniqueList"></ul>
                     </li>
                     {{/if}}
                     {{#if filters.authors.length }}
@@ -146,7 +147,7 @@
                         </p>
                         <div class="dropdown">
                             <div class="dropdownWrapper">
-                                <ul class="dropdownList">
+                                <ul class="dropdownList authorList">
                                     {{#each filters.authors}}
                                     <li class="dropdownItem" data-select="{{{ authorID }}}">
                                         <img class="authorPhoto"
@@ -159,7 +160,7 @@
                             </div>
                             <div class="dropdownScroll"></div>
                         </div>
-                        <ul class="chosenList"></ul>
+                        <ul class="chosenList authorList"></ul>
                     </li>
                     {{/if}}
                 </ul>

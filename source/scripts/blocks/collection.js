@@ -47,7 +47,7 @@ const cloneTemplate = (picture) => {
         photos
     } = picture;
     const photoLink = (photos[0]) ? photos[0].photoLink : ``;
-    const sourcePicture = document.querySelector(`.pictureList .picture`);
+    const sourcePicture = document.querySelector(`.pictureTemplate`).content;
     const pictureTemplate = sourcePicture.cloneNode(true);
     const pictureHeader = pictureTemplate.querySelector(`.pictureHeader`);
     const pictureAuthor = pictureTemplate.querySelector(`.pictureAuthor`);
@@ -79,6 +79,160 @@ const cloneTemplate = (picture) => {
     return pictureTemplate;
 };
 
+const hideLoader = () => {
+    const loader = document.querySelector(`.collectionLoader`);
+    loader.classList.remove(`collectionLoader--visible`);
+};
+
+const showLoader = () => {
+    const loader = document.querySelector(`.collectionLoader`);
+    loader.classList.add(`collectionLoader--visible`);
+};
+
+const filterPictures = (pictures, filterData) => {
+    const filteredPictures = pictures.filter((picture) => {
+        const {
+            picturePrice, pictureSizeWidth, pictureSizeHeight,
+            pictureOrientation, authorID, colors,
+            genres: pictureGenres, techniques: pictureTechniques
+        } = picture;
+        const {
+            minPrice, maxPrice, minWidth, maxWidth,
+            minHeight, maxHeight, orientation, authors,
+            color, genres, techniques
+        } = filterData;
+        // price
+        if (picturePrice < minPrice || picturePrice > maxPrice) return false;
+        // width
+        if (pictureSizeWidth < minWidth || pictureSizeWidth > maxWidth) return false;
+        // height
+        if (pictureSizeHeight < minHeight || pictureSizeHeight > maxHeight) return false;
+        // orientation
+        if (!orientation.includes(pictureOrientation)) return false;
+        // authors
+        if (!authors.includes(String(authorID))) return false;
+        // color
+        const colorsArray = colors.map(({ colorID }) => String(colorID));
+        const hasColor = !!colorsArray.filter((pictureColor) => {
+            return color.includes(pictureColor)
+        }).length;
+        if (!hasColor) return false;
+        // genre
+        const genreArray = pictureGenres.map(({ genreID }) => String(genreID));
+        const hasGenre = !!genreArray.filter((pictureGenre) => {
+            return genres.includes(pictureGenre)
+        }).length;
+        if (!hasGenre) return false;
+        // technique
+        const techniqueArray = pictureTechniques.map(({ techniqueID }) => String(techniqueID));
+        const hasTechnique = !!techniqueArray.filter((pictureTechnique) => {
+            return techniques.includes(pictureTechnique)
+        }).length;
+        if (!hasTechnique) return false;
+        // return true if all checks success
+        return true;
+    });
+    const picturesCount = filteredPictures.length;
+    const pictureList = document.querySelector(`.pictureList`);
+    pictureList.innerHTML = ``;
+    filteredPictures.forEach((picture, index) => {
+        const pictureNode = cloneTemplate(picture);
+        pictureList.appendChild(pictureNode);
+        checkButtonVisible(picturesCount);
+    });
+    imagesLoaded( pictureList, function() {
+        new Masonry( pictureList, {
+            itemSelector: `.picture`
+        });
+        hideLoader();
+    });
+};
+
+let timeoutID;
+const changeFilters = (pictures) => {
+    return (mutationsList) => {
+        const filterList = document.querySelector(`.filters`);
+        const minPriceNode = filterList.querySelector(`.labelMin.price`);
+        const maxPriceNode = filterList.querySelector(`.labelMax.price`);
+        const minWidthNode = filterList.querySelector(`.labelMin.metricWidth`);
+        const maxWidthNode = filterList.querySelector(`.labelMax.metricWidth`);
+        const minHeightNode = filterList.querySelector(`.labelMin.metricHeight`);
+        const maxHeightNode = filterList.querySelector(`.labelMax.metricHeight`);
+        const orientations = filterList.querySelector(`.orientationWrapper`);
+        const colors = filterList.querySelector(`.colorsWrapper`);
+        const genreList = filterList.querySelector(`.chosenList.genreList`);
+        const genreDropdown = filterList.querySelector(`.dropdownList.genreList`);
+        const techniqueList = filterList.querySelector(`.chosenList.techniqueList`);
+        const techniqueDropdown = filterList.querySelector(`.dropdownList.techniqueList`);
+        const authorList = filterList.querySelector(`.chosenList.authorList`);
+        const authorDropdown = filterList.querySelector(`.dropdownList.authorList`);
+        for (let mutation of mutationsList) {
+            const { target } = mutation;
+            if (
+                target.classList.contains(`range`) ||
+                target.classList.contains(`rangeMin`) ||
+                target.classList.contains(`rangeMax`) ||
+                target.classList.contains(`dropdown`) ||
+                target.classList.contains(`filterLabel`)
+            ) return false;
+            //
+            // orientation
+            let orientation = [];
+            const dropOrientation = ({ dataset: { select }}) => orientation.push(select);
+            const orientationElements = [...orientations.querySelectorAll(`.orientation`)];
+            const orientationActive = [...orientations.querySelectorAll(`.orientation--active`)];
+            (!orientationActive.length) ?
+                orientationElements.forEach(dropOrientation) :
+                orientationActive.forEach(dropOrientation);
+            // colors
+            let color = [];
+            const dropColor = ({ dataset: { select }}) => color.push(select);
+            const colorElements = [...colors.querySelectorAll(`.color`)];
+            const colorActive = [...colors.querySelectorAll(`.color--active`)];
+            (!colorActive.length) ?
+                colorElements.forEach(dropColor) :
+                colorActive.forEach(dropColor);
+            // genres
+            let genres = [];
+            const dropGenre = ({ dataset: { select }}) => genres.push(select);
+            const genreElements = [...genreDropdown.querySelectorAll(`.dropdownItem`)];
+            const genreActive = [...genreList.querySelectorAll(`.chosenItem`)];
+            (!genreActive.length) ?
+                genreElements.forEach(dropGenre) :
+                genreActive.forEach(dropGenre);
+            // techniques
+            let techniques = [];
+            const dropTechnique = ({ dataset: { select }}) => techniques.push(select);
+            const techniqueElements = [...techniqueDropdown.querySelectorAll(`.dropdownItem`)];
+            const techniqueActive = [...techniqueList.querySelectorAll(`.chosenItem`)];
+            (!techniqueActive.length) ?
+                techniqueElements.forEach(dropTechnique) :
+                techniqueActive.forEach(dropTechnique);
+            // authors
+            let authors = [];
+            const dropAuthor = ({ dataset: { select }}) => authors.push(select);
+            const authorsElements = [...authorDropdown.querySelectorAll(`.dropdownItem`)];
+            const authorsActive = [...authorList.querySelectorAll(`.chosenItem`)];
+            (!authorsActive.length) ?
+                authorsElements.forEach(dropAuthor) :
+                authorsActive.forEach(dropAuthor);
+            // result
+            const filterData = {
+                minPrice: Number(minPriceNode.dataset.current || minPriceNode.dataset.rub),
+                maxPrice: Number(maxPriceNode.dataset.current || maxPriceNode.dataset.rub),
+                minWidth: Number(minWidthNode.innerText),
+                maxWidth: Number(maxWidthNode.innerText),
+                minHeight: Number(minHeightNode.innerText),
+                maxHeight: Number(maxHeightNode.innerText),
+                orientation, color, genres, techniques, authors
+            };
+            clearTimeout(timeoutID);
+            timeoutID = setTimeout(() => filterPictures(pictures, filterData), 200);
+            showLoader();
+        }
+    };
+};
+
 export const collectionFilters = async () => {
     const filtersNode = document.querySelector(`.filters`);
     const pictureList = document.querySelector(`.pictureList`);
@@ -95,15 +249,19 @@ export const collectionFilters = async () => {
             if (index > visiblePicturesCount() + 10) return false;
             const clonedPicture = cloneTemplate(picture);
             pictureList.appendChild(clonedPicture);
-            imagesLoaded( pictureList, function() {
-                new Masonry( pictureList, {
-                    itemSelector: `.picture`
-                });
-            });
             checkButtonVisible(picturesCount);
         });
+        imagesLoaded( pictureList, function() {
+            new Masonry( pictureList, {
+                itemSelector: `.picture`
+            });
+        });
     });
-
+    // filters
+    const filterList = document.querySelector(`.filters`);
+    const config = { attributes: true, childList: true, subtree: true, characterData: true };
+    const observer = new MutationObserver(changeFilters(pictures));
+    observer.observe(filterList, config);
 };
 
 export const setDesktopLinks = () => {

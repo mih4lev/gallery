@@ -34,10 +34,8 @@
                             </p>
                         </div>
                         <div class="picturePriceWrapper">
-                                <span class="picturePrice picturePrice--main price price--{{{ priceTitle }}}"
-                                      data-rub="{{{ picturePrice }}}">
-                                    {{{ langPrice }}}
-                                </span>
+                            <span class="picturePrice picturePrice--main price price--{{{ priceTitle }}}"
+                                  data-rub="{{{ picturePrice }}}">{{{ langPrice }}}</span>
                         </div>
                     </div>
                     <button class="cartButton"
@@ -50,3 +48,31 @@
     {{/if}}
     <button class="arrowDownButton picturesButton">{{{ picturesButton }}}</button>
 </div>
+
+<template class="pictureTemplate">
+    <li class="picture similarParent">
+        <a class="picturePhotoWrapper photoLabel photoLabel--new" href="">
+            <img class="picturePhoto similarPhoto" src="" alt="">
+        </a>
+        <div class="pictureHeaderWrapper">
+            <a class="pictureHeader similarLink" href=""></a>
+        </div>
+        <div class="pictureData">
+            <div class="pictureInfoWrapper">
+                <p class="pictureAuthorWrapper">
+                    <a class="pictureAuthor" href=""></a>
+                </p>
+                <p class="pictureSize">
+                    <span class="sizeLabel">{{{ sizeLabel }}}</span>
+                    <span class="pictureWidth metric metric--{{{ lang }}}"></span>
+                    <span class="pictureHeight metric metric--{{{ lang }}}"></span>
+                </p>
+            </div>
+            <div class="picturePriceWrapper">
+                <span class="picturePrice picturePrice--main price price--{{{ priceTitle }}}"
+                      data-rub=""></span>
+            </div>
+        </div>
+        <button class="cartButton" data-picture-id="">{{{ cartButton }}}</button>
+    </li>
+</template>
