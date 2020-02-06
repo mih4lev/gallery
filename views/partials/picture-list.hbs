@@ -5,9 +5,13 @@
                 <li class="picture similarParent">
                     <a class="picturePhotoWrapper photoLabel photoLabel--new"
                        href="/collection/{{{ pictureID }}}">
-                        <img class="picturePhoto similarPhoto"
-                             src="/photos/pictures/{{{ photo }}}.png"
-                             alt="{{{ picture }}}">
+                        {{# if hasPhoto}}
+                            <img class="picturePhoto similarPhoto"
+                                 src="/photos/pictures/{{{ photo }}}.png"
+                                 alt="{{{ picture }}}">
+                        {{else}}
+                            <div class="picturePhoto similarPhoto defaultPhoto"></div>
+                        {{/if}}
                     </a>
                     <div class="pictureHeaderWrapper">
                         <a class="pictureHeader similarLink"

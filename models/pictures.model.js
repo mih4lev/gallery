@@ -10,6 +10,26 @@ const {
 } = require(`./pictures-data.model`);
 const { savePhoto, saveThumb, saveOriginal, saveOriginalThumb } = require(`./utils.model`);
 
+const updatePlaces = async (picturePlace) => {
+    try {
+        const placeQuery = `
+            SELECT pictureID FROM pictures 
+            WHERE picturePlace >= ${picturePlace} ORDER BY picturePlace
+        `;
+        const changeFields = await requestDB(placeQuery);
+        let updatedPlace = Number(picturePlace) + 1;
+        for (const { pictureID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE pictures SET picturePlace = ${updatedPlace++}
+                WHERE pictureID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
 // INSERT | CREATE
 const savePicture = async (params) => {
     const {
@@ -18,15 +38,22 @@ const savePicture = async (params) => {
         pictureAboutRU, pictureAboutEN, pictureOrientation,
         genresID, techniquesID, colorsID
     } = params;
+    const countQuery = `SELECT COUNT(exhibitionID) as count FROM exhibitions`;
+    const { 0: { count }} = await requestDB(countQuery);
+    let setPlace = count + 1;
+    if (picturePlace) {
+        setPlace = picturePlace;
+        await updatePlaces(picturePlace);
+    }
     const query = `
         INSERT INTO pictures (
             pictureRU, pictureEN, picturePlace, 
-            picturePrice, picturePriceSale,
+            picturePrice, picturePriceSale, 
             pictureSizeWidth, pictureSizeHeight, 
             pictureAboutRU, pictureAboutEN, 
             authorID, pictureOrientation
         ) VALUES (
-            '${pictureRU}', '${pictureEN}', '${picturePlace}', 
+            '${pictureRU}', '${pictureEN}', '${setPlace}', 
             '${picturePrice}', '${(picturePriceSale) ? picturePriceSale : 0}', 
             '${pictureSizeWidth}', '${pictureSizeHeight}', 
             '${pictureAboutRU}', '${pictureAboutEN}', 
@@ -298,9 +325,9 @@ const updatePicture = async (pictureID, params) => {
         pictureRU, pictureEN, picturePlace, pictureSizeWidth,
         pictureSizeHeight, picturePrice, picturePriceSale,
         pictureAboutRU, pictureAboutEN, authorID,
-        pictureOrientation,
-        genresID, techniquesID, colorsID
+        pictureOrientation, genresID, techniquesID, colorsID
     } = params;
+
     const query = `
         UPDATE pictures SET 
             pictureRU = '${pictureRU}', 
@@ -316,6 +343,7 @@ const updatePicture = async (pictureID, params) => {
             authorID = '${authorID[0]}' 
         WHERE pictureID = ${pictureID}`;
     try {
+        await updatePlaces(picturePlace);
         await requestDB(query);
         await editGenres(pictureID, genresID);
         await editTechniques(pictureID, techniquesID);

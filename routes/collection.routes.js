@@ -17,12 +17,14 @@ router.get(`/`, async (request, response) => {
         picture.sizeLabel = data.sizeLabel;
         picture.lang = data.language;
         picture.priceTitle = (lang === `en`) ? `euro` : `rub`;
-        picture.photo = picture.photos[0].photoLink;
+        picture.hasPhoto = !!(picture.photos[0]);
+        if (picture.photos[0]) {
+            picture.photo = picture.photos[0].photoLink;
+        }
     });
     data.filters = await requestLanguageFilters(lang);
     data.filters.priceTitle = (lang === `en`) ? `euro` : `rub`;
     data.isCollectionActive = true;
-    console.log(data.picturesData[0].photos);
     response.render(pageLink, data);
 });
 
