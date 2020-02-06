@@ -90,6 +90,7 @@ const showLoader = () => {
 };
 
 const filterPictures = (pictures, filterData) => {
+    showLoader();
     const filteredPictures = pictures.filter((picture) => {
         const {
             picturePrice, pictureSizeWidth, pictureSizeHeight,
@@ -144,7 +145,9 @@ const filterPictures = (pictures, filterData) => {
         new Masonry( pictureList, {
             itemSelector: `.picture`
         });
-        hideLoader();
+        setTimeout(() => {
+            hideLoader();
+        }, 300);
     });
 };
 
@@ -227,8 +230,7 @@ const changeFilters = (pictures) => {
                 orientation, color, genres, techniques, authors
             };
             clearTimeout(timeoutID);
-            timeoutID = setTimeout(() => filterPictures(pictures, filterData), 200);
-            showLoader();
+            timeoutID = setTimeout(() => filterPictures(pictures, filterData), 300);
         }
     };
 };
