@@ -179,7 +179,6 @@ const changeFilters = (pictures) => {
                 target.classList.contains(`filterLabel`) ||
                 target.classList.contains(`filters`)
             ) return false;
-            console.log(target);
             //
             // orientation
             let orientation = [];
