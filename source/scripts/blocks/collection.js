@@ -57,7 +57,7 @@ const cloneTemplate = (picture) => {
     } = picture;
     const lang = document.querySelector(`html`).getAttribute(`lang`);
     const photoLink = (photos[0]) ? photos[0].photoLink : ``;
-    const sourcePicture = document.querySelector(`.pictureTemplate`).content;
+    const sourcePicture = document.querySelector(`.clonePictureTemplate`).content;
     const pictureTemplate = sourcePicture.cloneNode(true);
     const pictureHeader = pictureTemplate.querySelector(`.pictureHeader`);
     const pictureAuthor = pictureTemplate.querySelector(`.pictureAuthor`);
