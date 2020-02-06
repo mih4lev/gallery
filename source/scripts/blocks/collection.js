@@ -44,8 +44,9 @@ const cloneTemplate = (picture) => {
     const {
         picture: pictureTitle, pictureID, author, authorID,
         pictureSizeWidth, pictureSizeHeight, langPrice, picturePrice,
-        photos: { 0: { photoLink }}
+        photos
     } = picture;
+    const photoLink = (photos[0]) ? photos[0].photoLink : ``;
     const sourcePicture = document.querySelector(`.pictureList .picture`);
     const pictureTemplate = sourcePicture.cloneNode(true);
     const pictureHeader = pictureTemplate.querySelector(`.pictureHeader`);
@@ -60,8 +61,15 @@ const cloneTemplate = (picture) => {
     pictureHeader.setAttribute(`href`, `/collection/${pictureID}`);
     pictureAuthor.innerText = author;
     pictureAuthor.setAttribute(`href`, `/authors/${authorID}`);
-    picturePhoto.src = `/photos/pictures/${photoLink}.png`;
-    picturePhoto.setAttribute(`alt`, pictureTitle);
+    if (photoLink) {
+        picturePhoto.src = `/photos/pictures/${photoLink}.png`;
+        picturePhoto.setAttribute(`alt`, pictureTitle);
+    } else {
+        const defaultPhoto = document.createElement(`div`);
+        defaultPhoto.classList.add(`defaultPhoto`);
+        picturePhotoLink.removeChild(picturePhoto);
+        picturePhotoLink.appendChild(defaultPhoto);
+    }
     picturePhotoLink.setAttribute(`href`, `/collection/${pictureID}`);
     pictureWidth.innerText = pictureSizeWidth;
     pictureHeight.innerText = pictureSizeHeight;

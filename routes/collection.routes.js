@@ -47,7 +47,10 @@ router.get(`/:pictureID`, async (request, response) => {
     data.authorID = data.pictureData.authorID;
     data.anotherPictures = await requestLanguageAuthorPictures(data.authorID, lang, 5, pictureID);
     data.anotherPictures.forEach((picture) => {
-        picture.photoLink = picture.photos[0].photoLink;
+        picture.hasPhoto = !!(picture.photos[0]);
+        if (picture.photos[0]) {
+            picture.photoLink = picture.photos[0].photoLink;
+        }
     });
     console.log(data);
     response.render(pageLink, data);

@@ -38,7 +38,7 @@ const savePicture = async (params) => {
         pictureAboutRU, pictureAboutEN, pictureOrientation,
         genresID, techniquesID, colorsID
     } = params;
-    const countQuery = `SELECT COUNT(exhibitionID) as count FROM exhibitions`;
+    const countQuery = `SELECT COUNT(pictureID) as count FROM pictures`;
     const { 0: { count }} = await requestDB(countQuery);
     let setPlace = count + 1;
     if (picturePlace) {
@@ -51,13 +51,13 @@ const savePicture = async (params) => {
             picturePrice, picturePriceSale, 
             pictureSizeWidth, pictureSizeHeight, 
             pictureAboutRU, pictureAboutEN, 
-            authorID, pictureOrientation
+            authorID, pictureOrientation, pictureDate
         ) VALUES (
             '${pictureRU}', '${pictureEN}', '${setPlace}', 
             '${picturePrice}', '${(picturePriceSale) ? picturePriceSale : 0}', 
             '${pictureSizeWidth}', '${pictureSizeHeight}', 
             '${pictureAboutRU}', '${pictureAboutEN}', 
-            '${authorID[0]}', '${pictureOrientation}'
+            '${authorID[0]}', '${pictureOrientation}', NOW()
         )`;
     try {
         const { insertId } = await requestDB(query);
@@ -319,6 +319,24 @@ const requestLanguageFilters = async (language = `ru`) => {
     }
 };
 
+const updatePlacesFromFirst = async () => {
+    try {
+        const placeQuery = `SELECT pictureID FROM pictures ORDER BY picturePlace`;
+        const changeFields = await requestDB(placeQuery);
+        let updatedPlace = 1;
+        for (const { pictureID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE pictures SET picturePlace = ${updatedPlace++}
+                WHERE pictureID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
+
 // UPDATE
 const updatePicture = async (pictureID, params) => {
     const {
@@ -345,6 +363,7 @@ const updatePicture = async (pictureID, params) => {
     try {
         await updatePlaces(picturePlace);
         await requestDB(query);
+        await updatePlacesFromFirst(picturePlace);
         await editGenres(pictureID, genresID);
         await editTechniques(pictureID, techniquesID);
         await editColors(pictureID, colorsID);
@@ -357,11 +376,29 @@ const updatePicture = async (pictureID, params) => {
     }
 };
 
+const updateDeletedPlaces = async () => {
+    try {
+        const placeQuery = `SELECT pictureID FROM pictures ORDER BY picturePlace`;
+        const changeFields = await requestDB(placeQuery);
+        let updatedPlace = 1;
+        for (const { pictureID: changeID } of changeFields) {
+            const updateQuery = `
+                UPDATE pictures SET picturePlace = ${updatedPlace++}
+                WHERE pictureID = ${changeID};
+            `;
+            await requestDB(updateQuery);
+        }
+    } catch (error) {
+        return error;
+    }
+};
+
 // DELETE
 const deletePicture = async (pictureID) => {
     const query = `DELETE FROM pictures WHERE pictureID = ${pictureID}`;
     try {
         const { affectedRows } = await requestDB(query);
+        await updateDeletedPlaces();
         await deleteGenres(pictureID);
         await deleteTechniques(pictureID);
         await deleteColors(pictureID);

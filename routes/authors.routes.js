@@ -40,7 +40,10 @@ router.get(`/:painterID`, async (request, response) => {
         picture.sizeLabel = data.sizeLabel;
         picture.lang = data.language;
         picture.priceTitle = (lang === `en`) ? `euro` : `rub`;
-        picture.photo = picture.photos[0].photoLink;
+        picture.hasPhoto = !!(picture.photos[0]);
+        if (picture.photos[0]) {
+            picture.photo = picture.photos[0].photoLink;
+        }
     });
     response.render(pageLink, data);
 });

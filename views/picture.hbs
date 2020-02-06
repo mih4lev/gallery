@@ -96,9 +96,13 @@
                     {{#each anotherPictures}}
                     <li class="authorPicture">
                         <a class="authorPictureLink" href="/collection/{{{ pictureID }}}">
+                            {{#if hasPhoto }}
                             <img class="authorPicturePhoto"
                                  src="/photos/pictures/thumbs/{{{ photoLink }}}_194x194.png"
                                  alt="{{{ picture }}}">
+                            {{else}}
+                                <div class="authorPicturePhoto defaultPhoto"></div>
+                            {{/if}}
                         </a>
                     </li>
                     {{/each}}

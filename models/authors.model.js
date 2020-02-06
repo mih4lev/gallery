@@ -93,7 +93,10 @@ const requestLanguageAuthors = async (language, limit = 100) => {
                 const { pictureID } = picture;
                 const photosQuery = `SELECT photoLink FROM photos WHERE pictureID = '${pictureID}'`;
                 const result = await requestDB(photosQuery);
-                picture.photoLink = result[0].photoLink;
+                picture.hasPhoto = !!(result[0]);
+                if (picture.hasPhoto) {
+                    picture.photoLink = result[0].photoLink;
+                }
             }
             authorData.push(Object.assign(
                 author,
@@ -101,7 +104,9 @@ const requestLanguageAuthors = async (language, limit = 100) => {
             ));
         }
         return authorData;
-    } catch ({ sqlMessage }) {
+    } catch (error) {
+        console.log(error);
+        const { sqlMessage } = error;
         return { code: 0, error: sqlMessage }
     }
 };
