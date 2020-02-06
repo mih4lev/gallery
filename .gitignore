@@ -4,6 +4,9 @@
 # ignore WebStorm settings
 /.idea/
 /client/.idea/
+# ignore config
+/config/
+/config/.json
 # ignore DS files
 .DS_Store
 /client/.DS_Store

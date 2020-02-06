@@ -1,20 +1,12 @@
 const mysql = require(`promise-mysql`);
-
+const config = require(`config`);
 const mysqlOptions = {
-    host: "89.208.223.225",
-    user: "mikhalev",
-    password: "i8nvl551s",
-    database: "arte",
-    port: 3306
+    host: config.get('mysql.host'),
+    user: config.get('mysql.user'),
+    password: config.get('mysql.password'),
+    database: config.get('mysql.database'),
+    port: config.get('mysql.port')
 };
-
-// const mysqlOptions = {
-//     host: "localhost",
-//     user: "root",
-//     password: "i8nvl551s",
-//     database: "gallery",
-//     port: 3306
-// };
 
 const requestDB = async (query) => {
     const connection = await mysql.createConnection(mysqlOptions);
