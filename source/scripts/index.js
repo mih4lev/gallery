@@ -44,11 +44,3 @@ translatePainter();
 translateArticle();
 translateEvents();
 translatePicture();
-
-const addAdminPanel = () => {
-    const adminFile = `/scripts/admin.min.js`;
-    const scriptNode = document.createElement(`script`);
-    scriptNode.src = adminFile;
-    document.body.appendChild(scriptNode);
-};
-addAdminPanel();

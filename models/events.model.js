@@ -80,9 +80,7 @@ const requestLanguageEvents = async (language, limit = 100, eventID = false) => 
         const data = await requestDB(query);
         const errorData = { code: 404, result: `events not found` };
         return (data.length) ? data : errorData;
-    } catch (error) {
-        console.log(error);
-        const { sqlMessage } = error;
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };
@@ -155,9 +153,7 @@ const updateEventPhoto = async (eventID, file) => {
             code: (changedRows) ? 200 : 404,
             result: (changedRows) ? filename : `event not found`
         };
-    } catch (event) {
-        const { sqlMessage } = event;
-        console.log(event);
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };

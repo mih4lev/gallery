@@ -31,13 +31,9 @@ router.get(`/`, async (request, response) => {
         const preMaxPrice = data.filters.maxPrice / rate;
         const exchangeMinPrice = Math.floor((preMinPrice) * 100) / 100;
         const exchangeMaxPrice = Math.ceil((preMaxPrice) * 100) / 100;
-        // data.filters.exchangeMinPrice = Math.round(exchangeMinPrice / 100) * 100;
-        // data.filters.exchangeMaxPrice = Math.round(exchangeMaxPrice / 100) * 100;
         data.filters.exchangeMinPrice = exchangeMinPrice;
         data.filters.exchangeMaxPrice = exchangeMaxPrice;
     }
-    console.log(data.filters.exchangeMinPrice);
-    console.log(data.filters.exchangeMaxPrice);
     data.isCollectionActive = true;
     response.render(pageLink, data);
 });
@@ -66,7 +62,6 @@ router.get(`/:pictureID`, async (request, response) => {
             picture.photoLink = picture.photos[0].photoLink;
         }
     });
-    console.log(data);
     response.render(pageLink, data);
 });
 

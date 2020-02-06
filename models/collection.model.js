@@ -89,9 +89,7 @@ const updateCollectionPhoto = async (pictureID, file) => {
             code: (changedRows) ? 200 : 404,
             result: (changedRows) ? filename : `picture not found`
         };
-    } catch (event) {
-        const { sqlMessage } = event;
-        console.log(event);
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };

@@ -9,7 +9,6 @@ const updatePlaces = async (educationPlace, authorID) => {
             ORDER BY educationPlace
         `;
         const changeFields = await requestDB(placeQuery);
-        console.log(changeFields);
         let updatedPlace = Number(educationPlace) + 1;
         for (const { educationID: changeID } of changeFields) {
             const updateQuery = `

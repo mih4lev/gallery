@@ -58,9 +58,7 @@ const requestCategoryEvents = async(categoryLink) => {
         const data = await requestDB(query);
         const errorData = { code: 404, result: `events of ${categoryLink} not found` };
         return (data.length) ? data : errorData;
-    } catch (error) {
-        const { sqlMessage } = error;
-        console.log(error);
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };

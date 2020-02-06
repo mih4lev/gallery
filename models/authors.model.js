@@ -104,9 +104,7 @@ const requestLanguageAuthors = async (language, limit = 100) => {
             ));
         }
         return authorData;
-    } catch (error) {
-        console.log(error);
-        const { sqlMessage } = error;
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };
@@ -260,9 +258,7 @@ const updateAuthorPhoto = async (authorID, file) => {
             code: (changedRows) ? 200 : 404,
             result: (changedRows) ? filename : `author not found`
         };
-    } catch (event) {
-        const { sqlMessage } = event;
-        console.log(event);
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };

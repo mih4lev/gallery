@@ -93,9 +93,7 @@ const addPicturePhoto = async (pictureID, file) => {
             result: (insertId) ? `photo added` : `picture add error`,
             insertID: insertId
         };
-    } catch (event) {
-        const { sqlMessage } = event;
-        console.log(event);
+    } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };

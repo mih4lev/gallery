@@ -264,7 +264,7 @@ export const collectionFilters = async () => {
     const picturesCount = pictures.length;
     const showMoreButton = document.querySelector(`.picturesButton`);
     checkButtonVisible(picturesCount);
-    showMoreButton.addEventListener(`click`, () => {
+    showMoreButton.addEventListener(`click`, async () => {
         pictures.forEach((picture, index) => {
             if (index < visiblePicturesCount()) return false;
             if (index > visiblePicturesCount() + 10) return false;
@@ -277,6 +277,7 @@ export const collectionFilters = async () => {
                 itemSelector: `.picture`
             });
         });
+        await cartButtons();
     });
     // filters
     const filterList = document.querySelector(`.filters`);

@@ -15,7 +15,6 @@ const addHandler = (editWrapper) => {
             },
             body: JSON.stringify(collectData(editWrapper))
         };
-        console.log(collectData(editWrapper));
         const response = await fetch(`/api/events`, options);
         const { code, insertID } = await response.json();
         const linkResponse = await fetch(`/api/events/id/${insertID}`);
