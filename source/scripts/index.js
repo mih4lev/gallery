@@ -6,7 +6,8 @@ import { headerLanguage } from "./blocks/header-language";
 import { headerNav } from "./blocks/header-nav";
 import { respondInterestBlock, showMoreEvents, translateEvents } from "./blocks/events";
 import {
-    setDesktopLinks, setPicturesLayout, translatePicture, collectionFilters
+    setDesktopLinks, setPicturesLayout, translatePicture, collectionFilters,
+    translatePictureList
 } from "./blocks/collection";
 import { cartButtons, basketTable, basketDelivery, basketForm } from "./blocks/basket";
 import { articleScroll, shareList, translateArticle } from "./blocks/article";
@@ -25,6 +26,7 @@ headerNav();
 respondInterestBlock();
 showMoreEvents();
 collectionFilters();
+translatePictureList();
 setDesktopLinks();
 setPicturesLayout();
 cartButtons();

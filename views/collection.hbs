@@ -16,14 +16,18 @@
                             <div class="rangeLabels">
                                 <span
                                     class="labelMin price price--{{{ filters.priceTitle }}}"
-                                    data-rub="{{{ filters.minPrice }}}">
-                                    {{{ filters.langMinPrice }}}
-                                </span>
+                                    {{# if filters.exchangeMinPrice }}
+                                        data-value="{{{ filters.exchangeMinPrice }}}"
+                                        data-current="{{{ filters.exchangeMinPrice }}}"
+                                    {{/if}}
+                                    data-rub="{{{ filters.minPrice }}}">{{{ filters.langMinPrice }}}</span>
                                 <span
                                     class="labelMax price price--{{{ filters.priceTitle }}}"
-                                    data-rub="{{{ filters.maxPrice }}}">
-                                    {{{ filters.langMaxPrice }}}
-                                </span>
+                                    {{#if filters.exchangeMaxPrice }}
+                                        data-value="{{{ filters.exchangeMaxPrice }}}"
+                                        data-current="{{{ filters.exchangeMaxPrice }}}"
+                                    {{/if}}
+                                    data-rub="{{{ filters.maxPrice }}}">{{{ filters.langMaxPrice }}}</span>
                             </div>
                         </div>
                     </li>

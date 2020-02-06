@@ -1,5 +1,4 @@
 export const checkBasketStorage = () => {
-    // localStorage.setItem(`basket`, JSON.stringify([27, 28, 29]));
     // need to create check this pictures and update person basket
     const storage = localStorage.getItem(`basket`);
     if (!storage) return false;

@@ -1,6 +1,7 @@
 import Masonry from "masonry-layout";
 import { currency } from "../utils";
-
+import { checkBasketStorage } from "./header-basket";
+import { cartButtons } from "./basket";
 const imagesLoaded = require('imagesloaded');
 
 export const translatePicture = () => {
@@ -28,6 +29,14 @@ export const translatePicture = () => {
     });
 };
 
+export const translatePictureList = () => {
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        const filtersHeader = document.querySelector(`.filtersHeader`);
+        if (!filtersHeader) return false;
+        location.reload();
+    });
+};
+
 const visiblePicturesCount = () => {
     return document.querySelectorAll(`.pictureList .picture`).length;
 };
@@ -46,6 +55,7 @@ const cloneTemplate = (picture) => {
         pictureSizeWidth, pictureSizeHeight, langPrice, picturePrice,
         photos
     } = picture;
+    const lang = document.querySelector(`html`).getAttribute(`lang`);
     const photoLink = (photos[0]) ? photos[0].photoLink : ``;
     const sourcePicture = document.querySelector(`.pictureTemplate`).content;
     const pictureTemplate = sourcePicture.cloneNode(true);
@@ -57,6 +67,7 @@ const cloneTemplate = (picture) => {
     const pictureHeight = pictureTemplate.querySelector(`.pictureHeight`);
     const mainPrice = pictureTemplate.querySelector(`.picturePrice--main`);
     const cartButton = pictureTemplate.querySelector(`.cartButton`);
+    const priceClass = (lang === `ru`) ? `price--rub` : `price--euro`;
     pictureHeader.innerText = pictureTitle;
     pictureHeader.setAttribute(`href`, `/collection/${pictureID}`);
     pictureAuthor.innerText = author;
@@ -75,6 +86,7 @@ const cloneTemplate = (picture) => {
     pictureHeight.innerText = pictureSizeHeight;
     mainPrice.innerText = langPrice;
     mainPrice.dataset.rub = picturePrice;
+    mainPrice.classList.add(priceClass);
     cartButton.dataset.pictureId = pictureID;
     return pictureTemplate;
 };
@@ -141,10 +153,12 @@ const filterPictures = (pictures, filterData) => {
         pictureList.appendChild(pictureNode);
         checkButtonVisible(picturesCount);
     });
-    imagesLoaded( pictureList, function() {
+    imagesLoaded( pictureList, async () => {
         new Masonry( pictureList, {
             itemSelector: `.picture`
         });
+        checkBasketStorage();
+        await cartButtons();
         setTimeout(() => {
             hideLoader();
         }, 300);
@@ -153,7 +167,8 @@ const filterPictures = (pictures, filterData) => {
 
 let timeoutID;
 const changeFilters = (pictures) => {
-    return (mutationsList) => {
+    return async (mutationsList) => {
+        const lang = document.querySelector(`html`).getAttribute(`lang`);
         const filterList = document.querySelector(`.filters`);
         const minPriceNode = filterList.querySelector(`.labelMin.price`);
         const maxPriceNode = filterList.querySelector(`.labelMax.price`);
@@ -221,9 +236,12 @@ const changeFilters = (pictures) => {
                 authorsElements.forEach(dropAuthor) :
                 authorsActive.forEach(dropAuthor);
             // result
+            const minPrice = Number(minPriceNode.dataset.current || minPriceNode.dataset.rub);
+            const maxPrice = Number(maxPriceNode.dataset.current || maxPriceNode.dataset.rub);
+            const rate = await currency();
             const filterData = {
-                minPrice: Number(minPriceNode.dataset.current || minPriceNode.dataset.rub),
-                maxPrice: Number(maxPriceNode.dataset.current || maxPriceNode.dataset.rub),
+                minPrice: (lang === `ru`) ? minPrice : minPrice * rate,
+                maxPrice: (lang === `ru`) ? maxPrice : maxPrice * rate,
                 minWidth: Number(minWidthNode.innerText),
                 maxWidth: Number(maxWidthNode.innerText),
                 minHeight: Number(minHeightNode.innerText),
@@ -480,7 +498,8 @@ export const setPicturesLayout = () => {
             if (minValueNode.dataset.rub) {
                 minValueNode.dataset.current = String(textValue);
             }
-            minValueNode.innerText = (isDefault) ? format(textValue) : textValue;
+            const formValue = (minValueNode.dataset.rub) ? textValue.toFixed(2) : textValue;
+            minValueNode.innerText = (isDefault) ? format(textValue) : formValue;
             rangeMinButton.style[`left`] = `${rangeSize}px`;
             rangeLine.style[`left`] = `${rangeSize}px`;
         };
@@ -520,7 +539,8 @@ export const setPicturesLayout = () => {
             if (maxValueNode.dataset.rub) {
                 maxValueNode.dataset.current = String(textValue);
             }
-            maxValueNode.innerText = (isDefault) ? format(textValue) : textValue;
+            const formValue = (maxValueNode.dataset.rub) ? textValue.toFixed(2) : textValue;
+            maxValueNode.innerText = (isDefault) ? format(textValue) : formValue;
             rangeMaxButton.style[`right`] = `${rangeSize}px`;
             rangeLine.style[`right`] = `${rangeSize}px`;
         };
@@ -572,7 +592,7 @@ export const setPicturesLayout = () => {
             const exchangeValue = Math.round((preValue) * step) / step;
             const roundValue = Math.round(exchangeValue / step) * step;
             node.dataset.current = String(roundValue);
-            node.innerText = (isDefault) ? format(roundValue) : roundValue;
+            node.innerText = (isDefault) ? format(exchangeValue) : exchangeValue;
         });
     });
     // orientation choose

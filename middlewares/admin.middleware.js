@@ -1,3 +1,5 @@
+const { requestDB } = require(`../models/db.model`);
+
 const checkAdmin = async (request, response, next) => {
     const cookie = request.signedCookies.loginValidate;
     if (!cookie) {

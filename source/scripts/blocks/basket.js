@@ -9,7 +9,6 @@ export const cartButtons = async () => {
         button.addEventListener(`click`, () => {
             const { dataset: { pictureId }} = button;
             const pictureID = Number(pictureId);
-            console.log(pictureID);
             const storage = localStorage.getItem(`basket`);
             const basketPictures = (storage) ? JSON.parse(storage) : [];
             basketPictures.push(pictureID);
