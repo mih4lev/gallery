@@ -37,9 +37,7 @@
                         <div class="orientationWrapper">
                             {{# each filters.orientations }}
                             <button class="orientation orientation--{{{ pictureOrientation }}}"
-                                    data-select="{{{ pictureOrientation }}}">
-                                {{{ pictureOrientation }}}
-                            </button>
+                                    data-select="{{{ pictureOrientation }}}">{{{ pictureOrientation }}}</button>
                             {{/each}}
                         </div>
                     </li>
@@ -56,14 +54,10 @@
                             <div class="rangeLabels">
                                 <span
                                     class="labelMin metric metricWidth metric--{{{ language }}}"
-                                    data-default="{{{ filters.minWidth }}}">
-                                    {{{ filters.minWidth }}}
-                                </span>
+                                    data-default="{{{ filters.minWidth }}}">{{{ filters.minWidth }}}</span>
                                 <span
                                     class="labelMax metric metricWidth metric--{{{ language }}}"
-                                    data-default="{{{ filters.maxWidth }}}">
-                                    {{{ filters.maxWidth }}}
-                                </span>
+                                    data-default="{{{ filters.maxWidth }}}">{{{ filters.maxWidth }}}</span>
                             </div>
                         </div>
                         <div class="rangeWrapper">
@@ -76,14 +70,10 @@
                             <div class="rangeLabels">
                                 <span
                                     class="labelMin metric metricHeight metric--{{{ language }}}"
-                                    data-default="{{{ filters.minHeight }}}">
-                                    {{{ filters.minHeight }}}
-                                </span>
+                                    data-default="{{{ filters.minHeight }}}">{{{ filters.minHeight }}}</span>
                                 <span
                                     class="labelMax metric metricHeight metric--{{{ language }}}"
-                                    data-default="{{{ filters.maxHeight }}}">
-                                    {{{ filters.maxHeight }}}
-                                </span>
+                                    data-default="{{{ filters.maxHeight }}}">{{{ filters.maxHeight }}}</span>
                             </div>
                         </div>
                     </li>
@@ -91,13 +81,11 @@
                     <li class="filter">
                         <p class="filterLabel filterColor">{{{ filterColor }}}</p>
                         <div class="colorsWrapper">
-                            {{# each filters.colors }}
+                            {{#each filters.colors }}
                                 <button class="color"
                                         data-color-id="{{{ colorID }}}"
                                         style="background-color: {{{ colorHEX }}};"
-                                        data-select="{{{ colorID }}}">
-                                    {{{ color }}}
-                                </button>
+                                        data-select="{{{ colorID }}}">{{{ color }}}</button>
                             {{/each}}
                         </div>
                     </li>

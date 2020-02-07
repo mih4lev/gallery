@@ -27,11 +27,13 @@
             <h3 class="eventsHeader">{{{ eventsHeader }}}</h3>
             {{#if events.length }}
                 <ul class="eventsList">
-                    {{# each events }}
+                    {{#each events}}
                         <li class="event similarParent">
                             <a href="/events/{{{ eventLink }}}" class="eventPhotoLink">
-                                {{#if hasPhoto }}
-                                    <img class="eventPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
+                                {{#if hasPhoto}}
+                                    <img class="eventPhoto similarPhoto"
+                                         src="/photos/events/{{{ eventPhoto }}}.png"
+                                         alt="{{{ eventTitle }}}">
                                 {{else}}
                                     <div class="eventPhoto similarPhoto defaultPhoto"></div>
                                 {{/if}}
@@ -43,7 +45,7 @@
                     {{/each}}
                 </ul>
             {{/if}}
-            {{#if hasMoreButton }}
+            {{#if hasMoreButton}}
                 <button class="arrowDownButton interestButton">{{{ interestButton }}}</button>
             {{/if}}
         </div>

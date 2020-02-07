@@ -14,19 +14,24 @@
                     {{# if pictureData.mainPicture.hasPhoto }}
                         <img class="picturePhoto"
                              src="/photos/pictures/original/{{{ pictureData.mainPicture.photoLink }}}_preview.jpg"
-                             alt="{{{ pictureData.picture }}}">
+                             alt="{{{ pictureData.picture }}}"
+                             data-position="1">
                     {{/if}}
                 </div>
                 <div class="pictureDataWrapper">
-                    <h1 class="pictureHeader pictureHeaderID" data-picture-id="{{{ pictureData.pictureID }}}">{{{ pictureData.picture }}}</h1>
+                    <h1 class="pictureHeader pictureHeaderID"
+                        data-picture-id="{{{ pictureData.pictureID }}}">{{{ pictureData.picture }}}</h1>
                     <div class="pictureAuthorWrapper">
-                        <a class="pictureAuthor pictureAuthorData" href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
+                        <a class="pictureAuthor pictureAuthorData"
+                           href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
                     </div>
                     {{# if isActiveRU }}
-                        <em class="picturePrice price price--rub" data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        <em class="picturePrice price price--rub"
+                            data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
                     {{/if}}
                     {{# if isActiveEN }}
-                        <em class="picturePrice price price--euro" data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        <em class="picturePrice price price--euro"
+                            data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
                     {{/if}}
                     <p class="pictureSize">
                         <span class="sizeLabel">{{{ sizeLabel }}}</span>
@@ -55,7 +60,7 @@
                             <li class="pictureSimilar">
                                 <picture class="interestPhoto similarPhoto"
                                          data-picture="/photos/pictures/original/{{{ photoLink }}}_preview.jpg"
-                                         data-orignial="/photos/pictures/original/{{{ photoLink }}}.jpg">
+                                         data-original="/photos/pictures/original/{{{ photoLink }}}.jpg">
                                     <source srcset="/photos/pictures/thumbs/{{{ photoLink }}}_56x56.webp" type="image/webp">
                                     <img
                                          src="/photos/pictures/thumbs/{{{ photoLink }}}_56x56.png"
@@ -78,9 +83,7 @@
                     </ul>
                     <p class="pictureDeliveryText">{{{ pictureDeliveryText }}}</p>
                     <button class="cartButton"
-                            data-picture-id="{{{ pictureData.pictureID }}}">
-                        {{{ cartButton }}}
-                    </button>
+                            data-picture-id="{{{ pictureData.pictureID }}}">{{{ cartButton }}}</button>
                 </div>
             </div>
             <p class="pictureText">{{{ pictureData.pictureAbout }}}</p>
@@ -118,6 +121,12 @@
 
 <template class="pictureGallery">
     <div class="galleryWrapper">
-
+        <button class="moveArrow moveArrow--left"><=</button>
+        <div class="originalPhotoWrapper">
+            <div class="galleryLoader"></div>
+            <img class="originalPhoto" src="" alt="gallery photo">
+        </div>
+        <button class="moveArrow moveArrow--right">>=</button>
+        <button class="closeButton">X</button>
     </div>
 </template>

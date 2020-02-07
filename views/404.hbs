@@ -10,14 +10,18 @@
                 <ul class="eventsList">
                     {{# each anotherEvents }}
                         <li class="event similarParent">
-                            <a class="eventPhotoWrapper" href="/events/{{{ eventLink }}}">
+                            <a class="eventPhotoWrapper"
+                               href="/events/{{{ eventLink }}}">
                                 {{#if hasPhoto }}
-                                    <img class="eventPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
+                                    <img class="eventPhoto similarPhoto"
+                                         src="/photos/events/{{{ eventPhoto }}}.png"
+                                         alt="{{{ eventTitle }}}">
                                 {{else}}
                                     <div class="eventPhoto similarPhoto defaultPhoto"></div>
                                 {{/if}}
                             </a>
-                            <a class="eventLink similarLink" href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
+                            <a class="eventLink similarLink"
+                               href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
                             <p class="eventDescription">{{{ eventAnnotation }}}</p>
                             <span class="eventTheme">{{{ categoryTitle }}}</span>
                         </li>

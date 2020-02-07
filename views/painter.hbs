@@ -2,13 +2,14 @@
     <div class="painterHeader">
         <div class="wrapper">
             <div class="painterHeaderWrapper">
-                <h1 class="painterName" data-author-id="{{{ authorData.authorID }}}">
-                    {{{ authorData.author }}}
-                </h1>
+                <h1 class="painterName"
+                    data-author-id="{{{ authorData.authorID }}}">{{{ authorData.author }}}</h1>
                 <span class="painterCity">{{{ authorData.authorCity }}}</span>
                 <div class="painterPhotoWrapper">
                     {{#if hasAuthorPhoto }}
-                        <img class="painterPhoto" src="/photos/authors/{{{ authorData.authorPhoto }}}.png" alt="{{{ authorData.author }}}">
+                        <img class="painterPhoto"
+                             src="/photos/authors/{{{ authorData.authorPhoto }}}.png"
+                             alt="{{{ authorData.author }}}">
                     {{else}}
                         <div class="painterPhoto defaultPhoto"></div>
                     {{/if}}
@@ -27,7 +28,8 @@
             <div class="painterDataWrapper">
                 <ul class="breadcrumbs">
                     <li class="breadcrumb">
-                        <a class="breadcrumbLink authorsBreadcrumbLink" href="/authors">{{{ authorsBreadcrumbLink }}}</a>
+                        <a class="breadcrumbLink authorsBreadcrumbLink"
+                           href="/authors">{{{ authorsBreadcrumbLink }}}</a>
                     </li>
                     <li class="breadcrumb">
                         <span class="breadcrumbLink--active">{{{ authorData.author }}}</span>

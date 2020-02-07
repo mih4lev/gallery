@@ -3,7 +3,8 @@
             <div class="wrapper">
                 <ul class="breadcrumbs">
                     <li class="breadcrumb">
-                        <a class="breadcrumbLink eventsBreadcrumbLink" href="/events">{{{ eventsBreadcrumbLink }}}</a>
+                        <a class="breadcrumbLink eventsBreadcrumbLink"
+                           href="/events">{{{ eventsBreadcrumbLink }}}</a>
                     </li>
                     <li class="breadcrumb">
                         <span class="breadcrumbLink--active">{{{ eventData.eventTitle }}}</span>
@@ -11,10 +12,13 @@
                 </ul>
                 <div class="article">
                     <div class="articleAdditional">
-                        <h1 class="articleHeader" data-event-link="{{{ eventData.eventLink }}}">{{{ eventData.eventTitle }}}</h1>
+                        <h1 class="articleHeader"
+                            data-event-link="{{{ eventData.eventLink }}}">{{{ eventData.eventTitle }}}</h1>
                         <div class="articlePictureWrapper">
                             {{#if hasEventPhoto }}
-                                <img class="articlePicture" alt="article picture 1" src='/photos/events/{{{ eventData.eventPhoto }}}.png'>
+                                <img class="articlePicture"
+                                     alt="article picture 1"
+                                     src='/photos/events/{{{ eventData.eventPhoto }}}.png'>
                             {{else}}
                                 <div class="articlePicture defaultPhoto"></div>
                             {{/if}}
@@ -44,16 +48,24 @@
                         <span class="shareTitle">{{{ shareTitle }}}</span>
                         <ul class="socialList">
                             <li class="social">
-                                <a class="socialLink socialLink--facebook" data-social="facebook" href="#">Facebook</a>
+                                <a class="socialLink socialLink--facebook"
+                                   data-social="facebook"
+                                   href="#">Facebook</a>
                             </li>
                             <li class="social">
-                                <a class="socialLink socialLink--twitter" data-social="twitter" href="#">Twitter</a>
+                                <a class="socialLink socialLink--twitter"
+                                   data-social="twitter"
+                                   href="#">Twitter</a>
                             </li>
                             <li class="social">
-                                <a class="socialLink socialLink--vk" data-social="vk" href="#">VK</a>
+                                <a class="socialLink socialLink--vk"
+                                   data-social="vk"
+                                   href="#">VK</a>
                             </li>
                             <li class="social">
-                                <a class="socialLink socialLink--ok" data-social="ok" href="#">OK</a>
+                                <a class="socialLink socialLink--ok"
+                                   data-social="ok"
+                                   href="#">OK</a>
                             </li>
                         </ul>
                     </div>
@@ -64,12 +76,15 @@
                     <li class="event similarParent">
                         <a class="eventPhotoWrapper" href="/events/{{{ eventLink }}}">
                             {{#if hasPhoto }}
-                            <img class="eventPhoto similarPhoto" src="/photos/events/{{{ eventPhoto }}}.png" alt="{{{ eventTitle }}}">
+                            <img class="eventPhoto similarPhoto"
+                                 src="/photos/events/{{{ eventPhoto }}}.png"
+                                 alt="{{{ eventTitle }}}">
                             {{else}}
                             <div class="eventPhoto similarPhoto defaultPhoto"></div>
                             {{/if}}                            
                         </a>
-                        <a class="eventLink similarLink" href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
+                        <a class="eventLink similarLink"
+                           href="/events/{{{ eventLink }}}">{{{ eventTitle }}}</a>
                         <p class="eventDescription">{{{ eventAnnotation }}}</p>
                         <span class="eventTheme">{{{ categoryTitle }}}</span>
                     </li>

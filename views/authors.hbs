@@ -5,16 +5,20 @@
             <div class="authorBlock">
                 <div class="authorWrapper">
                     <div class="authorInfoWrapper similarParent">
-                        <a href="/authors/{{{ authorID }}}" class="authorPhotoLink">
+                        <a href="/authors/{{{ authorID }}}"
+                           class="authorPhotoLink">
                             {{#if hasAuthorPhoto }}
-                                <img class="authorPhoto similarPhoto" src="/photos/authors/{{{ authorPhoto }}}.png" alt="{{{ author }}}">
+                                <img class="authorPhoto similarPhoto"
+                                     src="/photos/authors/{{{ authorPhoto }}}.png"
+                                     alt="{{{ author }}}">
                             {{else}}
                                 <div class="authorPhoto defaultPhoto similarPhoto"></div>
                             {{/if}}
                         </a>
                         <div class="authorInfo">
                             <div class="authorNameWrapper">
-                                <a href="/authors/{{{ authorID }}}" class="authorName similarLink">{{{ author }}}</a>
+                                <a href="/authors/{{{ authorID }}}"
+                                   class="authorName similarLink">{{{ author }}}</a>
                             </div>
                             <p class="authorDescription">{{{ authorAbout }}}</p>
                         </div>
@@ -38,7 +42,7 @@
                     {{/if}}
                 </div>
                 {{#if pictures.length }}
-                <a class="authorButton" href="/authors/1">{{{ authorButton }}}</a>
+                    <a class="authorButton" href="/authors/{{{ authorID }}}">{{{ authorButton }}}</a>
                 {{/if}}
             </div>
         </div>
