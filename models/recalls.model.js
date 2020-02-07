@@ -15,7 +15,6 @@ const saveRecallData = async (clientData) => {
             return errorData;
         }
     }
-    console.log(`test`);
     const query = `
         INSERT INTO recalls ( recallName, recallPhone, recallEmail ) 
         VALUES ( '${recallName}', '${recallPhone}', '${recallEmail}' )

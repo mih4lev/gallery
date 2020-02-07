@@ -13,17 +13,19 @@ const sendRecallData = async (fields) => {
     return (code === 200);
 };
 
+const hideRecallForm = () => {
+    const hideNodes = document.querySelectorAll(`.sended--hide`);
+    const showNodes = document.querySelectorAll(`.sended--show`);
+    hideNodes.forEach((node) => node.style.display = `none`);
+    showNodes.forEach((node) => node.style.display = `block`);
+};
+
 export const recallForm = () => {
     const fields = document.querySelectorAll(`.recallForm--field`);
     const button = document.querySelector(`.recallForm--button`);
     const errorBlock = document.querySelector(`.errorBlock--form`);
     if (!fields.length || !button || !errorBlock) return false;
-    if (sessionStorage.getItem(`isRecallSend`)) {
-        const hideNodes = document.querySelectorAll(`.sended--hide`);
-        const showNodes = document.querySelectorAll(`.sended--show`);
-        hideNodes.forEach((node) => node.style.display = `none`);
-        showNodes.forEach((node) => node.style.display = `block`);
-    }
+    if (sessionStorage.getItem(`isRecallSend`)) return hideRecallForm();
     const patterns = {
         name: /^[a-zA-Zа-яА-Я-\s]+$/,
         phone: /^[\s()+-]*([0-9][\s()+-]*){10,11}$/,
@@ -63,12 +65,6 @@ export const recallForm = () => {
         errorBlock.style.opacity = (isHasEmptyFields) ? `1` : `0`;
         if (!isValidForm) return false;
         const isSaveSuccess = await sendRecallData(fields);
-        if (isSaveSuccess) {
-            sessionStorage.setItem('isRecallSend', JSON.stringify(true));
-            const hideNodes = document.querySelectorAll(`.sended--hide`);
-            const showNodes = document.querySelectorAll(`.sended--show`);
-            hideNodes.forEach((node) => node.style.display = `none`);
-            showNodes.forEach((node) => node.style.display = `block`);
-        }
+        if (isSaveSuccess) hideRecallForm();
     });
 };

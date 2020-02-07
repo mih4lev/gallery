@@ -12,6 +12,26 @@ const saveOrder = async (typedData) => {
         clientEmail, clientComment, clientCity, clientAddress,
         orderPictures
     } = typedData;
+    const checkFields = {
+        clientName, clientPhone, clientEmail, clientComment,
+        clientCity, clientAddress
+    };
+    const patterns = {
+        clientName: /^[a-zA-Zа-яА-Я-\s]+$/,
+        clientPhone: /^[\s()+-]*([0-9][\s()+-]*){10,11}$/,
+        clientEmail: /\S+@\S+\.\S+/,
+        clientComment: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=\(\)\/\#\@]{0,200}$/,
+        clientCity: /^[а-яА-Яa-zA-Z]+(?:[\s-][а-яА-Яa-zA-Z]+)*$/,
+        clientAddress: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=]{10,200}$/
+    };
+    const errorData = { code: 0 };
+    for (const field in checkFields) {
+        if (checkFields.hasOwnProperty(field)) {
+            if (!patterns[field].test(typedData[field])) return errorData;
+        } else {
+            return errorData;
+        }
+    }
     const query = `
         INSERT INTO orders (
             orderNumber, delivery, payment, clientName, clientPhone, 
