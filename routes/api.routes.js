@@ -2,6 +2,7 @@ const { Router } = require(`express`);
 const { requestPosts } = require("../models/instagram.model");
 const { currency } = require("../models/currency.model");
 const { checkLoginData } = require("../models/login.model");
+const { saveRecallData } = require("../models/recalls.model");
 const router = new Router();
 
 router.get(`/instagram`, async (request, response) => {
@@ -11,6 +12,11 @@ router.get(`/instagram`, async (request, response) => {
 
 router.get(`/currency`, async (request, response) => {
     const data = await currency();
+    await response.json(data);
+});
+
+router.post(`/recall`, async (request, response) => {
+    const data = await saveRecallData(request.body);
     await response.json(data);
 });
 

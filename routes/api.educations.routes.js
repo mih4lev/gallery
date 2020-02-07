@@ -16,12 +16,12 @@ router.post(`/:authorID`, async (request, response) => {
 // GET | READ
 router.get(`/`, async (request, response) => {
     const data = await requestEducationList();
-    response.send(data);
+    await response.json(data);
 });
 router.get(`/:educationID`, async (request, response) => {
     const { params: { educationID }} = request;
     const data = await requestEducation(educationID);
-    response.send(data);
+    await response.json(data);
 });
 
 // PUT | UPDATE
@@ -35,7 +35,7 @@ router.put(`/:educationID`, async (request, response) => {
 router.delete(`/:educationID`, async (request, response) => {
     const { params: { educationID }} = request;
     const data = await deleteEducation(educationID);
-    response.send(data);
+    await response.json(data);
 });
 
 module.exports = router;

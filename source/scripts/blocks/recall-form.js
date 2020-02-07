@@ -1,9 +1,29 @@
-export const recallForm = () => {
+const sendRecallData = async (fields) => {
+    const data = {};
+    [...fields].forEach(({ name, value }) => data[name] = value);
+    const recallOptions = {
+        method: `POST`,
+        headers: {
+            'Content-Type': `application/json;charset=utf-8`
+        },
+        body: JSON.stringify(data)
+    };
+    const response = await fetch(`/api/recall`, recallOptions);
+    const { code } = await response.json();
+    return (code === 200);
+};
 
+export const recallForm = () => {
     const fields = document.querySelectorAll(`.recallForm--field`);
     const button = document.querySelector(`.recallForm--button`);
     const errorBlock = document.querySelector(`.errorBlock--form`);
     if (!fields.length || !button || !errorBlock) return false;
+    if (sessionStorage.getItem(`isRecallSend`)) {
+        const hideNodes = document.querySelectorAll(`.sended--hide`);
+        const showNodes = document.querySelectorAll(`.sended--show`);
+        hideNodes.forEach((node) => node.style.display = `none`);
+        showNodes.forEach((node) => node.style.display = `block`);
+    }
     const patterns = {
         name: /^[a-zA-Zа-яА-Я-\s]+$/,
         phone: /^[\s()+-]*([0-9][\s()+-]*){10,11}$/,
@@ -34,18 +54,21 @@ export const recallForm = () => {
         field.addEventListener(`focusout`, showLabel(false));
         field.addEventListener(`change`, showLabel(true));
     });
-    button.addEventListener(`click`, (event) => {
+    button.addEventListener(`click`, async (event) => {
         event.preventDefault();
         fields.forEach(setFieldValue);
-        const isHasEmptyFields = [...fields].filter((field) => !field.isEmpty).length !== fields.length;
+        const filterFunc = (field) => !field.isEmpty;
+        const isHasEmptyFields = [...fields].filter(filterFunc).length !== fields.length;
         const isValidForm = ![...fields].filter((field) => !field.isValid).length;
         errorBlock.style.opacity = (isHasEmptyFields) ? `1` : `0`;
         if (!isValidForm) return false;
-        const hideNodes = document.querySelectorAll(`.sended--hide`);
-        const showNodes = document.querySelectorAll(`.sended--show`);
-        hideNodes.forEach((node) => node.style.display = `none`);
-        showNodes.forEach((node) => node.style.display = `block`);
-        console.log(`form valid, send info to API`);
+        const isSaveSuccess = await sendRecallData(fields);
+        if (isSaveSuccess) {
+            sessionStorage.setItem('isRecallSend', JSON.stringify(true));
+            const hideNodes = document.querySelectorAll(`.sended--hide`);
+            const showNodes = document.querySelectorAll(`.sended--show`);
+            hideNodes.forEach((node) => node.style.display = `none`);
+            showNodes.forEach((node) => node.style.display = `block`);
+        }
     });
-
-}
+};
