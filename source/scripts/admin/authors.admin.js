@@ -1,11 +1,12 @@
 import {
     cloneTemplate, collectData, hideLoader, hideTemplate,
-    requestMainButton, showLoader, fillFields
+    requestMainButton, showLoader, fillFields, checkRequiredFields
 } from "./utils.admin";
 
 const addHandler = (editWrapper) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const options = {
             method: `POST`,
@@ -27,6 +28,7 @@ const addHandler = (editWrapper) => {
 const editHandler = (editWrapper, authorId) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const authorID = Number(authorId);
         const options = {

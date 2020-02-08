@@ -1,11 +1,13 @@
 import {
     cloneTemplate, collectData, fillFields, hideDeleteButton,
-    hideLoader, hideTemplate, requestMainButton, showLoader
+    hideLoader, hideTemplate, requestMainButton, showLoader,
+    checkRequiredFields
 } from "./utils.admin";
 
 const addHandler = (editWrapper, authorID) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const options = {
             method: `POST`,
@@ -27,6 +29,7 @@ const addHandler = (editWrapper, authorID) => {
 const editHandler = (editWrapper, reward) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const rewardID = Number(reward.dataset.rewardId);
         const options = {

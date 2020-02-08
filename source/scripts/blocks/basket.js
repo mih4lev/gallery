@@ -153,6 +153,7 @@ export const basketDelivery = () => {
         cashPaymentField.classList.remove(`checkedItem--disable`);
     };
     deliveryFormItems.forEach((item) => {
+        if (item.classList.contains(`disabledItem`)) return false;
         item.addEventListener(`click`, () => {
             uncheckAll();
             item.classList.add(`checkedItem--active`);
@@ -165,6 +166,7 @@ export const basketDelivery = () => {
         });
     });
     paymentFormItems.forEach((item) => {
+        if (item.classList.contains(`disabledItem`)) return false;
         item.addEventListener(`click`, () => {
             if (item.classList.contains(`checkedItem--disable`)) return false;
             paymentFormItems.forEach((node) => {

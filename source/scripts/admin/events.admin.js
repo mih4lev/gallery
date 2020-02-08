@@ -1,12 +1,13 @@
 import {
     cloneTemplate, collectData, collectDataInner, fillFields,
-    hideDeleteButton, hideLoader, hideTemplate, requestMainButton,
-    selectTemplate, showLoader
+    hideLoader, hideTemplate, requestMainButton,
+    selectTemplate, showLoader, checkRequiredFields
 } from "./utils.admin";
 
 const addHandler = (editWrapper) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const options = {
             method: `POST`,
@@ -30,6 +31,7 @@ const addHandler = (editWrapper) => {
 const editHandler = (editWrapper, eventId) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const eventID = Number(eventId);
         const newData = collectData(editWrapper);
@@ -131,7 +133,6 @@ const requestCategories = async (activeCategoryID = false) => {
         selectLink.innerText = categoryTitleRU;
         selectLink.dataset.value = categoryID;
         selectLink.dataset.field = `categoryID`;
-        console.log(activeCategoryID);
         if (activeCategoryID === categoryID) selectLink.classList.add(`chosenLink`);
         selectLink.addEventListener(`click`, selectClickHandler(templateList));
         templateList.appendChild(templateClone);

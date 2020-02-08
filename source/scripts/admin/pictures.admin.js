@@ -1,12 +1,13 @@
 import {
     cloneTemplate, collectData, collectDataInner, fillFields,
     hideLoader, hideTemplate, requestMainButton,
-    selectTemplate, showLoader
+    selectTemplate, showLoader, checkRequiredFields
 } from "./utils.admin";
 
 const addHandler = (editWrapper) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const options = {
             method: `POST`,
@@ -28,6 +29,7 @@ const addHandler = (editWrapper) => {
 const editHandler = (editWrapper, pictureId) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const pictureID = Number(pictureId);
         const options = {

@@ -61,9 +61,15 @@ const savePicture = async (params) => {
         )`;
     try {
         const { insertId } = await requestDB(query);
-        await addGenres(insertId, genresID);
-        await addTechniques(insertId, techniquesID);
-        await addColors(insertId, colorsID);
+        if (genresID) {
+            await addGenres(insertId, genresID);
+        }
+        if (techniquesID) {
+            await addTechniques(insertId, techniquesID);
+        }
+        if (colorsID) {
+            await addColors(insertId, colorsID);
+        }
         return {
             code: (insertId) ? 200 : 0,
             result: (insertId) ? `picture added` : `picture add error`,
@@ -359,12 +365,19 @@ const updatePicture = async (pictureID, params) => {
             authorID = '${authorID[0]}' 
         WHERE pictureID = ${pictureID}`;
     try {
-        await updatePlaces(picturePlace);
+        let checkPlace = (picturePlace) ? picturePlace : 1000;
+        await updatePlaces(checkPlace);
         await requestDB(query);
         await updatePlacesFromFirst(picturePlace);
-        await editGenres(pictureID, genresID);
-        await editTechniques(pictureID, techniquesID);
-        await editColors(pictureID, colorsID);
+        if (genresID) {
+            await editGenres(pictureID, genresID);
+        }
+        if (techniquesID) {
+            await editTechniques(pictureID, techniquesID);
+        }
+        if (colorsID) {
+            await editColors(pictureID, colorsID);
+        }
         return {
             code: 200,
             result: `picture ${pictureID} updated`

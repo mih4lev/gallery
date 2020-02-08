@@ -35,16 +35,18 @@ router.get(`/:painterID`, async (request, response) => {
         return response.status(404).redirect(`/404`);
     }
     data.picturesData = await requestLanguageAuthorPictures(painterID, lang, 10);
-    data.picturesData.forEach((picture) => {
-        picture.cartButton = data.cartButton;
-        picture.sizeLabel = data.sizeLabel;
-        picture.lang = data.language;
-        picture.priceTitle = (lang === `en`) ? `euro` : `rub`;
-        picture.hasPhoto = !!(picture.photos[0]);
-        if (picture.photos[0]) {
-            picture.photo = picture.photos[0].photoLink;
-        }
-    });
+    if (data.picturesData.length) {
+        data.picturesData.forEach((picture) => {
+            picture.cartButton = data.cartButton;
+            picture.sizeLabel = data.sizeLabel;
+            picture.lang = data.language;
+            picture.priceTitle = (lang === `en`) ? `euro` : `rub`;
+            picture.hasPhoto = !!(picture.photos[0]);
+            if (picture.photos[0]) {
+                picture.photo = picture.photos[0].photoLink;
+            }
+        });
+    }
     response.render(pageLink, data);
 });
 

@@ -337,6 +337,18 @@
             }
         }
     }
+    .disabledItem {
+        opacity: 0.1;
+        .checkedElement {
+            cursor: default;
+        }
+        .checkedLabel {
+            cursor: default;
+        }
+        .checkedAdditional {
+            cursor: default;
+        }
+    }
     .checkedItem--active {
         .checkedElement {
             &:after {

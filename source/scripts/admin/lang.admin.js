@@ -1,6 +1,7 @@
 import {
     cloneTemplate, collectData, fillFields, hideLoader,
-    hideTemplate, requestMainButton, showLoader
+    hideTemplate, requestMainButton, showLoader,
+    checkRequiredFields
 } from "./utils.admin";
 
 const selectData = async (langSelector) => {
@@ -11,6 +12,7 @@ const selectData = async (langSelector) => {
 const editHandler = (editWrapper, langSelector) => {
     return async (event) => {
         event.preventDefault();
+        if (!checkRequiredFields(editWrapper)) return false;
         showLoader(editWrapper);
         const body = collectData(editWrapper);
         const options = {

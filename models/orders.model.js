@@ -21,10 +21,10 @@ const saveOrder = async (typedData) => {
         clientPhone: /^[\s()+-]*([0-9][\s()+-]*){10,11}$/,
         clientEmail: /\S+@\S+\.\S+/,
         clientComment: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=\(\)\/\#\@]{0,200}$/,
-        clientCity: /^[а-яА-Яa-zA-Z]+(?:[\s-][а-яА-Яa-zA-Z]+)*$/,
-        clientAddress: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=]{10,200}$/
+        clientCity: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=\(\)\/\#\@]{0,200}$/,
+        clientAddress: /^[a-zA-Zа-яА-Я0-9\s\.\,\!\?\-\+\=\(\)\/\#\@]{0,200}$/,
     };
-    const errorData = { code: 0 };
+    const errorData = { code: 0, error: `validation failed` };
     for (const field in checkFields) {
         if (checkFields.hasOwnProperty(field)) {
             if (!patterns[field].test(typedData[field])) return errorData;
@@ -32,7 +32,8 @@ const saveOrder = async (typedData) => {
             return errorData;
         }
     }
-    const query = `
+    try {
+        const query = `
         INSERT INTO orders (
             orderNumber, delivery, payment, clientName, clientPhone, 
             clientEmail, clientComment, clientCity, clientAddress, 
@@ -42,8 +43,11 @@ const saveOrder = async (typedData) => {
             '${clientEmail}', '${clientComment}', '${clientCity}', '${clientAddress}',
             '${orderPictures}'
         )`;
-    const result = await requestDB(query);
-    return { code: (result.insertId) ? 200 : 0, orderNumber };
+        const result = await requestDB(query);
+        return { code: (result.insertId) ? 200 : 0, orderNumber };
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
 };
 
 // SELECT | READ

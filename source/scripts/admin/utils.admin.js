@@ -8,14 +8,14 @@ export const cloneTemplate = (templateSelector) => {
     const closeWindow = () => bodyNode.removeChild(editWrapper);
     closeButton.addEventListener(`click`, closeWindow);
     bodyNode.appendChild(editWrapper);
-    validateForm(editWrapper, `.templateField`);
+    // validateForm(editWrapper, `.templateField`);
     return editWrapper;
 };
 
 export const selectTemplate = (templateSelector, element) => {
     const template = document.querySelector(templateSelector);
     const templateWrapper = template.content.cloneNode(true);
-    validateForm(templateWrapper, `.subFormField`);
+    // validateForm(templateWrapper, `.subFormField`);
     return templateWrapper.querySelector(element);
 };
 
@@ -113,4 +113,31 @@ export const requestMainButton = (editWrapper, title = false) => {
     const mainButton = editWrapper.querySelector(`.mainButton`);
     if (title) mainButton.innerText = title;
     return mainButton;
+};
+
+export const checkRequiredFields = (editWrapper) => {
+    const requiredFields = [...editWrapper.querySelectorAll(`[data-required="true"]`)];
+    let isValid = true;
+    requiredFields.forEach((field) => {
+        if (field.classList.contains(`templateSelect`)) {
+            const checkedElements = [...field.querySelectorAll(`.chosenLink`)];
+            if (checkedElements.length) return true;
+            isValid = false;
+            const selectLinks = [...field.querySelectorAll(`.selectLink`)];
+            selectLinks.forEach((link) => {
+                link.classList.add(`fieldHasError`);
+                link.addEventListener(`click`, () => {
+                    selectLinks.forEach((link) => link.classList.remove(`fieldHasError`));
+                });
+            });
+            return false;
+        }
+        field.addEventListener(`input`, () => {
+            field.classList.remove(`fieldHasError`);
+        });
+        if (field.value) return true;
+        field.classList.add(`fieldHasError`);
+        isValid = false;
+    });
+    return isValid;
 };

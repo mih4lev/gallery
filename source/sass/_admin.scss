@@ -162,6 +162,9 @@
                             border: 1px solid $secondaryColor;
                         }
                     }
+                    .selectLink.fieldHasError {
+                        border: 1px solid $errorColor;
+                    }
                     .selectLink.colorLink {
                         padding-top: 0;
                         padding-left: 0;
@@ -186,13 +189,15 @@
                         width: 25px;
                         height: 25px;
                         font-size: 0;
-                        border: 1px solid $secondaryColor;
-                        background-image: url(/images/chosen--icon.svg);
+                        border: 1px solid $primaryColor;
                         background-repeat: no-repeat;
                         background-position: center center;
                         &:hover {
                             transform: scale(0.9);
                         }
+                    }
+                    .selectLink.orientationLink.fieldHasError {
+                        border: 1px solid $errorColor;
                     }
                     .selectLink.orientationLink.orientationWidth {
                         width: 30px;
@@ -217,8 +222,8 @@
                         transform: scale(1.2);
                     }
                     .selectLink.orientationLink.chosenLink {
-                        border: 1px solid $primaryColor;
-                        background-image: none;
+                        border: 1px solid $secondaryColor;
+                        background-image: url(/images/chosen--icon.svg);
                         background-color: #000;
                         transform: scale(1.2);
                     }
