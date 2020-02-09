@@ -1,0 +1,25 @@
+<div class="innerPage">
+    <div class="ordersWrapper">
+        <div class="wrapper">
+            <h1 class="pageTitle ordersTitle">Заказы</h1>
+            <div class="ordersTable">
+                {{#each orders}}
+                    <div class="ordersLine">
+                        <div class="orderMain">
+                            Заказ #{{{ orderNumber }}} |
+                            {{#if pictures.length}}
+                            Картин в заказе: {{{ pictures.length }}} |
+                            {{/if}}
+                            {{{ delivery }}} |
+                            {{{ payment }}}
+                        </div>
+                        <div class="orderAdditional">
+                            дата: <span class="formatedDate">{{{ formatedDate }}}</span> |
+                            статус: <span class="orderStatus">{{{ orderStatus }}}</span>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

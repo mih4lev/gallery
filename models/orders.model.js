@@ -1,4 +1,5 @@
 const { requestDB } = require(`../models/db.model`);
+const { sendClientMail, sendOwnerMail } = require(`../models/mail.model`);
 
 // INSERT | CREATE
 const saveOrder = async (typedData) => {
@@ -37,12 +38,14 @@ const saveOrder = async (typedData) => {
         INSERT INTO orders (
             orderNumber, delivery, payment, clientName, clientPhone, 
             clientEmail, clientComment, clientCity, clientAddress, 
-            orderPictures
+            orderPictures, orderStatus
         ) VALUES (
             '${orderNumber}', '${delivery}', '${payment}', '${clientName}', '${clientPhone}',
             '${clientEmail}', '${clientComment}', '${clientCity}', '${clientAddress}',
-            '${orderPictures}'
+            '${orderPictures}', 'new'
         )`;
+        await sendClientMail(orderNumber, typedData);
+        await sendOwnerMail(orderNumber, typedData);
         const result = await requestDB(query);
         return { code: (result.insertId) ? 200 : 0, orderNumber };
     } catch ({ sqlMessage }) {
@@ -52,7 +55,12 @@ const saveOrder = async (typedData) => {
 
 // SELECT | READ
 const requestOrderList = async () => {
-    const query = `SELECT * FROM orders`;
+    const query = `
+        SELECT
+            orderID, orderNumber, delivery, payment, clientName, clientPhone, clientEmail, 
+            clientComment, clientCity, clientAddress, orderPictures, orderStatus, DATE_FORMAT(orderDate,'%d.%m.%Y %H:%i') as formatedDate
+        FROM orders ORDER BY orderDate LIMIT 10
+    `;
     try {
         const data = await requestDB(query);
         const errorData = { code: 404, result: `orders not found` };

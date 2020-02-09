@@ -203,6 +203,9 @@ const changeFilters = (pictures) => {
             (!orientationActive.length) ?
                 orientationElements.forEach(dropOrientation) :
                 orientationActive.forEach(dropOrientation);
+            if (!orientationActive.length) {
+                orientationElements.forEach((orientation) => orientation.classList.add(`orientation--active`));
+            }
             // colors
             let color = [];
             const dropColor = ({ dataset: { select }}) => color.push(select);
@@ -321,6 +324,11 @@ export const setPicturesLayout = () => {
     const format = (value) => {
         return String(value).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     };
+    // change all filters to active 
+    const orientationElements = [...document.querySelectorAll(`.orientationWrapper .orientation`)];
+    orientationElements.forEach((orientation) => {
+        orientation.classList.add(`orientation--active`);
+    });
     // hide all dropdown menus
     const dropdownWrappers = [...document.querySelectorAll(`.dropdown`)];
     const hideAllDropdownMenu = () => {

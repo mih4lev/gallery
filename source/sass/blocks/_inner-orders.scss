@@ -1,0 +1,29 @@
+.ordersWrapper {
+    .ordersTitle {
+        &:after {
+            display: none;
+        }
+    }
+    .ordersTable {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .ordersLine {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 100%;
+            .orderMain {
+                
+            }
+            .orderAdditional {
+                .orderStatus {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}

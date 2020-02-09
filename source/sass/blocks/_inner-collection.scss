@@ -304,7 +304,6 @@
                             font-size: 0;
                             border: none;
                             background-color: transparent;
-                            background-image: url(/images/chosen--icon.svg);
                             background-repeat: no-repeat;
                             background-position: center center;
                             outline: none;
@@ -316,7 +315,7 @@
                         }
                         .color--active {
                             transform: scale(1.2);
-                            background-image: none;
+                            background-image: url(/images/chosen--icon.svg);
                         }
                     }
                     .filterLabel--dropdown {

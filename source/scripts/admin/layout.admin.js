@@ -24,6 +24,10 @@ const showHandler = (event) => {
     }, 100);
 };
 
+const showOrders = () => {
+    location.href = `/orders`;
+};
+
 export const showAdminLayout = () => {
     const layoutButton = document.querySelector(`.adminEye`);
     if (!layoutButton) return false;
@@ -42,9 +46,9 @@ export const showAdminLayout = () => {
         'addPicture': addPicture,
         'editPicture': editPicture,
         'deletePicture': deletePicture,
-        'editOptions': editOptions
+        'editOptions': editOptions,
+        'showOrders': showOrders
     };
-
     layoutLinks.forEach((link) => {
         const { dataset: { action }} = link;
         link.addEventListener(`click`, layoutMap[action]);

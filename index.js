@@ -36,6 +36,8 @@ app.use('/authors', require('./routes/authors.routes'));
 app.use('/events', require('./routes/events.routes'));
 app.use('/delivery', require('./routes/delivery.routes'));
 app.use('/basket', require('./routes/basket.routes'));
+app.use('/orders', require('./routes/orders.routes'));
+app.use('/404', require('./routes/404.routes'));
 app.use('/api', require('./routes/api.routes'));
 app.use('/api/options', require('./routes/api.options.routes'));
 app.use('/api/pages', require('./routes/api.pages.routes'));
@@ -53,7 +55,6 @@ app.use('/api/techniques', require('./routes/api.techniques.routes'));
 app.use('/api/photos', require('./routes/api.photos.routes'));
 app.use('/api/pictures', require('./routes/api.pictures.routes'));
 app.use('/api/orders', require('./routes/api.orders.routes'));
-app.use('/404', require('./routes/404.routes'));
 // 404
 app.use((request, response, next) => {
     const { url } = request;

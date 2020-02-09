@@ -118,6 +118,10 @@
                 font-size: 20px;
                 line-height: 24px;
                 letter-spacing: 0.1375em;
+                color: $primaryColor;
+                &:hover {
+                    color: $secondaryColor;
+                }
                 @include respond(tablet) {
                     position: absolute;
                     top: 50%;
@@ -145,6 +149,10 @@
                 align-self: flex-end;
                 margin-top: 10px;
                 text-transform: uppercase;
+                color: $primaryColor;
+                &:hover {
+                    color: $secondaryColor;
+                }
                 @include respond(tablet) {
                     margin-top: 0;
                     text-transform: unset;
