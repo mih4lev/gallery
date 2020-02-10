@@ -159,12 +159,13 @@ const requestLanguagePicture = async (pictureID, language) => {
         `;
         const data = await requestDB(query);
         if (!data.length) return { code: 404, result: `picture ${pictureID} not found` };
-        const { 0: pictureData, 0: { picturePrice }} = data;
+        const { 0: pictureData, 0: { picturePrice, picturePriceSale }} = data;
         await photosArray(pictureData, lang);
         await genreArray(pictureData, lang);
         await techniqueArray(pictureData, lang);
         await photosArray(pictureData, lang);
         pictureData.langPrice = await changeCurrency(picturePrice, lang);
+        pictureData.langPriceSale = await changeCurrency(picturePriceSale, lang);
         return pictureData;
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
@@ -184,7 +185,8 @@ const requestLanguagePictures = async (language, limit = 1000) => {
                 pictures.pictureOrientation as pictureOrientation,
                 pictures.picturePrice as picturePrice, 
                 pictures.picturePriceSale as picturePriceSale, 
-                pictures.pictureAbout${lang} as pictureAbout
+                pictures.pictureAbout${lang} as pictureAbout,
+                DATEDIFF(NOW(), pictures.pictureDate) as pictureTime
             FROM pictures
             INNER JOIN authors ON pictures.authorID = authors.authorID
             ORDER BY pictures.picturePlace
@@ -201,6 +203,7 @@ const requestLanguagePictures = async (language, limit = 1000) => {
                 photosArray(picture, lang)
             ]);
             picture.langPrice = await changeCurrency(picture.picturePrice, lang);
+            picture.langPriceSale = await changeCurrency(picture.picturePriceSale, lang);
         }
         return data;
     } catch ({ sqlMessage }) {
@@ -220,7 +223,8 @@ const requestLanguageAuthorPictures = async (authorID, language, limit = 1000, e
                 pictures.pictureOrientation as pictureOrientation, 
                 pictures.picturePrice as picturePrice, 
                 pictures.picturePriceSale as picturePriceSale, 
-                pictures.pictureAbout${lang} as pictureAbout 
+                pictures.pictureAbout${lang} as pictureAbout,
+                DATEDIFF(NOW(), pictures.pictureDate) as pictureTime
             FROM pictures 
             INNER JOIN authors ON pictures.authorID = authors.authorID 
             WHERE pictures.authorID = ${authorID} 
@@ -239,6 +243,7 @@ const requestLanguageAuthorPictures = async (authorID, language, limit = 1000, e
                 photosArray(picture, lang)
             ]);
             picture.langPrice = await changeCurrency(picture.picturePrice, lang);
+            picture.langPriceSale = await changeCurrency(picture.picturePriceSale, lang);
         }
         return data;
     } catch ({ sqlMessage }) {

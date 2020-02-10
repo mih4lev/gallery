@@ -241,6 +241,20 @@
                 letter-spacing: 0.125em;
             }
         }
+        .picturePrice--old {
+            opacity: 0.5;
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+            text-decoration-line: line-through;
+            &:before {
+                display: none;
+            }
+            &:after {
+                display: none;
+            }
+        }
         .pictureSize{
             margin-top: 20px;
             margin-bottom: 10px;

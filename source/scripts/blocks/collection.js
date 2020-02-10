@@ -52,8 +52,8 @@ const checkButtonVisible = (picturesCount) => {
 const cloneTemplate = (picture) => {
     const {
         picture: pictureTitle, pictureID, author, authorID,
-        pictureSizeWidth, pictureSizeHeight, langPrice, picturePrice,
-        photos
+        pictureSizeWidth, pictureSizeHeight, langPrice, langPriceSale, picturePrice,
+        picturePriceSale, photos, pictureTime
     } = picture;
     const lang = document.querySelector(`html`).getAttribute(`lang`);
     const photoLink = (photos[0]) ? photos[0].photoLink : ``;
@@ -65,9 +65,15 @@ const cloneTemplate = (picture) => {
     const picturePhotoLink = pictureTemplate.querySelector(`.picturePhotoWrapper`);
     const pictureWidth = pictureTemplate.querySelector(`.pictureWidth`);
     const pictureHeight = pictureTemplate.querySelector(`.pictureHeight`);
+    const priceWrapper = pictureTemplate.querySelector(`.picturePriceWrapper`);
     const mainPrice = pictureTemplate.querySelector(`.picturePrice--main`);
+    const oldPrice = pictureTemplate.querySelector(`.picturePrice--old`);
     const cartButton = pictureTemplate.querySelector(`.cartButton`);
     const priceClass = (lang === `ru`) ? `price--rub` : `price--euro`;
+    const pictureLabel =
+        (picturePriceSale) ? `photoLabel--sale` :
+            (pictureTime <= 30) ? `photoLabel--new` :
+                `photoLabel--regular`;
     pictureHeader.innerText = pictureTitle;
     pictureHeader.setAttribute(`href`, `/collection/${pictureID}`);
     pictureAuthor.innerText = author;
@@ -75,6 +81,7 @@ const cloneTemplate = (picture) => {
     if (photoLink) {
         picturePhoto.src = `/photos/pictures/${photoLink}.png`;
         picturePhoto.setAttribute(`alt`, pictureTitle);
+        picturePhotoLink.classList.add(pictureLabel);
     } else {
         const defaultPhoto = document.createElement(`div`);
         defaultPhoto.classList.add(`defaultPhoto`);
@@ -84,9 +91,23 @@ const cloneTemplate = (picture) => {
     picturePhotoLink.setAttribute(`href`, `/collection/${pictureID}`);
     pictureWidth.innerText = pictureSizeWidth;
     pictureHeight.innerText = pictureSizeHeight;
-    mainPrice.innerText = langPrice;
-    mainPrice.dataset.rub = picturePrice;
-    mainPrice.classList.add(priceClass);
+    if (picturePriceSale === 0) {
+        // main price
+        mainPrice.innerText = langPrice;
+        mainPrice.dataset.rub = picturePrice;
+        mainPrice.classList.add(priceClass);
+        // remove old price node
+        priceWrapper.removeChild(oldPrice);
+    } else {
+        // main price
+        mainPrice.innerText = langPriceSale;
+        mainPrice.dataset.rub = picturePriceSale;
+        mainPrice.classList.add(priceClass);
+        // old price
+        oldPrice.innerText = langPrice;
+        oldPrice.dataset.rub = picturePrice;
+        oldPrice.classList.add(priceClass);
+    }
     cartButton.dataset.pictureId = pictureID;
     return pictureTemplate;
 };

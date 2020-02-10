@@ -19,7 +19,12 @@ router.get(`/`, async (request, response) => {
         picture.sizeLabel = data.sizeLabel;
         picture.lang = data.language;
         picture.priceTitle = (lang === `en`) ? `euro` : `rub`;
+        picture.hasSalePrice = (picture.picturePriceSale !== 0);
         picture.hasPhoto = !!(picture.photos[0]);
+        picture.pictureLabel =
+            (picture.hasSalePrice) ? `photoLabel--sale` :
+                (picture.pictureTime <= 30) ? `photoLabel--new` :
+                    `photoLabel--regular`;
         if (picture.photos[0]) {
             picture.photo = picture.photos[0].photoLink;
         }
@@ -44,6 +49,7 @@ router.get(`/:pictureID`, async (request, response) => {
     const data = await collectData(request, pageLink);
     const lang = data.language;
     data.pictureData = await requestLanguagePicture(pictureID, lang);
+    data.hasSalePrice = (data.pictureData.picturePriceSale !== 0);
     if (!data.pictureData.pictureID) {
         return response.status(404).redirect(`/404`);
     }

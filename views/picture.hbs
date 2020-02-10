@@ -26,12 +26,26 @@
                            href="/authors/{{{ pictureData.authorID }}}">{{{ pictureData.author }}}</a>
                     </div>
                     {{# if isActiveRU }}
-                        <em class="picturePrice price price--rub"
-                            data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        {{# if hasSalePrice }}
+                            <em class="picturePrice picturePrice--main price price--rub"
+                                data-rub="{{{ pictureData.picturePriceSale }}}">{{{ pictureData.langPriceSale }}}</em>
+                            <em class="picturePrice picturePrice--old price price--rub"
+                                data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        {{ else }}
+                            <em class="picturePrice picturePrice--main price price--rub"
+                                data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        {{/if}}
                     {{/if}}
                     {{# if isActiveEN }}
-                        <em class="picturePrice price price--euro"
-                            data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        {{# if hasSalePrice }}
+                            <em class="picturePrice picturePrice--main price price--euro"
+                                data-rub="{{{ pictureData.picturePriceSale }}}">{{{ pictureData.langPriceSale }}}</em>
+                            <em class="picturePrice picturePrice--old price price--euro"
+                                data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        {{ else }}
+                            <em class="picturePrice picturePrice--main price price--euro"
+                                data-rub="{{{ pictureData.picturePrice }}}">{{{ pictureData.langPrice }}}</em>
+                        {{/if}}
                     {{/if}}
                     <p class="pictureSize">
                         <span class="sizeLabel">{{{ sizeLabel }}}</span>

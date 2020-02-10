@@ -3,7 +3,7 @@
         <ul class="pictureList">
             {{# each picturesData }}
                 <li class="picture similarParent">
-                    <a class="picturePhotoWrapper photoLabel photoLabel--new"
+                    <a class="picturePhotoWrapper photoLabel {{{ pictureLabel }}}"
                        href="/collection/{{{ pictureID }}}">
                         {{# if hasPhoto}}
                             <img class="picturePhoto similarPhoto"
@@ -34,8 +34,15 @@
                             </p>
                         </div>
                         <div class="picturePriceWrapper">
-                            <span class="picturePrice picturePrice--main price price--{{{ priceTitle }}}"
-                                  data-rub="{{{ picturePrice }}}">{{{ langPrice }}}</span>
+                            {{#if hasSalePrice}}
+                                <span class="picturePrice picturePrice--main price price--{{{ priceTitle }}}"
+                                      data-rub="{{{ picturePriceSale }}}">{{{ langPriceSale }}}</span>
+                                <span class="picturePrice picturePrice--old price price--{{{ priceTitle }}}"
+                                      data-rub="{{{ picturePrice }}}">{{{ langPrice }}}</span>
+                            {{else}}
+                                <span class="picturePrice picturePrice--main price price--{{{ priceTitle }}}"
+                                      data-rub="{{{ picturePrice }}}">{{{ langPrice }}}</span>
+                            {{/if}}
                         </div>
                     </div>
                     <button class="cartButton"
@@ -51,7 +58,7 @@
 
 <template class="clonePictureTemplate">
     <li class="picture similarParent">
-        <a class="picturePhotoWrapper photoLabel photoLabel--new" href="">
+        <a class="picturePhotoWrapper photoLabel" href="">
             <img class="picturePhoto similarPhoto" src="" alt="">
         </a>
         <div class="pictureHeaderWrapper">
@@ -70,6 +77,7 @@
             </div>
             <div class="picturePriceWrapper">
                 <span class="picturePrice picturePrice--main price" data-rub=""></span>
+                <span class="picturePrice picturePrice--old price" data-rub=""></span>
             </div>
         </div>
         <button class="cartButton" data-picture-id="">{{{ cartButton }}}</button>
