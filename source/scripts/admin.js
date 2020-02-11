@@ -4,6 +4,7 @@ import { educationAdmin } from "./admin/educations.admin";
 import { rewardAdmin } from "./admin/rewards.admin";
 import { exhibitionAdmin } from "./admin/exhibitions.admin";
 import { downloadPhoto, deletePhoto } from "./admin/photos.admin";
+import { showOrders } from "./admin/orders.admin";
 
 showAdminLayout();
 authorButtons();
@@ -12,3 +13,4 @@ rewardAdmin();
 exhibitionAdmin();
 downloadPhoto();
 deletePhoto();
+showOrders();

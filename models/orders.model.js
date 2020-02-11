@@ -1,5 +1,6 @@
 const { requestDB } = require(`../models/db.model`);
 const { sendClientMail, sendOwnerMail } = require(`../models/mail.model`);
+const { photosArray } = require(`./pictures-data.model`);
 
 // INSERT | CREATE
 const saveOrder = async (typedData) => {
@@ -59,7 +60,7 @@ const requestOrderList = async () => {
         SELECT
             orderID, orderNumber, delivery, payment, clientName, clientPhone, clientEmail, 
             clientComment, clientCity, clientAddress, orderPictures, orderStatus, DATE_FORMAT(orderDate,'%d.%m.%Y %H:%i') as formatedDate
-        FROM orders ORDER BY orderDate LIMIT 10
+        FROM orders ORDER BY orderDate DESC
     `;
     try {
         const data = await requestDB(query);
@@ -74,15 +75,54 @@ const requestOrder = async (orderNumber) => {
     try {
         const data = await requestDB(query);
         const errorData = { code: 404, result: `order ${orderNumber} not found` };
+        if (data[0].orderPictures) {
+            const picturesArray = data[0].orderPictures.split(`,`);
+            data[0].orderPictures = [];
+            for (const pictureID of picturesArray) {
+                const query = `
+                    SELECT 
+                        pictures.pictureID as pictureID, 
+                        pictures.pictureRU as picture, 
+                        pictures.picturePrice as picturePrice, 
+                        pictures.picturePriceSale as picturePriceSale, 
+                        authors.authorID as authorID,
+                        authors.authorRU as author,
+                        authors.authorPhoto as authorPhoto
+                    FROM pictures 
+                    INNER JOIN authors ON pictures.authorID = authors.authorID
+                    WHERE pictureID = ${pictureID}`;
+                const pictureData = await requestDB(query);
+                for (const picture of pictureData) {
+                    await photosArray(picture, `ru`);
+                }
+                data[0].orderPictures.push(pictureData[0]);
+            }
+        }
         return (data.length) ? data[0] : errorData;
     } catch ({ sqlMessage }) {
         return { code: 0, error: sqlMessage }
     }
 };
 
+// UPDATE
+const updateOrderStatus = async (orderNumber, status) => {
+    const query = `        
+        UPDATE orders SET orderStatus = '${status}' 
+        WHERE orderNumber = ${orderNumber}`;
+    try {
+        await requestDB(query);
+        return {
+            code: 200,
+            result: `order ${orderNumber} status updated`
+        };
+    } catch ({ sqlMessage }) {
+        return { code: 0, error: sqlMessage }
+    }
+};
+
 //DELETE
-const deleteOrder = async (orderID) => {
-    const query = `DELETE FROM orders WHERE orderID = ${orderID}`;
+const deleteOrder = async (orderNumber) => {
+    const query = `DELETE FROM orders WHERE orderNumber = ${orderNumber}`;
     try {
         const { affectedRows } = await requestDB(query);
         return {
@@ -94,4 +134,7 @@ const deleteOrder = async (orderID) => {
     }
 };
 
-module.exports = { saveOrder, requestOrderList, requestOrder, deleteOrder };
+module.exports = {
+    saveOrder, requestOrderList, requestOrder,
+    updateOrderStatus, deleteOrder
+};

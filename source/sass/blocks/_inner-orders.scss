@@ -1,4 +1,6 @@
 .ordersWrapper {
+    display: flex;
+    justify-content: center;
     .ordersTitle {
         &:after {
             display: none;
@@ -8,20 +10,428 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        margin-bottom: 40px;
         .ordersLine {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
             justify-content: space-between;
             margin-bottom: 5px;
             padding-top: 10px;
             padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            box-sizing: border-box;
             width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease-in;
+            &:nth-of-type(1n) {
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+            @include respond(tabletMini) {
+                flex-direction: column;
+            }
+            @include respond(mobile) {
+                flex-direction: column;
+            }
             .orderMain {
-                
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: center;
+                width: 80%;
+                @include respond(tabletMini) {
+                    width: 100%;
+                }
+                @include respond(mobile) {
+                    width: 100%;
+                }
+                .orderNumberWrapper {
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                    flex-basis: 100%;
+                    &:after {
+                        display: none;
+                    }
+                    .orderNumber {
+                        font-weight: 700;
+                    }
+                    @include respond(tabletMini) {
+                        margin-bottom: 10px;
+                    }
+                    @include respond(mobile) {
+                        margin-bottom: 10px;
+                    }
+                }
             }
             .orderAdditional {
-                .orderStatus {
-                    text-transform: uppercase;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                align-items: center;
+                width: 20%;
+                @include respond(tabletMini) {
+                    justify-content: flex-start;
+                    margin-top: 10px;
+                    width: 100%;
+                }
+                @include respond(mobile) {
+                    justify-content: flex-start;
+                    margin-top: 10px;
+                    width: 100%;
+                }
+                .orderStatusWrapper {
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                    flex-basis: 100%;
+                    text-align: right;
+                    &:after {
+                        display: none;
+                    }
+                    @include respond(tabletMini) {
+                        flex-basis: auto;
+                        text-align: left;
+                        order: 2;
+                    }
+                    @include respond(mobile) {
+                        flex-basis: auto;
+                        text-align: left;
+                        order: 2;
+                    }
+                    .orderStatus {
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+                    .orderStatus[data-status="new"] {
+                        color: limegreen;
+                    }
+                    .orderStatus[data-status="process"] {
+                        color: darkcyan;
+                    }
+                    .orderStatus[data-status="canceled"] {
+                        color: brown;
+                    }
+                }
+                @include respond(tabletMini) {
+                    .titleElement {
+                        &:last-of-type {
+                            &:after {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+                @include respond(mobile) {
+                    .titleElement {
+                        &:last-of-type {
+                            &:after {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+            .titleElement {
+                font-style: normal;
+                &:after {
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    content: "|";
+                }
+                &:last-of-type {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+            &:hover {
+                background-color: $secondaryColor;
+                color: #000;
+            }
+        }
+        .ordersLine--active {
+            cursor: default;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: $primaryColor;
+            }
+        }
+        .ordersLine[data-status="complete"] {
+            opacity: 0.35;
+        }
+        .ordersLine[data-status="canceled"] {
+            opacity: 0.35;
+        }
+    }
+}
+
+.orderPicturesWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 100%;
+    border-top: 1px solid darken($primaryColor, 70%);
+}
+.orderPictureList {
+    padding-top: 10px;
+    width: 50%;
+    @include respond(tabletMini) {
+        width: 100%;
+    }
+    @include respond(mobile) {
+        width: 100%;
+    }
+    .orderPicture {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+        width: 100%;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        .pictureDataWrapper {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            .pictureLink {
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 14px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: $primaryColor;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            .pictureAuthorLinkWrapper {
+                margin-top: auto;
+                .pictureAuthorLink {
+                    color: $primaryColor;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            .picturePriceWrapper {
+                margin-top: 5px;
+                .picturePrice--main {
+                    font-size: 12px;
+                    line-height: 14px;
+                    letter-spacing: 0.1em;
+                    font-weight: 700;
+                }
+                .picturePrice--old {
+                    opacity: 0.5;
+                    font-size: 10px;
+                    line-height: 12px;
+                    letter-spacing: 0.075em;
+                    text-decoration-line: line-through;
+                }
+            }
+        }
+    }
+}
+.orderClientWrapper {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    width: 50%;
+    background-color: darken(#FFF, 95%);
+    @include respond(tabletMini) {
+        width: 100%;
+    }
+    @include respond(mobile) {
+        width: 100%;
+    }
+    .clientWrapper {
+        margin-bottom: 10px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+    .clientNameWrapper {
+        &:before {
+            content: "Имя:";
+            padding-right: 5px;
+        }
+    }
+    .clientPhoneWrapper {
+        &:before {
+            content: "Телефон:";
+            padding-right: 5px;
+        }
+    }
+    .clientEmailWrapper {
+        &:before {
+            content: "E-mail:";
+            padding-right: 5px;
+        }
+    }
+    .clientCommentWrapper {
+        &:before {
+            content: "Комментарий:";
+            padding-right: 5px;
+        }
+    }
+    .clientCityWrapper {
+        &:before {
+            content: "Город:";
+            padding-right: 5px;
+        }
+    }
+    .clientAddressWrapper {
+        &:before {
+            content: "Адрес:";
+            padding-right: 5px;
+        }
+    }
+}
+.orderBottomWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 100%;
+    @include respond(tabletMini) {
+        margin-top: 0;
+        flex-wrap: wrap;
+    }
+    @include respond(mobile) {
+        margin-top: 0;
+        flex-wrap: wrap;
+    }
+    .orderPriceWrapper {
+        &:before {
+            content: "Сумма заказа:";
+        }
+        .orderPrice--main {
+            font-size: 12px;
+            line-height: 14px;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        .orderPrice--old {
+            opacity: 0.5;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.075em;
+            text-decoration-line: line-through;
+        }
+    }
+    .orderButtonsWrapper {
+        @include respond(tabletMini) {
+            width: 100%;
+            margin-top: 10px;
+        }
+        @include respond(mobile) {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .orderButtonList {
+            display: flex;
+            flex-direction: row;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style-type: none;
+            @include respond(tabletMini) {
+                width: 100%;
+            }
+            @include respond(mobile) {
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .orderButtonElement {
+                margin-left: 10px;
+                @include respond(tabletMini) {
+                    &:first-of-type {
+                        margin-left: 0;
+                    }
+                    &:last-of-type {
+                        margin-left: auto;
+                    }
+                }
+                @include respond(mobile) {
+                    margin-left: 0;
+                    margin-right: 5px;
+                    &:first-of-type {
+                        margin-left: 0;
+                        margin-right: 5px;
+                    }
+                    &:last-of-type {
+                        margin-left: auto;
+                        margin-right: 0;
+                    }
+                }
+                .orderButton {
+                    opacity: 0.5;
+                    padding-top: 5px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    padding-bottom: 5px;
+                    font-size: 10px;
+                    letter-spacing: 0.075em;
+                    color: $secondaryColor;
+                    border: 1px dashed $secondaryColor;
+                    background-color: transparent;
+                    transition: all 0.2s ease-in;
+                    cursor: pointer;
+                    outline: none;
+                    @include respond(mobile) {
+                        padding-top: 0;
+                        padding-left: 0;
+                        padding-right: 0;
+                        padding-bottom: 0;
+                        border: none;
+                    }
+                    &:hover {
+                        opacity: 1;
+                        border: 1px solid $primaryColor;
+                        color: $primaryColor;
+                        @include respond(mobile) {
+                            border: none;
+                        }
+                    }
+                }
+                .orderButton--active {
+                    border: 1px solid $secondaryColor;
+                    background-color: $secondaryColor;
+                    color: #000;
+                    cursor: default;
+                    @include respond(mobile) {
+                        background-color: transparent;
+                        color: $primaryColor;
+                        border: none;
+                    }
+                    &:hover {
+                        opacity: 0.5;
+                        border: 1px solid $secondaryColor;
+                        background-color: $secondaryColor;
+                        color: #000;
+                        @include respond(mobile) {
+                            background-color: transparent;
+                            color: $primaryColor;
+                            border: none;
+                        }
+                    }
+                }
+                .orderButton--delete {
+                    border: 1px dashed $errorColor;
+                    color: $errorColor;
+                    @include respond(mobile) {
+                        border: none;
+                    }
                 }
             }
         }

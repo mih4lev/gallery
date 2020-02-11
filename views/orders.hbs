@@ -4,18 +4,28 @@
             <h1 class="pageTitle ordersTitle">Заказы</h1>
             <div class="ordersTable">
                 {{#each orders}}
-                    <div class="ordersLine">
+                    <div class="ordersLine"
+                         data-status="{{{ statusLabel }}}"
+                         data-order-number="{{{ orderNumber }}}">
                         <div class="orderMain">
-                            Заказ #{{{ orderNumber }}} |
+                            <em class="titleElement orderNumberWrapper">
+                                Заказ <span class="orderNumber">#{{{ orderNumber }}}</span>
+                            </em>
                             {{#if pictures.length}}
-                            Картин в заказе: {{{ pictures.length }}} |
+                                <em class="titleElement">Картин в заказе: {{{ pictures.length }}}</em>
                             {{/if}}
-                            {{{ delivery }}} |
-                            {{{ payment }}}
+                            <em class="titleElement">{{{ delivery }}}</em>
+                            <em class="titleElement">{{{ payment }}}</em>
                         </div>
                         <div class="orderAdditional">
-                            дата: <span class="formatedDate">{{{ formatedDate }}}</span> |
-                            статус: <span class="orderStatus">{{{ orderStatus }}}</span>
+                            <em class="titleElement orderStatusWrapper">
+                                статус:
+                                <span class="orderStatus"
+                                      data-status="{{{ statusLabel }}}">{{{ orderStatus }}}</span>
+                            </em>
+                            <em class="titleElement">
+                                <span class="formatedDate">{{{ formatedDate }}}</span>
+                            </em>
                         </div>
                     </div>
                 {{/each}}
@@ -23,3 +33,113 @@
         </div>
     </div>
 </div>
+
+<template class="orderPictures">
+    <div class="orderPicturesWrapper">
+        <div class="orderPictureList">
+            <div class="orderPicture">
+                <div class="picturePhotoWrapper">
+                    <img class="picturePhoto" src="" alt="">
+                </div>
+                <div class="pictureDataWrapper">
+                    <div class="pictureLinkWrapper">
+                        <a class="pictureLink" href="" target="_blank"></a>
+                    </div>
+                    <div class="pictureAuthorLinkWrapper">
+                        <a class="pictureAuthorLink" href="" target="_blank"></a>
+                    </div>
+                    <div class="picturePriceWrapper">
+                        <span class="picturePrice--main price--rub"></span>
+                        <span class="picturePrice--old"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orderClientWrapper">
+            <div class="clientWrapper clientNameWrapper">
+                <span class="clientName"></span>
+            </div>
+            <div class="clientWrapper clientPhoneWrapper">
+                <span class="clientPhone"></span>
+            </div>
+            <div class="clientWrapper clientEmailWrapper">
+                <span class="clientEmail"></span>
+            </div>
+            <div class="clientWrapper clientCommentWrapper">
+                <span class="clientComment"></span>
+            </div>
+            <div class="clientWrapper clientCityWrapper">
+                <span class="clientCity"></span>
+            </div>
+            <div class="clientWrapper clientAddressWrapper">
+                <span class="clientAddress"></span>
+            </div>
+        </div>
+        <div class="orderBottomWrapper">
+            <div class="orderPriceWrapper">
+                <span class="orderPrice--main price--rub"></span>
+                <span class="orderPrice--old"></span>
+            </div>
+            <div class="orderButtonsWrapper">
+                <ul class="orderButtonList">
+                    <li class="orderButtonElement">
+                        <button class="orderButton orderButton--new"
+                                data-status="new">NEW</button>
+                    </li>
+                    <li class="orderButtonElement">
+                        <button class="orderButton orderButton--process"
+                                data-status="process">PROCESS</button>
+                    </li>
+                    <li class="orderButtonElement">
+                        <button class="orderButton orderButton--complete"
+                                data-status="complete">COMPLETE</button>
+                    </li>
+                    <li class="orderButtonElement">
+                        <button class="orderButton orderButton--canceled"
+                                data-status="canceled">CANCELED</button>
+                    </li>
+                    <li class="orderButtonElement">
+                        <button class="orderButton orderButton--delete"
+                                data-status="delete">X</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template class="orderDeleteTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <p class="templateHeader">
+                Вы точно хотите удалить заказ #<span class="orderNumber"></span>?
+            </p>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Удалить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>
+
+<template class="orderStatusChangeTemplate">
+    <div class="editWrapper">
+        <form class="templateWrapper">
+            <p class="templateHeader">
+                Вы точно хотите изменить статус заказа #<span class="orderNumber"></span>?
+            </p>
+            <div class="templateButtons">
+                <button
+                    class="templateButton mainButton"
+                    type="submit">
+                    Изменить
+                </button>
+            </div>
+        </form>
+        <button class="adminButton closeButton">Закрыть</button>
+    </div>
+</template>

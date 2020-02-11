@@ -1,6 +1,7 @@
 const { Router } = require(`express`);
 const {
-    saveOrder, requestOrderList, requestOrder, deleteOrder
+    saveOrder, requestOrderList, requestOrder,
+    updateOrderStatus, deleteOrder
 } = require("../models/orders.model");
 
 const router = new Router();
@@ -20,6 +21,13 @@ router.get(`/:orderNumber`, async (request, response) => {
     const { params: { orderNumber }} = request;
     const data = await requestOrder(orderNumber);
     response.send(data);
+});
+
+// PUT | UPDATE
+router.put(`/status/:orderNumber`, async (request, response) => {
+    const { params: { orderNumber }, body: { status }} = request;
+    const data = await updateOrderStatus(orderNumber, status);
+    await response.json(data);
 });
 
 // DELETE
