@@ -20,7 +20,7 @@ const cloneTemplate = (pictureData) => {
     const {
         pictureID, picture, photos: { 0: { photoLink }},
         pictureSizeWidth, pictureSizeHeight, authorID, author,
-        picturePrice, langPrice
+        picturePrice, picturePriceSale, langPrice, langPriceSale
     } = pictureData;
     const lang = document.querySelector(`html`).getAttribute(`lang`);
     const priceClass = (lang === `ru`) ? `price--rub` : `price--euro`;
@@ -31,7 +31,8 @@ const cloneTemplate = (pictureData) => {
     const pictureWidth = wrapper.querySelector(`.pictureWidth`);
     const pictureHeight = wrapper.querySelector(`.pictureHeight`);
     const pictureAuthor = wrapper.querySelector(`.pictureAuthor`);
-    const picturePriceNode = wrapper.querySelector(`.picturePrice`);
+    const picturePriceNode = wrapper.querySelector(`.picturePrice--main`);
+    const picturePriceOldNode = wrapper.querySelector(`.picturePrice--old`);
     picturePhoto.src = `/photos/pictures/${photoLink}.png`;
     picturePhoto.setAttribute(`alt`, picture);
     pictureTitle.innerText = picture;
@@ -42,9 +43,20 @@ const cloneTemplate = (pictureData) => {
     pictureHeight.classList.add(`metric--${lang}`);
     pictureAuthor.innerText = author;
     pictureAuthor.setAttribute(`href`, `/authors/${authorID}`);
-    picturePriceNode.innerText = langPrice;
-    picturePriceNode.classList.add(priceClass);
-    picturePriceNode.dataset.rub = picturePrice;
+    if (!picturePriceSale || picturePriceSale === 0) {
+        picturePriceNode.innerText = langPrice;
+        picturePriceNode.classList.add(priceClass);
+        picturePriceNode.dataset.rub = picturePrice;
+        picturePriceOldNode.parentNode.removeChild(picturePriceOldNode);
+    } else {
+        // main
+        picturePriceNode.innerText = langPriceSale;
+        picturePriceNode.classList.add(priceClass);
+        picturePriceNode.dataset.rub = picturePriceSale;
+        // old
+        picturePriceOldNode.innerText = langPrice;
+        picturePriceOldNode.dataset.rub = picturePrice;
+    }
     // button
     const basketButton = wrapper.querySelector(`.basketButton`);
     basketButton.addEventListener(`click`, () => {

@@ -220,13 +220,17 @@
                         <a class="pictureAuthorLink" href="" target="_blank"></a>
                     </div>
                 </div>
-                <em class="picturePrice price" data-rub=""></em>
+                <div class="picturePrice">
+                    <em class="picturePrice--main price" data-rub=""></em>
+                    <em class="picturePrice--old price" data-rub=""></em>
+                </div>
                 <button class="removeButton">X</button>
             </div>
         </div>
         <div class="basketTableFooter">
             <span class="basketSummaryTitle">{{{ basketSummaryTitle }}}</span>
-            <span class="basketSummaryValue price" data-rub=""></span>
+            <span class="basketSummaryValue basketSummaryValue--main price" data-rub=""></span>
+            <span class="basketSummaryValue basketSummaryValue--old price" data-rub=""></span>
         </div>
     </div>
 </template>

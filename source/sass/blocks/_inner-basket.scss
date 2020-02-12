@@ -184,30 +184,64 @@
 
             }
             .picturePrice {
+                display: flex;
+                flex-direction: column;
                 flex-shrink: 0;
                 margin-left: auto;
                 width: 260px;
                 font-style: normal;
-                @extend %middlePrimaryText;
                 @include respond(tablet) {
                     width: 200px;
-                    font-size: 15px;
-                    line-height: 18px;
-                    letter-spacing: 0.125em;
                 }
                 @include respond(tabletMini) {
                     width: 120px;
-                    font-size: 12px;
-                    line-height: 14px;
-                    letter-spacing: 0.1em;
                 }
                 @include respond(mobile) {
                     margin-top: 10px;
                     margin-left: 20px;
                     width: 80px;
-                    font-size: 12px;
-                    line-height: 14px;
-                    letter-spacing: 0.1em;
+                }
+                .picturePrice--main {
+                    font-style: normal;
+                    @extend %middlePrimaryText;
+                    @include respond(tablet) {
+                        font-size: 15px;
+                        line-height: 18px;
+                        letter-spacing: 0.125em;
+                    }
+                    @include respond(tabletMini) {
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.1em;
+                    }
+                    @include respond(mobile) {
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.1em;
+                    }
+                }
+                .picturePrice--old {
+                    opacity: 0.5;
+                    font-size: 15px;
+                    line-height: 18px;
+                    letter-spacing: 0.125em;
+                    text-decoration-line: line-through;
+                    font-style: normal;
+                    @include respond(tablet) {
+                        font-size: 12px;
+                        line-height: 14px;
+                        letter-spacing: 0.1em;
+                    }
+                    @include respond(tabletMini) {
+                        font-size: 10px;
+                        line-height: 12px;
+                        letter-spacing: 0.075em;
+                    }
+                    @include respond(mobile) {
+                        font-size: 10px;
+                        line-height: 12px;
+                        letter-spacing: 0.075em;
+                    }
                 }
             }
             .removeButton {
@@ -258,6 +292,7 @@
     .basketTableFooter {
         display: flex;
         justify-content: flex-end;
+        align-items: baseline;
         border-top: 1px solid $secondaryColor;
         padding-top: 20px;
         font-size: 25px;
@@ -283,6 +318,21 @@
             margin-right: 20px;
             &:after {
                 content: ":";
+            }
+        }
+        .basketSummaryValue--old {
+            opacity: 0.5;
+            padding-left: 10px;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 0.125em;
+            text-decoration-line: line-through;
+            font-weight: 300;
+            &:after {
+                display: none;
+            }
+            &:before {
+                display: none;
             }
         }
     }

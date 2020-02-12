@@ -368,15 +368,31 @@
                     .picturePrice {
                         position: absolute;
                         bottom: 0;
-                        font-weight: 300;
-                        font-style: normal;
-                        font-size: 20px;
-                        line-height: 24px;
-                        letter-spacing: 0.1375em;
-                        @include respond(mobile) {
+                        .picturePrice--main {
+                            font-weight: 300;
+                            font-style: normal;
+                            font-size: 20px;
+                            line-height: 24px;
+                            letter-spacing: 0.1375em;
+                            @include respond(mobile) {
+                                font-size: 15px;
+                                line-height: 18px;
+                                letter-spacing: 0.125em;
+                            }
+                        }
+                        .picturePrice--old {
+                            opacity: 0.5;
                             font-size: 15px;
                             line-height: 18px;
                             letter-spacing: 0.125em;
+                            text-decoration-line: line-through;
+                            font-style: normal;
+                            white-space: nowrap;
+                            @include respond(mobile) {
+                                font-size: 12px;
+                                line-height: 14px;
+                                letter-spacing: 0.1em;
+                            }
                         }
                     }
                 }

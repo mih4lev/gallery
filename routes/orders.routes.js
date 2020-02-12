@@ -32,7 +32,6 @@ router.get(`/`, async (request, response) => {
         if (!order.orderPictures) return false;
         order.pictures = order.orderPictures.split(`,`);
     });
-    console.log(data);
     response.render(pageLink, data);
 });
 

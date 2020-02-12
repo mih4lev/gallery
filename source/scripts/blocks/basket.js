@@ -43,15 +43,30 @@ const removePicture = async ({ target }) => {
     const pictureID = Number(pictureId);
     const lang = document.querySelector(`html`).getAttribute(`lang`);
     const basketTableBody = document.querySelector(`.basketTableBody`);
+    const basketTableFooter = document.querySelector(`.basketTableFooter`);
     const deletedPicture = document.querySelector(`.basketItem[data-picture-id="${pictureID}"]`);
-    const picturePriceNode = deletedPicture.querySelector(`.picturePrice`);
-    const picturePrice = Number(picturePriceNode.dataset.rub);
+    const pictureMainPriceNode = deletedPicture.querySelector(`.picturePrice--main`);
+    const pictureMainPrice = Number(pictureMainPriceNode.dataset.rub);
     basketTableBody.removeChild(deletedPicture);
     // total sum
-    const totalSum = document.querySelector(`.basketSummaryValue`);
-    const oldValue = Number(totalSum.dataset.rub);
-    totalSum.dataset.rub = String(oldValue - picturePrice);
+    const totalSum = document.querySelector(`.basketSummaryValue--main`);
+    const totalOldSum = document.querySelector(`.basketSummaryValue--old`);
+    const previousValue = Number(totalSum.dataset.rub);
+    totalSum.dataset.rub = String(previousValue - pictureMainPrice);
     await changeCurrency(lang, totalSum);
+    if (totalOldSum) {
+        const pictureOldPriceNode = deletedPicture.querySelector(`.picturePrice--old`);
+        let price = pictureMainPrice;
+        if (pictureOldPriceNode) {
+            price = Number(pictureOldPriceNode.dataset.rub);
+        }
+        const previousOldValue = Number(totalOldSum.dataset.rub);
+        totalOldSum.dataset.rub = String(previousOldValue - price);
+        await changeCurrency(lang, totalOldSum);
+        if (Number(totalSum.dataset.rub) === Number(totalOldSum.dataset.rub)) {
+            basketTableFooter.removeChild(totalOldSum);
+        }
+    }
     // remove from localStorage
     const storage = localStorage.getItem(`basket`);
     if (!storage) return false;
@@ -75,7 +90,7 @@ const cloneTemplate = async (picturesData) => {
         const {
             pictureID, picture, photos: { 0: { photoLink }},
             pictureSizeWidth, pictureSizeHeight, authorID, author,
-            picturePrice, langPrice
+            picturePrice, picturePriceSale, langPrice, langPriceSale
         } = pictureData;
         const wrapper = clonedPicture.cloneNode(true);
         const picturePhoto = wrapper.querySelector(`.basketPhoto`);
@@ -83,7 +98,9 @@ const cloneTemplate = async (picturesData) => {
         const pictureWidth = wrapper.querySelector(`.pictureWidth`);
         const pictureHeight = wrapper.querySelector(`.pictureHeight`);
         const pictureAuthor = wrapper.querySelector(`.pictureAuthorLink`);
-        const picturePriceNode = wrapper.querySelector(`.picturePrice`);
+        const picturePriceWrapper = wrapper.querySelector(`.picturePrice`);
+        const picturePriceNode = wrapper.querySelector(`.picturePrice--main`);
+        const picturePriceOld = wrapper.querySelector(`.picturePrice--old`);
         wrapper.dataset.pictureId = pictureID;
         picturePhoto.src = `/photos/pictures/${photoLink}.png`;
         picturePhoto.setAttribute(`alt`, picture);
@@ -95,9 +112,20 @@ const cloneTemplate = async (picturesData) => {
         pictureHeight.classList.add(`metric--${lang}`);
         pictureAuthor.innerText = author;
         pictureAuthor.setAttribute(`href`, `/authors/${authorID}`);
-        picturePriceNode.innerText = langPrice;
-        picturePriceNode.classList.add(priceClass);
-        picturePriceNode.dataset.rub = picturePrice;
+        if (!picturePriceSale || picturePriceSale === 0) {
+            picturePriceNode.innerText = langPrice;
+            picturePriceNode.classList.add(priceClass);
+            picturePriceNode.dataset.rub = picturePrice;
+            picturePriceWrapper.removeChild(picturePriceOld);
+        } else {
+            // main
+            picturePriceNode.innerText = langPriceSale;
+            picturePriceNode.classList.add(priceClass);
+            picturePriceNode.dataset.rub = picturePriceSale;
+            // old
+            picturePriceOld.innerText = langPrice;
+            picturePriceOld.dataset.rub = picturePrice;
+        }
         // remove button
         const removeButton = wrapper.querySelector(`.removeButton`);
         removeButton.dataset.pictureId = pictureID;
@@ -105,10 +133,27 @@ const cloneTemplate = async (picturesData) => {
         basketTableBody.appendChild(wrapper);
     }
     // total sum
+    const basketTableFooter = basketTable.querySelector(`.basketTableFooter`);
+    const totalPriceSale = picturesData.reduce((sum, { picturePrice, picturePriceSale }) => {
+        const price = (picturePriceSale && picturePriceSale !== 0) ? picturePriceSale : picturePrice;
+        return sum + price;
+    }, 0);
     const totalPrice = picturesData.reduce((sum, { picturePrice }) => sum + picturePrice, 0);
-    const totalSum = basketTable.querySelector(`.basketSummaryValue`);
-    totalSum.dataset.rub = totalPrice;
-    await changeCurrency(lang, totalSum);
+    console.log(totalPriceSale, totalPrice);
+    const totalSum = basketTable.querySelector(`.basketSummaryValue--main`);
+    const totalOldSum = basketTable.querySelector(`.basketSummaryValue--old`);
+    if (totalPriceSale === totalPrice) {
+        totalSum.dataset.rub = totalPrice;
+        await changeCurrency(lang, totalSum);
+        basketTableFooter.removeChild(totalOldSum);
+    } else {
+        // main
+        totalSum.dataset.rub = totalPriceSale;
+        await changeCurrency(lang, totalSum);
+        // old
+        totalOldSum.dataset.rub = totalPrice;
+        await changeCurrency(lang, totalOldSum);
+    }
     return basketTable;
 };
 
