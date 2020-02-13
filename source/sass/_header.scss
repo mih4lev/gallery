@@ -370,6 +370,14 @@
                         flex-direction: column;
                         position: absolute;
                         bottom: 0;
+                        @include respond(tablet) {
+                            align-items: baseline;
+                            flex-direction: row;
+                        }
+                        @include respond(tabletMini) {
+                            align-items: baseline;
+                            flex-direction: row;
+                        }
                         .picturePrice--main {
                             font-weight: 300;
                             font-style: normal;
@@ -395,6 +403,12 @@
                             }
                             &:before {
                                 display: none;
+                            }
+                            @include respond(tablet) {
+                                padding-left: 10px;
+                            }
+                            @include respond(tabletMini) {
+                                padding-left: 10px;
                             }
                             @include respond(mobile) {
                                 font-size: 12px;
