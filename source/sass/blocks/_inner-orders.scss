@@ -374,7 +374,7 @@
                         margin-right: 0;
                     }
                 }
-                .orderButton {
+                .orderStatusButton {
                     opacity: 0.5;
                     padding-top: 5px;
                     padding-left: 10px;
@@ -404,7 +404,7 @@
                         }
                     }
                 }
-                .orderButton--active {
+                .orderStatusButton--active {
                     border: 1px solid $secondaryColor;
                     background-color: $secondaryColor;
                     color: #000;
@@ -426,7 +426,7 @@
                         }
                     }
                 }
-                .orderButton--delete {
+                .orderStatusButton--delete {
                     border: 1px dashed $errorColor;
                     color: $errorColor;
                     @include respond(mobile) {

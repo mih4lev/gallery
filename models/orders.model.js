@@ -3,7 +3,7 @@ const { sendClientMail, sendOwnerMail } = require(`../models/mail.model`);
 const { photosArray } = require(`./pictures-data.model`);
 
 // INSERT | CREATE
-const saveOrder = async (typedData) => {
+const saveOrder = async (typedData, lang) => {
     const lastIDQuery = `
         SELECT LAST_INSERT_ID(orderID) AS lastID 
         FROM orders ORDER BY lastID DESC LIMIT 1`;
@@ -45,7 +45,7 @@ const saveOrder = async (typedData) => {
             '${clientEmail}', '${clientComment}', '${clientCity}', '${clientAddress}',
             '${orderPictures}', 'new'
         )`;
-        await sendClientMail(orderNumber, typedData);
+        await sendClientMail(orderNumber, typedData, lang);
         await sendOwnerMail(orderNumber, typedData);
         const result = await requestDB(query);
         return { code: (result.insertId) ? 200 : 0, orderNumber };

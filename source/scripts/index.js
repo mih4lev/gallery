@@ -1,15 +1,18 @@
 import { userLogin } from "./login";
 import { similarPhoto } from "./utils";
 import { recallForm } from "./blocks/recall-form";
-import { checkBasketStorage, headerBasket } from "./blocks/header-basket";
+import { translateHeaderBasket, checkBasketStorage, headerBasket } from "./blocks/header-basket";
 import { headerLanguage } from "./blocks/header-language";
 import { headerNav } from "./blocks/header-nav";
 import { respondInterestBlock, showMoreEvents, translateEvents } from "./blocks/events";
 import {
-    setDesktopLinks, setPicturesLayout, translatePicture, collectionFilters,
-    translatePictureList
+    setDesktopLinks, setPicturesLayout, translatePicture,
+    collectionFilters, translatePictureList
 } from "./blocks/collection";
-import { cartButtons, basketTable, basketDelivery, basketForm } from "./blocks/basket";
+import {
+    cartButtons, basketTable, basketDelivery, basketForm,
+    translateBasket
+} from "./blocks/basket";
 import { articleScroll, shareList, translateArticle } from "./blocks/article";
 import { changePhotos, showGallery } from "./blocks/picture";
 import { translateHomepage, instagramPosts } from "./blocks/home";
@@ -44,3 +47,5 @@ translatePainter();
 translateArticle();
 translateEvents();
 translatePicture();
+translateHeaderBasket();
+translateBasket();

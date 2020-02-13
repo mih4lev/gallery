@@ -1,7 +1,25 @@
-import {currency} from "../utils";
+import { currency } from "../utils";
 
 const basketWrapper = document.querySelector(`.basketWrapper`);
 const orderWrapper = document.querySelector(`.orderWrapper`);
+
+export const translateBasket = () => {
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        const basketPictures = [...document.querySelectorAll(`.basketTableBody .basketItem`)];
+        if (!basketPictures.length) return false;
+        for (const pictureNode of basketPictures) {
+            const { dataset: { pictureId }} = pictureNode;
+            const response = await fetch(`/api/pictures/${pictureId}/lang/${lang}`);
+            const { picture, author } = await response.json();
+            const picturePhoto = pictureNode.querySelector(`.basketPhoto`);
+            const pictureHeader = pictureNode.querySelector(`.basketItemLink`);
+            const pictureAuthor = pictureNode.querySelector(`.pictureAuthorLink`);
+            picturePhoto.setAttribute(`alt`, picture);
+            pictureHeader.innerText = picture;
+            pictureAuthor.innerText = author;
+        }
+    });
+};
 
 export const cartButtons = async () => {
     const buttons = [...document.querySelectorAll(`.cartButton`)];
@@ -139,7 +157,6 @@ const cloneTemplate = async (picturesData) => {
         return sum + price;
     }, 0);
     const totalPrice = picturesData.reduce((sum, { picturePrice }) => sum + picturePrice, 0);
-    console.log(totalPriceSale, totalPrice);
     const totalSum = basketTable.querySelector(`.basketSummaryValue--main`);
     const totalOldSum = basketTable.querySelector(`.basketSummaryValue--old`);
     if (totalPriceSale === totalPrice) {

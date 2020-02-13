@@ -10,6 +10,8 @@ export const headerLanguage = () => {
             if (phraseNode.length) {
                 phraseNode.forEach((node) => {
                     node.innerText = data[phrase];
+                    console.log(node);
+                    console.log(data[phrase]);
                 })
             }
         }

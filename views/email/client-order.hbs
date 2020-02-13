@@ -3,7 +3,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
     <meta name="format-detection" content="telephone=no" />
-    <title>Ваш заказ #{{{orderNumber}}} на сайте artegallery.ru</title>
+    <title>{{{ clientMailHeader }}}</title>
 </head>
 
 <body style="border-collapse: collapse;
@@ -69,7 +69,7 @@
                                    padding-bottom: 20px;"
                         align="center"
                         valign="top">
-                        Спасибо за заказ!
+                        {{{ clientMailThanks }}}
                     </td>
                 </tr>
             </table>
@@ -147,10 +147,11 @@
                                        font-size: 24px;
                                        line-height: 36px;
                                        font-family: sans-serif;
+                                       width: 400px;
                                        background-color: #CEA776;"
                         align="center"
                         valign="top">
-                        номер вашего заказа
+                        {{{ clientOrderNumber }}}
                         <br>
                         <b style="font-weight: bold; font-size: 42px">{{{orderNumber}}}</b>
                     </td>
@@ -186,7 +187,7 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    При оформлении заказа вы указали данные:
+                                    {{{ clientDataHeader }}}
                                 </td>
                             </tr>
                             <tr>
@@ -202,8 +203,8 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    <b style="color: #FFF; font-size: 14px;">Вид доставки: </b>
-                                    Самовывоз
+                                    <b style="color: #FFF; font-size: 14px;">{{{ clientDeliveryTitle }}} </b>
+                                    {{{ clientDeliveryType }}}
                                 </td>
                             </tr>
                             <tr>
@@ -219,8 +220,8 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    <b style="color: #FFF; font-size: 14px;">Способ оплаты: </b>
-                                    Оплата наличными
+                                    <b style="color: #FFF; font-size: 14px;">{{{ clientPaymentTitle }}} </b>
+                                    {{{ clientPaymentType }}}
                                 </td>
                             </tr>
                             <tr>
@@ -236,7 +237,7 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    <b style="color: #FFF; font-size: 14px;">Ваше имя: </b>
+                                    <b style="color: #FFF; font-size: 14px;">{{{ clientNameTitle }}} </b>
                                     {{{clientName}}}
                                 </td>
                             </tr>
@@ -253,7 +254,7 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    <b style="color: #FFF; font-size: 14px;">Телефон: </b>
+                                    <b style="color: #FFF; font-size: 14px;">{{{ clientPhoneTitle }}} </b>
                                     <a style="color: #CEA776;
                                               text-decoration: underline"
                                        href="tel:{{{clientPhone}}}">{{{clientPhone}}}</a>
@@ -272,7 +273,7 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    <b style="color: #FFF; font-size: 14px;">Email: </b>
+                                    <b style="color: #FFF; font-size: 14px;">{{{ clientEmailTitle }}} </b>
                                     <a style="color: #CEA776;
                                               text-decoration: underline"
                                        href="mailto:{{{clientEmail}}}">{{{clientEmail}}}</a>
@@ -291,7 +292,7 @@
                                                    font-family: sans-serif;"
                                     align="left"
                                     valign="top">
-                                    <b style="color: #FFF; font-size: 14px;">Комментарий к заказу: </b>
+                                    <b style="color: #FFF; font-size: 14px;">{{{ clientCommentTitle }}} </b>
                                     {{{clientComment}}}
                                 </td>
                             </tr>
@@ -335,7 +336,7 @@
                                        font-family: sans-serif;"
                         align="center"
                         valign="top">
-                        Есть вопросы?
+                        {{{ hasQuestionsTitle }}}
                         <a style="color: #CEA776;
                                   text-decoration: underline;
                                   font-family: sans-serif;
@@ -455,7 +456,7 @@
                                        font-family: sans-serif;"
                         align="center"
                         valign="top">
-                        Это письмо электронной почты было отправлено вам на
+                        {{{ footerTextPart1 }}}
                         <a style="text-decoration: underline;
                                           color: #999999;
                                           font-family: sans-serif;
@@ -464,10 +465,10 @@
                                           line-height: 150%;"
                            href="mailto:{{{clientEmail}}}"
                            target="_blank">{{{clientEmail}}}</a>
-                        , потому что вы сделали заказ на сайте
+                        {{{ footerTextPart2 }}}
                         <a style="color: #999999; text-decoration: underline;"
                            href="https://artegallery.ru"
-                           target="blank">artegallery.ru
+                           target="blank">artegallery.ru</a>
                     </td>
                 </tr>
             </table>

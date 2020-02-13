@@ -8,7 +8,8 @@ const router = new Router();
 
 // POST | CREATE
 router.post(`/`, async (request, response) => {
-    const data = await saveOrder(request.body);
+    const { language: lang } = request;
+    const data = await saveOrder(request.body, lang);
     await response.json(data);
 });
 

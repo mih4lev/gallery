@@ -1,3 +1,19 @@
+export const translateHeaderBasket = () => {
+    document.addEventListener(`languageChange`, async ({ detail: { lang }}) => {
+        const headerBasketPicture = document.querySelector(`.addedPictures .basketPicture`);
+        if (!headerBasketPicture) return false;
+        const { dataset: { pictureId }} = headerBasketPicture;
+        const response = await fetch(`/api/pictures/${pictureId}/lang/${lang}`);
+        const { picture, author } = await response.json();
+        const picturePhoto = headerBasketPicture.querySelector(`.basketPhoto`);
+        const pictureHeader = headerBasketPicture.querySelector(`.pictureHeader`);
+        const pictureAuthor = headerBasketPicture.querySelector(`.pictureAuthor`);
+        picturePhoto.setAttribute(`alt`, picture);
+        pictureHeader.innerText = picture;
+        pictureAuthor.innerText = author;
+    });
+};
+
 export const checkBasketStorage = () => {
     // need to create check this pictures and update person basket
     const storage = localStorage.getItem(`basket`);
@@ -33,6 +49,8 @@ const cloneTemplate = (pictureData) => {
     const pictureAuthor = wrapper.querySelector(`.pictureAuthor`);
     const picturePriceNode = wrapper.querySelector(`.picturePrice--main`);
     const picturePriceOldNode = wrapper.querySelector(`.picturePrice--old`);
+    const pictureWrapper = wrapper.querySelector(`.basketPicture`);
+    pictureWrapper.dataset.pictureId = pictureID;
     picturePhoto.src = `/photos/pictures/${photoLink}.png`;
     picturePhoto.setAttribute(`alt`, picture);
     pictureTitle.innerText = picture;

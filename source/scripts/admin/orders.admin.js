@@ -28,7 +28,7 @@ const deleteOrder = async (orderNumber) => {
 const updateStatus = async (orderNumber, status) => {
     const orderSelector = `.ordersLine[data-order-number="${orderNumber}"]`;
     const orderBlock = document.querySelector(orderSelector);
-    const buttons = [...orderBlock.querySelectorAll(`.orderButton`)];
+    const buttons = [...orderBlock.querySelectorAll(`.orderStatusButton`)];
     const fetchOptions = {
         method: `PUT`,
         headers: {
@@ -40,10 +40,10 @@ const updateStatus = async (orderNumber, status) => {
     const data = await response.json();
     if (data.code === 200) {
         buttons.forEach((button) => {
-            button.classList.remove(`orderButton--active`);
-            const activeSelector = `.orderButton[data-status="${status}"]`;
+            button.classList.remove(`orderStatusButton--active`);
+            const activeSelector = `.orderStatusButton[data-status="${status}"]`;
             const activeButton = orderBlock.querySelector(activeSelector);
-            activeButton.classList.add(`orderButton--active`);
+            activeButton.classList.add(`orderStatusButton--active`);
         });
         //
         const orderStatusNode = orderBlock.querySelector(`.orderStatus`);
@@ -111,10 +111,10 @@ const showPictures = async (orderNumber) => {
         field.innerText = data[fieldName];
     });
     // buttons
-    const orderButtons = [...templateClone.querySelectorAll(`.orderButton`)];
+    const orderButtons = [...templateClone.querySelectorAll(`.orderStatusButton`)];
     orderButtons.forEach((button) => {
         const { dataset: { status }} = button;
-        if (status === orderStatus) button.classList.add(`orderButton--active`);
+        if (status === orderStatus) button.classList.add(`orderStatusButton--active`);
         button.addEventListener(`click`, async () => {
             if (status === `delete`) {
                 return await deleteOrder(orderNumber);

@@ -366,6 +366,8 @@
                         }
                     }
                     .picturePrice {
+                        display: flex;
+                        flex-direction: column;
                         position: absolute;
                         bottom: 0;
                         .picturePrice--main {
@@ -388,6 +390,12 @@
                             text-decoration-line: line-through;
                             font-style: normal;
                             white-space: nowrap;
+                            &:after {
+                                display: none;
+                            }
+                            &:before {
+                                display: none;
+                            }
                             @include respond(mobile) {
                                 font-size: 12px;
                                 line-height: 14px;
