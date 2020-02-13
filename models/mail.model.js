@@ -101,4 +101,19 @@ const sendOwnerMail = async (orderNumber, typedData) => {
     }
 };
 
-module.exports = { sendClientMail, sendOwnerMail };
+const sendRecallMail = async (typedData) => {
+    try {
+        let mailOptions = {
+            from: `sales@artegallery.ru`,
+            to: `sales@artegallery.ru`,
+            subject: `Оставлены данные для ответного звонка`,
+            template: `recall`,
+            context: typedData
+        };
+        await createTransport().sendMail(mailOptions);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+module.exports = { sendClientMail, sendOwnerMail, sendRecallMail };

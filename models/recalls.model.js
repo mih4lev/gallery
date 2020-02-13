@@ -1,4 +1,5 @@
-const { requestDB } = require(`../models/db.model`);
+const { sendRecallMail } = require(`./mail.model`);
+const { requestDB } = require(`./db.model`);
 
 const saveRecallData = async (clientData) => {
     const patterns = {
@@ -21,6 +22,7 @@ const saveRecallData = async (clientData) => {
     `;
     try {
         const { insertId } = await requestDB(query);
+        await sendRecallMail(clientData);
         return {
             code: (insertId) ? 200 : 0,
             result: (insertId) ? `recall added` : `recall add error`
