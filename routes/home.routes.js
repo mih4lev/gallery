@@ -8,12 +8,8 @@ const router = new Router();
 
 router.get(`/`, async (request, response) => {
     const pageLink = `home`;
-    try {
-        const data = await collectData(request, pageLink);
-        const lang = data.language;
-    } catch(error) {
-        response.send(error);
-    }
+    const data = await collectData(request, pageLink);
+    // const lang = data.language;
     // await Promise.all([
     //     data.collection = await requestLangCollectionList(lang),
     //     data.authors = await requestLanguageAuthors(lang, 3),
@@ -34,7 +30,7 @@ router.get(`/`, async (request, response) => {
     //     if (index === 1) event.isActive = true;
     //     event.hasPhoto = (event.eventPhoto !== `NULL` && event.eventPhoto !== null);
     // });
-    response.render(pageLink, data);
+    // response.render(pageLink, data);
 });
 
 module.exports = router;
