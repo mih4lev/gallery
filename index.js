@@ -16,6 +16,7 @@ app.engine(`hbs`, expressHbs({
 }));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
+app.use(`/robots.txt`, express.static(__dirname + `/robots.txt`));
 // static source path
 app.use(`/css`, express.static(__dirname + `/public/css`));
 app.use(`/images`, express.static(__dirname + `/public/images`));
