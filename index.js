@@ -3,13 +3,12 @@ const compression = require('compression');
 // const expressHbs = require(`express-handlebars`);
 // const hbs = require(`hbs`);
 // const cookieParser = require(`cookie-parser`);
-// const cors = require(`cors`);
-// const corsOptions = require("./middlewares/cors.middleware");
+const cors = require(`cors`);
+const corsOptions = require("./middlewares/cors.middleware");
 const app = express();
 
 app.get('/', (request, response) => {
-    console.log(`URL: ${request.url}`);
-    response.send('Test2');
+    response.send('Test3');
 });
 
 // // compress response
@@ -35,7 +34,7 @@ app.use(compression());
 // app.use(cookieParser('some_secret_numbers_123409853532'));
 // app.use(require(`./middlewares/lang.middleware`));
 // app.use(require(`./middlewares/admin.middleware`));
-// app.use('/api', cors(corsOptions));
+app.use('/api', cors(corsOptions));
 // // routes
 // app.use('/', require('./routes/home.routes'));
 // app.use('/collection', require('./routes/collection.routes'));
