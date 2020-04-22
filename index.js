@@ -1,5 +1,5 @@
 const express = require(`express`);
-// const compression = require('compression');
+const compression = require('compression');
 // const expressHbs = require(`express-handlebars`);
 // const hbs = require(`hbs`);
 // const cookieParser = require(`cookie-parser`);
@@ -9,11 +9,11 @@ const app = express();
 
 app.get('/', (request, response) => {
     console.log(`URL: ${request.url}`);
-    response.send('Hello, Server!');
+    response.send('Test2');
 });
 
 // // compress response
-// app.use(compression());
+app.use(compression());
 // // handlebars options
 // app.engine(`hbs`, expressHbs({
 //     layoutsDir: `views/layouts`,
