@@ -7,8 +7,8 @@ const { requestLangCollectionList } = require("../models/collection.model");
 const router = new Router();
 
 router.get(`/`, async (request, response) => {
-    response.send(`Test6`);
-    // const pageLink = `home`;
+    const pageLink = `home`;
+    const data = [];
     // const data = await collectData(request, pageLink);
     // const lang = data.language;
     // await Promise.all([
@@ -31,7 +31,7 @@ router.get(`/`, async (request, response) => {
     //     if (index === 1) event.isActive = true;
     //     event.hasPhoto = (event.eventPhoto !== `NULL` && event.eventPhoto !== null);
     // });
-    // response.render(pageLink, data);
+    response.render(pageLink, data);
 });
 
 module.exports = router;
