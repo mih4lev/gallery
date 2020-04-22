@@ -7,9 +7,9 @@ const cors = require(`cors`);
 const corsOptions = require("./middlewares/cors.middleware");
 const app = express();
 
-app.get('/', (request, response) => {
-    response.send('Test5');
-});
+// app.get('/', (request, response) => {
+//     response.send('Test5');
+// });
 
 // compress response
 app.use(compression());
@@ -36,7 +36,7 @@ app.use(require(`./middlewares/lang.middleware`));
 app.use(require(`./middlewares/admin.middleware`));
 app.use('/api', cors(corsOptions));
 // // routes
-// app.use('/', require('./routes/home.routes'));
+app.use('/', require('./routes/home.routes'));
 app.use('/collection', require('./routes/collection.routes'));
 app.use('/authors', require('./routes/authors.routes'));
 app.use('/events', require('./routes/events.routes'));
