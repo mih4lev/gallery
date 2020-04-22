@@ -9,8 +9,7 @@ const router = new Router();
 router.get(`/`, async (request, response) => {
     const pageLink = `home`;
     const data = await collectData(request, pageLink);
-    // const lang = data.language;
-    const lang = `en`;
+    const lang = data.language;
     await Promise.all([
         data.collection = await requestLangCollectionList(lang),
         data.authors = await requestLanguageAuthors(lang, 3),
