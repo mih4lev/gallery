@@ -1,26 +1,26 @@
 const express = require(`express`);
 const compression = require('compression');
-// const expressHbs = require(`express-handlebars`);
-// const hbs = require(`hbs`);
+const expressHbs = require(`express-handlebars`);
+const hbs = require(`hbs`);
 const cookieParser = require(`cookie-parser`);
 const cors = require(`cors`);
 const corsOptions = require("./middlewares/cors.middleware");
 const app = express();
 
 app.get('/', (request, response) => {
-    response.send('Test3');
+    response.send('Test4');
 });
 
-// // compress response
+// compress response
 app.use(compression());
-// // handlebars options
-// app.engine(`hbs`, expressHbs({
-//     layoutsDir: `views/layouts`,
-//     defaultLayout: `layout`,
-//     extname: `hbs`
-// }));
-// app.set('view engine', 'hbs');
-// hbs.registerPartials(__dirname + '/views/partials');
+// handlebars options
+app.engine(`hbs`, expressHbs({
+    layoutsDir: `views/layouts`,
+    defaultLayout: `layout`,
+    extname: `hbs`
+}));
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 app.use(`/robots.txt`, express.static(__dirname + `/robots.txt`));
 // // static source path
 app.use(`/css`, express.static(__dirname + `/public/css`));
@@ -30,10 +30,10 @@ app.use(`/scripts`, express.static(__dirname + `/public/scripts`));
 app.use(`/fonts`, express.static(__dirname + `/public/fonts`));
 app.use(`/lang`, express.static(__dirname + `/public/lang`));
 // // middleware
-// app.use(express.json({ extended: true }));
+app.use(express.json({ extended: true }));
 app.use(cookieParser('some_secret_numbers_123409853532'));
-// app.use(require(`./middlewares/lang.middleware`));
-// app.use(require(`./middlewares/admin.middleware`));
+app.use(require(`./middlewares/lang.middleware`));
+app.use(require(`./middlewares/admin.middleware`));
 app.use('/api', cors(corsOptions));
 // // routes
 // app.use('/', require('./routes/home.routes'));
