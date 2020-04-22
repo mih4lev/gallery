@@ -6,11 +6,6 @@ const cookieParser = require(`cookie-parser`);
 const cors = require(`cors`);
 const corsOptions = require("./middlewares/cors.middleware");
 const app = express();
-
-// app.get('/', (request, response) => {
-//     response.send('Test5');
-// });
-
 // compress response
 app.use(compression());
 // handlebars options
@@ -61,15 +56,15 @@ app.use('/api/techniques', require('./routes/api.techniques.routes'));
 app.use('/api/photos', require('./routes/api.photos.routes'));
 app.use('/api/pictures', require('./routes/api.pictures.routes'));
 app.use('/api/orders', require('./routes/api.orders.routes'));
-// // 404
-// app.use((request, response, next) => {
-//     const { url } = request;
-//     if (url.indexOf(`favicon`) !== -1) {
-//         response.status(404);
-//         return next();
-//     }
-//     response.status(404).redirect(`/404`);
-//     next();
-// });
+// 404
+app.use((request, response, next) => {
+    const { url } = request;
+    if (url.indexOf(`favicon`) !== -1) {
+        response.status(404);
+        return next();
+    }
+    response.status(404).redirect(`/404`);
+    next();
+});
 
 app.listen(5000);
